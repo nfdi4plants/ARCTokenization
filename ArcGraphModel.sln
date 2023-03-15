@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ArcGraphModel", "src\ArcGraphModel\ArcGraphModel.fsproj", "{32B01B13-37E2-4C86-9612-4BD8F33313D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2EB71559-9BE4-4E02-9763-9092876D1E4A}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ArcGraphModel.Tests", "tests\ArcGraphModel.Tests\ArcGraphModel.Tests.fsproj", "{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE1B84FD-33DE-48E4-A97A-A4BDC34E08F0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		build.cmd = build.cmd
+		build.sh = build.sh
+		global.json = global.json
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "build", "build\build.fsproj", "{449FE822-BEC3-4029-B46B-D498E20B8597}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32B01B13-37E2-4C86-9612-4BD8F33313D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32B01B13-37E2-4C86-9612-4BD8F33313D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32B01B13-37E2-4C86-9612-4BD8F33313D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32B01B13-37E2-4C86-9612-4BD8F33313D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{449FE822-BEC3-4029-B46B-D498E20B8597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449FE822-BEC3-4029-B46B-D498E20B8597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449FE822-BEC3-4029-B46B-D498E20B8597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449FE822-BEC3-4029-B46B-D498E20B8597}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95} = {2EB71559-9BE4-4E02-9763-9092876D1E4A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {933E3470-7D09-4F22-A056-2407458B9600}
+	EndGlobalSection
+EndGlobal
