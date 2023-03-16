@@ -21,35 +21,16 @@ open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
 
 
-// TO DO: put this into FsExtensions.FsWorkbook
-type FsWorkbook with
-    /// Takes the path to an Xlsx file and returns the FsWorkbook based on its content.
-    static member fromXlsxFile (filePath : string) =
-        let sr = new StreamReader(filePath)
-        let wb = FsWorkbook.fromXlsxStream sr.BaseStream
-        sr.Close()
-        wb
-
 let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-let workbook = FsWorkbook.fromXlsxFile fp
-let sheets = FsWorkbook.getWorksheets workbook
+let wb = FsWorkbook.fromXlsxFile fp
+let shts = FsWorkbook.getWorksheets wb
 
-// TO DO: put this into FsWorkbook
-type FsWorkbook with
-    /// <summary>Returns all FsTables from the FsWorkbook.</summary>
-    member self.GetTables() =
-        self.GetWorksheets()
-        |> List.collect (fun s -> s.Tables)
-
-    /// <summary>Returns all FsTables from an FsWorkbook.</summary>
-    static member getTables (workbook : FsWorkbook) =
-        workbook.GetTables()
-
-let tables = FsWorkbook.getTables workbook
-let tablesFiltered = tables |> List.filter (fun t -> String.contains "annotationTable" t.Name)
-let table1 = tablesFiltered.Head
+let tbls = FsWorkbook.getTables wb
+let tblsFiltered = tbls |> List.filter (fun t -> String.contains "annotationTable" t.Name)
+let tbl1 = tblsFiltered.Head
 // TO DO: make this dynamic: add a getWorksheetOfTable function to FsTable
-let associatedWorksheet = sheets.Head
+let associatedWorksheet = shts.Head
+let fcc = associatedWorksheet.CellCollection
 
 /// Names that are excluded.
 let nodeColumnNames = [
@@ -61,14 +42,65 @@ let nodeColumnNames = [
     "Protocol REF"
 ]
 
-let columnHeadersRowAddress = table1.HeadersRow().RangeAddress.FirstAddress.RowNumber
+let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
 let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> Array.ofSeq
 let headersFiltered = columnHeaders |> Array.choose (fun c -> if List.contains c.Value nodeColumnNames |> not then c.Value |> Option.Some else None)
 let groupedHeaders = Seq.groupWhen (fun h -> String.contains "[" h) headersFiltered |> Array.ofSeq |> Array.map Array.ofSeq
 
-let getKvTriplets (headerTriplets : seq<seq<string>>) (workbook : FsWorkbook) (table : FsTable) = 
+let headers = tbl1.Field("Source Name", fcc)
+headers.DataCells(fcc, true)
+
+// possibly not needed due to FsTableFields
+//type FsTable with
+//    member this.GetColCellsOfHeader
+
+///// <summary>Takes a header FsCell, an FsTable and the FsCellsCollection of the associated FsWorksheet and returns all FsCells below the header.</summary>
+//// TO DO: put into FsTable
+//// alternatively: add FsCellsCollection to FsTable (like done in FsRow) which facilitates working 
+//// with the associated FsCells but makes it more difficult to maintain: FsWorksheet will need a 
+//// `.RescanTables` method which does the same like to its FsRows.
+//let getColCellsOfHeader (header : FsCell) (cellsColl : FsCellsCollection) (table : FsTable) =
+//    let headerColIndex = header.ColumnNumber
+//    let firstValueRow = table.RangeAddress.FirstAddress.RowNumber + 1
+//    let lastValueRow = table.RangeAddress.LastAddress.RowNumber
+//    cellsColl.GetCells(firstValueRow, headerColIndex, lastValueRow, headerColIndex)
+
+let getKvTriplets (headerTriplets : string [] []) (workbook : FsWorkbook) (table : FsTable) = 
+    let workbook = wb
+    let table = tbl1
+    let headerTriplets = groupedHeaders
+
+    let associatedWorksheet = table.GetWorksheetOfTable workbook
     let columnHeadersRowAddress = table.HeadersRow().RangeAddress.FirstAddress.RowNumber
-    let associatedWorksheet = FsWorkbook.getWorksheets() |> List.find (fun s -> s.Tables |> List.find (fun t -> t.Name = table.Name))
+    //let columnHeadersColAddress = 
+
+    let mutable tripleCounter = 0
+    let mutable doubleCounter = 0
+    //let raiseTc () = 
+    //    if tripleCounter = 3 then tripleCounter <- 1
+    //    else tripleCounter <- tripleCounter + 1
+    let raiseDc () =
+        if doubleCounter = 2 then doubleCounter <- 1
+        else doubleCounter <- doubleCounter + 1
+    let satisfier = String.contains "["
+
+    headerTriplets
+    |> Array.map (
+        fun ht ->
+            ht
+            |> Array.map (
+                fun h ->
+                    if satisfier h then tripleCounter <- 1
+                    else tripleCounter <- tripleCounter + 1
+                    match tripleCounter with
+                    | 1 -> 
+                    | x when x <= 3 && x > 1 ->
+                    | x when x > 3 ->
+                        raiseDc ()
+
+            )
+    )
+
     let rec loop tripleCounter doubleCounter =
         if en.MoveNext() then
             let e = en.Current
@@ -77,12 +109,13 @@ let getKvTriplets (headerTriplets : seq<seq<string>>) (workbook : FsWorkbook) (t
 
         else 
 
-    headerTriplets
-    |> Seq.map (
-        fun seq1 ->
-            use en = input.GetEnumerator()
-            loop id
-    )
+    //headerTriplets
+    //|> Seq.map (
+    //    fun seq1 ->
+    //        use en = input.GetEnumerator()
+    //        loop id
+    //)
+    0
 
 
 
