@@ -10,10 +10,12 @@ let dllBasePath = @"c:/repos/csbiology/fsspreadsheet/src"
 File.Copy(dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll", dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll", true)
 File.Copy(dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll", dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll", true)
 File.Copy(dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll", true)
+File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll")
 
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll"
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll"
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll"
+#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
 
 
 open FsSpreadsheet
@@ -31,6 +33,8 @@ let tbl1 = tblsFiltered.Head
 // TO DO: make this dynamic: add a getWorksheetOfTable function to FsTable
 let associatedWorksheet = shts.Head
 let fcc = associatedWorksheet.CellCollection
+tbl1.Field("Source Name", fcc).DataCells(fcc, false) |> Seq.length
+tbl1.Field("Source Name", fcc).DataCells(fcc, true)
 
 /// Names that are excluded.
 let nodeColumnNames = [
@@ -42,30 +46,21 @@ let nodeColumnNames = [
     "Protocol REF"
 ]
 
+tbl1.RescanRange()
+tbl1.Field("test", fcc).DataCells(fcc, false)
+tbl1.FieldNames
+
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
 let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> Array.ofSeq
-let headersFiltered = columnHeaders |> Array.choose (fun c -> if List.contains c.Value nodeColumnNames |> not then c.Value |> Option.Some else None)
-let groupedHeaders = Seq.groupWhen (fun h -> String.contains "[" h) headersFiltered |> Array.ofSeq |> Array.map Array.ofSeq
+let headersFiltered = columnHeaders |> Array.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
+let groupedHeaders = headersFiltered |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> Array.ofSeq |> Array.map Array.ofSeq
 
 let headers = tbl1.Field("Source Name", fcc)
-headers.DataCells(fcc, true)
+//headers.DataCells(fcc, true)
+headers.DataCells(fcc, false)
 
-// possibly not needed due to FsTableFields
-//type FsTable with
-//    member this.GetColCellsOfHeader
 
-///// <summary>Takes a header FsCell, an FsTable and the FsCellsCollection of the associated FsWorksheet and returns all FsCells below the header.</summary>
-//// TO DO: put into FsTable
-//// alternatively: add FsCellsCollection to FsTable (like done in FsRow) which facilitates working 
-//// with the associated FsCells but makes it more difficult to maintain: FsWorksheet will need a 
-//// `.RescanTables` method which does the same like to its FsRows.
-//let getColCellsOfHeader (header : FsCell) (cellsColl : FsCellsCollection) (table : FsTable) =
-//    let headerColIndex = header.ColumnNumber
-//    let firstValueRow = table.RangeAddress.FirstAddress.RowNumber + 1
-//    let lastValueRow = table.RangeAddress.LastAddress.RowNumber
-//    cellsColl.GetCells(firstValueRow, headerColIndex, lastValueRow, headerColIndex)
-
-let getKvTriplets (headerTriplets : string [] []) (workbook : FsWorkbook) (table : FsTable) = 
+let getKvTriplets (headerTriplets : FsCell [] []) (workbook : FsWorkbook) (table : FsTable) = 
     let workbook = wb
     let table = tbl1
     let headerTriplets = groupedHeaders
@@ -73,6 +68,15 @@ let getKvTriplets (headerTriplets : string [] []) (workbook : FsWorkbook) (table
     let associatedWorksheet = table.GetWorksheetOfTable workbook
     let columnHeadersRowAddress = table.HeadersRow().RangeAddress.FirstAddress.RowNumber
     //let columnHeadersColAddress = 
+    //let columnHeadersValues = table.FieldNames(associatedWorksheet.CellCollection)
+    let columnHeadersValues = 
+        headerTriplets
+        |> Array.map (
+            Array.map (
+                fun c ->
+                    table.Field(c.Value, associatedWorksheet.CellCollection)
+            )
+        )
 
     let mutable tripleCounter = 0
     let mutable doubleCounter = 0
