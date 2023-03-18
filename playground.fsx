@@ -5,6 +5,7 @@
 open DocumentFormat.OpenXml
 open FSharpAux
 open System.IO
+open System.Collections.Generic
 
 let dllBasePath = @"c:/repos/csbiology/fsspreadsheet/src"
 File.Copy(dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll", dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll", true)
@@ -23,9 +24,24 @@ open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
 
 
-let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
+
+let mutable testDic = new Dictionary<string,int>()
+testDic.Add("first", 24)
+testDic.Add("second", 1337)
+testDic.Add("third", 69)
+let oldTestDic = testDic
+testDic <- new Dictionary<string,int>()
+let testDic2 = new Dictionary<int,Dictionary<int,string>>()
+let testDic3 = new Dictionary<int,string>()
+testDic3.Add(3,"sheesh")
+testDic3.Add(4,"shnash")
+testDic2.Add(2,testDic3)
+testDic2.Add(6,testDic3)
+testDic2.Values |> Seq.minBy (fun d -> d.Keys |> Seq.min) |> fun d -> d.Keys |> Seq.min
 
 let tbls = FsWorkbook.getTables wb
 let tblsFiltered = tbls |> List.filter (fun t -> String.contains "annotationTable" t.Name)
@@ -48,16 +64,21 @@ let nodeColumnNames = [
 
 tbl1.RescanRange()
 tbl1.Field("test", fcc).DataCells(fcc, false)
-tbl1.FieldNames
 
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
 let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> Array.ofSeq
 let headersFiltered = columnHeaders |> Array.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
 let groupedHeaders = headersFiltered |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> Array.ofSeq |> Array.map Array.ofSeq
 
-let headers = tbl1.Field("Source Name", fcc)
-//headers.DataCells(fcc, true)
-headers.DataCells(fcc, false)
+//let ftf = FsTableField()
+let header1 = tbl1.Field("Source Name", fcc)
+//header1.DataCells(fcc, true)
+header1.DataCells(fcc, false) |> Seq.length
+header1.Index
+let header2 = tbl1.Field("Parameter [Protocol]", fcc)
+header2.Index
+tbl1.RescanRange()
+tbl1.FieldNames(obj)
 
 
 let getKvTriplets (headerTriplets : FsCell [] []) (workbook : FsWorkbook) (table : FsTable) = 
