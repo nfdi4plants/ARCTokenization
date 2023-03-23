@@ -10,7 +10,7 @@ let dllBasePath = @"c:/repos/csbiology/fsspreadsheet/src"
 File.Copy(dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll", dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll", true)
 File.Copy(dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll", dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll", true)
 File.Copy(dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll", true)
-File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll")
+File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll", true)
 
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll"
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll"
@@ -48,16 +48,91 @@ let nodeColumnNames = [
 
 tbl1.RescanRange()
 tbl1.Field("test", fcc).DataCells(fcc, false)
-tbl1.FieldNames
+//tbl1.FieldNames
 
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
-let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> Array.ofSeq
-let headersFiltered = columnHeaders |> Array.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
-let groupedHeaders = headersFiltered |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> Array.ofSeq |> Array.map Array.ofSeq
+let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> List.ofSeq
+let headersFiltered = columnHeaders |> List.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
+let groupedHeaders = headersFiltered |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
+//let groupedHeadersStr = 
 
 let headers = tbl1.Field("Source Name", fcc)
 //headers.DataCells(fcc, true)
 headers.DataCells(fcc, false)
+
+// timoCode
+let parse crStart (strl : string list) =
+    let rec loop (roundOne) s = 
+        [
+            match s with
+            | a :: b :: c :: rest when roundOne ->
+                yield (a,b,c)
+                yield! loop false rest
+            | a :: b :: rest ->
+                match roundOne with
+                | true  ->
+                    yield (a, b, "na")
+                    yield! loop false rest
+                | false ->
+                    yield ("na", a, b)
+                    yield! loop false rest
+            | a :: [] ->
+                match roundOne with
+                | true  ->
+                    yield (a, "na", "na")
+                | false ->
+                    yield ("na" ,a, "na")
+            | [] -> ()
+        ]
+    loop crStart strl
+
+//parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray)
+//groupedHeaders |> Array.map (parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray))
+
+let parse2 crStart (cl : FsCell list) =
+    let empty() = FsCell.createEmpty ()
+    let rec loop roundOne s = 
+        [
+            match s with
+            | a :: b :: c :: rest when roundOne ->
+                yield (a, b, c)
+                yield! loop false rest
+            | a :: b :: rest ->
+                match roundOne with
+                | true  ->
+                    yield (a, b, empty())
+                    yield! loop false rest
+                | false ->
+                    yield (empty(), a, b)
+                    yield! loop false rest
+            | a :: [] ->
+                match roundOne with
+                | true  ->
+                    yield (a, empty(), empty())
+                | false ->
+                    yield (empty(), a, empty())
+            | [] -> ()
+        ]
+    loop crStart cl
+
+let t2 = tbls.Item 1
+let assWs2 = FsTable.getWorksheetOfTable wb t2
+let columnHeadersRowAddress2 = t2.HeadersRow().RangeAddress.FirstAddress.RowNumber
+let columnHeaders2 = assWs2.CellCollection.GetCellsInRow columnHeadersRowAddress2 |> Array.ofSeq
+let headersFiltered2 = columnHeaders2 |> Array.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
+let groupedHeaders2 = headersFiltered2 |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
+
+let res = groupedHeaders2 |> List.map (parse2 true)
+let antiEmptyChecker str = if str = "" then "(empty)" else str
+res 
+|> List.collect (
+    List.map (fun (c1,c2,c3) -> 
+        (antiEmptyChecker c1.Value, antiEmptyChecker c2.Value, antiEmptyChecker c3.Value)
+        |> fun (c1n,c2n,c3n) -> 
+            printfn "%s    %s    %s" c1n c2n c3n; c1n, c2n, c3n)
+)
+
+assWs2.CellCollection.GetCellsInColumn(11)
 
 
 let getKvTriplets (headerTriplets : FsCell [] []) (workbook : FsWorkbook) (table : FsTable) = 
