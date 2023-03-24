@@ -1,9 +1,3 @@
-#r "nuget: FSharpAux"
-#r "nuget: DocumentFormat.OpenXml"
-//#r @"C:/Users/olive/.nuget/packages/fsharpaux/1.1.0/lib/net5.0/FSharpAux.dll"
-
-open DocumentFormat.OpenXml
-open FSharpAux
 open System.IO
 open System.Collections.Generic
 
@@ -13,44 +7,51 @@ File.Copy(dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreads
 File.Copy(dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll", true)
 File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll", true)
 
+#r "nuget: DocumentFormat.OpenXml"
+#r "nuget: FSharpAux"
+//#r @"C:/Users/olive/.nuget/packages/fsharpaux/1.1.0/lib/net5.0/FSharpAux.dll"
+
+open DocumentFormat.OpenXml
+open FSharpAux
+
+
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll"
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll"
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll"
 #r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
 
-
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
+open ArcGraphModel.CvParam
 
 
-//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
-let mutable testDic = new Dictionary<string,int>()
-testDic.Add("first", 24)
-testDic.Add("second", 1337)
-testDic.Add("third", 69)
-let oldTestDic = testDic
-testDic <- new Dictionary<string,int>()
-let testDic2 = new Dictionary<int,Dictionary<int,string>>()
-let testDic3 = new Dictionary<int,string>()
-testDic3.Add(3,"sheesh")
-testDic3.Add(4,"shnash")
-testDic2.Add(2,testDic3)
-testDic2.Add(6,testDic3)
-testDic2.Values |> Seq.minBy (fun d -> d.Keys |> Seq.min) |> fun d -> d.Keys |> Seq.min
+//let mutable testDic = new Dictionary<string,int>()
+//testDic.Add("first", 24)
+//testDic.Add("second", 1337)
+//testDic.Add("third", 69)
+//let oldTestDic = testDic
+//testDic <- new Dictionary<string,int>()
+//let testDic2 = new Dictionary<int,Dictionary<int,string>>()
+//let testDic3 = new Dictionary<int,string>()
+//testDic3.Add(3,"sheesh")
+//testDic3.Add(4,"shnash")
+//testDic2.Add(2,testDic3)
+//testDic2.Add(6,testDic3)
+//testDic2.Values |> Seq.minBy (fun d -> d.Keys |> Seq.min) |> fun d -> d.Keys |> Seq.min
 
 let tbls = FsWorkbook.getTables wb
 let tblsFiltered = tbls |> List.filter (fun t -> String.contains "annotationTable" t.Name)
 let tbl1 = tblsFiltered.Head
-// TO DO: make this dynamic: add a getWorksheetOfTable function to FsTable
 let associatedWorksheet = shts.Head
 let fcc = associatedWorksheet.CellCollection
-tbl1.Field("Source Name", fcc).DataCells(fcc, false) |> Seq.length
-tbl1.Field("Source Name", fcc).DataCells(fcc, true)
+//tbl1.Field("Source Name", fcc).DataCells(fcc, false) |> Seq.length
+//tbl1.Field("Source Name", fcc).DataCells(fcc, true)
 
 /// Names that are excluded.
 let nodeColumnNames = [
@@ -62,8 +63,8 @@ let nodeColumnNames = [
     "Protocol REF"
 ]
 
-tbl1.RescanRange()
-tbl1.Field("test", fcc).DataCells(fcc, false)
+//tbl1.RescanRange()
+//tbl1.Field("test", fcc).DataCells(fcc, false)
 //tbl1.FieldNames
 
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
@@ -73,14 +74,14 @@ let groupedHeaders = headersFiltered |> Seq.groupWhen (fun h -> String.contains 
 //let groupedHeadersStr = 
 
 //let ftf = FsTableField()
-let header1 = tbl1.Field("Source Name", fcc)
+//let header1 = tbl1.Field("Source Name", fcc)
 //header1.DataCells(fcc, true)
-header1.DataCells(fcc, false) |> Seq.length
-header1.Index
-let header2 = tbl1.Field("Parameter [Protocol]", fcc)
-header2.Index
-tbl1.RescanRange()
-tbl1.FieldNames(obj)
+//header1.DataCells(fcc, false) |> Seq.length
+//header1.Index
+//let header2 = tbl1.Field("Parameter [Protocol]", fcc)
+//header2.Index
+//tbl1.RescanRange()
+//tbl1.FieldNames(obj)
 
 // timoCode
 let parse crStart (strl : string list) =
@@ -111,11 +112,29 @@ let parse crStart (strl : string list) =
 //parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray)
 //groupedHeaders |> Array.map (parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray))
 
+//// for FsCells & CvParams
+//type BuildingBlock<'a> =
+//    | Triple of ('a * 'a * 'a)
+//    | Quadruple of ('a * 'a * 'a * 'a)
+
+let check
+
 let parse2 crStart (cl : FsCell list) =
     let empty() = FsCell.createEmpty ()
-    let rec loop roundOne s = 
+    let rec loop roundOne (s : FsCell list) = 
         [
             match s with
+            | a :: b :: c :: d :: rest when roundOne && (String.startsWith "Unit" b.Value) ->
+                let dataCells = FsCellsCollection.getCellsInColumn a.ColumnNumber fcc |> Seq.toList
+                let cvPars =
+                    dataCells
+                    |> List.map (
+                        fun dc ->
+                            let parVal = ParamValue
+                            CvParam(d.Value, a.Value, c.Value, )
+                    )
+                yield (a, b, c, d)
+                yield! loop false rest
             | a :: b :: c :: rest when roundOne ->
                 yield (a, b, c)
                 yield! loop false rest
