@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2EB71559
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ArcGraphModel.Tests", "tests\ArcGraphModel.Tests\ArcGraphModel.Tests.fsproj", "{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE1B84FD-33DE-48E4-A97A-A4BDC34E08F0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{CE1B84FD-33DE-48E4-A97A-A4BDC34E08F0}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		build.cmd = build.cmd
@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "build", "build\build.fsproj", "{449FE822-BEC3-4029-B46B-D498E20B8597}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{67DA0DCC-75F4-4F30-91C3-309A48B13D49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,7 +47,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{32B01B13-37E2-4C86-9612-4BD8F33313D3} = {67DA0DCC-75F4-4F30-91C3-309A48B13D49}
 		{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95} = {2EB71559-9BE4-4E02-9763-9092876D1E4A}
+		{449FE822-BEC3-4029-B46B-D498E20B8597} = {CE1B84FD-33DE-48E4-A97A-A4BDC34E08F0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933E3470-7D09-4F22-A056-2407458B9600}

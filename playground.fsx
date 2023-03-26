@@ -26,8 +26,8 @@ open FsSpreadsheet.DSL
 open ArcGraphModel.CvParam
 
 
-let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -117,41 +117,65 @@ let parse crStart (strl : string list) =
 //    | Triple of ('a * 'a * 'a)
 //    | Quadruple of ('a * 'a * 'a * 'a)
 
-let check
+module List =
+    let map4 (mapping : 'T -> 'T -> 'T -> 'T -> 'U) (list1 : 'T list) (list2 : 'T list) (list3 : 'T list) (list4 : 'T list) =
+        if list1.Length <> list2.Length || list1.Length <> list3.Length || list1.Length <> list4.Length then
+            failwithf "The input lists have different lengths.\n\tlist1.Length = %i; list2.Length = %i; list3.Length = %i; list4.Length = %i" list1.Length list2.Length list3.Length list4.Length
+        let rec loop acc nl1 nl2 nl3 nl4 =
+            match nl1, nl2, nl3, nl4 with
+            | h1 :: t1, h2 :: t2, h3 :: t3, h4 :: t4 ->
+                loop (mapping h1 h2 h3 h4 :: acc) t1 t2 t3 t4
+            | _ -> List.rev acc
+        loop [] list1 list2 list3 list4
 
 let parse2 crStart (cl : FsCell list) =
     let empty() = FsCell.createEmpty ()
+    let getDataCellsOf (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList
     let rec loop roundOne (s : FsCell list) = 
         [
             match s with
             | a :: b :: c :: d :: rest when roundOne && (String.startsWith "Unit" b.Value) ->
-                let dataCells = FsCellsCollection.getCellsInColumn a.ColumnNumber fcc |> Seq.toList
+                let dataCellsVal = getDataCellsOf a
+                let dataCellsUnt = getDataCellsOf b
+                let dataCellsTsr = getDataCellsOf c
+                let dataCellsTan = getDataCellsOf d
                 let cvPars =
-                    dataCells
-                    |> List.map (
-                        fun dc ->
-                            let parVal = ParamValue
-                            CvParam(d.Value, a.Value, c.Value, )
-                    )
-                yield (a, b, c, d)
+                    List.map4 (
+                        fun (vl : FsCell) unt tan tsr -> 
+                            let valTerm = CvUnit(tan.Value, vl.Value, tsr.Value)
+                                //CvTerm(dc.Value)
+                            //CvParam(d.Value, a.Value, c.Value, CvValue valTerm)
+                            CvParam(d.Value, a.Value, c.Value, WithCvUnitAccession (unt.Value, valTerm))
+                    ) dataCellsVal dataCellsUnt dataCellsTan dataCellsTsr
+                yield cvPars
                 yield! loop false rest
             | a :: b :: c :: rest when roundOne ->
-                yield (a, b, c)
+                let dataCellsVal = getDataCellsOf a
+                let dataCellsTsr = getDataCellsOf b
+                let dataCellsTan = getDataCellsOf c
+                let cvPars =
+                    (dataCellsVal, dataCellsTsr, dataCellsTan)
+                    |||> List.map3 (
+                        fun vl tsr tan ->
+                            let valTerm = CvTerm(tan.Value, vl.Value, tsr.Value)
+                            CvParam(c.Value, a.Value, b.Value, CvValue valTerm)
+                    )
+                yield cvPars
                 yield! loop false rest
-            | a :: b :: rest ->
-                match roundOne with
-                | true  ->
-                    yield (a, b, empty())
-                    yield! loop false rest
-                | false ->
-                    yield (empty(), a, b)
-                    yield! loop false rest
-            | a :: [] ->
-                match roundOne with
-                | true  ->
-                    yield (a, empty(), empty())
-                | false ->
-                    yield (empty(), a, empty())
+            //| a :: b :: rest ->
+            //    match roundOne with
+            //    | true  ->
+            //        yield (a, b, empty())
+            //        yield! loop false rest
+            //    | false ->
+            //        yield (empty(), a, b)
+            //        yield! loop false rest
+            //| a :: [] ->
+            //    match roundOne with
+            //    | true  ->
+            //        yield (a, empty(), empty())
+            //    | false ->
+            //        yield (empty(), a, empty())
             | [] -> ()
         ]
     loop crStart cl
@@ -176,58 +200,58 @@ res
 assWs2.CellCollection.GetCellsInColumn(11)
 
 
-let getKvTriplets (headerTriplets : FsCell [] []) (workbook : FsWorkbook) (table : FsTable) = 
-    let workbook = wb
-    let table = tbl1
-    let headerTriplets = groupedHeaders
+//let getKvTriplets (headerTriplets : FsCell [] []) (workbook : FsWorkbook) (table : FsTable) = 
+//    let workbook = wb
+//    let table = tbl1
+//    let headerTriplets = groupedHeaders
 
-    let associatedWorksheet = table.GetWorksheetOfTable workbook
-    let columnHeadersRowAddress = table.HeadersRow().RangeAddress.FirstAddress.RowNumber
-    //let columnHeadersColAddress = 
-    //let columnHeadersValues = table.FieldNames(associatedWorksheet.CellCollection)
-    let columnHeadersValues = 
-        headerTriplets
-        |> Array.map (
-            Array.map (
-                fun c ->
-                    table.Field(c.Value, associatedWorksheet.CellCollection)
-            )
-        )
+//    let associatedWorksheet = table.GetWorksheetOfTable workbook
+//    let columnHeadersRowAddress = table.HeadersRow().RangeAddress.FirstAddress.RowNumber
+//    //let columnHeadersColAddress = 
+//    //let columnHeadersValues = table.FieldNames(associatedWorksheet.CellCollection)
+//    let columnHeadersValues = 
+//        headerTriplets
+//        |> Array.map (
+//            Array.map (
+//                fun c ->
+//                    table.Field(c.Value, associatedWorksheet.CellCollection)
+//            )
+//        )
 
-    let mutable tripleCounter = 0
-    let mutable doubleCounter = 0
-    //let raiseTc () = 
-    //    if tripleCounter = 3 then tripleCounter <- 1
-    //    else tripleCounter <- tripleCounter + 1
-    let raiseDc () =
-        if doubleCounter = 2 then doubleCounter <- 1
-        else doubleCounter <- doubleCounter + 1
-    let satisfier = String.contains "["
+//    let mutable tripleCounter = 0
+//    let mutable doubleCounter = 0
+//    //let raiseTc () = 
+//    //    if tripleCounter = 3 then tripleCounter <- 1
+//    //    else tripleCounter <- tripleCounter + 1
+//    let raiseDc () =
+//        if doubleCounter = 2 then doubleCounter <- 1
+//        else doubleCounter <- doubleCounter + 1
+//    let satisfier = String.contains "["
 
-    headerTriplets
-    |> Array.map (
-        fun ht ->
-            ht
-            |> Array.map (
-                fun h ->
-                    if satisfier h then tripleCounter <- 1
-                    else tripleCounter <- tripleCounter + 1
-                    match tripleCounter with
-                    | 1 -> 
-                    | x when x <= 3 && x > 1 ->
-                    | x when x > 3 ->
-                        raiseDc ()
+//    headerTriplets
+//    |> Array.map (
+//        fun ht ->
+//            ht
+//            |> Array.map (
+//                fun h ->
+//                    if satisfier h then tripleCounter <- 1
+//                    else tripleCounter <- tripleCounter + 1
+//                    match tripleCounter with
+//                    | 1 -> 
+//                    | x when x <= 3 && x > 1 ->
+//                    | x when x > 3 ->
+//                        raiseDc ()
 
-            )
-    )
+//            )
+//    )
 
-    let rec loop tripleCounter doubleCounter =
-        if en.MoveNext() then
-            let e = en.Current
-            let updatedTripleCounter = tripleCounter + 1
-            let colI = cellsColl.TryGetCell 
+//    let rec loop tripleCounter doubleCounter =
+//        if en.MoveNext() then
+//            let e = en.Current
+//            let updatedTripleCounter = tripleCounter + 1
+//            let colI = cellsColl.TryGetCell 
 
-        else 
+//        else 
 
     //headerTriplets
     //|> Seq.map (
