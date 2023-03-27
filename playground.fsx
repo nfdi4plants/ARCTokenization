@@ -27,8 +27,8 @@ open ArcGraphModel
 open ArcGraphModel.Param
 
 
-//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -129,15 +129,24 @@ module List =
             | _ -> List.rev acc
         loop [] list1 list2 list3 list4
 
-let parse2 crStart (cl : FsCell list) =
+tbl1.Fields(fcc)
+
+let parse2 crStart (table : FsTable) (cl : FsCell list) =
     //let empty() = FsCell.createEmpty ()
-    let getDataCellsOf (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList
+    //let getDataCellsOf (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList
+    let getTableFieldOf (table : FsTable) (cell : FsCell) =
+        table.Fields(fcc) |> ignore
+
     let rec loop roundOne (s : FsCell list) = 
         [
+            printfn "s: %A" s
             match s with
             | a :: b :: c :: d :: rest when roundOne && (String.startsWith "Unit" b.Value) ->
+                printfn "case: a :: b :: c :: d :: rest"
                 // a = Value/Name header, b = Unit header, c = TermSourceRef header, d = TermAccessionNumber header
                 let dataCellsVal = getDataCellsOf a
+                let tfa = FsTableField(a.Value, a.ColumnNumber, )
+                FsTableField.getDataCells fcc true 
                 let dataCellsUnt = getDataCellsOf b
                 let dataCellsTsr = getDataCellsOf c
                 let dataCellsTan = getDataCellsOf d
@@ -150,8 +159,10 @@ let parse2 crStart (cl : FsCell list) =
                 yield! cvPars
                 yield! loop false rest
             | a :: b :: c :: rest when roundOne ->
+                printfn "case: a :: b :: c :: rest"
                 // a = Value/Name header, b = TermSourceRef header, c = TermAccessionNumber header
                 let dataCellsVal = getDataCellsOf a
+                printfn "%A" dataCellsVal
                 let dataCellsTsr = getDataCellsOf b
                 let dataCellsTan = getDataCellsOf c
                 let cvPars =
@@ -164,9 +175,11 @@ let parse2 crStart (cl : FsCell list) =
                 yield! cvPars
                 yield! loop false rest
             | a :: b :: rest ->
-                // a = Value/Name header, b = TermSourceRef header (assumed, could also be TermAccessionNumber header if TSR column is missing)
+                printfn "case: a :: b :: rest"
                 match roundOne with
                 | true  ->
+                    // a = Value/Name header, b = TermSourceRef header (assumed, could also be TermAccessionNumber header if TSR column is missing)
+                    printfn "subcase: roundOne"
                     let dataCellsVal = getDataCellsOf a
                     let dataCellsTsr = getDataCellsOf b
                     let cvPars =
@@ -179,6 +192,7 @@ let parse2 crStart (cl : FsCell list) =
                     yield! cvPars
                     yield! loop false rest
                 | false ->
+                    printfn "subcase: not roundOne"
                     // a = TermSourceRef header, b = TermAccessionNumber header
                     let dataCellsTsr = getDataCellsOf a
                     let dataCellsTan = getDataCellsOf b
@@ -192,8 +206,10 @@ let parse2 crStart (cl : FsCell list) =
                     yield! cvPars
                     yield! loop false rest
             | a :: [] ->
+                printfn "case: a :: []"
                 match roundOne with
                 | true  ->
+                    printfn "subcase: roundOne"
                     // a = Value/Name header
                     let dataCellsVal = getDataCellsOf a
                     let cvPars =
@@ -206,6 +222,7 @@ let parse2 crStart (cl : FsCell list) =
                         )
                     yield! cvPars
                 | false ->
+                    printfn "subcase: not roundOne"
                     // a = TermSourceRef header (assumed, could also be TermAccessionNumber header if TSR column is missing)
                     let dataCellsTsr = getDataCellsOf a
                     let cvPars =
@@ -215,12 +232,13 @@ let parse2 crStart (cl : FsCell list) =
                                 CvParam("(n/a)", "(n/a)", tsr.Value, Value "(n/a)")
                         )
                     yield! cvPars
-            | [] -> ()
+            | [] -> printfn "case: []"; ()
         ]
     loop crStart cl
 
 let parsed = List.map (parse2 true) groupedHeaders
-parsed.Head |> ArcGraphModel.Param.getValue
+parsed.Head.Head |> ArcGraphModel.Param.getCvAccessionOrName
+parsed.Head.Head |> ArcGraphModel.Param.getValue
 
 
 let t2 = tbls.Item 1
@@ -230,17 +248,30 @@ let columnHeaders2 = assWs2.CellCollection.GetCellsInRow columnHeadersRowAddress
 let headersFiltered2 = columnHeaders2 |> Array.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
 let groupedHeaders2 = headersFiltered2 |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
 
-let res = groupedHeaders2 |> List.map (parse2 true)
-let antiEmptyChecker str = if str = "" then "(empty)" else str
-res 
-|> List.collect (
-    List.map (fun (c1,c2,c3) -> 
-        (antiEmptyChecker c1.Value, antiEmptyChecker c2.Value, antiEmptyChecker c3.Value)
-        |> fun (c1n,c2n,c3n) -> 
-            printfn "%s    %s    %s" c1n c2n c3n; c1n, c2n, c3n)
-)
+groupedHeaders2 |> List.map (parse2 true)
+groupedHeaders2.Head.Length
+groupedHeaders2 |> List.map List.length
+groupedHeaders2 |> List.mapi (fun i x -> printfn "%i" i; parse2 true x)
+groupedHeaders2[2].Length
+groupedHeaders2.Head |> parse2 true
+groupedHeaders2[1] |> parse2 true
+groupedHeaders2[2] |> parse2 true
+groupedHeaders2[2].Head
+groupedHeaders2[2][1]
+groupedHeaders2[2][2]
+groupedHeaders2[2][3]
 
-assWs2.CellCollection.GetCellsInColumn(11)
+//let res = groupedHeaders2 |> List.map (parse2 true)
+//let antiEmptyChecker str = if str = "" then "(empty)" else str
+//res 
+//|> List.collect (
+//    List.map (fun (c1,c2,c3) -> 
+//        (antiEmptyChecker c1.Value, antiEmptyChecker c2.Value, antiEmptyChecker c3.Value)
+//        |> fun (c1n,c2n,c3n) -> 
+//            printfn "%s    %s    %s" c1n c2n c3n; c1n, c2n, c3n)
+//)
+
+//assWs2.CellCollection.GetCellsInColumn(11)
 
 
 //let getKvTriplets (headerTriplets : FsCell [] []) (workbook : FsWorkbook) (table : FsTable) = 
@@ -302,7 +333,7 @@ assWs2.CellCollection.GetCellsInColumn(11)
     //        use en = input.GetEnumerator()
     //        loop id
     //)
-    0
+    //0
 
 
 
