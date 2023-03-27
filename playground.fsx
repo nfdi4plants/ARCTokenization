@@ -23,7 +23,8 @@ open FSharpAux
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
-open ArcGraphModel.CvParam
+open ArcGraphModel
+open ArcGraphModel.Param
 
 
 //let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
@@ -129,12 +130,13 @@ module List =
         loop [] list1 list2 list3 list4
 
 let parse2 crStart (cl : FsCell list) =
-    let empty() = FsCell.createEmpty ()
+    //let empty() = FsCell.createEmpty ()
     let getDataCellsOf (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList
     let rec loop roundOne (s : FsCell list) = 
         [
             match s with
             | a :: b :: c :: d :: rest when roundOne && (String.startsWith "Unit" b.Value) ->
+                // a = Value/Name header, b = Unit header, c = TermSourceRef header, d = TermAccessionNumber header
                 let dataCellsVal = getDataCellsOf a
                 let dataCellsUnt = getDataCellsOf b
                 let dataCellsTsr = getDataCellsOf c
@@ -143,13 +145,12 @@ let parse2 crStart (cl : FsCell list) =
                     List.map4 (
                         fun (vl : FsCell) unt tan tsr -> 
                             let valTerm = CvUnit(tan.Value, vl.Value, tsr.Value)
-                                //CvTerm(dc.Value)
-                            //CvParam(d.Value, a.Value, c.Value, CvValue valTerm)
                             CvParam(d.Value, a.Value, c.Value, WithCvUnitAccession (unt.Value, valTerm))
                     ) dataCellsVal dataCellsUnt dataCellsTan dataCellsTsr
-                yield cvPars
+                yield! cvPars
                 yield! loop false rest
             | a :: b :: c :: rest when roundOne ->
+                // a = Value/Name header, b = TermSourceRef header, c = TermAccessionNumber header
                 let dataCellsVal = getDataCellsOf a
                 let dataCellsTsr = getDataCellsOf b
                 let dataCellsTan = getDataCellsOf c
@@ -160,25 +161,67 @@ let parse2 crStart (cl : FsCell list) =
                             let valTerm = CvTerm(tan.Value, vl.Value, tsr.Value)
                             CvParam(c.Value, a.Value, b.Value, CvValue valTerm)
                     )
-                yield cvPars
+                yield! cvPars
                 yield! loop false rest
-            //| a :: b :: rest ->
-            //    match roundOne with
-            //    | true  ->
-            //        yield (a, b, empty())
-            //        yield! loop false rest
-            //    | false ->
-            //        yield (empty(), a, b)
-            //        yield! loop false rest
-            //| a :: [] ->
-            //    match roundOne with
-            //    | true  ->
-            //        yield (a, empty(), empty())
-            //    | false ->
-            //        yield (empty(), a, empty())
+            | a :: b :: rest ->
+                // a = Value/Name header, b = TermSourceRef header (assumed, could also be TermAccessionNumber header if TSR column is missing)
+                match roundOne with
+                | true  ->
+                    let dataCellsVal = getDataCellsOf a
+                    let dataCellsTsr = getDataCellsOf b
+                    let cvPars =
+                        (dataCellsVal, dataCellsTsr)
+                        ||> List.map2 (
+                            fun vl tsr ->
+                                let valTerm = CvTerm("(n/a)", vl.Value, tsr.Value)
+                                CvParam("n/a", a.Value, b.Value, CvValue valTerm)
+                        )
+                    yield! cvPars
+                    yield! loop false rest
+                | false ->
+                    // a = TermSourceRef header, b = TermAccessionNumber header
+                    let dataCellsTsr = getDataCellsOf a
+                    let dataCellsTan = getDataCellsOf b
+                    let cvPars =
+                        (dataCellsTsr, dataCellsTan)
+                        ||> List.map2 (
+                            fun tsr tan ->
+                                let valTerm = CvTerm(tan.Value, "n/a", tsr.Value)
+                                CvParam(b.Value, "(n/a)", a.Value, CvValue valTerm)
+                        )
+                    yield! cvPars
+                    yield! loop false rest
+            | a :: [] ->
+                match roundOne with
+                | true  ->
+                    // a = Value/Name header
+                    let dataCellsVal = getDataCellsOf a
+                    let cvPars =
+                        dataCellsVal
+                        |> List.map (
+                            fun vl ->
+                                // use this if ParamValue shall be CvValue instead of mere Value
+                                //let valTerm = CvTerm("(n/a)", vl.Value, "(n/a)")
+                                CvParam("(n/a)", a.Value, "(n/a)", Value vl.Value)
+                        )
+                    yield! cvPars
+                | false ->
+                    // a = TermSourceRef header (assumed, could also be TermAccessionNumber header if TSR column is missing)
+                    let dataCellsTsr = getDataCellsOf a
+                    let cvPars =
+                        dataCellsTsr
+                        |> List.map (
+                            fun tsr ->
+                                CvParam("(n/a)", "(n/a)", tsr.Value, Value "(n/a)")
+                        )
+                    yield! cvPars
             | [] -> ()
         ]
     loop crStart cl
+
+let parsed = List.map (parse2 true) groupedHeaders
+parsed.Head |> ArcGraphModel.Param.getValue
+
 
 let t2 = tbls.Item 1
 let assWs2 = FsTable.getWorksheetOfTable wb t2

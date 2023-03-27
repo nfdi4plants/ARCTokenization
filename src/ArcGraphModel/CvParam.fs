@@ -8,7 +8,7 @@
 
 
 
-module CvParam =
+module Param =
     open System
 
 
