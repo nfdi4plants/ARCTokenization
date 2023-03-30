@@ -27,8 +27,8 @@ open ArcGraphModel
 open ArcGraphModel.Param
 
 
-let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -72,6 +72,7 @@ let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNum
 let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> List.ofSeq
 let headersFiltered = columnHeaders |> List.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
 let groupedHeaders = headersFiltered |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
+let nodeHeaders = columnHeaders |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
 //let groupedHeadersStr = 
 
 //let ftf = FsTableField()
@@ -129,139 +130,181 @@ module List =
             | _ -> List.rev acc
         loop [] list1 list2 list3 list4
 
-tbl1.Fields(fcc)
+//tbl1.Fields(fcc)
 
-let parse2 crStart (table : FsTable) (cl : FsCell list) =
+let getDataCellsOf (fcc : FsCellsCollection) (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList
+
+let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsCell list) =
     //let empty() = FsCell.createEmpty ()
-    //let getDataCellsOf (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList
-    let getTableFieldOf (table : FsTable) (cell : FsCell) =
-        table.Fields(fcc) |> ignore
+    //let getTableFieldOf (table : FsTable) (cell : FsCell) =
+    //    table.Fields(fcc) |> ignore
 
-    let rec loop roundOne (s : FsCell list) = 
+    let rec loop roundOne (cells : FsCell list) = 
         [
-            printfn "s: %A" s
-            match s with
+            match cells with
             | a :: b :: c :: d :: rest when roundOne && (String.startsWith "Unit" b.Value) ->
-                printfn "case: a :: b :: c :: d :: rest"
                 // a = Value/Name header, b = Unit header, c = TermSourceRef header, d = TermAccessionNumber header
-                let dataCellsVal = getDataCellsOf a
-                let tfa = FsTableField(a.Value, a.ColumnNumber, )
-                FsTableField.getDataCells fcc true 
-                let dataCellsUnt = getDataCellsOf b
-                let dataCellsTsr = getDataCellsOf c
-                let dataCellsTan = getDataCellsOf d
+                //let tfa = FsTableField(a.Value, a.ColumnNumber, )
+                //FsTableField.getDataCells fcc true 
+                let dataCellsVal = getDataCellsOf fcc a
+                let dataCellsUnt = getDataCellsOf fcc b
+                let dataCellsTsr = getDataCellsOf fcc c
+                let dataCellsTan = getDataCellsOf fcc d
                 let cvPars =
                     List.map4 (
                         fun (vl : FsCell) unt tan tsr -> 
                             let valTerm = CvUnit(tan.Value, vl.Value, tsr.Value)
-                            CvParam(d.Value, a.Value, c.Value, WithCvUnitAccession (unt.Value, valTerm))
-                    ) dataCellsVal dataCellsUnt dataCellsTan dataCellsTsr
+                            CvParam(d.Value, a.Value, c.Value, WithCvUnitAccession (unt.Value, valTerm)) :> ICvBase
+                    ) dataCellsVal dataCellsUnt dataCellsTan dataCellsTsr 
                 yield! cvPars
                 yield! loop false rest
             | a :: b :: c :: rest when roundOne ->
-                printfn "case: a :: b :: c :: rest"
                 // a = Value/Name header, b = TermSourceRef header, c = TermAccessionNumber header
-                let dataCellsVal = getDataCellsOf a
-                printfn "%A" dataCellsVal
-                let dataCellsTsr = getDataCellsOf b
-                let dataCellsTan = getDataCellsOf c
+                let dataCellsVal = getDataCellsOf fcc a
+                let dataCellsTsr = getDataCellsOf fcc b
+                let dataCellsTan = getDataCellsOf fcc c
                 let cvPars =
                     (dataCellsVal, dataCellsTsr, dataCellsTan)
                     |||> List.map3 (
                         fun vl tsr tan ->
                             let valTerm = CvTerm(tan.Value, vl.Value, tsr.Value)
-                            CvParam(c.Value, a.Value, b.Value, CvValue valTerm)
+                            CvParam(c.Value, a.Value, b.Value, CvValue valTerm) :> ICvBase
                     )
                 yield! cvPars
                 yield! loop false rest
             | a :: b :: rest ->
-                printfn "case: a :: b :: rest"
                 match roundOne with
                 | true  ->
                     // a = Value/Name header, b = TermSourceRef header (assumed, could also be TermAccessionNumber header if TSR column is missing)
-                    printfn "subcase: roundOne"
-                    let dataCellsVal = getDataCellsOf a
-                    let dataCellsTsr = getDataCellsOf b
+                    let dataCellsVal = getDataCellsOf fcc a
+                    let dataCellsTsr = getDataCellsOf fcc b
                     let cvPars =
                         (dataCellsVal, dataCellsTsr)
                         ||> List.map2 (
                             fun vl tsr ->
                                 let valTerm = CvTerm("(n/a)", vl.Value, tsr.Value)
-                                CvParam("n/a", a.Value, b.Value, CvValue valTerm)
+                                CvParam("n/a", a.Value, b.Value, CvValue valTerm) :> ICvBase
                         )
                     yield! cvPars
                     yield! loop false rest
                 | false ->
-                    printfn "subcase: not roundOne"
                     // a = TermSourceRef header, b = TermAccessionNumber header
-                    let dataCellsTsr = getDataCellsOf a
-                    let dataCellsTan = getDataCellsOf b
+                    let dataCellsTsr = getDataCellsOf fcc a
+                    let dataCellsTan = getDataCellsOf fcc b
                     let cvPars =
                         (dataCellsTsr, dataCellsTan)
                         ||> List.map2 (
                             fun tsr tan ->
                                 let valTerm = CvTerm(tan.Value, "n/a", tsr.Value)
-                                CvParam(b.Value, "(n/a)", a.Value, CvValue valTerm)
+                                CvParam(b.Value, "(n/a)", a.Value, CvValue valTerm) :> ICvBase
                         )
                     yield! cvPars
                     yield! loop false rest
             | a :: [] ->
-                printfn "case: a :: []"
                 match roundOne with
                 | true  ->
-                    printfn "subcase: roundOne"
                     // a = Value/Name header
-                    let dataCellsVal = getDataCellsOf a
+                    let dataCellsVal = getDataCellsOf fcc a
                     let cvPars =
                         dataCellsVal
                         |> List.map (
                             fun vl ->
                                 // use this if ParamValue shall be CvValue instead of mere Value
                                 //let valTerm = CvTerm("(n/a)", vl.Value, "(n/a)")
-                                CvParam("(n/a)", a.Value, "(n/a)", Value vl.Value)
+                                CvParam("(n/a)", a.Value, "(n/a)", Value vl.Value) :> ICvBase
                         )
                     yield! cvPars
                 | false ->
-                    printfn "subcase: not roundOne"
                     // a = TermSourceRef header (assumed, could also be TermAccessionNumber header if TSR column is missing)
-                    let dataCellsTsr = getDataCellsOf a
+                    let dataCellsTsr = getDataCellsOf fcc a
                     let cvPars =
                         dataCellsTsr
                         |> List.map (
                             fun tsr ->
-                                CvParam("(n/a)", "(n/a)", tsr.Value, Value "(n/a)")
+                                CvParam("(n/a)", "(n/a)", tsr.Value, Value "(n/a)") :> ICvBase
                         )
                     yield! cvPars
-            | [] -> printfn "case: []"; ()
+            | [] -> ()
         ]
     loop crStart cl
 
-let parsed = List.map (parse2 true) groupedHeaders
-parsed.Head.Head |> ArcGraphModel.Param.getCvAccessionOrName
-parsed.Head.Head |> ArcGraphModel.Param.getValue
+let parseNode fcc headerCell =
+    let dataCellsVal = getDataCellsOf fcc headerCell
+    dataCellsVal
+    |> List.map (
+        fun dc ->
+            //UserParam(headerCell.Value, ParamValue.Value dc.Value)
+            CvParam("", headerCell.Value, "", ParamValue.Value dc.Value) :> ICvBase
+    )
+
+let parsedNodes = List.map (parseNode fcc) nodeHeaders
+let parsedEdges = List.map (parseEdges true fcc) groupedHeaders
+parsedEdges.Head.Head |> ArcGraphModel.Param.getCvAccession
+parsedEdges.Head.Head :?> CvParam<string> |> ArcGraphModel.Param.getValue
+parsedEdges |> List.map (List.map (fun t -> t :?> CvParam<string> |> Param.getValue))
+parsedEdges |> List.map (List.map (Param.getCvName))
 
 
 let t2 = tbls.Item 1
 let assWs2 = FsTable.getWorksheetOfTable wb t2
+let fcc2 = assWs2.CellCollection
 let columnHeadersRowAddress2 = t2.HeadersRow().RangeAddress.FirstAddress.RowNumber
-let columnHeaders2 = assWs2.CellCollection.GetCellsInRow columnHeadersRowAddress2 |> Array.ofSeq
-let headersFiltered2 = columnHeaders2 |> Array.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
+let columnHeaders2 = fcc2.GetCellsInRow columnHeadersRowAddress2 |> List.ofSeq
+let headersFiltered2 = columnHeaders2 |> List.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
 let groupedHeaders2 = headersFiltered2 |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
+let parsedEdges2 = groupedHeaders2 |> List.map (parseEdges true fcc2)
+let nodeHeaders2 = columnHeaders2 |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
+let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
 
-groupedHeaders2 |> List.map (parse2 true)
-groupedHeaders2.Head.Length
-groupedHeaders2 |> List.map List.length
-groupedHeaders2 |> List.mapi (fun i x -> printfn "%i" i; parse2 true x)
-groupedHeaders2[2].Length
-groupedHeaders2.Head |> parse2 true
-groupedHeaders2[1] |> parse2 true
-groupedHeaders2[2] |> parse2 true
-groupedHeaders2[2].Head
-groupedHeaders2[2][1]
-groupedHeaders2[2][2]
-groupedHeaders2[2][3]
 
-//let res = groupedHeaders2 |> List.map (parse2 true)
+#r "nuget: FSharp.FGL"
+#r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
+
+open FSharp.FGL
+open FSharp.FGL.ArrayAdjacencyGraph
+
+let nodeList = parsedNodes
+let linkList = parsedEdges
+let singleSourceNode = nodeList.Head.Head
+let singleSinkNode = nodeList[1].Head
+let singleEdge = linkList.Head.Head
+//let singleSourceNode = nodeList.Head.Head :?> UserParam<string>
+//let singleSinkNode = nodeList[1].Head :?> UserParam<string>
+//let singleEdge = linkList.Head.Head :?> CvParam<string>
+
+
+let vertexList : LVertex<int,#ICvBase> list = [
+//let vertexList : LVertex<int,UserParam<string>> list = [
+    0, singleSourceNode
+    1, singleSinkNode
+]
+
+let edgeList : LEdge<int,#ICvBase> list = [
+//let edgeList : LEdge<int,CvParam<string>> list = [
+    (0,1,singleEdge)
+]
+
+
+
+//groupedHeaders2 |> List.map (parseEdges true fcc2)
+//groupedHeaders2.Head.Length
+//groupedHeaders2 |> List.map List.length
+//groupedHeaders2 |> List.mapi (fun i x -> printfn "%i" i; parseEdges true fcc2 x)
+//groupedHeaders2[2].Length
+//groupedHeaders2.Head |> parseEdges true fcc2
+//groupedHeaders2[1] |> parseEdges true fcc2
+//groupedHeaders2[2] |> parseEdges true fcc2
+//groupedHeaders2[2].Head
+//groupedHeaders2[2][1]
+//groupedHeaders2[2][2]
+//groupedHeaders2[2][3]
+//FsCellsCollection.getCellsInColumn groupedHeaders2[2].Head.ColumnNumber fcc |> Seq.toList
+//fcc[1,7]
+//groupedHeaders2[2].Head.ColumnNumber
+//groupedHeaders2[2][1]
+//groupedHeaders2[2][2]
+
+//let res = groupedHeaders2 |> List.map (parseEdges true)
 //let antiEmptyChecker str = if str = "" then "(empty)" else str
 //res 
 //|> List.collect (
