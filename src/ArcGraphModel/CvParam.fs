@@ -28,13 +28,14 @@ module Param =
         | Directory
         | Custom of string 
 
-    type Adress =
-        // sheetname * row * col
+    type Address =
+        /// Represents an address in the form of: sheetname * row * col
         | Table of string * int * int 
 
     /// Represents a term from a controlled vocabulary (Cv)
     /// in the form of: id|accession * name|value * refUri
     // ?Maybe [<Struct>]
+    //[<Struct>]
     type CvTerm = string * string * string
 
     /// Represents a unit term from the unit ontology 
@@ -62,11 +63,11 @@ module Param =
         // abstract member Adress     : Adress / Location / Position
 
     /// Interface ensures the value as ParamValue<'T>  
-    type IParamBase<'T when 'T :> IConvertible> =        
-        abstract member Value    : ParamValue<'T>    
+    type IParamBase<'T when 'T :> IConvertible> =
+        abstract member Value : ParamValue<'T>
 
     /// Represents controlled vocabulary term as key for a ParamValue as value
-    type CvParam<'T when 'T :> IConvertible>(cvAccession:string,cvName:string,cvRefUri:string,paramValue:ParamValue<'T>) =
+    type CvParam<'T when 'T :> IConvertible>(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue<'T>) =
         interface ICvBase with 
             member this.ID     = cvAccession
             member this.Name   = cvName
@@ -77,28 +78,27 @@ module Param =
         member this.CvAccession = cvAccession
 
     /// Represents user defined term as key for a ParamValue as value
-    type UserParam<'T when 'T :> IConvertible>(name:string,paramValue:ParamValue<'T>) =
+    type UserParam<'T when 'T :> IConvertible>(name : string, paramValue : ParamValue<'T>) =
         interface ICvBase with 
             member this.ID     = name
             member this.Name   = name
             member this.RefUri = "UserTerm"
-        interface IParamBase<'T> with         
+        interface IParamBase<'T> with
             member this.Value  = paramValue
 
-
-    type CvObject<'T>(cvAccession:string,cvName:string,cvRefUri:string,object:'T) =
+    type CvObject<'T>(cvAccession : string, cvName : string, cvRefUri : string, object : 'T) =
         interface ICvBase with 
             member this.ID     = cvAccession
             member this.Name   = cvName
-            member this.RefUri = cvRefUri    
+            member this.RefUri = cvRefUri
 
         member this.Object = object
 
-    type CvDoc<'T when 'T :> IParamBase<IConvertible> and 'T:> ICvBase>(cvAccession:string,cvName:string,cvRefUri:string,doc:'T list) =
+    type CvDoc<'T when 'T :> IParamBase<IConvertible> and 'T:> ICvBase>(cvAccession : string, cvName : string, cvRefUri : string, doc : 'T list) =
         interface ICvBase with 
             member this.ID     = cvAccession
             member this.Name   = cvName
-            member this.RefUri = cvRefUri    
+            member this.RefUri = cvRefUri
 
         member this.Document = doc
 
@@ -108,22 +108,41 @@ module Param =
     let getCvName (param:#ICvBase) =
         param.Name
 
-    let getCvAccessionOrName (param:#ICvBase) =
+    let getCvAccession (param : #ICvBase) =
         param.ID
 
-    let getValue (param:#IParamBase<_>) =
-        match param.Value with
-        | Value   v                 -> v
-        | CvValue (_,v,_)           -> v
-        | WithCvUnitAccession (v,_) -> v
+    let getCvName (param : #ICvBase) =
+        param.Name
 
-    let tryGetCvUnit  (param:#IParamBase<_>) : CvUnit option =
+    let getCvRef (param : #ICvBase) =
+        param.RefUri
+
+    let getValue (param : #IParamBase<_>) =
         match param.Value with
-        | Value _                   -> None
-        | CvValue _                 -> None
+        | Value                    v    -> v
+        | CvValue               (_,v,_) -> v
+        | WithCvUnitAccession     (v,_) -> v
+
+    let tryGetValueAccession (param : #IParamBase<_>) =
+        match param.Value with
+        | CvValue                   (a,_,_) -> Some a
+        | Value                      _      -> None     // mere Value has no accession number
+        | WithCvUnitAccession        _      -> None     // use tryGetCvUnitAccession instead
+        //| WithCvUnitAccession (_,(a,_,_))   -> Some a
+
+    let tryGetValueRef (param : #IParamBase<_>) =
+        match param.Value with
+        | CvValue               (_,_,r) -> Some r
+        | Value                      _  -> None     // mere Value has no ref
+        | WithCvUnitAccession        _  -> None     // use tryGetCvUnitRef instead
+
+    let tryGetCvUnit (param : #IParamBase<_>) : CvUnit option =
+        match param.Value with
+        | Value                  _  -> None
+        | CvValue                _  -> None
         | WithCvUnitAccession (_,u) -> Some u
 
-
+    // TO DO: try get for the parts of CvUnit
 
 
 
