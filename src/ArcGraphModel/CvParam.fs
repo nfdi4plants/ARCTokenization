@@ -54,17 +54,23 @@ module Param =
         | WithCvUnitAccession of cvu : 'T * CvUnit
 
     /// Interface ensures the propterties necessary for CvTerm 
-    type ICvBase =        
-        abstract member ID       : string    
+    type ICvBase =
+        abstract member ID       : string
         abstract member Name     : string
         abstract member RefUri   : string
         // here or as node/edge abstraction 
         // abstract member DataType   : ModelDataType
         // abstract member Adress     : Adress / Location / Position
 
+        //override this.ToString() = 
+        //    $"Name: {this.Name}\nID: {this.ID}\nRefUri: {this.RefUri}"
+
     /// Interface ensures the value as ParamValue<'T>  
     type IParamBase<'T when 'T :> IConvertible> =
         abstract member Value : ParamValue<'T>
+
+        //override this.ToString() = 
+        //    $"Value: {this.Value}"
 
     /// Represents controlled vocabulary term as key for a ParamValue as value
     type CvParam<'T when 'T :> IConvertible>(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue<'T>) =
@@ -77,6 +83,9 @@ module Param =
 
         member this.CvAccession = cvAccession
 
+        override this.ToString() = 
+            $"Name: {(this :> ICvBase).Name}\nID: {this.CvAccession}\nRefUri: {(this :> ICvBase).RefUri}\nValue: {(this :> IParamBase<'T>).Value}"
+
     /// Represents user defined term as key for a ParamValue as value
     type UserParam<'T when 'T :> IConvertible>(name : string, paramValue : ParamValue<'T>) =
         interface ICvBase with 
@@ -86,6 +95,9 @@ module Param =
         interface IParamBase<'T> with
             member this.Value  = paramValue
 
+        override this.ToString() = 
+            $"Name: {(this :> ICvBase).Name}\nID: {(this :> ICvBase).ID}\nRefUri: {(this :> ICvBase).RefUri}\nValue: {(this :> IParamBase<'T>).Value}"
+
     type CvObject<'T>(cvAccession : string, cvName : string, cvRefUri : string, object : 'T) =
         interface ICvBase with 
             member this.ID     = cvAccession
@@ -94,6 +106,9 @@ module Param =
 
         member this.Object = object
 
+        override this.ToString() = 
+            $"Name: {(this :> ICvBase).Name}\nID: {(this :> ICvBase).ID}\nRefUri: {(this :> ICvBase).RefUri}"
+
     type CvDoc<'T when 'T :> IParamBase<IConvertible> and 'T:> ICvBase>(cvAccession : string, cvName : string, cvRefUri : string, doc : 'T list) =
         interface ICvBase with 
             member this.ID     = cvAccession
@@ -101,6 +116,9 @@ module Param =
             member this.RefUri = cvRefUri
 
         member this.Document = doc
+
+        override this.ToString() = 
+            $"Name: {(this :> ICvBase).Name}\nID: {(this :> ICvBase).ID}\nRefUri: {(this :> ICvBase).RefUri}"
 
     // Maybe a CvJDoc is necessary. Using SimpleJson as document type
 

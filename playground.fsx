@@ -18,7 +18,7 @@ open FSharpAux
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll"
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll"
 #r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll"
-#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
+#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll"
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
@@ -27,8 +27,8 @@ open ArcGraphModel
 open ArcGraphModel.Param
 
 
-//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -70,9 +70,9 @@ let nodeColumnNames = [
 
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
 let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> List.ofSeq
-let headersFiltered = columnHeaders |> List.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
-let groupedHeaders = headersFiltered |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
-let nodeHeaders = columnHeaders |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
+let nodeHeaders, edgeHeaders = columnHeaders |> List.partition (fun c -> List.contains c.Value nodeColumnNames)
+let groupedEdgeHeaders = edgeHeaders |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
+//let nodeHeaders = columnHeaders |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
 //let groupedHeadersStr = 
 
 //let ftf = FsTableField()
@@ -85,31 +85,31 @@ let nodeHeaders = columnHeaders |> List.filter (fun ch -> List.contains ch.Value
 //tbl1.RescanRange()
 //tbl1.FieldNames(obj)
 
-// timoCode
-let parse crStart (strl : string list) =
-    let rec loop (roundOne) s = 
-        [
-            match s with
-            | a :: b :: c :: rest when roundOne ->
-                yield (a,b,c)
-                yield! loop false rest
-            | a :: b :: rest ->
-                match roundOne with
-                | true  ->
-                    yield (a, b, "na")
-                    yield! loop false rest
-                | false ->
-                    yield ("na", a, b)
-                    yield! loop false rest
-            | a :: [] ->
-                match roundOne with
-                | true  ->
-                    yield (a, "na", "na")
-                | false ->
-                    yield ("na" ,a, "na")
-            | [] -> ()
-        ]
-    loop crStart strl
+//// timoCode
+//let parse crStart (strl : string list) =
+//    let rec loop (roundOne) s = 
+//        [
+//            match s with
+//            | a :: b :: c :: rest when roundOne ->
+//                yield (a,b,c)
+//                yield! loop false rest
+//            | a :: b :: rest ->
+//                match roundOne with
+//                | true  ->
+//                    yield (a, b, "na")
+//                    yield! loop false rest
+//                | false ->
+//                    yield ("na", a, b)
+//                    yield! loop false rest
+//            | a :: [] ->
+//                match roundOne with
+//                | true  ->
+//                    yield (a, "na", "na")
+//                | false ->
+//                    yield ("na" ,a, "na")
+//            | [] -> ()
+//        ]
+//    loop crStart strl
 
 //parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray)
 //groupedHeaders |> Array.map (parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray))
@@ -132,7 +132,7 @@ module List =
 
 //tbl1.Fields(fcc)
 
-let getDataCellsOf (fcc : FsCellsCollection) (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList
+let getDataCellsOf (fcc : FsCellsCollection) (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList |> List.skip 1
 
 let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsCell list) =
     //let empty() = FsCell.createEmpty ()
@@ -154,7 +154,7 @@ let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsC
                     List.map4 (
                         fun (vl : FsCell) unt tan tsr -> 
                             let valTerm = CvUnit(tan.Value, vl.Value, tsr.Value)
-                            CvParam(d.Value, a.Value, c.Value, WithCvUnitAccession (unt.Value, valTerm)) :> ICvBase
+                            CvParam(d.Value, a.Value, c.Value, WithCvUnitAccession (unt.Value, valTerm))
                     ) dataCellsVal dataCellsUnt dataCellsTan dataCellsTsr 
                 yield! cvPars
                 yield! loop false rest
@@ -168,7 +168,7 @@ let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsC
                     |||> List.map3 (
                         fun vl tsr tan ->
                             let valTerm = CvTerm(tan.Value, vl.Value, tsr.Value)
-                            CvParam(c.Value, a.Value, b.Value, CvValue valTerm) :> ICvBase
+                            CvParam(c.Value, a.Value, b.Value, CvValue valTerm)
                     )
                 yield! cvPars
                 yield! loop false rest
@@ -183,7 +183,7 @@ let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsC
                         ||> List.map2 (
                             fun vl tsr ->
                                 let valTerm = CvTerm("(n/a)", vl.Value, tsr.Value)
-                                CvParam("n/a", a.Value, b.Value, CvValue valTerm) :> ICvBase
+                                CvParam("n/a", a.Value, b.Value, CvValue valTerm)
                         )
                     yield! cvPars
                     yield! loop false rest
@@ -196,7 +196,7 @@ let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsC
                         ||> List.map2 (
                             fun tsr tan ->
                                 let valTerm = CvTerm(tan.Value, "n/a", tsr.Value)
-                                CvParam(b.Value, "(n/a)", a.Value, CvValue valTerm) :> ICvBase
+                                CvParam(b.Value, "(n/a)", a.Value, CvValue valTerm)
                         )
                     yield! cvPars
                     yield! loop false rest
@@ -211,7 +211,7 @@ let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsC
                             fun vl ->
                                 // use this if ParamValue shall be CvValue instead of mere Value
                                 //let valTerm = CvTerm("(n/a)", vl.Value, "(n/a)")
-                                CvParam("(n/a)", a.Value, "(n/a)", Value vl.Value) :> ICvBase
+                                CvParam("(n/a)", a.Value, "(n/a)", Value vl.Value)
                         )
                     yield! cvPars
                 | false ->
@@ -221,7 +221,7 @@ let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsC
                         dataCellsTsr
                         |> List.map (
                             fun tsr ->
-                                CvParam("(n/a)", "(n/a)", tsr.Value, Value "(n/a)") :> ICvBase
+                                CvParam("(n/a)", "(n/a)", tsr.Value, Value "(n/a)")
                         )
                     yield! cvPars
             | [] -> ()
@@ -234,14 +234,38 @@ let parseNode fcc headerCell =
     |> List.map (
         fun dc ->
             //UserParam(headerCell.Value, ParamValue.Value dc.Value)
-            CvParam("", headerCell.Value, "", ParamValue.Value dc.Value) :> ICvBase
+            CvParam("(n/a)", headerCell.Value, "(n/a)", ParamValue.Value dc.Value)
     )
 
+type NodeType =
+    | Source
+    | Sink
+    | ProtocolRef
+
+let getNodeType (cvPar : CvParam<string>) =
+    //let castedCvPar = cvPar :?> CvParam<string>     // debatable approach
+    //let v = Param.getCvName castedCvPar
+    let v = Param.getCvName cvPar
+    match v with
+    | "Source Name" -> Source
+    | "Sample Name"
+    | "Raw Data File"
+    | "Derived Data File" -> Sink
+    | "Protocol REF"
+    | "Protocol Type" -> ProtocolRef
+    | _ -> failwith $"HeaderCell {v} cannot be parsed to any NodeType."
+
+
 let parsedNodes = List.map (parseNode fcc) nodeHeaders
-let parsedEdges = List.map (parseEdges true fcc) groupedHeaders
+let parsedEdges = List.map (parseEdges true fcc) groupedEdgeHeaders
+let nodeTypes = parsedNodes |> List.map (List.map getNodeType)
+parsedNodes.Head.Head |> ArcGraphModel.Param.getValue
+parsedNodes.Head[1] |> ArcGraphModel.Param.getValue
+parsedNodes.Head.Length
 parsedEdges.Head.Head |> ArcGraphModel.Param.getCvAccession
-parsedEdges.Head.Head :?> CvParam<string> |> ArcGraphModel.Param.getValue
-parsedEdges |> List.map (List.map (fun t -> t :?> CvParam<string> |> Param.getValue))
+parsedEdges.Head.Head |> ArcGraphModel.Param.getValue
+parsedEdges.Head[1] |> ArcGraphModel.Param.getValue
+parsedEdges |> List.map (List.map Param.getValue)
 parsedEdges |> List.map (List.map (Param.getCvName))
 
 
@@ -250,10 +274,10 @@ let assWs2 = FsTable.getWorksheetOfTable wb t2
 let fcc2 = assWs2.CellCollection
 let columnHeadersRowAddress2 = t2.HeadersRow().RangeAddress.FirstAddress.RowNumber
 let columnHeaders2 = fcc2.GetCellsInRow columnHeadersRowAddress2 |> List.ofSeq
-let headersFiltered2 = columnHeaders2 |> List.filter (fun c -> List.contains c.Value nodeColumnNames |> not)
-let groupedHeaders2 = headersFiltered2 |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
-let parsedEdges2 = groupedHeaders2 |> List.map (parseEdges true fcc2)
-let nodeHeaders2 = columnHeaders2 |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
+let nodeHeaders2, edgeHeaders2 = columnHeaders2 |> List.partition (fun c -> List.contains c.Value nodeColumnNames)
+let groupedEdgeHeaders2 = edgeHeaders2 |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
+let parsedEdges2 = groupedEdgeHeaders2 |> List.map (parseEdges true fcc2)
+//let nodeHeaders2 = columnHeaders2 |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
 let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
 
 
@@ -262,6 +286,27 @@ let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
 
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
+
+/// <summary>
+/// Takes an indexed input list (e.g. a list of Sources) and groups them by their occurence.
+/// </summary>
+/// <example>
+/// E.g.: `["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve` leads to
+/// `[([0; 1; 2], "Hello"); ([3; 4], "World"); ([5], "lol")]`
+/// </example>
+let convolve input = 
+    input 
+    |> List.groupBy snd
+    |> List.map (fun (k,il) -> List.map fst il, k)
+
+["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve
+
+let buildSourceSinkConnection sources edges sinks =
+    let indexedSources = List.indexed sources
+    let indexedEdges = List.indexed edges
+    let indexedSinks = List.indexed sinks
+    let convolvedSourced = convolve indexedSources
+    let convolvedSinks = convolve indexedSinks
 
 let nodeList = parsedNodes
 let linkList = parsedEdges
@@ -272,14 +317,23 @@ let singleEdge = linkList.Head.Head
 //let singleSinkNode = nodeList[1].Head :?> UserParam<string>
 //let singleEdge = linkList.Head.Head :?> CvParam<string>
 
+let sourceNodeList, sinkNodeList = 
+    let part (input : ('a*'b) list) = snd input.Head
+    parsedNodes 
+    |> List.map (List.groupBy getNodeType >> List.head) 
+    |> List.partition (fst >> (=) Source)
+    |> fun (sonl,sinl) -> part sonl, part sinl
 
-let vertexList : LVertex<int,#ICvBase> list = [
+sourceNodeList
+
+
+let vertexList : LVertex<int list,CvParam<string>> list = [
 //let vertexList : LVertex<int,UserParam<string>> list = [
     0, singleSourceNode
     1, singleSinkNode
 ]
 
-let edgeList : LEdge<int,#ICvBase> list = [
+let edgeList : LEdge<int list,CvParam<string>> list = [
 //let edgeList : LEdge<int,CvParam<string>> list = [
     (0,1,singleEdge)
 ]
