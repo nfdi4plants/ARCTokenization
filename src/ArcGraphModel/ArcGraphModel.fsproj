@@ -10,4 +10,9 @@
     <Compile Include="TableTransform.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FSharpAux" Version="1.1.0" />
+    <PackageReference Include="FsSpreadsheet" Version="1.0.1" />
+  </ItemGroup>
+
 </Project>
