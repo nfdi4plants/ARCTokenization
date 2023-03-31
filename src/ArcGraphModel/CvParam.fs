@@ -82,7 +82,7 @@ module Param =
         member this.CvAccession = cvAccession
 
         override this.ToString() = 
-            $"Name: {(this :> ICvBase).Name}\nID: {this.CvAccession}\nRefUri: {(this :> ICvBase).RefUri}\nValue: {(this :> IParamBase<'T>).Value}"
+            $"Name: {(this :> ICvBase).Name}\n\tID: {this.CvAccession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase<'T>).Value}"
 
     /// Represents user defined term as key for a ParamValue as value
     type UserParam<'T when 'T :> IConvertible>(name : string, paramValue : ParamValue<'T>) =
@@ -94,7 +94,7 @@ module Param =
             member this.Value  = paramValue
 
         override this.ToString() = 
-            $"Name: {(this :> ICvBase).Name}\nID: {(this :> ICvBase).ID}\nRefUri: {(this :> ICvBase).RefUri}\nValue: {(this :> IParamBase<'T>).Value}"
+            $"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase<'T>).Value}"
 
     type CvObject<'T>(cvAccession : string, cvName : string, cvRefUri : string, object : 'T) =
         interface ICvBase with 
@@ -105,7 +105,7 @@ module Param =
         member this.Object = object
 
         override this.ToString() = 
-            $"Name: {(this :> ICvBase).Name}\nID: {(this :> ICvBase).ID}\nRefUri: {(this :> ICvBase).RefUri}"
+            $"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}"
 
     type CvDoc<'T when 'T :> IParamBase<IConvertible> and 'T:> ICvBase>(cvAccession : string, cvName : string, cvRefUri : string, doc : 'T list) =
         interface ICvBase with 
@@ -116,7 +116,7 @@ module Param =
         member this.Document = doc
 
         override this.ToString() = 
-            $"Name: {(this :> ICvBase).Name}\nID: {(this :> ICvBase).ID}\nRefUri: {(this :> ICvBase).RefUri}"
+            $"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}"
 
     // Maybe a CvJDoc is necessary. Using SimpleJson as document type
 

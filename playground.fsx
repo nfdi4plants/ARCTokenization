@@ -1,11 +1,11 @@
-open System.IO
-open System.Collections.Generic
+//open System.IO
+//open System.Collections.Generic
 
-let dllBasePath = @"c:/repos/csbiology/fsspreadsheet/src"
-File.Copy(dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll", dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll", true)
-File.Copy(dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll", dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll", true)
-File.Copy(dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll", true)
-File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll", true)
+//let dllBasePath = @"c:/repos/csbiology/fsspreadsheet/src"
+//File.Copy(dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll", dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll", true)
+//File.Copy(dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll", dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll", true)
+//File.Copy(dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll", true)
+//File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll", true)
 
 #r "nuget: DocumentFormat.OpenXml"
 #r "nuget: FSharpAux"
@@ -15,16 +15,17 @@ open DocumentFormat.OpenXml
 open FSharpAux
 
 
-#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll"
-#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll"
-#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll"
-#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll"
+#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll"
+#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll"
+#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll"
+#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
 open ArcGraphModel
 open ArcGraphModel.Param
+open ArcGraphModel.TableTransform
 
 
 let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
@@ -53,17 +54,6 @@ let associatedWorksheet = shts.Head
 let fcc = associatedWorksheet.CellCollection
 //tbl1.Field("Source Name", fcc).DataCells(fcc, false) |> Seq.length
 //tbl1.Field("Source Name", fcc).DataCells(fcc, true)
-
-/// Names that are excluded.
-let nodeColumnNames = [
-    "Source Name"
-    "Sample Name"
-    "Raw Data File"
-    "Derived Data File"
-    "Protocol Type"
-    "Protocol REF"
-]
-
 //tbl1.RescanRange()
 //tbl1.Field("test", fcc).DataCells(fcc, false)
 //tbl1.FieldNames
@@ -131,12 +121,17 @@ let parsedEdges = List.map (parseEdges true fcc) groupedEdgeHeaders
 let nodeTypes = parsedNodes |> List.map (List.map getNodeType)
 parsedNodes.Head.Head |> ArcGraphModel.Param.getValue
 parsedNodes.Head[1] |> ArcGraphModel.Param.getValue
+parsedNodes.Length
 parsedNodes.Head.Length
 parsedEdges.Head.Head |> ArcGraphModel.Param.getCvAccession
 parsedEdges.Head.Head |> ArcGraphModel.Param.getValue
 parsedEdges.Head[1] |> ArcGraphModel.Param.getValue
 parsedEdges |> List.map (List.map Param.getValue)
 parsedEdges |> List.map (List.map Param.getCvName)
+
+
+
+let sourceNodes, sinkNodes, protocolRefNodes = separateNodes (List.concat parsedNodes)
 
 
 let t2 = tbls.Item 1
@@ -158,25 +153,34 @@ open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
 
 /// <summary>
-/// Takes an indexed input list (e.g. a list of Sources) and groups them by their occurence.
+/// Takes an indexed input list (e.g. a list of Sources) and groups them by their occurence. Returns the first index of the occurence
+/// and the value as tuple.
 /// </summary>
 /// <example>
 /// E.g.: `["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve` leads to
-/// `[([0; 1; 2], "Hello"); ([3; 4], "World"); ([5], "lol")]`
+/// `[(0, "Hello"); (3, "World"); (5, "lol")]`
 /// </example>
 let convolve input = 
     input 
     |> List.groupBy snd
-    |> List.map (fun (k,il) -> List.map fst il, k)
+    |> List.map (fun (k,il) -> List.map fst il |> List.min, k)
 
 ["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve
 
 let buildSourceSinkConnection sources edges sinks =
+    let sources = 
+
     let indexedSources = List.indexed sources
     let indexedEdges = List.indexed edges
     let indexedSinks = List.indexed sinks
     let convolvedSources = convolve indexedSources
     let convolvedSinks = convolve indexedSinks
+    let links =
+        let len = indexedSources.Length
+        let newIndSinks = convolvedSinks |> List.map (fun (i,s) -> i + len, s)
+    if indexedSinks
+
+let extendConnection newEdges newSinks = 0
 
 
 let nodeList = parsedNodes
@@ -199,13 +203,13 @@ sourceNodeList
 
 ArrayAdjacencyGraph.Vertices.
 
-let vertexList : LVertex<int list,CvParam<string>> list = [
+let vertexList : LVertex<int,CvParam<string>> list = [
 //let vertexList : LVertex<int,UserParam<string>> list = [
     0, singleSourceNode
     1, singleSinkNode
 ]
 
-let edgeList : LEdge<int list,CvParam<string>> list = [
+let edgeList : LEdge<int,CvParam<string>> list = [
 //let edgeList : LEdge<int,CvParam<string>> list = [
     (0,1,singleEdge)
 ]
