@@ -17,10 +17,37 @@ module List =   // remove as soon as this is available in next F#Aux NuGet relea
         loop [] list1 list2 list3 list4
 
 
+/// <summary>
+/// Functions to work with FsTables into graph-based models.
+/// </summary>
 module TableTransform =
 
-    let getDataCellsOf (fcc : FsCellsCollection) (cell : FsCell) = FsCellsCollection.getCellsInColumn cell.ColumnNumber fcc |> Seq.toList |> List.skip 1
+    /// <summary>
+    /// The header names of the columns containing Node-related Building Blocks.
+    /// </summary>
+    let nodeColumnNames = [
+        "Source Name"
+        "Sample Name"
+        "Raw Data File"
+        "Derived Data File"
+        "Protocol Type"
+        "Protocol REF"
+    ]
 
+    /// <summary>
+    /// Returns all data cells from a given header cell.
+    /// </summary>
+    let getDataCellsOf (fcc : FsCellsCollection) (headerCell : FsCell) = 
+        FsCellsCollection.getCellsInColumn headerCell.ColumnNumber fcc 
+        |> Seq.toList 
+        |> List.skip 1
+
+    /// <summary>
+    /// Takes a list of header cells and an FsCellsCollections and returns a list of CvParams according to the information from the FsCells.
+    /// If `crStart` is true, it is assumed that the first header cell is a Term containing header cell of a Building Block.
+    /// 
+    /// This function should only be used for parsing edges, i.e., Term-related Building Blocks.
+    /// </summary>
     let parseEdges crStart (*(table : FsTable)*) (fcc : FsCellsCollection) (cl : FsCell list) =
         //let empty() = FsCell.createEmpty ()
         //let getTableFieldOf (table : FsTable) (cell : FsCell) =
@@ -115,6 +142,11 @@ module TableTransform =
             ]
         loop crStart cl
 
+    /// <summary>
+    /// Takes a header cells and an FsCellsCollections and returns a list of CvParams according to the information from the FsCells.
+    /// 
+    /// This function should only be used for parsing nodes, i.e., input-, output-, and featured columns.
+    /// </summary>
     let parseNode fcc headerCell =
         let dataCellsVal = getDataCellsOf fcc headerCell
         dataCellsVal
@@ -124,11 +156,17 @@ module TableTransform =
                 CvParam("(n/a)", headerCell.Value, "(n/a)", ParamValue.Value dc.Value)
         )
 
+    /// <summary>
+    /// Modelling of the different types of nodes / Building Blocks.
+    /// </summary>
     type NodeType =
         | Source
         | Sink
         | ProtocolRef
 
+    /// <summary>
+    /// Takes a CvParam and returns the type of Node it contains.
+    /// </summary>
     let getNodeType (cvPar : CvParam<string>) =
         //let castedCvPar = cvPar :?> CvParam<string>     // debatable approach
         //let v = Param.getCvName castedCvPar
@@ -141,3 +179,19 @@ module TableTransform =
         | "Protocol REF"
         | "Protocol Type" -> ProtocolRef
         | _ -> failwith $"HeaderCell {v} cannot be parsed to any NodeType."
+
+    /// <summary>
+    /// Separates a list of nodes into a tuple in the form of `Source * Sink * ProtocolRef` with their respective CvParam lists.
+    /// </summary>
+    let separateNodes nodesList =
+        let groupedNodes = List.groupBy (getNodeType) nodesList
+        // long tuple... perhaps rework with anonymous record?
+        let rec loop sourceNodeList sinkNodeList protocolRefNodeList gn =
+            match gn with
+            | [] -> sourceNodeList, sinkNodeList, protocolRefNodeList
+            | h :: t ->
+                match fst h with
+                | Source        -> loop h               sinkNodeList    protocolRefNodeList t
+                | Sink          -> loop sourceNodeList  h               protocolRefNodeList t
+                | ProtocolRef   -> loop sourceNodeList  sinkNodeList    h                   t
+        loop (Source, []) (Sink, []) (ProtocolRef, []) groupedNodes
