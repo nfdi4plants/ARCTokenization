@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="CvParam.fs" />
+    <Compile Include="Param.fs" />
     <Compile Include="TableTransform.fs" />
   </ItemGroup>
 
