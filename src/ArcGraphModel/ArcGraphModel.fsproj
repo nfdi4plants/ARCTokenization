@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Compile Include="ArcType.fs" />
-    <Compile Include="CvParam.fs" />
     <Compile Include="TableTransform.fs" />
   </ItemGroup>
 
