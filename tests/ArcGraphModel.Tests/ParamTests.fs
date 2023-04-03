@@ -105,3 +105,7 @@ module Param =
         [<Fact>]
         let ``is Some`` () =
             Assert.True retrievedCvUnitValue.IsSome
+
+        [<Fact>]
+        let ``returns correct CvUnit value`` () =
+            Assert.Equal("CvUnit_Value", retrievedCvUnitValue.Value)
