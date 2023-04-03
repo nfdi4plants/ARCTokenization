@@ -107,5 +107,18 @@ module Param =
             Assert.True retrievedCvUnitValue.IsSome
 
         [<Fact>]
-        let ``returns correct CvUnit value`` () =
+        let ``returns correct CvUnit Value`` () =
             Assert.Equal("CvUnit_Value", retrievedCvUnitValue.Value)
+
+
+    module tryGetCvUnitName =
+
+        let retrievedCvUnitName = tryGetCvUnitName testCvParam3
+
+        [<Fact>]
+        let ``isSome`` () =
+            Assert.True retrievedCvUnitName.IsSome
+
+        [<Fact>]
+        let ``returns correct CvUnit Name`` () =
+            Assert.Equal("CvUnit_Name", retrievedCvUnitName.Value)

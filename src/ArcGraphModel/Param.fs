@@ -162,3 +162,9 @@ module Param =
         | Value                  _  -> None
         | CvValue                _  -> None
         | WithCvUnitAccession (v,_) -> Some v
+
+    let tryGetCvUnitName (param : #IParamBase<_>) : #IConvertible option =
+        match param.Value with
+        | Value                  _          -> None
+        | CvValue                _          -> None
+        | WithCvUnitAccession   (_,(_,n,_)) -> Some n
