@@ -157,8 +157,6 @@ module Param =
         | CvValue                _  -> None
         | WithCvUnitAccession (_,u) -> Some u
 
-    // TO DO: try get for the parts of CvUnit
-
     let tryGetCvUnitValue (param : #IParamBase<_>) : #IConvertible option =
         match param.Value with
         | Value                  _  -> None
