@@ -163,14 +163,20 @@ module Param =
         | CvValue                _  -> None
         | WithCvUnitAccession (v,_) -> Some v
 
-    let tryGetCvUnitName (param : #IParamBase<_>) : #IConvertible option =
+    let tryGetCvUnitName (param : #IParamBase<_>) =
         match param.Value with
         | Value                  _          -> None
         | CvValue                _          -> None
         | WithCvUnitAccession   (_,(_,n,_)) -> Some n
 
-    let tryGetCvUnitAccession (param : #IParamBase<_>) : #IConvertible option =
+    let tryGetCvUnitAccession (param : #IParamBase<_>) =
         match param.Value with
         | Value                  _          -> None
         | CvValue                _          -> None
         | WithCvUnitAccession   (_,(a,_,_)) -> Some a
+
+    let tryGetCvUnitRef (param : #IParamBase<_>) =
+        match param.Value with
+        | Value                  _          -> None
+        | CvValue                _          -> None
+        | WithCvUnitAccession   (_,(_,_,r)) -> Some r
