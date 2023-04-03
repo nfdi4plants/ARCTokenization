@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Include="ParamTests.fs" />
+    <Compile Include="TabeTransformTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
