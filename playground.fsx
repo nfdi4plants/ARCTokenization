@@ -75,31 +75,6 @@ let groupedEdgeHeaders = edgeHeaders |> Seq.groupWhen (fun h -> String.contains 
 //tbl1.RescanRange()
 //tbl1.FieldNames(obj)
 
-//// timoCode
-//let parse crStart (strl : string list) =
-//    let rec loop (roundOne) s = 
-//        [
-//            match s with
-//            | a :: b :: c :: rest when roundOne ->
-//                yield (a,b,c)
-//                yield! loop false rest
-//            | a :: b :: rest ->
-//                match roundOne with
-//                | true  ->
-//                    yield (a, b, "na")
-//                    yield! loop false rest
-//                | false ->
-//                    yield ("na", a, b)
-//                    yield! loop false rest
-//            | a :: [] ->
-//                match roundOne with
-//                | true  ->
-//                    yield (a, "na", "na")
-//                | false ->
-//                    yield ("na" ,a, "na")
-//            | [] -> ()
-//        ]
-//    loop crStart strl
 
 //parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray)
 //groupedHeaders |> Array.map (parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray))
@@ -108,12 +83,6 @@ let groupedEdgeHeaders = edgeHeaders |> Seq.groupWhen (fun h -> String.contains 
 //type BuildingBlock<'a> =
 //    | Triple of ('a * 'a * 'a)
 //    | Quadruple of ('a * 'a * 'a * 'a)
-
-
-
-//tbl1.Fields(fcc)
-
-
 
 
 let parsedNodes = List.map (parseNode fcc) nodeHeaders
@@ -152,6 +121,8 @@ let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
 
+let separatedNotes = separateNodes (List.concat parsedNodes)
+
 /// <summary>
 /// Takes an indexed input list (e.g. a list of Sources) and groups them by their occurence. Returns the first index of the occurence
 /// and the value as tuple.
@@ -168,17 +139,30 @@ let convolve input =
 ["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve
 
 let buildSourceSinkConnection sources edges sinks =
-    let sources = 
+    let (_,sources), (_,sinks), _ = separateNodes (List.concat parsedNodes)
+    let edges = parsedEdges
 
     let indexedSources = List.indexed sources
-    let indexedEdges = List.indexed edges
-    let indexedSinks = List.indexed sinks
-    let convolvedSources = convolve indexedSources
-    let convolvedSinks = convolve indexedSinks
-    let links =
-        let len = indexedSources.Length
-        let newIndSinks = convolvedSinks |> List.map (fun (i,s) -> i + len, s)
-    if indexedSinks
+    //let indexedEdges = List.indexed edges
+    let maxIndex = indexedSources.Length - 1
+    let indexedSinks = List.mapi (fun i s -> i + maxIndex + 1, s) sinks
+    //let convolvedSources = convolve indexedSources
+    //let convolvedSinks = convolve indexedSinks
+    //let links =
+    //    let len = indexedSources.Length
+    //    let newIndSinks = convolvedSinks |> List.map (fun (i,s) -> i + len, s)
+    //if indexedSinks
+
+    let sourceVertices : LVertex<int,CvParam<string>> list = indexedSources
+    let sinkVertices : LVertex<int,CvParam<string>> list = indexedSinks
+    let edges = 
+        edges.Head
+        |> List.mapi (
+            fun i e -> LEdge<int,CvParam<string>>(i, i + maxIndex + 1, e)
+        )
+    
+    0
+
 
 let extendConnection newEdges newSinks = 0
 
