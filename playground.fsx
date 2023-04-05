@@ -28,8 +28,8 @@ open ArcGraphModel.Param
 open ArcGraphModel.TableTransform
 
 
-let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -121,7 +121,6 @@ let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
 
-let separatedNotes = separateNodes (List.concat parsedNodes)
 
 /// <summary>
 /// Takes an indexed input list (e.g. a list of Sources) and groups them by their occurence. Returns the first index of the occurence
@@ -138,7 +137,10 @@ let convolve input =
 
 ["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve
 
-let buildSourceSinkConnection sources edges sinks =
+
+
+//let buildSourceSinkConnection sources edges sinks =
+let initGraphWithElements sources edges sinks =
     let (_,sources), (_,sinks), _ = separateNodes (List.concat parsedNodes)
     let edges = parsedEdges
 
@@ -155,13 +157,13 @@ let buildSourceSinkConnection sources edges sinks =
 
     let sourceVertices : LVertex<int,CvParam<string>> list = indexedSources
     let sinkVertices : LVertex<int,CvParam<string>> list = indexedSinks
-    let edges = 
+    let edges : LEdge<int,CvParam<string>> list = 
         edges.Head
         |> List.mapi (
-            fun i e -> LEdge<int,CvParam<string>>(i, i + maxIndex + 1, e)
+            fun i e -> i, i + maxIndex + 1, e
         )
-    
-    0
+
+    Graph.create (sourceVertices @ sinkVertices) edges
 
 
 let extendConnection newEdges newSinks = 0
