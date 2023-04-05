@@ -28,8 +28,8 @@ open ArcGraphModel.Param
 open ArcGraphModel.TableTransform
 
 
-//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -141,9 +141,6 @@ let convolve input =
 
 //let buildSourceSinkConnection sources edges sinks =
 let initGraphWithElements sources edges sinks =
-    let (_,sources), (_,sinks), _ = separateNodes (List.concat parsedNodes)
-    let edges = parsedEdges
-
     let indexedSources = List.indexed sources
     //let indexedEdges = List.indexed edges
     let maxIndex = indexedSources.Length - 1
@@ -157,16 +154,22 @@ let initGraphWithElements sources edges sinks =
 
     let sourceVertices : LVertex<int,CvParam<string>> list = indexedSources
     let sinkVertices : LVertex<int,CvParam<string>> list = indexedSinks
-    let edges : LEdge<int,CvParam<string>> list = 
-        edges.Head
-        |> List.mapi (
-            fun i e -> i, i + maxIndex + 1, e
+    let edges : LEdge<int,CvParam<string>> list list = 
+        edges
+        |> List.map (
+            List.mapi (
+                fun i e -> i, i + maxIndex + 1, e
+            )
         )
 
-    Graph.create (sourceVertices @ sinkVertices) edges
+    Graph.create (sourceVertices @ sinkVertices) (List.concat edges)
 
+let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
+testGraph.EdgeCount
+ArrayAdjacencyGraph.Edges.
 
-let extendConnection newEdges newSinks = 0
+let extendConnection newEdges newSinks graph = 
+    0
 
 
 let nodeList = parsedNodes
