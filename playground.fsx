@@ -28,8 +28,8 @@ open ArcGraphModel.Param
 open ArcGraphModel.TableTransform
 
 
-let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -122,25 +122,84 @@ open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
 
 
-/// <summary>
-/// Takes an indexed input list (e.g. a list of Sources) and groups them by their occurence. Returns the first index of the occurence
-/// and the value as tuple.
-/// </summary>
-/// <example>
-/// E.g.: `["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve` leads to
-/// `[(0, "Hello"); (3, "World"); (5, "lol")]`
-/// </example>
-let convolve input = 
-    input 
-    |> List.groupBy snd
-    |> List.map (fun (k,il) -> List.map fst il |> List.min, k)
+///// <summary>
+///// Takes an indexed input list (e.g. a list of Sources) and groups them by their occurence. Returns the first index of the occurence
+///// and the value as tuple.
+///// </summary>
+///// <example>
+///// E.g.: `["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve` leads to
+///// `[(0, "Hello"); (3, "World"); (5, "lol")]`
+///// </example>
+//let convolve input = 
+//    input 
+//    |> List.groupBy snd
+//    |> List.map (fun (k,il) -> List.map fst il |> List.min, k)
 
-["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve
+//["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve
+
+let extractVerticesWithLabels (graph : ArrayAdjacencyGraph<'a,'b,'c>) : LVertex<'a,'b> [] =
+    (graph.GetVertices(), graph.GetLabels()) ||> Array.zip
+
+[["R1,C1"; "R2,C1"]; ["R1,C2"; "R2,C2"]] |> List.transpose
+
+let sources = snd sourceNodes
+let sources = List.init sources.Length (fun _ -> sources.Head)
+let sinks = snd sinkNodes
+let edges = parsedEdges
+
+let invertedEdges = List.transpose edges
+let rec loop inputSources inputSinks inputEdges sourceVertices sinkVertices connectedEdges : ((LVertex<'a,'b> list) * (LVertex<'a,'b> list) * (LEdge<'a,'b> list list)) =
+    match inputSources, inputSinks, inputEdges with
+    | hSrc :: tSrc, hSnk :: tSnk, hEdg :: tEdg ->
+        let sourceValue = Param.getValue hSrc
+        let sinkValue = Param.getValue hSnk
+        let filledSourceVertices = (sourceValue, hSrc) :: sourceVertices
+        let filledSinkVertices = (sinkValue, hSnk) :: sinkVertices
+        let filledConnEdges = (hEdg |> List.map (fun e -> sourceValue, sinkValue, e)) :: connectedEdges
+        loop tSrc tSnk tEdg filledSourceVertices filledSinkVertices filledConnEdges
+    | [], [], [] -> sourceVertices, sinkVertices, connectedEdges
+    | _ -> failwith $"Input lists have different lengths: inputSources: {inputSources.Length}; inputSinks: {inputSinks.Length}; inputEdges: {inputEdges.Length}"
+let sourceVertices, sinkVertices, connectedEdges = loop sources sinks invertedEdges [] [] []
+let graph = Graph.create (sourceVertices @ sinkVertices |> List.distinctBy fst) (List.concat connectedEdges)
+extractVerticesWithLabels graph
 
 
+
+let toVertices paramList : LVertex<string,CvParam<string>> list =
+    paramList 
+    |> List.map (
+        fun s -> Param.getValue s, s
+    )
+    // since a graph must not have duplicate keys, we distinct by key here
+     //|> List.distinctBy fst     // do that later
+let sourceVertices = sources |> toVertices
+let sinkVertices = sinks |> toVertices
+//let sourceVertices, sinkVertices, connectedEdges =
+//    (sources, sinks, edges)
+//    |||> List.map3 (
+//        fun source sink edge ->
+//            0
+//    )
+let connectedEdges =
+    edges
+    |> List.map (
+        List.mapi (
+            fun i e -> fst sourceVertices[i], fst sinkVertices[i], e
+        )
+    )
+
+
+///// 
+//let initGraphWithElements sources edges sinks =
+//    let sourceVertices : LVertex<string,CvParam<string>> list = 
+//        sources 
+//        |> 
 
 //let buildSourceSinkConnection sources edges sinks =
 let initGraphWithElements sources edges sinks =
+    let sources = snd sourceNodes
+    let sinks = snd sinkNodes
+    let edges = parsedEdges
     let indexedSources = List.indexed sources
     //let indexedEdges = List.indexed edges
     let maxIndex = indexedSources.Length - 1
@@ -152,9 +211,9 @@ let initGraphWithElements sources edges sinks =
     //    let newIndSinks = convolvedSinks |> List.map (fun (i,s) -> i + len, s)
     //if indexedSinks
 
-    let sourceVertices : LVertex<int,CvParam<string>> list = indexedSources
-    let sinkVertices : LVertex<int,CvParam<string>> list = indexedSinks
-    let edges : LEdge<int,CvParam<string>> list list = 
+    let sourceVertices : LVertex<'a,'b> list = indexedSources
+    let sinkVertices : LVertex<'a,'b> list = indexedSinks
+    let indexedEdges : LEdge<'a,'b> list list = 
         edges
         |> List.map (
             List.mapi (
@@ -162,46 +221,76 @@ let initGraphWithElements sources edges sinks =
             )
         )
 
-    Graph.create (sourceVertices @ sinkVertices) (List.concat edges)
+    Graph.create (sourceVertices @ sinkVertices) (List.concat indexedEdges)
+
+
+
+
+
+
 
 let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
 testGraph.EdgeCount
-ArrayAdjacencyGraph.Edges.
+let extractedVertices = testGraph.GetVertices()
+//let extractedVertices : LVertex<int,CvParam<string>> = testGraph.GetVertices()
+let extractedEdges = testGraph.GetEdges()
+//Graph.get
+testGraph.GetLabels()
+//testGraph.
 
-let extendConnection newEdges newSinks graph = 
+//let testVertex : LVertex<int,string> = (0,"Hallo")
+//let testVertex2 : LVertex<int,string> = (1,"Hallo")
+//let testEdge : LEdge<int,string> = (0,1,"ich bin edgy")
+//let testGraph2 = Graph.create [testVertex; testVertex2] [testEdge]
+//(testGraph2.GetVertices(), testGraph2.GetLabels()) ||> Array.map2 (fun x y -> x,y)
+
+let (sourceNodes2, sinkNodes2, protocolRefNodes2) = separateNodes (List.concat parsedNodes2)
+
+// extentConnection
+let newSources = snd sourceNodes2
+let newSinks = snd sinkNodes2
+let newEdges = parsedEdges2
+let graph = testGraph
+
+let maxIndex = testGraph.VertexCount
+let indexedSources = List.mapi (fun i s -> i + maxIndex + 1, s) newSources
+let indexedSinks = List.mapi (fun i s -> i + maxIndex + indexedSources.Length + 1, s) newSinks
+testGraph.AddManyVertices()
+
+
+
+let extendConnection newSources newEdges newSinks graph = 
     0
 
 
-let nodeList = parsedNodes
-let linkList = parsedEdges
-let singleSourceNode = nodeList.Head.Head
-let singleSinkNode = nodeList[1].Head
-let singleEdge = linkList.Head.Head
+//let nodeList = parsedNodes
+//let linkList = parsedEdges
+//let singleSourceNode = nodeList.Head.Head
+//let singleSinkNode = nodeList[1].Head
+//let singleEdge = linkList.Head.Head
 //let singleSourceNode = nodeList.Head.Head :?> UserParam<string>
 //let singleSinkNode = nodeList[1].Head :?> UserParam<string>
 //let singleEdge = linkList.Head.Head :?> CvParam<string>
 
-let sourceNodeList, sinkNodeList = 
-    let part (input : ('a*'b) list) = snd input.Head
-    parsedNodes 
-    |> List.map (List.groupBy getNodeType >> List.head) 
-    |> List.partition (fst >> (=) Source)
-    |> fun (sonl,sinl) -> part sonl, part sinl
+//let sourceNodeList, sinkNodeList = 
+//    let part (input : ('a*'b) list) = snd input.Head
+//    parsedNodes 
+//    |> List.map (List.groupBy getNodeType >> List.head) 
+//    |> List.partition (fst >> (=) Source)
+//    |> fun (sonl,sinl) -> part sonl, part sinl
 
-sourceNodeList
+//sourceNodeList
 
-ArrayAdjacencyGraph.Vertices.
+//let vertexList : LVertex<int,CvParam<string>> list = [
+////let vertexList : LVertex<int,UserParam<string>> list = [
+//    0, singleSourceNode
+//    1, singleSinkNode
+//]
 
-let vertexList : LVertex<int,CvParam<string>> list = [
-//let vertexList : LVertex<int,UserParam<string>> list = [
-    0, singleSourceNode
-    1, singleSinkNode
-]
-
-let edgeList : LEdge<int,CvParam<string>> list = [
 //let edgeList : LEdge<int,CvParam<string>> list = [
-    (0,1,singleEdge)
-]
+////let edgeList : LEdge<int,CvParam<string>> list = [
+//    (0,1,singleEdge)
+//]
 
 
 
