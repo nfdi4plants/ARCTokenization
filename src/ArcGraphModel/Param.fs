@@ -51,6 +51,18 @@ module Param =
         // value * CvUnit
         | WithCvUnitAccession of cvu : 'T * CvUnit
 
+        static member getValue (param:ParamValue<_>) =
+            match param with
+            | Value   v                 -> string v
+            | CvValue (_,v,_)           -> v
+            | WithCvUnitAccession (v,_) -> string v
+
+        static member tryGetUnit  (param:ParamValue<_>) : CvUnit option =
+            match param with
+            | Value _                   -> None
+            | CvValue _                 -> None
+            | WithCvUnitAccession (_,u) -> Some u
+
     /// Interface ensures the propterties necessary for CvTerm 
     type ICvBase =
         abstract member ID       : string
@@ -79,7 +91,18 @@ module Param =
         interface IParamBase<'T> with 
             member this.Value  = paramValue
 
+        new ((id,name,ref) : CvTerm,pv : ParamValue<'T>) = CvParam (id,name,ref,pv)
+
         member this.CvAccession = cvAccession
+        
+        static member fromValue(category : CvTerm,v : 'T) =
+            CvParam(category, ParamValue.Value (v :> IConvertible))
+
+        static member fromCategory(category : CvTerm,term : CvTerm) =
+            CvParam(category, ParamValue.CvValue term)
+
+        static member fromValueWithUnit(category : CvTerm,v : 'T, unit : CvUnit) =
+            CvParam(category, ParamValue.WithCvUnitAccession (v :> IConvertible,unit))
 
         override this.ToString() = 
             $"Name: {(this :> ICvBase).Name}\n\tID: {this.CvAccession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase<'T>).Value}"
@@ -102,6 +125,8 @@ module Param =
             member this.Name   = cvName
             member this.RefUri = cvRefUri
 
+        new ((id,name,ref) : CvTerm,object : 'T) = CvObject (id,name,ref,object)
+
         member this.Object = object
 
         override this.ToString() = 
@@ -112,6 +137,8 @@ module Param =
             member this.ID     = cvAccession
             member this.Name   = cvName
             member this.RefUri = cvRefUri
+
+        new ((id,name,ref) : CvTerm,doc : 'T list) = CvDoc (id,name,ref,doc)
 
         member this.Document = doc
 
