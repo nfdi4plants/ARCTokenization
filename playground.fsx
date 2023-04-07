@@ -136,13 +136,32 @@ Graph.extractVerticesWithLabels
 
 let (sourceNodes2, sinkNodes2, protocolRefNodes2) = separateNodes (List.concat parsedNodes2)
 
+let testParamValue = ParamValue.Value "testParamValue.Value"
+let testCvParam = CvParam("testCvParamTAN", "testCvParamName", "testCvParamTSR", testParamValue)
+
+
+// function input
+
 let newSources = snd sourceNodes2
 let newSinks = snd sinkNodes2
 let newEdges = parsedEdges2
+newEdges.Length
+newEdges.Head.Length
 let graph = testGraph
 
-graph.GetVertices() |> Array.map 
-let checkForExistingVertices =
+// function body
+
+let currentVertices = graph.GetVertices()
+//Vertices.addMany [|LVertex("meine quelle1",testCvParam)|] graph
+let newInvertedEdges = List.transpose newEdges  // TO DO: make alternative for List.transpose: List.init l1 (List.init l2 (...))
+let newSourceVertices, newSinkVertices, newConnectedEdges = buildVerticesAndEdges newSources newInvertedEdges newSinks
+let excludedVertices =
+    newSourceVertices @ newSinkVertices
+    |> List.filter (
+        fun (v,par) ->
+            Array.contains v currentVertices 
+            |> not
+    )
 
 //let maxIndex = testGraph.VertexCount
 //let indexedSources = List.mapi (fun i s -> i + maxIndex + 1, s) newSources
