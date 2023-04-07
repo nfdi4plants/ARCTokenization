@@ -29,8 +29,8 @@ open ArcGraphModel.TableTransform
 open FGLAux
 
 
-//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -139,6 +139,31 @@ let (sourceNodes2, sinkNodes2, protocolRefNodes2) = separateNodes (List.concat p
 let testParamValue = ParamValue.Value "testParamValue.Value"
 let testCvParam = CvParam("testCvParamTAN", "testCvParamName", "testCvParamTSR", testParamValue)
 
+
+let inline transposeOrdinary (lists : seq<'T list>) =
+    printfn $"{lists |> Seq.exists (fun t -> t.Length <> (Seq.head lists).Length)}"
+    if lists |> Seq.exists (fun t -> t.Length <> (Seq.head lists).Length) |> not then
+        failwith "Input lists have different lengths."
+    List.init (Seq.head lists).Length (
+        fun i ->
+            List.init (Seq.length lists) (
+                fun j -> (Seq.item j lists)[i]
+            )
+    )
+
+transposeOrdinary [[1;2;3]; [4;5;6]]
+
+let arrayTransposeOrdinary (arrays : seq<'T []>) =
+    let arrays = Array.ofSeq arrays
+    [|
+        for i = 0 to arrays[0].Length - 1 do
+        [|
+            for j = 0 to arrays.Length - 1 do
+                arrays[j][i]
+        |]
+    |]
+
+arrayTransposeOrdinary [|[|1;2;3|]; [|4;5;6|]|]
 
 // function input
 
