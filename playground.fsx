@@ -137,56 +137,64 @@ open FSharp.FGL.ArrayAdjacencyGraph
 
 //["Hello"; "Hello"; "Hello"; "World"; "World"; "lol"] |> List.indexed |> convolve
 
-let extractVerticesWithLabels (graph : ArrayAdjacencyGraph<'a,'b,'c>) : LVertex<'a,'b> [] =
-    (graph.GetVertices(), graph.GetLabels()) ||> Array.zip
 
-[["R1,C1"; "R2,C1"]; ["R1,C2"; "R2,C2"]] |> List.transpose
+
+//[["R1,C1"; "R2,C1"]; ["R1,C2"; "R2,C2"]] |> List.transpose
 
 let sources = snd sourceNodes
 let sources = List.init sources.Length (fun _ -> sources.Head)
 let sinks = snd sinkNodes
 let edges = parsedEdges
 
-let invertedEdges = List.transpose edges
-let rec loop inputSources inputSinks inputEdges sourceVertices sinkVertices connectedEdges : ((LVertex<'a,'b> list) * (LVertex<'a,'b> list) * (LEdge<'a,'b> list list)) =
-    match inputSources, inputSinks, inputEdges with
-    | hSrc :: tSrc, hSnk :: tSnk, hEdg :: tEdg ->
-        let sourceValue = Param.getValue hSrc
-        let sinkValue = Param.getValue hSnk
-        let filledSourceVertices = (sourceValue, hSrc) :: sourceVertices
-        let filledSinkVertices = (sinkValue, hSnk) :: sinkVertices
-        let filledConnEdges = (hEdg |> List.map (fun e -> sourceValue, sinkValue, e)) :: connectedEdges
-        loop tSrc tSnk tEdg filledSourceVertices filledSinkVertices filledConnEdges
-    | [], [], [] -> sourceVertices, sinkVertices, connectedEdges
-    | _ -> failwith $"Input lists have different lengths: inputSources: {inputSources.Length}; inputSinks: {inputSinks.Length}; inputEdges: {inputEdges.Length}"
-let sourceVertices, sinkVertices, connectedEdges = loop sources sinks invertedEdges [] [] []
-let graph = Graph.create (sourceVertices @ sinkVertices |> List.distinctBy fst) (List.concat connectedEdges)
+/// <summary>
+/// Initializes an ArrayAdjencyGraph with teh given sources and sinks realized as LVertices and the given edges as LEdges.
+/// </summary>
+let initGraphWithElements sources edges sinks =
+    // input edges will be a 2D list in the form of: 1st dim = columns, 2nd dim = rows, but we want to invert that
+    let invertedEdges = List.transpose edges
+    // iterate through all element lists and build LVertices and LEdges according to their index (i.e., the row)
+    let rec loop inputSources inputSinks inputEdges sourceVertices sinkVertices connectedEdges : ((LVertex<'a,'b> list) * (LVertex<'a,'b> list) * (LEdge<'a,'b> list list)) =
+        match inputSources, inputSinks, inputEdges with
+        | hSrc :: tSrc, hSnk :: tSnk, hEdg :: tEdg ->
+            let sourceValue = Param.getValue hSrc
+            let sinkValue = Param.getValue hSnk
+            let filledSourceVertices = (sourceValue, hSrc) :: sourceVertices
+            let filledSinkVertices = (sinkValue, hSnk) :: sinkVertices
+            let filledConnEdges = (hEdg |> List.map (fun e -> sourceValue, sinkValue, e)) :: connectedEdges
+            loop tSrc tSnk tEdg filledSourceVertices filledSinkVertices filledConnEdges
+        | [], [], [] -> sourceVertices, sinkVertices, connectedEdges
+        // the lists must be equally long, since even empty cells should be translated into CvParams/IParamBases
+        | _ -> failwith $"Input lists have different lengths: inputSources: {inputSources.Length}; inputSinks: {inputSinks.Length}; inputEdges: {inputEdges.Length}"
+    let sourceVertices, sinkVertices, connectedEdges = loop sources sinks invertedEdges [] [] []
+    // we distinct the vertices since they must be unique so they can be added to a graph
+    Graph.create (sourceVertices @ sinkVertices |> List.distinctBy fst) (List.concat connectedEdges)
+
 extractVerticesWithLabels graph
 
 
 
-let toVertices paramList : LVertex<string,CvParam<string>> list =
-    paramList 
-    |> List.map (
-        fun s -> Param.getValue s, s
-    )
-    // since a graph must not have duplicate keys, we distinct by key here
-     //|> List.distinctBy fst     // do that later
-let sourceVertices = sources |> toVertices
-let sinkVertices = sinks |> toVertices
+//let toVertices paramList : LVertex<string,CvParam<string>> list =
+//    paramList 
+//    |> List.map (
+//        fun s -> Param.getValue s, s
+//    )
+//    // since a graph must not have duplicate keys, we distinct by key here
+//     //|> List.distinctBy fst     // do that later
+//let sourceVertices = sources |> toVertices
+//let sinkVertices = sinks |> toVertices
 //let sourceVertices, sinkVertices, connectedEdges =
 //    (sources, sinks, edges)
 //    |||> List.map3 (
 //        fun source sink edge ->
 //            0
 //    )
-let connectedEdges =
-    edges
-    |> List.map (
-        List.mapi (
-            fun i e -> fst sourceVertices[i], fst sinkVertices[i], e
-        )
-    )
+//let connectedEdges =
+//    edges
+//    |> List.map (
+//        List.mapi (
+//            fun i e -> fst sourceVertices[i], fst sinkVertices[i], e
+//        )
+//    )
 
 
 ///// 
@@ -196,32 +204,32 @@ let connectedEdges =
 //        |> 
 
 //let buildSourceSinkConnection sources edges sinks =
-let initGraphWithElements sources edges sinks =
-    let sources = snd sourceNodes
-    let sinks = snd sinkNodes
-    let edges = parsedEdges
-    let indexedSources = List.indexed sources
-    //let indexedEdges = List.indexed edges
-    let maxIndex = indexedSources.Length - 1
-    let indexedSinks = List.mapi (fun i s -> i + maxIndex + 1, s) sinks
-    //let convolvedSources = convolve indexedSources
-    //let convolvedSinks = convolve indexedSinks
-    //let links =
-    //    let len = indexedSources.Length
-    //    let newIndSinks = convolvedSinks |> List.map (fun (i,s) -> i + len, s)
-    //if indexedSinks
+//let initGraphWithElements sources edges sinks =
+//    let sources = snd sourceNodes
+//    let sinks = snd sinkNodes
+//    let edges = parsedEdges
+//    let indexedSources = List.indexed sources
+//    //let indexedEdges = List.indexed edges
+//    let maxIndex = indexedSources.Length - 1
+//    let indexedSinks = List.mapi (fun i s -> i + maxIndex + 1, s) sinks
+//    //let convolvedSources = convolve indexedSources
+//    //let convolvedSinks = convolve indexedSinks
+//    //let links =
+//    //    let len = indexedSources.Length
+//    //    let newIndSinks = convolvedSinks |> List.map (fun (i,s) -> i + len, s)
+//    //if indexedSinks
 
-    let sourceVertices : LVertex<'a,'b> list = indexedSources
-    let sinkVertices : LVertex<'a,'b> list = indexedSinks
-    let indexedEdges : LEdge<'a,'b> list list = 
-        edges
-        |> List.map (
-            List.mapi (
-                fun i e -> i, i + maxIndex + 1, e
-            )
-        )
+//    let sourceVertices : LVertex<'a,'b> list = indexedSources
+//    let sinkVertices : LVertex<'a,'b> list = indexedSinks
+//    let indexedEdges : LEdge<'a,'b> list list = 
+//        edges
+//        |> List.map (
+//            List.mapi (
+//                fun i e -> i, i + maxIndex + 1, e
+//            )
+//        )
 
-    Graph.create (sourceVertices @ sinkVertices) (List.concat indexedEdges)
+//    Graph.create (sourceVertices @ sinkVertices) (List.concat indexedEdges)
 
 
 
