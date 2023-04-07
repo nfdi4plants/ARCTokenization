@@ -18,6 +18,16 @@ module List =   // remove as soon as this is available in next F#Aux NuGet relea
             | _ -> List.rev acc
         loop [] list1 list2 list3 list4
 
+    let inline transposeOrdinary (lists : seq<'T list>) =
+        if lists |> Seq.forall (fun t -> t.Length <> (Seq.head lists).Length) then
+            failwith "Input lists have different lengths."
+        List.init (Seq.head lists).Length (
+            fun i ->
+                List.init (Seq.length lists) (
+                    fun j -> (Seq.item j lists)[i]
+                )
+        )
+
 
 /// <summary>
 /// Functions to work with FsTables into graph-based models.
