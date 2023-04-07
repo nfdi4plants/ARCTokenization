@@ -26,6 +26,7 @@ open FsSpreadsheet.DSL
 open ArcGraphModel
 open ArcGraphModel.Param
 open ArcGraphModel.TableTransform
+open FGLAux
 
 
 //let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
@@ -122,6 +123,35 @@ open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
 
 
+let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
+testGraph.EdgeCount
+testGraph.VertexCount
+let extractedVertices = testGraph.GetVertices()
+//let extractedVertices : LVertex<int,CvParam<string>> = testGraph.GetVertices()
+let extractedEdges = testGraph.GetEdges()
+//Graph.get
+testGraph.GetLabels()
+//testGraph.
+Graph.
+
+let (sourceNodes2, sinkNodes2, protocolRefNodes2) = separateNodes (List.concat parsedNodes2)
+
+let newSources = snd sourceNodes2
+let newSinks = snd sinkNodes2
+let newEdges = parsedEdges2
+let graph = testGraph
+
+let maxIndex = testGraph.VertexCount
+let indexedSources = List.mapi (fun i s -> i + maxIndex + 1, s) newSources
+let indexedSinks = List.mapi (fun i s -> i + maxIndex + indexedSources.Length + 1, s) newSinks
+testGraph.AddManyVertices()
+
+
+
+let extendConnection newSources newEdges newSinks graph = 
+    0
+
+
 ///// <summary>
 ///// Takes an indexed input list (e.g. a list of Sources) and groups them by their occurence. Returns the first index of the occurence
 ///// and the value as tuple.
@@ -141,35 +171,14 @@ open FSharp.FGL.ArrayAdjacencyGraph
 
 //[["R1,C1"; "R2,C1"]; ["R1,C2"; "R2,C2"]] |> List.transpose
 
-let sources = snd sourceNodes
-let sources = List.init sources.Length (fun _ -> sources.Head)
-let sinks = snd sinkNodes
-let edges = parsedEdges
+//let sources = snd sourceNodes
+//let sources = List.init sources.Length (fun _ -> sources.Head)
+//let sinks = snd sinkNodes
+//let edges = parsedEdges
 
-/// <summary>
-/// Initializes an ArrayAdjencyGraph with teh given sources and sinks realized as LVertices and the given edges as LEdges.
-/// </summary>
-let initGraphWithElements sources edges sinks =
-    // input edges will be a 2D list in the form of: 1st dim = columns, 2nd dim = rows, but we want to invert that
-    let invertedEdges = List.transpose edges
-    // iterate through all element lists and build LVertices and LEdges according to their index (i.e., the row)
-    let rec loop inputSources inputSinks inputEdges sourceVertices sinkVertices connectedEdges : ((LVertex<'a,'b> list) * (LVertex<'a,'b> list) * (LEdge<'a,'b> list list)) =
-        match inputSources, inputSinks, inputEdges with
-        | hSrc :: tSrc, hSnk :: tSnk, hEdg :: tEdg ->
-            let sourceValue = Param.getValue hSrc
-            let sinkValue = Param.getValue hSnk
-            let filledSourceVertices = (sourceValue, hSrc) :: sourceVertices
-            let filledSinkVertices = (sinkValue, hSnk) :: sinkVertices
-            let filledConnEdges = (hEdg |> List.map (fun e -> sourceValue, sinkValue, e)) :: connectedEdges
-            loop tSrc tSnk tEdg filledSourceVertices filledSinkVertices filledConnEdges
-        | [], [], [] -> sourceVertices, sinkVertices, connectedEdges
-        // the lists must be equally long, since even empty cells should be translated into CvParams/IParamBases
-        | _ -> failwith $"Input lists have different lengths: inputSources: {inputSources.Length}; inputSinks: {inputSinks.Length}; inputEdges: {inputEdges.Length}"
-    let sourceVertices, sinkVertices, connectedEdges = loop sources sinks invertedEdges [] [] []
-    // we distinct the vertices since they must be unique so they can be added to a graph
-    Graph.create (sourceVertices @ sinkVertices |> List.distinctBy fst) (List.concat connectedEdges)
 
-extractVerticesWithLabels graph
+
+//extractVerticesWithLabels graph
 
 
 
@@ -237,14 +246,8 @@ extractVerticesWithLabels graph
 
 
 
-let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
-testGraph.EdgeCount
-let extractedVertices = testGraph.GetVertices()
-//let extractedVertices : LVertex<int,CvParam<string>> = testGraph.GetVertices()
-let extractedEdges = testGraph.GetEdges()
-//Graph.get
-testGraph.GetLabels()
-//testGraph.
+
+
 
 //let testVertex : LVertex<int,string> = (0,"Hallo")
 //let testVertex2 : LVertex<int,string> = (1,"Hallo")
@@ -252,23 +255,6 @@ testGraph.GetLabels()
 //let testGraph2 = Graph.create [testVertex; testVertex2] [testEdge]
 //(testGraph2.GetVertices(), testGraph2.GetLabels()) ||> Array.map2 (fun x y -> x,y)
 
-let (sourceNodes2, sinkNodes2, protocolRefNodes2) = separateNodes (List.concat parsedNodes2)
-
-// extentConnection
-let newSources = snd sourceNodes2
-let newSinks = snd sinkNodes2
-let newEdges = parsedEdges2
-let graph = testGraph
-
-let maxIndex = testGraph.VertexCount
-let indexedSources = List.mapi (fun i s -> i + maxIndex + 1, s) newSources
-let indexedSinks = List.mapi (fun i s -> i + maxIndex + indexedSources.Length + 1, s) newSinks
-testGraph.AddManyVertices()
-
-
-
-let extendConnection newSources newEdges newSinks graph = 
-    0
 
 
 //let nodeList = parsedNodes
