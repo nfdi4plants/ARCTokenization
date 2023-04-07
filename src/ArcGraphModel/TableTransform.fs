@@ -183,7 +183,7 @@ module TableTransform =
     /// <summary>
     /// Takes a CvParam and returns the type of Node it contains.
     /// </summary>
-    let getNodeType (cvPar : CvParam<string>) =
+    let getNodeType (cvPar : #IParamBase<'a>) =
         //let castedCvPar = cvPar :?> CvParam<string>     // debatable approach
         //let v = Param.getCvName castedCvPar
         let v = Param.getCvName cvPar
@@ -197,10 +197,12 @@ module TableTransform =
         | _ -> failwith $"HeaderCell {v} cannot be parsed to any NodeType."
 
     /// <summary>
-    /// Separates a list of nodes into a tuple in the form of `Source * Sink * ProtocolRef` with their respective CvParam lists.
+    /// Separates a list of nodes into a tuple in the form of `Source * Sink * ProtocolRef`, tupled together with their respective CvParam lists.
     /// </summary>
     let separateNodes nodesList =
+
         let groupedNodes = List.groupBy (getNodeType) nodesList
+
         // long tuple... perhaps rework with anonymous record?
         let rec loop sourceNodeList sinkNodeList protocolRefNodeList gn =
             match gn with
@@ -213,15 +215,13 @@ module TableTransform =
         loop (Source, []) (Sink, []) (ProtocolRef, []) groupedNodes
 
     /// <summary>
-    /// Initializes an ArrayAdjencyGraph with teh given sources and sinks realized as LVertices and the given edges as LEdges.
+    /// Takes lists of sources, sinks, and edges, and returns them transformed into LVertices and LEdges.
     /// </summary>
-    let initGraphWithElements sources edges sinks =
-
-        // input edges will be a 2D list in the form of: 1st dim = columns, 2nd dim = rows, but we want to invert that
-        let invertedEdges = List.transpose edges
+    let buildVerticesAndEdges sources edges sinks =
 
         // iterate through all element lists and build LVertices and LEdges according to their index (i.e., the row)
-        let rec loop inputSources inputSinks inputEdges sourceVertices sinkVertices connectedEdges : ((LVertex<'a,'b> list) * (LVertex<'a,'b> list) * (LEdge<'a,'b> list list)) =
+        let rec loop inputSources inputSinks inputEdges sourceVertices sinkVertices connectedEdges 
+            : ((LVertex<'a,'b> list) * (LVertex<'a,'b> list) * (LEdge<'a,'b> list list)) =
             match inputSources, inputSinks, inputEdges with
             | hSrc :: tSrc, hSnk :: tSnk, hEdg :: tEdg ->
                 let sourceValue = Param.getValue hSrc
@@ -231,14 +231,26 @@ module TableTransform =
                 let filledConnEdges = (hEdg |> List.map (fun e -> sourceValue, sinkValue, e)) :: connectedEdges
                 loop tSrc tSnk tEdg filledSourceVertices filledSinkVertices filledConnEdges
             | [], [], [] -> sourceVertices, sinkVertices, connectedEdges
-            // the lists must be equally long, since even empty cells should be translated into CvParams/IParamBases
+            // the lists must be equally long, since even empty cells should be translated into Params
             | _ -> failwith $"Input lists have different lengths: inputSources: {inputSources.Length}; inputSinks: {inputSinks.Length}; inputEdges: {inputEdges.Length}"
-        let sourceVertices, sinkVertices, connectedEdges = loop sources sinks invertedEdges [] [] []
+        let sourceVertices, sinkVertices, connectedEdges = loop sources sinks edges [] [] []
+
+        // reverse lists so that the index matches original order – makes it easier to comprehend the output later
+        List.rev sourceVertices, List.rev sinkVertices, connectedEdges
+
+    /// <summary>
+    /// Initializes an ArrayAdjencyGraph with teh given sources and sinks realized as LVertices and the given edges as LEdges.
+    /// </summary>
+    let initGraphWithElements sources edges sinks =
+
+        // input edges will be a 2D list in the form of: 1st dim = columns, 2nd dim = rows, but we want to invert that
+        let invertedEdges = List.transpose edges
+
+        let sourceVertices, sinkVertices, connectedEdges = buildVerticesAndEdges sources invertedEdges sinks
 
         // we distinct the vertices since they must be unique so they can be added to a graph
         let combinedVertices = 
-            // reverse lists so that the index matches original order – makes it easier to comprehend the output later
-            List.rev sourceVertices @ List.rev sinkVertices
+            sourceVertices @ sinkVertices
             |> List.distinctBy fst
 
         Graph.create combinedVertices (List.concat connectedEdges)

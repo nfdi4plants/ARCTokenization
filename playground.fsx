@@ -132,7 +132,7 @@ let extractedEdges = testGraph.GetEdges()
 //Graph.get
 testGraph.GetLabels()
 //testGraph.
-Graph.
+Graph.extractVerticesWithLabels
 
 let (sourceNodes2, sinkNodes2, protocolRefNodes2) = separateNodes (List.concat parsedNodes2)
 
@@ -141,10 +141,13 @@ let newSinks = snd sinkNodes2
 let newEdges = parsedEdges2
 let graph = testGraph
 
-let maxIndex = testGraph.VertexCount
-let indexedSources = List.mapi (fun i s -> i + maxIndex + 1, s) newSources
-let indexedSinks = List.mapi (fun i s -> i + maxIndex + indexedSources.Length + 1, s) newSinks
-testGraph.AddManyVertices()
+graph.GetVertices() |> Array.map 
+let checkForExistingVertices =
+
+//let maxIndex = testGraph.VertexCount
+//let indexedSources = List.mapi (fun i s -> i + maxIndex + 1, s) newSources
+//let indexedSinks = List.mapi (fun i s -> i + maxIndex + indexedSources.Length + 1, s) newSinks
+//testGraph.AddManyVertices()
 
 
 
