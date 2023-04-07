@@ -3,6 +3,8 @@
 open FSharpAux
 open FsSpreadsheet
 open Param
+open FSharp.FGL
+open FSharp.FGL.ArrayAdjacencyGraph
 
 
 module List =   // remove as soon as this is available in next F#Aux NuGet release
@@ -22,6 +24,23 @@ module List =   // remove as soon as this is available in next F#Aux NuGet relea
 /// </summary>
 module TableTransform =
 
+    // -----
+    // TYPES
+    // -----
+
+    /// <summary>
+    /// Modelling of the different types of nodes / Building Blocks.
+    /// </summary>
+    type NodeType =
+        | Source
+        | Sink
+        | ProtocolRef
+
+
+    // ------
+    // VALUES
+    // ------
+
     /// <summary>
     /// The header names of the columns containing Node-related Building Blocks.
     /// </summary>
@@ -33,6 +52,11 @@ module TableTransform =
         "Protocol Type"
         "Protocol REF"
     ]
+
+
+    // ---------
+    // FUNCTIONS
+    // ---------
 
     /// <summary>
     /// Returns all data cells from a given header cell.
@@ -157,14 +181,6 @@ module TableTransform =
         )
 
     /// <summary>
-    /// Modelling of the different types of nodes / Building Blocks.
-    /// </summary>
-    type NodeType =
-        | Source
-        | Sink
-        | ProtocolRef
-
-    /// <summary>
     /// Takes a CvParam and returns the type of Node it contains.
     /// </summary>
     let getNodeType (cvPar : CvParam<string>) =
@@ -195,3 +211,34 @@ module TableTransform =
                 | Sink          -> loop sourceNodeList  h               protocolRefNodeList t
                 | ProtocolRef   -> loop sourceNodeList  sinkNodeList    h                   t
         loop (Source, []) (Sink, []) (ProtocolRef, []) groupedNodes
+
+    /// <summary>
+    /// Initializes an ArrayAdjencyGraph with teh given sources and sinks realized as LVertices and the given edges as LEdges.
+    /// </summary>
+    let initGraphWithElements sources edges sinks =
+
+        // input edges will be a 2D list in the form of: 1st dim = columns, 2nd dim = rows, but we want to invert that
+        let invertedEdges = List.transpose edges
+
+        // iterate through all element lists and build LVertices and LEdges according to their index (i.e., the row)
+        let rec loop inputSources inputSinks inputEdges sourceVertices sinkVertices connectedEdges : ((LVertex<'a,'b> list) * (LVertex<'a,'b> list) * (LEdge<'a,'b> list list)) =
+            match inputSources, inputSinks, inputEdges with
+            | hSrc :: tSrc, hSnk :: tSnk, hEdg :: tEdg ->
+                let sourceValue = Param.getValue hSrc
+                let sinkValue = Param.getValue hSnk
+                let filledSourceVertices = (sourceValue, hSrc) :: sourceVertices
+                let filledSinkVertices = (sinkValue, hSnk) :: sinkVertices
+                let filledConnEdges = (hEdg |> List.map (fun e -> sourceValue, sinkValue, e)) :: connectedEdges
+                loop tSrc tSnk tEdg filledSourceVertices filledSinkVertices filledConnEdges
+            | [], [], [] -> sourceVertices, sinkVertices, connectedEdges
+            // the lists must be equally long, since even empty cells should be translated into CvParams/IParamBases
+            | _ -> failwith $"Input lists have different lengths: inputSources: {inputSources.Length}; inputSinks: {inputSinks.Length}; inputEdges: {inputEdges.Length}"
+        let sourceVertices, sinkVertices, connectedEdges = loop sources sinks invertedEdges [] [] []
+
+        // we distinct the vertices since they must be unique so they can be added to a graph
+        let combinedVertices = 
+            // reverse lists so that the index matches original order – makes it easier to comprehend the output later
+            List.rev sourceVertices @ List.rev sinkVertices
+            |> List.distinctBy fst
+
+        Graph.create combinedVertices (List.concat connectedEdges)
