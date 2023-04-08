@@ -29,8 +29,8 @@ open ArcGraphModel.TableTransform
 open FGLAux
 
 
-let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -140,30 +140,6 @@ let testParamValue = ParamValue.Value "testParamValue.Value"
 let testCvParam = CvParam("testCvParamTAN", "testCvParamName", "testCvParamTSR", testParamValue)
 
 
-let inline transposeOrdinary (lists : seq<'T list>) =
-    printfn $"{lists |> Seq.exists (fun t -> t.Length <> (Seq.head lists).Length)}"
-    if lists |> Seq.exists (fun t -> t.Length <> (Seq.head lists).Length) |> not then
-        failwith "Input lists have different lengths."
-    List.init (Seq.head lists).Length (
-        fun i ->
-            List.init (Seq.length lists) (
-                fun j -> (Seq.item j lists)[i]
-            )
-    )
-
-transposeOrdinary [[1;2;3]; [4;5;6]]
-
-let arrayTransposeOrdinary (arrays : seq<'T []>) =
-    let arrays = Array.ofSeq arrays
-    [|
-        for i = 0 to arrays[0].Length - 1 do
-        [|
-            for j = 0 to arrays.Length - 1 do
-                arrays[j][i]
-        |]
-    |]
-
-arrayTransposeOrdinary [|[|1;2;3|]; [|4;5;6|]|]
 
 // function input
 
@@ -176,17 +152,7 @@ let graph = testGraph
 
 // function body
 
-let currentVertices = graph.GetVertices()
-//Vertices.addMany [|LVertex("meine quelle1",testCvParam)|] graph
-let newInvertedEdges = List.transpose newEdges  // TO DO: make alternative for List.transpose: List.init l1 (List.init l2 (...))
-let newSourceVertices, newSinkVertices, newConnectedEdges = buildVerticesAndEdges newSources newInvertedEdges newSinks
-let excludedVertices =
-    newSourceVertices @ newSinkVertices
-    |> List.filter (
-        fun (v,par) ->
-            Array.contains v currentVertices 
-            |> not
-    )
+
 
 //let maxIndex = testGraph.VertexCount
 //let indexedSources = List.mapi (fun i s -> i + maxIndex + 1, s) newSources
@@ -195,8 +161,6 @@ let excludedVertices =
 
 
 
-let extendConnection newSources newEdges newSinks graph = 
-    0
 
 
 ///// <summary>

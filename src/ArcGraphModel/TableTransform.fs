@@ -254,7 +254,7 @@ module TableTransform =
     let initGraphWithElements sources edges sinks =
 
         // input edges will be a 2D list in the form of: 1st dim = columns, 2nd dim = rows, but we want to invert that
-        let invertedEdges = List.transpose edges
+        let invertedEdges = JaggedList.transpose edges
 
         let sourceVertices, sinkVertices, connectedEdges = buildVerticesAndEdges sources invertedEdges sinks
 
@@ -264,3 +264,23 @@ module TableTransform =
             |> List.distinctBy fst
 
         Graph.create combinedVertices (List.concat connectedEdges)
+
+    /// <summary>
+    /// Extends a given graph with given new sources, sinks, and edges. Any source or sink already present in the graph is ignored.
+    /// </summary>
+    let extendConnections newSources newEdges newSinks (graph : ArrayAdjacencyGraph<'a,'b,'c> ) = 
+        let currentVertices = graph.GetVertices()
+        let newInvertedEdges = JaggedList.transpose newEdges
+        let newSourceVertices, newSinkVertices, newConnectedEdges = buildVerticesAndEdges newSources newInvertedEdges newSinks
+        // exclude all vertices already present in the graph
+        let withoutExcludedVertices =
+            newSourceVertices @ newSinkVertices
+            |> List.filter (
+                fun (v,par) ->
+                    Array.contains v currentVertices 
+                    |> not
+            )
+        graph.AddManyVertices (List.toArray withoutExcludedVertices) |> ignore
+        graph.AddManyEdges (List.concat newConnectedEdges |> List.toArray)
+
+    let createGraphFromTable table = 0
