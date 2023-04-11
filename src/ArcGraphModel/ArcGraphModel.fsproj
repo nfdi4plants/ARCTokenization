@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="FSharp.FGL.ArrayAdjacencyGraph" Version="0.0.2" />
     <PackageReference Include="FSharpAux" Version="1.1.0" />
-    <PackageReference Include="FsSpreadsheet" Version="1.0.1" />
+    <PackageReference Include="FsSpreadsheet" Version="1.2.0-preview" />
   </ItemGroup>
 
 </Project>
