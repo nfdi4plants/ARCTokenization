@@ -69,7 +69,14 @@ module TableTransform =
     // ---------
 
     /// <summary>
-    /// Returns all data cells from a given header cell.
+    /// Takes an FsWorkbook and returns all Annotation Tables it contains.
+    /// </summary>
+    let getAnnotationTables workbook =
+        let tables = FsWorkbook.getTables workbook
+        tables |> List.filter (fun t -> String.contains "annotationTable" t.Name)
+
+    /// <summary>
+    /// Returns all data cells from a given header cell by using a given FsCellsCollection.
     /// </summary>
     let getDataCellsOf (fcc : FsCellsCollection) (headerCell : FsCell) = 
         FsCellsCollection.getCellsInColumn headerCell.ColumnNumber fcc 

@@ -31,8 +31,8 @@ open ArcGraphModel.TableTransform
 open FGLAux
 
 
-//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
 let wb = FsWorkbook.fromXlsxFile fp
 let shts = FsWorkbook.getWorksheets wb
 
@@ -60,6 +60,14 @@ let fcc = associatedWorksheet.CellCollection
 //tbl1.RescanRange()
 //tbl1.Field("test", fcc).DataCells(fcc, false)
 //tbl1.FieldNames
+
+/// Takes an FsWorkbook and returns all Annotation Tables it contains.
+let getAnnotationTables workbook =
+    let tables = FsWorkbook.getTables workbook
+    tables |> List.filter (fun t -> String.contains "annotationTable" t.Name)
+
+(getAnnotationTables wb).Head.CellsCollection.Count
+
 
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
 let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> List.ofSeq
