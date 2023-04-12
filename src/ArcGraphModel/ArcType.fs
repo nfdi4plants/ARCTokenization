@@ -84,7 +84,7 @@ module ArcType =
         /// <summary>
         /// Parses this BuildingBlockType to the respective NodeType.
         /// </summary>
-        /// <exception cref="System.ArgumentException">if the BuildingBlockType cannot be parsed to any NodeType.</exception>
+        /// <exception cref="System.Exception">if the BuildingBlockType cannot be parsed to any NodeType.</exception>
         member this.ToNodeType() =
             if this.IsInputColumn then NodeType.Source
             elif this.IsOutputColumn then NodeType.Sink
