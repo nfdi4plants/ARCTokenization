@@ -52,7 +52,8 @@ module ArcType =
         /// <summary>
         /// Is true if this Building Block type is a TermColumn.
         ///
-        /// The name "TermColumn" refers to all columns with the syntax "Parameter/Factor/etc [TERM-NAME]".
+        /// The name "TermColumn" refers to all columns with the syntax "Parameter/Factor/etc [TERM-NAME]" and featured columns
+        /// such as Protocol Type as these are also represented as a triplet of Maincolumn-TSR-TAN.
         /// </summary>
         member this.IsTermColumn =
             match this with | Parameter | Factor | Characteristics | Component | ProtocolType -> true | anythingElse -> false
@@ -65,6 +66,12 @@ module ArcType =
         /// </summary>
         member this.IsFeaturedColumn =
             match this with | ProtocolType -> true | anythingElse -> false
+
+        /// <summary>
+        /// Is true if the Building Block type is deprecated and should not be used anymore.
+        /// </summary>
+        member this.IsDeprecated =
+            match this with | Data -> true | anythingElse -> false
 
         override this.ToString() =
             match this with

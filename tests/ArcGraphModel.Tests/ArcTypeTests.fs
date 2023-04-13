@@ -16,6 +16,7 @@ module ArcType =
     let testBuildingBlock8 = Component
     let testBuildingBlock9 = ProtocolType
     let testBuildingBlock10 = ProtocolREF
+    let testBuildingBlock11 = Data
 
     module IsInputColumn =
 
@@ -87,6 +88,17 @@ module ArcType =
         [<Fact>]
         let ``ProtocolType is true`` () =
             Assert.True testBuildingBlock9.IsFeaturedColumn
+
+
+    module IsDeprecated =
+
+        [<Fact>]
+        let ``Data is true`` () =
+            Assert.True testBuildingBlock11.IsDeprecated
+
+        [<Fact>]
+        let ``Source is false`` () =
+            Assert.False testBuildingBlock1.IsDeprecated
 
 
     module ToNodeType =
