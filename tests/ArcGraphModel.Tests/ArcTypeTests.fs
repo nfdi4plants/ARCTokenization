@@ -12,7 +12,7 @@ module ArcType =
     let testBuildingBlock4 = DerivedDataFile
     let testBuildingBlock5 = Factor
     let testBuildingBlock6 = Parameter
-    let testBuildingBlock7 = Characteristics
+    let testBuildingBlock7 = Characteristic
     let testBuildingBlock8 = Component
     let testBuildingBlock9 = ProtocolType
     let testBuildingBlock10 = ProtocolREF
@@ -52,7 +52,7 @@ module ArcType =
             Assert.True testBuildingBlock4.IsOutputColumn
 
         [<Fact>]
-        let ``Characteristics is false`` () =
+        let ``Characteristic is false`` () =
             Assert.False testBuildingBlock7.IsOutputColumn
 
 
@@ -75,7 +75,7 @@ module ArcType =
             Assert.True testBuildingBlock6.IsTermColumn
 
         [<Fact>]
-        let ``Characteristics is true`` () =
+        let ``Characteristic is true`` () =
             Assert.True testBuildingBlock7.IsTermColumn
 
         [<Fact>]
@@ -101,28 +101,28 @@ module ArcType =
             Assert.False testBuildingBlock1.IsDeprecated
 
 
-    module ToNodeType =
+    //module ToNodeType =
 
-        [<Fact>]
-        let ``Source parses to Source`` () =
-            Assert.Equal(NodeType.Source, testBuildingBlock1.ToNodeType())
+    //    [<Fact>]
+    //    let ``Source parses to Source`` () =
+    //        Assert.Equal(NodeType.Source, testBuildingBlock1.ToNodeType())
 
-        [<Fact>]
-        let ``Sample parses to Sink ()`` =
-            Assert.Equal(Sink, testBuildingBlock2.ToNodeType())
+    //    [<Fact>]
+    //    let ``Sample parses to Sink ()`` =
+    //        Assert.Equal(Sink, testBuildingBlock2.ToNodeType())
 
-        [<Fact>]
-        let ``RawDataFile parses to Sink`` () =
-            Assert.Equal(Sink, testBuildingBlock3.ToNodeType())
+    //    [<Fact>]
+    //    let ``RawDataFile parses to Sink`` () =
+    //        Assert.Equal(Sink, testBuildingBlock3.ToNodeType())
 
-        [<Fact>]
-        let ``DerivedDataFile parses to Sink`` () =
-            Assert.Equal(Sink, testBuildingBlock4.ToNodeType())
+    //    [<Fact>]
+    //    let ``DerivedDataFile parses to Sink`` () =
+    //        Assert.Equal(Sink, testBuildingBlock4.ToNodeType())
 
-        [<Fact>]
-        let ``ProtocolREF parses to ProtocolRef`` () =
-            Assert.Equal(ProtocolRef, testBuildingBlock10.ToNodeType())
+    //    [<Fact>]
+    //    let ``ProtocolREF parses to ProtocolRef`` () =
+    //        Assert.Equal(ProtocolRef, testBuildingBlock10.ToNodeType())
 
-        [<Fact>]
-        let ``Factor fails`` () =
-            Assert.Throws<System.Exception> (fun _ -> testBuildingBlock5.ToNodeType() |> ignore)
+    //    [<Fact>]
+    //    let ``Factor fails`` () =
+    //        Assert.Throws<System.Exception> (fun _ -> testBuildingBlock5.ToNodeType() |> ignore)

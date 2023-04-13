@@ -6,13 +6,13 @@
 /// </summary>
 module ArcType =
 
-    /// <summary>
-    /// Model of the different types of those Building Blocks that can be described as nodes in a graph-based model.
-    /// </summary>
-    type NodeType =
-        | Source
-        | Sink
-        | ProtocolRef
+    ///// <summary>
+    ///// Model of the different types of those Building Blocks that can be described as nodes in a graph-based model.
+    ///// </summary>
+    //type NodeType =
+    //    | Source
+    //    | Sink
+    //    | ProtocolRef
 
     /// <summary>
     /// Model of the different types of Building Blocks in an ARC Annotation Table.
@@ -21,7 +21,7 @@ module ArcType =
         // Term columns
         | Parameter
         | Factor
-        | Characteristics
+        | Characteristic
         | Component
         // Source columns
         | Source
@@ -56,7 +56,7 @@ module ArcType =
         /// such as Protocol Type as these are also represented as a triplet of Maincolumn-TSR-TAN.
         /// </summary>
         member this.IsTermColumn =
-            match this with | Parameter | Factor | Characteristics | Component | ProtocolType -> true | anythingElse -> false
+            match this with | Parameter | Factor | Characteristic | Component | ProtocolType -> true | anythingElse -> false
 
         /// <summary>
         /// Is true if the Building Block type is a FeaturedColumn. 
@@ -77,7 +77,7 @@ module ArcType =
             match this with
             | Parameter         -> "Parameter"
             | Factor            -> "Factor"
-            | Characteristics   -> "Characteristics"
+            | Characteristic    -> "Characteristics"
             | Component         -> "Component"
             | Sample            -> "Sample Name"
             | Data              -> "Data File Name"
@@ -88,12 +88,12 @@ module ArcType =
             | ProtocolREF       -> "Protocol REF"
             | Freetext str      -> str
 
-        /// <summary>
-        /// Parses this BuildingBlockType to the respective NodeType.
-        /// </summary>
-        /// <exception cref="System.Exception">if the BuildingBlockType cannot be parsed to any NodeType.</exception>
-        member this.ToNodeType() =
-            if this.IsInputColumn then NodeType.Source
-            elif this.IsOutputColumn then NodeType.Sink
-            elif this = ProtocolREF then ProtocolRef
-            else failwith $"BuildingBlockType {this} is no NodeType."
+        ///// <summary>
+        ///// Parses this BuildingBlockType to the respective NodeType.
+        ///// </summary>
+        ///// <exception cref="System.Exception">if the BuildingBlockType cannot be parsed to any NodeType.</exception>
+        //member this.ToNodeType() =
+        //    if this.IsInputColumn then NodeType.Source
+        //    elif this.IsOutputColumn then NodeType.Sink
+        //    elif this = ProtocolREF then ProtocolRef
+        //    else failwith $"BuildingBlockType {this} is no NodeType."
