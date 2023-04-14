@@ -2,7 +2,6 @@
 
 open FSharpAux
 open FsSpreadsheet
-open Param
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
 
@@ -200,10 +199,10 @@ module TableTransform =
     /// <summary>
     /// Takes a CvParam and returns the type of Node it contains.
     /// </summary>
-    let getNodeType (cvPar : #IParamBase<'a>) =
+    let getNodeType (cvPar : #IParamBase) =
         //let castedCvPar = cvPar :?> CvParam<string>     // debatable approach
         //let v = Param.getCvName castedCvPar
-        let v = Param.getCvName cvPar
+        let v = CvBase.getCvName cvPar
         match v with
         | "Source Name" -> Source
         | "Sample Name"
@@ -241,8 +240,8 @@ module TableTransform =
             : ((LVertex<'a,'b> list) * (LVertex<'a,'b> list) * (LEdge<'a,'b> list list)) =
             match inputSources, inputSinks, inputEdges with
             | hSrc :: tSrc, hSnk :: tSnk, hEdg :: tEdg ->
-                let sourceValue = Param.getValue hSrc
-                let sinkValue = Param.getValue hSnk
+                let sourceValue = ParamBase.getValue hSrc
+                let sinkValue = ParamBase.getValue hSnk
                 let filledSourceVertices = (sourceValue, hSrc) :: sourceVertices
                 let filledSinkVertices = (sinkValue, hSnk) :: sinkVertices
                 let filledConnEdges = (hEdg |> List.map (fun e -> sourceValue, sinkValue, e)) :: connectedEdges
