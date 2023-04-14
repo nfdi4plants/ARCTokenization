@@ -21,7 +21,7 @@ open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
 open ArcGraphModel
-open ArcGraphModel.Param
+open ArcGraphModel
 
 open System
 
@@ -152,6 +152,6 @@ x
 // val network: ArcGraph
 // val it: int = 18169
 // val it: int = 404467
-network.GetVertices()
-network.GetLabel("5cec766a-860b-47de-a197-ab41d69c423d")
-network.GetInEdges("5cec766a-860b-47de-a197-ab41d69c423d")
+//network.GetVertices()
+//network.GetLabel("5cec766a-860b-47de-a197-ab41d69c423d")
+//network.GetInEdges("5cec766a-860b-47de-a197-ab41d69c423d")

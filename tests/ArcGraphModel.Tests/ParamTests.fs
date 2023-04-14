@@ -1,8 +1,9 @@
 ﻿namespace ArcGraphModel.Tests
 
 open Xunit
-open ArcGraphModel.Param
-
+open ArcGraphModel
+open ParamBase
+open CvBase
 
 module Param =
 
@@ -10,7 +11,7 @@ module Param =
     let testCvParam1 = CvParam("CvParam_TAN_1", "CvParam_Name_1", "CvParam_TSR_1", testParamValueValue)
     let testCvTerm = CvTerm("CvTerm_TAN", "CvTerm_Name", "CvTerm_TSR")
     let testParamValueCvValue = ParamValue.CvValue testCvTerm
-    let testCvParam2 : CvParam<string> = CvParam("CvParam_TAN_2", "CvParam_Name_2", "CvParam_TSR_3", testParamValueCvValue)
+    let testCvParam2 : CvParam = CvParam("CvParam_TAN_2", "CvParam_Name_2", "CvParam_TSR_3", testParamValueCvValue)
     let testCvUnit = CvUnit("CvUnit_TAN", "CvUnit_Name", "CvUnit_TSR")
     let testParamValueCvUnit = ParamValue.WithCvUnitAccession ("CvUnit_Value", testCvUnit)
     let testCvParam3 = CvParam("CvParam_TAN_3", "CvParam_Name_3", "CvParam_TSR_3", testParamValueCvUnit)
@@ -44,7 +45,7 @@ module Param =
 
         [<Fact>]
         let ``returns correct Value`` () =
-            let retrievedValue = getValue testCvParam1
+            let retrievedValue = getValue testCvParam1 :?> string
             Assert.Equal("ParamValue.Value", retrievedValue)
 
 
@@ -108,7 +109,7 @@ module Param =
 
         [<Fact>]
         let ``returns correct CvUnit Value`` () =
-            Assert.Equal("CvUnit_Value", retrievedCvUnitValue.Value)
+            Assert.Equal("CvUnit_Value", retrievedCvUnitValue.Value :?> string)
 
 
     module tryGetCvUnitName =

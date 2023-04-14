@@ -22,88 +22,38 @@ open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
 open ArcGraphModel
-open ArcGraphModel.Param
+open ArcGraphModel
 
 open System
 open System.Collections
 open System.Collections.Generic
 
-type CvSequence<'T when 'T :> ICvBase> (cvAccession:string,cvName:string,cvRefUri:string,items : seq<'T>) =
 
-    interface ICvBase with 
-        member this.ID     = cvAccession
-        member this.Name   = cvName
-        member this.RefUri = cvRefUri    
+type Protocol (version : CvParam, description : CvParam) =  
 
-    
-    new ((id,name,ref) : CvTerm,items : seq<'T>) = CvSequence (id,name,ref,items)
-    new ((id,name,ref) : CvTerm) = CvSequence (id,name,ref,Seq.empty)
-    new (items : seq<'T>) = 
-        let l =         
-            items
-            |> Seq.map (fun v -> v.GetType().FullName)
-            |> Seq.countBy id 
-            |> Seq.length      
-        if l = 0 then          
-            failwith "Cannot create CvSequence without any items or cv annotation"
-            let h = Seq.head items
-            CvSequence (h.ID,h.Name,h.RefUri,items)
-        elif l > 1 then
-            failwith "Cannot create CvSequence with items of different type"
-            let h = Seq.head items
-            CvSequence (h.ID,h.Name,h.RefUri,items)
-        else 
-            let h = Seq.head items
-            CvSequence (h.ID,h.Name,h.RefUri,items)
+    inherit CvContainer(Terms.protocol,seq [version :> ICvBase;description])
 
-    member this.Item i = Seq.item i items
-             
-    interface IEnumerable<ICvBase> with
-        member this.GetEnumerator() = (items |> Seq.map (fun v -> v :> ICvBase)).GetEnumerator()
+    member this.GetVersion() = 
+        Dictionary.item "Version" this (*:?> CvParam*)
+    member this.SetVersion() = 
+        Dictionary.item "Version" this
 
-    interface IEnumerable with
-        member this.GetEnumerator() = (this :> IEnumerable<ICvBase>).GetEnumerator() :> IEnumerator
+    member this.GetDescription() = Dictionary.item "Description" this :?> CvParam
 
-type CvContainer (cvAccession:string,cvName:string,cvRefUri:string,items : seq<string*#ICvBase>) =
-  
-    let properties : IDictionary<string,#ICvBase> = Dictionary.ofSeq(items)
-
-    interface ICvBase with 
-        member this.ID     = cvAccession
-        member this.Name   = cvName
-        member this.RefUri = cvRefUri    
-
-    
-    new ((id,name,ref) : CvTerm,items : seq<string*#ICvBase>) = CvContainer (id,name,ref,items)
-    new ((id,name,ref) : CvTerm) = CvContainer (id,name,ref,Seq.empty)
-    
-    member this.Get k = Dictionary.item k properties
-    member this.TryGet k = Dictionary.tryFind k properties
-
-    member this.Add k v = Dictionary.addInPlace k v properties
-
-type Protocol (version : CvParam<IConvertible>, description : CvParam<IConvertible>) =  
-
-    inherit CvContainer(Terms.protocol,seq ["Version",version  :> ICvBase ;"Description",description :> ICvBase])
-
-    member this.Version = this.Get "Version" :?> CvParam<string>
-
-    member this.Description = this.Get "Description" :?> CvParam<string>
-
-type Process (name : CvParam<IConvertible>, protocol : Protocol) =  
+type Process (name : CvParam, protocol : Protocol) =  
 
     inherit CvContainer(Terms.processs,seq ["Name",name;"Protocol",protocol])
 
-    member this.Name = this.Get "Name" :?> CvParam<string>
+    member this.Name = this.Get "Name" :?> CvParam
 
     member this.Protocol = this.Get "Protocol" :?> Protocol
 
 
-type Assay (measurementType : CvParam<IConvertible>, processSequence : #seq<Process>) =
+type Assay (measurementType : CvParam, processSequence : #seq<Process>) =
 
     inherit CvContainer(Terms.assay,seq ["MeasurementType",measurementType;"ProcessSequence",CvSequence(processSequence)])
 
-    member this.MeasurementType = this.Get "MeasurementType" :?> CvParam<string>
+    member this.MeasurementType = this.Get "MeasurementType" :?> CvParam
 
     member this.ProcessSequence = this.Get "ProcessSequence" :?> CvSequence<Process>
 

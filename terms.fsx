@@ -15,7 +15,7 @@ open FSharp.FGL.ArrayAdjacencyGraph
 #I @"src\ArcGraphModel\bin\Release\net6.0"
 #r "ArcGraphModel.dll"
 
-open ArcGraphModel.Param
+open ArcGraphModel
 
 module Terms = 
     let protocol                : CvTerm = "ARC_00000150",                             "Protocol",                ""

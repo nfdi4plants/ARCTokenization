@@ -32,4 +32,8 @@
     <ProjectReference Include="..\..\src\ArcGraphModel\ArcGraphModel.fsproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="6.0.7" />
+  </ItemGroup>
+
 </Project>
