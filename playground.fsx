@@ -11,9 +11,13 @@
 #r "nuget: FSharpAux"
 #r "nuget: FsSpreadsheet, 1.2.0-preview"
 #r "nuget: FsSpreadsheet.ExcelIO, 1.2.0-preview"
+#r "nuget: FSharp.FGL"
+#r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
 open DocumentFormat.OpenXml
 open FSharpAux
+open FSharp.FGL
+open FSharp.FGL.ArrayAdjacencyGraph
 
 
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll"
@@ -26,9 +30,20 @@ open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsSpreadsheet.DSL
 open ArcGraphModel
-open ArcGraphModel.Param
+open ArcGraphModel.ParamBase
 open ArcGraphModel.TableTransform
 open FGLAux
+
+
+// working backwards
+
+let cvParamsToGraph (cvParams : CvParam list) = 
+    cvParams
+    |> List.fold (
+        fun graph cvp ->
+            
+    ) (ArrayAdjacencyGraph.Graph.create [] [])
+
 
 
 let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
@@ -99,15 +114,15 @@ let groupedEdgeHeaders = edgeHeaders |> Seq.groupWhen (fun h -> String.contains 
 let parsedNodes = List.map (parseNode fcc) nodeHeaders
 let parsedEdges = List.map (parseEdges true fcc) groupedEdgeHeaders
 let nodeTypes = parsedNodes |> List.map (List.map getNodeType)
-parsedNodes.Head.Head |> ArcGraphModel.Param.getValue
-parsedNodes.Head[1] |> ArcGraphModel.Param.getValue
+parsedNodes.Head.Head |> ArcGraphModel.ParamBase.getValue
+parsedNodes.Head[1] |> ArcGraphModel.ParamBase.getValue
 parsedNodes.Length
 parsedNodes.Head.Length
-parsedEdges.Head.Head |> ArcGraphModel.Param.getCvAccession
-parsedEdges.Head.Head |> ArcGraphModel.Param.getValue
-parsedEdges.Head[1] |> ArcGraphModel.Param.getValue
-parsedEdges |> List.map (List.map Param.getValue)
-parsedEdges |> List.map (List.map Param.getCvName)
+parsedEdges.Head.Head |> ArcGraphModel.CvBase.getCvAccession
+parsedEdges.Head.Head |> ArcGraphModel.ParamBase.getValue
+parsedEdges.Head[1] |> ArcGraphModel.ParamBase.getValue
+parsedEdges |> List.map (List.map ParamBase.getValue)
+parsedEdges |> List.map (List.map CvBase.getCvName)
 
 
 
@@ -124,13 +139,6 @@ let groupedEdgeHeaders2 = edgeHeaders2 |> Seq.groupWhen (fun h -> String.contain
 let parsedEdges2 = groupedEdgeHeaders2 |> List.map (parseEdges true fcc2)
 //let nodeHeaders2 = columnHeaders2 |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
 let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
-
-
-#r "nuget: FSharp.FGL"
-#r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
-
-open FSharp.FGL
-open FSharp.FGL.ArrayAdjacencyGraph
 
 
 let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
