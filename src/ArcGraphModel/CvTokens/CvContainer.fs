@@ -25,19 +25,32 @@ type CvContainer (cvAccession:string,cvName:string,cvRefUri:string,properties : 
 
     new (term : CvTerm) = CvContainer (term,Seq.empty)  
 
+    /// Retrieve children with the given name of the CvContainer as sequence
     static member getManyAs<'T when 'T :> ICvBase> propertyName (cvContainer : CvContainer) =
         Dictionary.item propertyName cvContainer
         |> Seq.map (fun cv -> cv :?> 'T)
 
+    /// Retrieve child with the given name of the CvContainer
+    ///
+    /// Fails, if there is not exactly one child with the given name
     static member getSingleAs<'T when 'T :> ICvBase> propertyName (cvContainer : CvContainer) =
         Dictionary.item propertyName cvContainer
         |> Seq.exactlyOne 
         |> (fun cv -> cv :?> 'T)
 
-    static member setMany propertyName (values : seq<#ICvBase>) (cvContainer : CvContainer) =
+    /// Set children as a property of the CvContainer
+    ///
+    /// These children are supposed to all have the same name, as they will be grouped into one property of the container, accessible by this shared name
+    static member setMany (values : seq<#ICvBase>) (cvContainer : CvContainer) =
+        let propertyName = 
+            values
+            |> Seq.countBy (fun v -> v.Name)
+            |> Seq.exactlyOne
+            |> fst
         Dictionary.addOrUpdateInPlace propertyName values cvContainer
         |> ignore
 
-    static member setSingle propertyName (value : #ICvBase) (cvContainer : CvContainer) =
-        Dictionary.addOrUpdateInPlace propertyName (Seq.singleton value) cvContainer
+    /// Set a single child as a property of the CvContainer, accessible by its name
+    static member setSingle (value : #ICvBase) (cvContainer : CvContainer) =
+        Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer
         |> ignore

@@ -32,26 +32,33 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
     new (cvTerm,pv : ParamValue) = 
         CvParam (cvTerm,pv,Seq.empty)
 
+    /// Create a CvParam from a category and a simple value
     static member fromValue (category : CvTerm) (v : 'T) =
         CvParam(category, ParamValue.Value (v :> IConvertible))
 
+    /// Create a CvParam from a category and a value coming from a controlled vocabulary
     static member fromCategory (category : CvTerm) (term : CvTerm) =
         CvParam(category, ParamValue.CvValue term)
 
+    /// Create a CvParam from a category, a simple value and a unit coming from a controlled vocabulary
     static member fromValueWithUnit (category : CvTerm) (v : 'T) (unit : CvUnit) =
         CvParam(category, ParamValue.WithCvUnitAccession (v :> IConvertible,unit))
 
+    /// Returns the typed value of the CvParam
     static member getValue (cvp : CvParam) =
         (cvp :> IParamBase).Value
 
+    /// Returns the value of the CvParam as a string
     static member getValueAsString (cvp : CvParam) =
         (cvp :> IParamBase).Value
         |> ParamValue.getValueAsString
 
+    /// Returns the value of the CvParam as an int if possible, else fails
     static member getValueAsInt (cvp : CvParam) =
         (cvp :> IParamBase).Value
         |> ParamValue.getValueAsInt
 
+    /// Returns the value of the CvParam as a term
     static member getValueAsTerm (cvp : CvParam) =
         (cvp :> IParamBase).Value
         |> ParamValue.getValueAsTerm
