@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{CE1B84FD-33DE-48E4-A97A-A4BDC34E08F0}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
 		build.cmd = build.cmd
 		build.sh = build.sh
 		global.json = global.json
