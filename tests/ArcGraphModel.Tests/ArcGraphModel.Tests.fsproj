@@ -9,6 +9,7 @@
   <ItemGroup>
     <Compile Include="ArcTypeTests.fs" />
     <Compile Include="ParamTests.fs" />
+    <Compile Include="ContainerTests.fs" />
     <Compile Include="TableTransformTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
