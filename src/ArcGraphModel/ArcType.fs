@@ -97,3 +97,22 @@ module ArcType =
         //    elif this.IsOutputColumn then NodeType.Sink
         //    elif this = ProtocolREF then ProtocolRef
         //    else failwith $"BuildingBlockType {this} is no NodeType."
+
+        /// <summary>
+        /// Creates a BuildingBlockType from a given string.
+        /// </summary>
+        static member tryOfString str =
+            match str with
+            | "Parameter" | "Parameter Value"   -> Some Parameter
+            | "Factor" | "Factor Value"         -> Some Factor
+            // "Characteristics" deprecated in v0.6.0
+            | "Characteristics" | "Characteristic" | "Characteristics Value" -> Some Characteristic
+            | "Component" -> Some Component
+            | "Sample Name"     -> Some Sample         
+            | "Data File Name"  -> Some Data
+            | "Raw Data File"       -> Some RawDataFile
+            | "Derived Data File"   -> Some DerivedDataFile
+            | "Source Name"     -> Some Source
+            | "Protocol Type"   -> Some ProtocolType
+            | "Protocol REF"    -> Some ProtocolREF
+            | anythingElse      -> Some <| Freetext anythingElse
