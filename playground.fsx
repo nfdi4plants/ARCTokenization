@@ -28,7 +28,7 @@ open FSharp.FGL.ArrayAdjacencyGraph
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
-open FsSpreadsheet.DSL
+//open FsSpreadsheet.DSL
 open ArcGraphModel
 open ArcGraphModel.ParamBase
 open ArcGraphModel.TableTransform
@@ -36,6 +36,96 @@ open FGLAux
 
 
 // working backwards
+
+/// <summary>
+/// Model of the different types of Building Blocks in an ARC Annotation Table.
+/// </summary>
+type BuildingBlockType =
+    // Term columns
+    | Parameter
+    | Factor
+    | Characteristic
+    | Component
+    // Source columns
+    | Source
+    // Output columns
+    | Sample
+    | Data // DEPRECATED at v0.6.0 [<ObsoleteAttribute>] 
+    | RawDataFile
+    | DerivedDataFile
+    // Featured Columns
+    | ProtocolType
+    // Single Columns
+    | ProtocolREF
+    // everything else
+    | Freetext of string
+
+    /// <summary>
+    /// Is true if this Building Block type is an InputColumn.
+    /// </summary>
+    member this.IsInputColumn =
+        match this with | Source -> true | anythingElse -> false
+
+    /// <summary>
+    /// Is true if this Building Block type is an OutputColumn.
+    /// </summary>
+    member this.IsOutputColumn =
+        match this with | Data | Sample | RawDataFile | DerivedDataFile -> true | anythingElse -> false
+
+    /// <summary>
+    /// Is true if this Building Block type is a TermColumn.
+    ///
+    /// The name "TermColumn" refers to all columns with the syntax "Parameter/Factor/etc [TERM-NAME]" and featured columns
+    /// such as Protocol Type as these are also represented as a triplet of Maincolumn-TSR-TAN.
+    /// </summary>
+    member this.IsTermColumn =
+        match this with | Parameter | Factor | Characteristic | Component | ProtocolType -> true | anythingElse -> false
+
+    /// <summary>
+    /// Is true if the Building Block type is a FeaturedColumn. 
+    ///
+    /// A FeaturedColumn can be abstracted by Parameter/Factor/Characteristics and describes one common usecase of either.
+    /// Such a block will contain TSR and TAN and can be used for directed Term search.
+    /// </summary>
+    member this.IsFeaturedColumn =
+        match this with | ProtocolType -> true | anythingElse -> false
+
+    /// <summary>
+    /// Is true if the Building Block type is deprecated and should not be used anymore.
+    /// </summary>
+    member this.IsDeprecated =
+        match this with | Data -> true | anythingElse -> false
+
+    override this.ToString() =
+        match this with
+        | Parameter         -> "Parameter"
+        | Factor            -> "Factor"
+        | Characteristic    -> "Characteristics"
+        | Component         -> "Component"
+        | Sample            -> "Sample Name"
+        | Data              -> "Data File Name"
+        | RawDataFile       -> "Raw Data File"
+        | DerivedDataFile   -> "Derived Data File"
+        | ProtocolType      -> "Protocol Type" 
+        | Source            -> "Source Name"
+        | ProtocolREF       -> "Protocol REF"
+        | Freetext str      -> str
+
+    static member tryOfString str =
+        match str with
+        | "Parameter" | "Parameter Value"   -> Some Parameter
+        | "Factor" | "Factor Value"         -> Some Factor
+        // "Characteristics" deprecated in v0.6.0
+        | "Characteristics" | "Characteristic" | "Characteristics Value" -> Some Characteristic
+        | "Component" -> Some Component
+        | "Sample Name"     -> Some Sample         
+        | "Data File Name"  -> Some Data
+        | "Raw Data File"       -> Some RawDataFile
+        | "Derived Data File"   -> Some DerivedDataFile
+        | "Source Name"     -> Some Source
+        | "Protocol Type"   -> Some ProtocolType
+        | "Protocol REF"    -> Some ProtocolREF
+        | anythingElse      -> Some <| Freetext anythingElse
 
 let tryAddVertex vertex graph =
     try ArrayAdjacencyGraph.Vertices.add vertex graph
@@ -49,8 +139,26 @@ let cvParamsToGraph (cvParams : CvParam list) =
     cvParams
     |> List.fold (
         fun graph cvp ->
-            CvParam()
-            tryAddVertex cvp graph
+            let label = 
+                cvp :> IParamBase 
+                |> ParamBase.getValue :?> IParamBase
+                |> ParamBase.getValue :?> CvParam
+            match (cvp :> ICvBase).Name |> BuildingBlockType.tryOfString with
+            | Some Sample
+            | Some RawDataFile
+            | Some DerivedDataFile
+            | Some Source -> 
+                let vertexId = 
+                    cvp :> IParamBase 
+                    |> ParamBase.getValue :?> ICvBase
+                    |> CvBase.getCvName
+                let vertex = LVertex (vertexId, label)
+                tryAddVertex vertex graph
+            | Some Parameter
+            | Some Characteristic
+            | Some Factor
+            | Some Component ->
+                tryAddEdge 
     ) (Graph.create [] [])
 
 
