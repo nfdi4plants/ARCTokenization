@@ -2,10 +2,8 @@
 
 open Xunit
 open ArcGraphModel
-open ParamBase
-open CvBase
 
-module Param =
+module Parameter =
 
     let testParamValueValue = ParamValue.Value "ParamValue.Value"
     let testCvParam1 = CvParam("CvParam_TAN_1", "CvParam_Name_1", "CvParam_TSR_1", testParamValueValue)
@@ -21,7 +19,7 @@ module Param =
 
         [<Fact>]
         let ``returns correct TAN`` () =
-            let retrievedTan = getCvAccession testCvParam1
+            let retrievedTan = CvBase.getCvAccession testCvParam1
             Assert.Equal("CvParam_TAN_1", retrievedTan)
 
 
@@ -29,7 +27,7 @@ module Param =
 
         [<Fact>]
         let ``returns correct Name`` () =
-            let retrievedName = getCvName testCvParam1
+            let retrievedName = CvBase.getCvName testCvParam1
             Assert.Equal("CvParam_Name_1", retrievedName)
 
 
@@ -37,7 +35,7 @@ module Param =
 
         [<Fact>]
         let ``returns correct TSR`` () =
-            let retrievedTsr = getCvRef testCvParam1
+            let retrievedTsr = CvBase.getCvRef testCvParam1
             Assert.Equal("CvParam_TSR_1", retrievedTsr)
 
 
@@ -45,13 +43,13 @@ module Param =
 
         [<Fact>]
         let ``returns correct Value`` () =
-            let retrievedValue = getValue testCvParam1 :?> string
+            let retrievedValue = ParamBase.getValue testCvParam1 :?> string
             Assert.Equal("ParamValue.Value", retrievedValue)
 
 
     module tryGetValueAccession =
 
-        let retrievedValueTan = tryGetValueAccession testCvParam2
+        let retrievedValueTan = ParamBase.tryGetValueAccession testCvParam2
 
         [<Fact>]
         let ``is Some`` () =
@@ -64,7 +62,7 @@ module Param =
 
     module tryGetValueRef =
 
-        let retreivedValueTsr = tryGetValueRef testCvParam2
+        let retreivedValueTsr = ParamBase.tryGetValueRef testCvParam2
 
         [<Fact>]
         let ``is Some`` () =
@@ -77,7 +75,7 @@ module Param =
 
     module tryGetCvUnit =
 
-        let retrievedCvUnit = tryGetCvUnit testCvParam3
+        let retrievedCvUnit = ParamBase.tryGetCvUnit testCvParam3
 
         [<Fact>]
         let ``is Some`` () =
@@ -101,7 +99,7 @@ module Param =
 
     module tryGetCvUnitValue =
 
-        let retrievedCvUnitValue = tryGetCvUnitValue testCvParam3
+        let retrievedCvUnitValue = ParamBase.tryGetCvUnitValue testCvParam3
 
         [<Fact>]
         let ``is Some`` () =
@@ -114,7 +112,7 @@ module Param =
 
     module tryGetCvUnitName =
 
-        let retrievedCvUnitName = tryGetCvUnitName testCvParam3
+        let retrievedCvUnitName = ParamBase.tryGetCvUnitName testCvParam3
 
         [<Fact>]
         let ``is Some`` () =
@@ -127,7 +125,7 @@ module Param =
 
     module tryGetCvUnitAccession =
 
-        let retrievedCvUnitTan = tryGetCvUnitAccession testCvParam3
+        let retrievedCvUnitTan = ParamBase.tryGetCvUnitAccession testCvParam3
 
         [<Fact>]
         let ``is Some`` () =
@@ -140,7 +138,7 @@ module Param =
 
     module tryGetCvUnitRef =
 
-        let retrievedCvUnitTsr = tryGetCvUnitRef testCvParam3
+        let retrievedCvUnitTsr = ParamBase.tryGetCvUnitRef testCvParam3
 
         [<Fact>]
         let ``is Some`` () =
