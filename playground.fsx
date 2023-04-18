@@ -37,12 +37,21 @@ open FGLAux
 
 // working backwards
 
+let tryAddVertex vertex graph =
+    try ArrayAdjacencyGraph.Vertices.add vertex graph
+    with _ -> graph
+
+let tryAddEdge vertex1 vertex2 edge graph =
+    try ArrayAdjacencyGraph.Edges.add (vertex1, vertex2, edge) graph
+    with _ -> graph
+
 let cvParamsToGraph (cvParams : CvParam list) = 
     cvParams
     |> List.fold (
         fun graph cvp ->
-            
-    ) (ArrayAdjacencyGraph.Graph.create [] [])
+            CvParam()
+            tryAddVertex cvp graph
+    ) (Graph.create [] [])
 
 
 
