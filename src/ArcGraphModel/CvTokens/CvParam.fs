@@ -32,14 +32,29 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
     new (cvTerm,pv : ParamValue) = 
         CvParam (cvTerm,pv,Seq.empty)
 
-    static member fromValue(category : CvTerm,v : 'T) =
+    static member fromValue (category : CvTerm) (v : 'T) =
         CvParam(category, ParamValue.Value (v :> IConvertible))
 
-    static member fromCategory(category : CvTerm,term : CvTerm) =
+    static member fromCategory (category : CvTerm) (term : CvTerm) =
         CvParam(category, ParamValue.CvValue term)
 
-    static member fromValueWithUnit(category : CvTerm,v : 'T, unit : CvUnit) =
+    static member fromValueWithUnit (category : CvTerm) (v : 'T) (unit : CvUnit) =
         CvParam(category, ParamValue.WithCvUnitAccession (v :> IConvertible,unit))
+
+    static member getValue (cvp : CvParam) =
+        (cvp :> IParamBase).Value
+
+    static member getValueAsString (cvp : CvParam) =
+        (cvp :> IParamBase).Value
+        |> ParamValue.getValueAsString
+
+    static member getValueAsInt (cvp : CvParam) =
+        (cvp :> IParamBase).Value
+        |> ParamValue.getValueAsInt
+
+    static member getValueAsTerm (cvp : CvParam) =
+        (cvp :> IParamBase).Value
+        |> ParamValue.getValueAsTerm
 
     override this.ToString() = 
         $"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}"

@@ -29,16 +29,32 @@ open System.Collections
 open System.Collections.Generic
 
 
+
+
 type Protocol (version : CvParam, description : CvParam) =  
 
     inherit CvContainer(Terms.protocol,seq [version :> ICvBase;description])
 
-    member this.GetVersion() = 
-        Dictionary.item "Version" this (*:?> CvParam*)
-    member this.SetVersion() = 
-        Dictionary.item "Version" this
+    member this.Version 
+        with get() = 
+            CvContainer.getSingleAs<CvParam> Protocol.VersionProperty this
+            |> CvParam.getValueAsString
+        and set(version : string) =
+            CvParam.fromValue Terms.version version
+            |> fun cvp -> CvContainer.setSingle Protocol.VersionProperty cvp this
+
+
+    static member VersionProperty = "Version"
+
+    //member this.GetVersion() = 
+    //    Dictionary.item "Version" this (*:?> CvParam*)
+    //member this.SetVersion() = 
+    //    Dictionary.item "Version" this
+
+
 
     member this.GetDescription() = Dictionary.item "Description" this :?> CvParam
+
 
 type Process (name : CvParam, protocol : Protocol) =  
 
