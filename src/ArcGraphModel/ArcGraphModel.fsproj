@@ -29,4 +29,19 @@
     <PackageReference Update="FSharp.Core" Version="6.0.7" />
   </ItemGroup>
 
+	<PropertyGroup>
+		<Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey</Authors>
+		<Description></Description>
+		<Summary></Summary>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<!--<PackageIcon>logo.png</PackageIcon>-->
+		<PackageTags>F# FSharp datascience</PackageTags>
+		<RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<ItemGroup Condition=" '$(PackageId)' == 'ArcGraphModel.Fable' ">
+		<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
+	</ItemGroup>
+
 </Project>
