@@ -11,9 +11,13 @@
 #r "nuget: FSharpAux"
 #r "nuget: FsSpreadsheet, 1.2.0-preview"
 #r "nuget: FsSpreadsheet.ExcelIO, 1.2.0-preview"
+#r "nuget: FSharp.FGL"
+#r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
 open DocumentFormat.OpenXml
 open FSharpAux
+open FSharp.FGL
+open FSharp.FGL.ArrayAdjacencyGraph
 
 
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll"
@@ -24,11 +28,122 @@ open FSharpAux
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
-open FsSpreadsheet.DSL
+//open FsSpreadsheet.DSL
 open ArcGraphModel
-open ArcGraphModel.Param
+open ArcGraphModel.ParamBase
 open ArcGraphModel.TableTransform
 open FGLAux
+open ArcType
+
+
+// working backwards
+
+let tryAddVertex vertex graph =
+    try ArrayAdjacencyGraph.Vertices.add vertex graph
+    with _ -> graph
+
+let tryAddEdge vertex1 vertex2 edge graph =
+    try ArrayAdjacencyGraph.Edges.add (vertex1, vertex2, edge) graph
+    with _ -> graph
+
+// TO DO: write validation tests that WORK ON CVPARAMS (list/array) instead of graph!
+
+// look for a function that checks if a Raw/Derived Data file is present in the ARC (look in arc-validate)
+// look if Input/Output columns have empty data cells
+
+let address = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!A2")]
+let address2 = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!B2")]
+let address3 = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!D5")]
+let testCvP3 = CvParam("ISA:0001", "Sample Name", "ISA", ParamValue.Value "", address3)
+address.Head :> IParamBase |> ParamBase.getValue |> string
+//address.Head :> IParamBase |> ParamBase.getValue :?> string
+
+let testCvP = CvParam("ISA:0000", "Source Name", "ISA", ParamValue.Value "eppi1", address)
+let testCvP2 = CvParam("ISA:0000", "Source Name", "ISA", ParamValue.Value "", address2)
+let testCvP3 = CvParam("ISA:0001", "Sample Name", "ISA", ParamValue.Value "", address3)
+testCvP["Address"] :> IParamBase |> ParamBase.getValue
+testCvP :> IParamBase |> ParamBase.getValue
+
+let private returnCellsAddressIf predicate columnType (cvParams : CvParam list) =
+    let yieldVal (e : CvParam) = 
+        e :> IParamBase 
+        |> ParamBase.getValue 
+        |> string
+    cvParams
+    |> List.choose (
+        fun cvp ->
+            match BuildingBlockType.tryOfString (cvp :> ICvBase).Name with
+            | Some x when columnType x ->
+                let nullOrEmpty = 
+                    cvp
+                    :> IParamBase 
+                    |> ParamBase.getValue 
+                    |> string
+                    |> predicate
+                if nullOrEmpty then Some (cvp["Address"] :> IParamBase |> ParamBase.getValue |> string)
+                else None
+            | _ -> None
+    )
+
+/// Returns all Source Name cells with an empty value.
+let returnEmptyInputCells cvParams = 
+    returnCellsAddressIf String.isNullOrEmpty (fun c -> c.IsInputColumn) cvParams
+
+/// Returns all Sample Name / Raw Data File / Derived Data File cells with an empty value.
+let returnEmptyOutputCells cvParams = 
+    returnCellsAddressIf String.isNullOrEmpty (fun c -> c.IsOutputColumn) cvParams
+
+let returnNonExistentFileNames cvParams =
+    returnCellsAddressIf (System.IO.File.Exists >> not) (fun c -> c = RawDataFile || c = DerivedDataFile || c = ProtocolREF) cvParams
+
+returnEmptyInputCells [testCvP; testCvP2; testCvP3]
+returnEmptyOutputCells [testCvP; testCvP2; testCvP3]
+
+
+let address4 = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!C2")]
+let ddfp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\dataset\myDerivedDataFile1.txt"
+let testCvP4 = CvParam("ISA:0002", "Derived Data File", "ISA", ParamValue.Value ddfp, address4)
+let address5 = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!C3")]
+let ddfp2 = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\dataset\myDerivedDataFile2.txt"
+let testCvP5 = CvParam("ISA:0002", "Derived Data File", "ISA", ParamValue.Value ddfp2, address5)
+
+BuildingBlockType.tryOfString (testCvP5 :> ICvBase).Name
+
+returnNonExistentFileNames [testCvP; testCvP4; testCvP5]
+
+let cvParamsToGraph (cvParams : CvParam list) = 
+    cvParams
+    |> List.fold (
+        fun graph cvp ->
+            let label = 
+                cvp :> IParamBase 
+                |> ParamBase.getValue :?> IParamBase
+                |> ParamBase.getValue :?> CvParam
+            match BuildingBlockType.tryOfString (cvp :> ICvBase).Name with
+            | Some Sample
+            | Some RawDataFile
+            | Some DerivedDataFile
+            | Some Source -> 
+                let vertexId = 
+                    label :> IParamBase 
+                    |> ParamBase.getValue :?> ICvBase
+                    |> CvBase.getCvName
+                let vertex = LVertex (vertexId, label)
+                tryAddVertex vertex graph
+            | Some Parameter
+            | Some Characteristic
+            | Some Factor
+            | Some Component ->
+                let vertex1id = 
+                    cvp["Address"] // string * int * int
+                tryAddEdge 
+            //| Some (Freetext e) ->
+            //    let vertex1id = 
+            //        cvp["Address"] // string * int * int
+            //    tryAddEdge 
+    ) (Graph.create [] [])
+
+
 
 
 let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
@@ -99,15 +214,15 @@ let groupedEdgeHeaders = edgeHeaders |> Seq.groupWhen (fun h -> String.contains 
 let parsedNodes = List.map (parseNode fcc) nodeHeaders
 let parsedEdges = List.map (parseEdges true fcc) groupedEdgeHeaders
 let nodeTypes = parsedNodes |> List.map (List.map getNodeType)
-parsedNodes.Head.Head |> ArcGraphModel.Param.getValue
-parsedNodes.Head[1] |> ArcGraphModel.Param.getValue
+parsedNodes.Head.Head |> ArcGraphModel.ParamBase.getValue
+parsedNodes.Head[1] |> ArcGraphModel.ParamBase.getValue
 parsedNodes.Length
 parsedNodes.Head.Length
-parsedEdges.Head.Head |> ArcGraphModel.Param.getCvAccession
-parsedEdges.Head.Head |> ArcGraphModel.Param.getValue
-parsedEdges.Head[1] |> ArcGraphModel.Param.getValue
-parsedEdges |> List.map (List.map Param.getValue)
-parsedEdges |> List.map (List.map Param.getCvName)
+parsedEdges.Head.Head |> ArcGraphModel.CvBase.getCvAccession
+parsedEdges.Head.Head |> ArcGraphModel.ParamBase.getValue
+parsedEdges.Head[1] |> ArcGraphModel.ParamBase.getValue
+parsedEdges |> List.map (List.map ParamBase.getValue)
+parsedEdges |> List.map (List.map CvBase.getCvName)
 
 
 
@@ -124,13 +239,6 @@ let groupedEdgeHeaders2 = edgeHeaders2 |> Seq.groupWhen (fun h -> String.contain
 let parsedEdges2 = groupedEdgeHeaders2 |> List.map (parseEdges true fcc2)
 //let nodeHeaders2 = columnHeaders2 |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
 let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
-
-
-#r "nuget: FSharp.FGL"
-#r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
-
-open FSharp.FGL
-open FSharp.FGL.ArrayAdjacencyGraph
 
 
 let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
