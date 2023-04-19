@@ -6,8 +6,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="CvTokens\CvTerm.fs" />
+    <Compile Include="CvTokens\ParamValue.fs" />
+    <Compile Include="CvTokens\ICvBase.fs" />
+    <Compile Include="CvTokens\IParamBase.fs" />
+    <Compile Include="CvTokens\CvParam.fs" />
+    <Compile Include="CvTokens\UserParam.fs" />
+    <Compile Include="CvTokens\CvObject.fs" />
+    <Compile Include="CvTokens\CvContainer.fs" />
+    <Compile Include="FGLAux.fs" />
     <Compile Include="ArcType.fs" />
-    <Compile Include="CvParam.fs" />
+    <Compile Include="TableTransform.fs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharp.FGL.ArrayAdjacencyGraph" Version="0.0.2" />
+    <PackageReference Include="FSharpAux" Version="1.1.0" />
+    <PackageReference Include="FsSpreadsheet" Version="1.2.0-preview" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="6.0.7" />
+  </ItemGroup>
+
+	<PropertyGroup>
+		<Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey</Authors>
+		<Description></Description>
+		<Summary></Summary>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<!--<PackageIcon>logo.png</PackageIcon>-->
+		<PackageTags>F# FSharp datascience</PackageTags>
+		<RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<ItemGroup Condition=" '$(PackageId)' == 'ArcGraphModel.Fable' ">
+		<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
+	</ItemGroup>
 
 </Project>

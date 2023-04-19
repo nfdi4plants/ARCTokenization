@@ -8,11 +8,15 @@
 
   <ItemGroup>
     <Compile Include="ArcTypeTests.fs" />
-    <Compile Include="Tests.fs" />
+    <Compile Include="ParamTests.fs" />
+    <Compile Include="ContainerTests.fs" />
+    <Compile Include="TableTransformTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FsSpreadsheet" Version="1.2.0-preview" />
+    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="1.2.0-preview" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -27,6 +31,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ArcGraphModel\ArcGraphModel.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="6.0.7" />
   </ItemGroup>
 
 </Project>
