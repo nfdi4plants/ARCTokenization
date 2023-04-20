@@ -46,71 +46,6 @@ let tryAddEdge vertex1 vertex2 edge graph =
     try ArrayAdjacencyGraph.Edges.add (vertex1, vertex2, edge) graph
     with _ -> graph
 
-// TO DO: write validation tests that WORK ON CVPARAMS (list/array) instead of graph!
-
-// look for a function that checks if a Raw/Derived Data file is present in the ARC (look in arc-validate)
-// look if Input/Output columns have empty data cells
-
-let address = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!A2")]
-let address2 = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!B2")]
-let address3 = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!D5")]
-let testCvP3 = CvParam("ISA:0001", "Sample Name", "ISA", ParamValue.Value "", address3)
-address.Head :> IParamBase |> ParamBase.getValue |> string
-//address.Head :> IParamBase |> ParamBase.getValue :?> string
-
-let testCvP = CvParam("ISA:0000", "Source Name", "ISA", ParamValue.Value "eppi1", address)
-let testCvP2 = CvParam("ISA:0000", "Source Name", "ISA", ParamValue.Value "", address2)
-let testCvP3 = CvParam("ISA:0001", "Sample Name", "ISA", ParamValue.Value "", address3)
-testCvP["Address"] :> IParamBase |> ParamBase.getValue
-testCvP :> IParamBase |> ParamBase.getValue
-
-let private returnCellsAddressIf predicate columnType (cvParams : CvParam list) =
-    let yieldVal (e : CvParam) = 
-        e :> IParamBase 
-        |> ParamBase.getValue 
-        |> string
-    cvParams
-    |> List.choose (
-        fun cvp ->
-            match BuildingBlockType.tryOfString (cvp :> ICvBase).Name with
-            | Some x when columnType x ->
-                let nullOrEmpty = 
-                    cvp
-                    :> IParamBase 
-                    |> ParamBase.getValue 
-                    |> string
-                    |> predicate
-                if nullOrEmpty then Some (cvp["Address"] :> IParamBase |> ParamBase.getValue |> string)
-                else None
-            | _ -> None
-    )
-
-/// Returns all Source Name cells with an empty value.
-let returnEmptyInputCells cvParams = 
-    returnCellsAddressIf String.isNullOrEmpty (fun c -> c.IsInputColumn) cvParams
-
-/// Returns all Sample Name / Raw Data File / Derived Data File cells with an empty value.
-let returnEmptyOutputCells cvParams = 
-    returnCellsAddressIf String.isNullOrEmpty (fun c -> c.IsOutputColumn) cvParams
-
-let returnNonExistentFileNames cvParams =
-    returnCellsAddressIf (System.IO.File.Exists >> not) (fun c -> c = RawDataFile || c = DerivedDataFile || c = ProtocolREF) cvParams
-
-returnEmptyInputCells [testCvP; testCvP2; testCvP3]
-returnEmptyOutputCells [testCvP; testCvP2; testCvP3]
-
-
-let address4 = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!C2")]
-let ddfp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\dataset\myDerivedDataFile1.txt"
-let testCvP4 = CvParam("ISA:0002", "Derived Data File", "ISA", ParamValue.Value ddfp, address4)
-let address5 = [CvParam("", "Address", "", ParamValue.Value "annotationTable1!C3")]
-let ddfp2 = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\dataset\myDerivedDataFile2.txt"
-let testCvP5 = CvParam("ISA:0002", "Derived Data File", "ISA", ParamValue.Value ddfp2, address5)
-
-BuildingBlockType.tryOfString (testCvP5 :> ICvBase).Name
-
-returnNonExistentFileNames [testCvP; testCvP4; testCvP5]
-
 let cvParamsToGraph (cvParams : CvParam list) = 
     cvParams
     |> List.fold (
@@ -182,6 +117,16 @@ let getAnnotationTables workbook =
     tables |> List.filter (fun t -> String.contains "annotationTable" t.Name)
 
 (getAnnotationTables wb).Head.CellsCollection.Count
+
+let getColumnHeaders (table : FsTable) =
+    let range = table.HeadersRow()
+    range.RangeAddress
+    table.GetHeaderCell
+
+let ioToCvParam headerCell dataCell =
+    
+
+let buildingBlockToCvParam headerCell dataCells =
 
 
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
