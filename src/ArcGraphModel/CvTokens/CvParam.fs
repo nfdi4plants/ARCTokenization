@@ -32,36 +32,50 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
     new (cvTerm,pv : ParamValue) = 
         CvParam (cvTerm,pv,Seq.empty)
 
-    /// Create a CvParam from a category and a simple value
+    /// Creates a CvParam from a category and a simple value.
     static member fromValue (category : CvTerm) (v : 'T) =
         CvParam(category, ParamValue.Value (v :> IConvertible))
 
-    /// Create a CvParam from a category and a value coming from a controlled vocabulary
+    /// Creates a CvParam from a category and a value coming from a controlled vocabulary.
     static member fromCategory (category : CvTerm) (term : CvTerm) =
         CvParam(category, ParamValue.CvValue term)
 
-    /// Create a CvParam from a category, a simple value and a unit coming from a controlled vocabulary
+    /// Creates a CvParam from a category, a simple value and a unit coming from a controlled vocabulary.
     static member fromValueWithUnit (category : CvTerm) (v : 'T) (unit : CvUnit) =
         CvParam(category, ParamValue.WithCvUnitAccession (v :> IConvertible,unit))
 
-    /// Returns the typed value of the CvParam
-    static member getValue (cvp : CvParam) =
-        (cvp :> IParamBase).Value
+    /// Returns the typed value of the CvParam.
+    static member getValue (cvParam : CvParam) =
+        (cvParam :> IParamBase).Value
 
-    /// Returns the value of the CvParam as a string
-    static member getValueAsString (cvp : CvParam) =
-        (cvp :> IParamBase).Value
+    /// Returns the value of the CvParam as a string.
+    static member getValueAsString (cvParam : CvParam) =
+        (cvParam :> IParamBase).Value
         |> ParamValue.getValueAsString
 
-    /// Returns the value of the CvParam as an int if possible, else fails
-    static member getValueAsInt (cvp : CvParam) =
-        (cvp :> IParamBase).Value
+    /// Returns the value of the CvParam as an int if possible, else fails.
+    static member getValueAsInt (cvParam : CvParam) =
+        (cvParam :> IParamBase).Value
         |> ParamValue.getValueAsInt
 
-    /// Returns the value of the CvParam as a term
-    static member getValueAsTerm (cvp : CvParam) =
-        (cvp :> IParamBase).Value
+    /// Returns the value of the CvParam as a CvTerm.
+    static member getValueAsTerm (cvParam : CvParam) =
+        (cvParam :> IParamBase).Value
         |> ParamValue.getValueAsTerm
+
+    /// Returns the qualifier with the given name if present in the CvParam. Else returns None.
+    static member tryGetQualifier qualifierName (cvParam : CvParam) =
+        Dictionary.tryFind qualifierName cvParam
+
+    /// Returns the ParamValue of the qualifier with the given name if present in the CvParam. Else returns None.
+    static member tryGetQualifierValue qualifierName (cvParam : CvParam) =
+        CvParam.tryGetQualifier qualifierName cvParam
+        |> Option.map CvParam.getValue
+
+    /// Returns the ParamValue of the qualifier with the given name if present in the CvParam as string. Else returns None.
+    static member tryGetQualifierValueAsString qualifierName (cvParam : CvParam) =
+        CvParam.tryGetQualifierValue qualifierName cvParam
+        |> Option.map ParamValue.getValueAsString
 
     override this.ToString() = 
         $"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}"

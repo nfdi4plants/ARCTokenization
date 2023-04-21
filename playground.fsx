@@ -11,9 +11,13 @@
 #r "nuget: FSharpAux"
 #r "nuget: FsSpreadsheet, 1.2.0-preview"
 #r "nuget: FsSpreadsheet.ExcelIO, 1.2.0-preview"
+#r "nuget: FSharp.FGL"
+#r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
 open DocumentFormat.OpenXml
 open FSharpAux
+open FSharp.FGL
+open FSharp.FGL.ArrayAdjacencyGraph
 
 
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll"
@@ -24,11 +28,57 @@ open FSharpAux
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
-open FsSpreadsheet.DSL
+//open FsSpreadsheet.DSL
 open ArcGraphModel
-open ArcGraphModel.Param
+open ArcGraphModel.ParamBase
 open ArcGraphModel.TableTransform
 open FGLAux
+open ArcType
+
+
+// working backwards
+
+let tryAddVertex vertex graph =
+    try ArrayAdjacencyGraph.Vertices.add vertex graph
+    with _ -> graph
+
+let tryAddEdge vertex1 vertex2 edge graph =
+    try ArrayAdjacencyGraph.Edges.add (vertex1, vertex2, edge) graph
+    with _ -> graph
+
+let cvParamsToGraph (cvParams : CvParam list) = 
+    cvParams
+    |> List.fold (
+        fun graph cvp ->
+            let label = 
+                cvp :> IParamBase 
+                |> ParamBase.getValue :?> IParamBase
+                |> ParamBase.getValue :?> CvParam
+            match BuildingBlockType.tryOfString (cvp :> ICvBase).Name with
+            | Some Sample
+            | Some RawDataFile
+            | Some DerivedDataFile
+            | Some Source -> 
+                let vertexId = 
+                    label :> IParamBase 
+                    |> ParamBase.getValue :?> ICvBase
+                    |> CvBase.getCvName
+                let vertex = LVertex (vertexId, label)
+                tryAddVertex vertex graph
+            | Some Parameter
+            | Some Characteristic
+            | Some Factor
+            | Some Component ->
+                let vertex1id = 
+                    cvp["Address"] // string * int * int
+                tryAddEdge 
+            //| Some (Freetext e) ->
+            //    let vertex1id = 
+            //        cvp["Address"] // string * int * int
+            //    tryAddEdge 
+    ) (Graph.create [] [])
+
+
 
 
 let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
@@ -68,6 +118,16 @@ let getAnnotationTables workbook =
 
 (getAnnotationTables wb).Head.CellsCollection.Count
 
+let getColumnHeaders (table : FsTable) =
+    let range = table.HeadersRow()
+    range.RangeAddress
+    table.GetHeaderCell
+
+let ioToCvParam headerCell dataCell =
+    
+
+let buildingBlockToCvParam headerCell dataCells =
+
 
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
 let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> List.ofSeq
@@ -99,15 +159,15 @@ let groupedEdgeHeaders = edgeHeaders |> Seq.groupWhen (fun h -> String.contains 
 let parsedNodes = List.map (parseNode fcc) nodeHeaders
 let parsedEdges = List.map (parseEdges true fcc) groupedEdgeHeaders
 let nodeTypes = parsedNodes |> List.map (List.map getNodeType)
-parsedNodes.Head.Head |> ArcGraphModel.Param.getValue
-parsedNodes.Head[1] |> ArcGraphModel.Param.getValue
+parsedNodes.Head.Head |> ArcGraphModel.ParamBase.getValue
+parsedNodes.Head[1] |> ArcGraphModel.ParamBase.getValue
 parsedNodes.Length
 parsedNodes.Head.Length
-parsedEdges.Head.Head |> ArcGraphModel.Param.getCvAccession
-parsedEdges.Head.Head |> ArcGraphModel.Param.getValue
-parsedEdges.Head[1] |> ArcGraphModel.Param.getValue
-parsedEdges |> List.map (List.map Param.getValue)
-parsedEdges |> List.map (List.map Param.getCvName)
+parsedEdges.Head.Head |> ArcGraphModel.CvBase.getCvAccession
+parsedEdges.Head.Head |> ArcGraphModel.ParamBase.getValue
+parsedEdges.Head[1] |> ArcGraphModel.ParamBase.getValue
+parsedEdges |> List.map (List.map ParamBase.getValue)
+parsedEdges |> List.map (List.map CvBase.getCvName)
 
 
 
@@ -124,13 +184,6 @@ let groupedEdgeHeaders2 = edgeHeaders2 |> Seq.groupWhen (fun h -> String.contain
 let parsedEdges2 = groupedEdgeHeaders2 |> List.map (parseEdges true fcc2)
 //let nodeHeaders2 = columnHeaders2 |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
 let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
-
-
-#r "nuget: FSharp.FGL"
-#r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
-
-open FSharp.FGL
-open FSharp.FGL.ArrayAdjacencyGraph
 
 
 let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
