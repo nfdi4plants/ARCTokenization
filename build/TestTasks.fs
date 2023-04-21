@@ -157,7 +157,7 @@ module WatchTests =
     let private fableTestsProcesses =
         [
             "[Fable Core]", dotnet $"fable watch {FableTestPath_input} -o {FableTestPath_output} --run npm run test:live" "."
-            //"[Mocha JsNative]", npm $"run testnative:live" "."
+            "[Mocha JsNative]", npm $"run testnative:live" "."
         ]
 
     let allTest = dotnetTestsProcesses@fableTestsProcesses

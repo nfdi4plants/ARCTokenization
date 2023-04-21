@@ -10,12 +10,12 @@ open FSharpAux
 open ArcGraphModel
 open ParamTests
 
-module private Terms = 
+module Terms = 
     
     let protocol = "Test:123", "Protocol", "Test"
     let version = "Test:456", "Version", "Test"
 
-type private Protocol () =  
+type Protocol () =  
 
     inherit CvContainer(Terms.protocol)
 
