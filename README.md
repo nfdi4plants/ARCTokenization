@@ -5,6 +5,12 @@
 ### prerequisites
 
 - .NET 6 SDK
+- nodejs (tested with ~v16)
+
+### setup
+
+- dotnet tool restore
+- npm install
 
 ### build
 
