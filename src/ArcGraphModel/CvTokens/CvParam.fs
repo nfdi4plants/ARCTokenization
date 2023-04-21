@@ -72,5 +72,10 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
         CvParam.tryGetQualifier qualifierName cvParam
         |> Option.map CvParam.getValue
 
+    /// Returns the ParamValue of the qualifier with the given name if present in the CvParam as string. Else returns None.
+    static member tryGetQualifierValueAsString qualifierName (cvParam : CvParam) =
+        CvParam.tryGetQualifierValue qualifierName cvParam
+        |> Option.map ParamValue.getValueAsString
+
     override this.ToString() = 
         $"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}"
