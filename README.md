@@ -35,7 +35,7 @@ run `build.cmd`
 
 #### Windows
 
-run `build.cmd runTests`
+- run `build.cmd runTests`
 
 #### or run the build project directly:
 
