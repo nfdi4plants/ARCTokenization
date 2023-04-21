@@ -6,7 +6,7 @@ let project = "ArcGraphModel"
 
 let testProjects = 
     [
-        "tests/ArcGraphModel.Tests/ArcGraphModel.Tests.fsproj"
+        "tests/ArcGraphModel.Tests"
     ]
 
 let solutionFile  = $"{project}.sln"

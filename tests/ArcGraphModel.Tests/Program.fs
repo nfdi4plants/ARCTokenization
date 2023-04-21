@@ -11,6 +11,8 @@ let all =
     testList "All"
         [
             ArcTypeTests.main
+            ParamTests.main
+            ContainerTests.main
         ]
 
 let [<EntryPoint>] main argv = 
