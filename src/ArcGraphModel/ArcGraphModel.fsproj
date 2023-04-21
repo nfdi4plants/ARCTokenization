@@ -35,7 +35,7 @@
 		<Summary></Summary>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<!--<PackageIcon>logo.png</PackageIcon>-->
-		<PackageTags>F# FSharp datascience fable fable-library fable-javascript</PackageTags>
+		<PackageTags>F# FSharp datascience rdm fable fable-library fable-javascript</PackageTags>
 		<RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
