@@ -348,3 +348,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/tests/ArcGraphModel.JsNativeTests/fable/src/ArcGraphModel
+/tests/ArcGraphModel.JsNativeTests/fable/Program.js.map
+/tests/ArcGraphModel.JsNativeTests/fable/Program.js
+/tests/ArcGraphModel.JsNativeTests/fable/ArcTypeTests.js.map
+/tests/ArcGraphModel.JsNativeTests/fable/ArcTypeTests.js
