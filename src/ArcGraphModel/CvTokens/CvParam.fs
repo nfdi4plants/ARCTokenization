@@ -7,18 +7,19 @@ open FSharpAux
 /// Represents a structured value, annotated with a controlled vocabulary term
 ///
 /// Qualifiers can be used to further describe the CvParam
-type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue, qualifiers : IDictionary<string,CvParam>) =
+type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue, attributes : IDictionary<string,IParam>) =
 
-    inherit Dictionary<string,CvParam>(qualifiers)        
+    //inherit Dictionary<string,CvParam>(qualifiers)
+    inherit CvAttributeCollection(attributes)
 
-    interface ICvBase with 
+    interface IParam with 
         member this.ID     = cvAccession
         member this.Name   = cvName
         member this.RefUri = cvRefUri
-    interface IParamBase with 
+    //interface IParamBase with 
         member this.Value  = paramValue
 
-    new (id,name,ref,pv,qualifiers : seq<CvParam>) = 
+    new (id,name,ref,pv,qualifiers : seq<IParam>) = 
         let dict = 
             qualifiers
             |> Seq.map (fun cvp -> (cvp :> ICvBase).Name, cvp)
@@ -27,7 +28,7 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
     new (id,name,ref,pv) = 
         CvParam (id,name,ref,pv,Seq.empty)
 
-    new ((id,name,ref) : CvTerm,pv,qualifiers : seq<CvParam>) = 
+    new ((id,name,ref) : CvTerm,pv,qualifiers : seq<IParam>) = 
         CvParam (id,name,ref,pv,qualifiers)
     new (cvTerm,pv : ParamValue) = 
         CvParam (cvTerm,pv,Seq.empty)
@@ -59,7 +60,7 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
         |> ParamValue.getValueAsInt
 
     /// Returns the value of the CvParam as a CvTerm.
-    static member getValueAsTerm (cvParam : CvParam) =
+    static member getValueAsTerm (cvParam : IParam) =
         (cvParam :> IParamBase).Value
         |> ParamValue.getValueAsTerm
 
@@ -68,7 +69,7 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
         Dictionary.tryFind qualifierName cvParam
 
     /// Returns the ParamValue of the qualifier with the given name if present in the CvParam. Else returns None.
-    static member tryGetQualifierValue qualifierName (cvParam : CvParam) =
+    static member tryGetQualifierValue qualifierName (cvParam : IParam) =
         CvParam.tryGetQualifier qualifierName cvParam
         |> Option.map CvParam.getValue
 

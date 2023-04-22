@@ -18,6 +18,7 @@ open DocumentFormat.OpenXml
 open FSharpAux
 open FSharp.FGL
 open FSharp.FGL.ArrayAdjacencyGraph
+open System.Collections.Generic
 
 
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll"
@@ -34,6 +35,49 @@ open ArcGraphModel.ParamBase
 open ArcGraphModel.TableTransform
 open FGLAux
 open ArcType
+
+
+
+
+// new CvTypes - testin' and foolin' around
+
+type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue, qualifiers : IDictionary<string,CvParam>) =
+
+    inherit Dictionary<string,CvParam>(qualifiers)
+
+    let mutable _cvContainers = Dictionary<string,CvContainer list>()
+
+    interface ICvBase with 
+        member this.ID     = cvAccession
+        member this.Name   = cvName
+        member this.RefUri = cvRefUri
+    interface IParamBase with 
+        member this.Value  = paramValue
+
+    new (id,name,ref,pv,qualifiers : seq<CvParam>) = 
+        let dict = 
+            qualifiers
+            |> Seq.map (fun cvp -> (cvp :> ICvBase).Name, cvp)
+            |> Dictionary.ofSeq
+        CvParam (id,name,ref,pv,dict)
+    new (id,name,ref,pv) = 
+        CvParam (id,name,ref,pv,Seq.empty)
+
+    new ((id,name,ref) : CvTerm,pv,qualifiers : seq<CvParam>) = 
+        CvParam (id,name,ref,pv,qualifiers)
+    new (cvTerm,pv : ParamValue) = 
+        CvParam (cvTerm,pv,Seq.empty)
+
+    member this.CvContainers
+        with private get() = _cvContainers
+        //with get(item) = _cvContainers[item]
+        and private set(item, value) = _cvContainers[item] <- value
+
+    member this.CvContainers.Item item =
+        this.CvContainers[item]
+
+    static member addCvContainerItem (item : CvContainer list) (cvParam : CvParam) =
+        cvParam.CvContainers.Add(item.Head |> CvBase.getCvName, item)
 
 
 // working backwards

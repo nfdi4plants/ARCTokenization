@@ -3,27 +3,52 @@
 open System.Collections.Generic
 open FSharpAux
 
-/// Represents a collection of structured properties, annotated with a controlled vocabulary term
-type CvContainer (cvAccession:string,cvName:string,cvRefUri:string,properties : IDictionary<string,ICvBase seq>) =
+/// Represents a collection of structured properties, annotated with a controlled vocabulary term.
+type internal CvContainer (
+    cvAccession : string, 
+    cvName : string, 
+    cvRefUri : string, 
+    attributes : IDictionary<string,IParam>, 
+    parameters : IDictionary<string,IParam seq>, 
+    cvContainers : Dictionary<string,CvContainer seq>
+    ) =
 
-    inherit Dictionary<string,ICvBase seq>(properties)
+    inherit CvAttributeCollection(attributes)
+
+    let _cvContainers = cvContainers
+    let _parameters = parameters
 
     interface ICvBase with 
         member this.ID     = cvAccession
         member this.Name   = cvName
         member this.RefUri = cvRefUri    
 
-    new ((id,name,ref) : CvTerm,properties : IDictionary<string,ICvBase seq>) = 
-        CvContainer(id,name,ref,properties)
 
-    new (term : CvTerm,items : seq<ICvBase>) = 
-        let properties : IDictionary<string,ICvBase seq> = 
+    new (cvAccession : string, cvName : string, cvRefUri : string) =
+        CvContainer(cvAccession, cvName, cvRefUri, Dictionary<string, IParam>(), Dictionary<string, IParam seq>(), Dictionary<string, CvContainer seq>())
+
+    new ((id,name,ref) : CvTerm, attributes : IDictionary<string,IParam>) = 
+        CvContainer(id, name, ref, attributes, Dictionary<string, IParam seq>(), Dictionary<string, CvContainer seq>())
+
+    new (term : CvTerm,items : seq<IParam>) = 
+        let parameters : IDictionary<string,IParam seq> = 
             items
             |> Seq.groupBy (fun v -> v.Name)
             |> Dictionary.ofSeq
-        CvContainer(term,properties)
+        CvContainer(term, Dictionary<string,IParam>(), parameters, Dictionary<string,CvContainer seq>())
 
-    new (term : CvTerm) = CvContainer (term,Seq.empty)  
+    new (term : CvTerm) = CvContainer (term, Seq.empty)  
+
+
+    member internal this.CvContainers
+        with get() = _cvContainers
+
+    member internal this.Properties
+        with get() = _parameters
+
+    member this.lel v =
+        this.CvContainers["lel"] <- v
+
 
     /// Retrieves children with the given name of the CvContainer as sequence.
     ///
