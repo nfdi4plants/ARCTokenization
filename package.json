@@ -1,0 +1,26 @@
+{
+  "name": "arcgraphmodel",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "pretest": "dotnet fable tests/ArcGraphModel.Tests -o tests/ArcGraphModel.JsNativeTests/fable",
+    "test": "mocha tests/ArcGraphModel.JsNativeTests/fable",
+    "posttest": "mocha tests/ArcGraphModel.JsNativeTests",
+    "test:live": "mocha --watch --parallel tests/ArcGraphModel.JsNativeTests/fable",
+    "testnative:live": "mocha --watch --parallel tests/ArcGraphModel.JsNativeTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nfdi4plants/ArcGraphModel.git"
+  },
+  "author": "Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nfdi4plants/ArcGraphModel/issues"
+  },
+  "homepage": "https://github.com/nfdi4plants/ArcGraphModel#readme",
+  "dependencies": {
+    "mocha": "^10.2.0"
+  }
+}

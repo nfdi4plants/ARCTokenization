@@ -1,8 +1,13 @@
-﻿namespace ArcGraphModel.Tests
+﻿module ParamTests
 
-open Xunit
 open ArcGraphModel
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
+open Expecto
+#endif
 
+[<AutoOpenAttribute>]
 module Parameter =
 
     let testParamValueValue = ParamValue.Value "ParamValue.Value"
@@ -14,136 +19,142 @@ module Parameter =
     let testParamValueCvUnit = ParamValue.WithCvUnitAccession ("CvUnit_Value", testCvUnit)
     let testCvParam3 = CvParam("CvParam_TAN_3", "CvParam_Name_3", "CvParam_TSR_3", testParamValueCvUnit)
 
+let private getCvAccession = testList "getCvAccession" [
+    testCase "returns correct TAN" (fun _ ->
+        let result = CvBase.getCvAccession testCvParam1
+        Expect.equal "CvParam_TAN_1" result ""
+    )
+]
 
-    module getCvAccession =
+let private getCvName = testList "getCvName" [
+    testCase "returns correct Name" (fun _ ->
+        let result = CvBase.getCvName testCvParam1
+        Expect.equal "CvParam_Name_1" result ""
+    )
+]
 
-        [<Fact>]
-        let ``returns correct TAN`` () =
-            let retrievedTan = CvBase.getCvAccession testCvParam1
-            Assert.Equal("CvParam_TAN_1", retrievedTan)
+let private getCvRef = testList "getCvRef" [
+    testCase "returns correct TSR" (fun _ ->
+        let result = CvBase.getCvRef testCvParam1
+        Expect.equal "CvParam_TSR_1" result ""
+    )
+]
 
+let private getValue = testList "getValue" [
+    testCase "returns correct Value" (fun _ ->
+        let result = ParamBase.getValue testCvParam1 :?> string
+        Expect.equal "ParamValue.Value" result ""
+    )
+]
 
-    module getCvName =
+let private tryGetValueAccession = testList "tryGetValueAccession" [
 
-        [<Fact>]
-        let ``returns correct Name`` () =
-            let retrievedName = CvBase.getCvName testCvParam1
-            Assert.Equal("CvParam_Name_1", retrievedName)
+    let retrievedValueTan = ParamBase.tryGetValueAccession testCvParam2
 
+    testCase "isSome" (fun _ ->
+        Expect.isTrue retrievedValueTan.IsSome ""
+    )
+    testCase "returns correct ParamValue TAN" (fun _ ->
+        Expect.equal "CvTerm_TAN" retrievedValueTan.Value ""
+    )
+]
 
-    module getCvRef =
+let private tryGetValueRef = testList "tryGetValueRef" [
 
-        [<Fact>]
-        let ``returns correct TSR`` () =
-            let retrievedTsr = CvBase.getCvRef testCvParam1
-            Assert.Equal("CvParam_TSR_1", retrievedTsr)
+    let retreivedValueTsr = ParamBase.tryGetValueRef testCvParam2
 
+    testCase "isSome" (fun _ ->
+        Expect.isTrue retreivedValueTsr.IsSome ""
+    )
+    testCase "returns correct ParamValue TSR" (fun _ ->
+        Expect.equal "CvTerm_TSR" retreivedValueTsr.Value ""
+    )
+]
 
-    module getValue =
+let private tryGetCvUnit = testList "tryGetCvUnit" [
 
-        [<Fact>]
-        let ``returns correct Value`` () =
-            let retrievedValue = ParamBase.getValue testCvParam1 :?> string
-            Assert.Equal("ParamValue.Value", retrievedValue)
+    let retrievedCvUnit = ParamBase.tryGetCvUnit testCvParam3
 
+    testCase "isSome" (fun _ ->
+        Expect.isTrue retrievedCvUnit.IsSome ""
+    )
+    testCase "returns correct ParamValue CvUnit Name" (fun _ ->
+        let result = retrievedCvUnit.Value |> fun (_,n,_) -> n
+        Expect.equal "CvUnit_Name" result ""
+    )
+    testCase "returns correct ParamValue CvUnit TAN" (fun _ ->
+        let result = retrievedCvUnit.Value |> fun (a,_,_) -> a
+        Expect.equal "CvUnit_TAN" result ""
+    )
+    testCase "returns correct ParamValue CvUnit TSR" (fun _ ->
+        let result = retrievedCvUnit.Value |> fun (_,_,r) -> r
+        Expect.equal "CvUnit_TSR" result ""
+    )
+]
 
-    module tryGetValueAccession =
+let private tryGetCvUnitValue = testList "tryGetCvUnitValue" [
 
-        let retrievedValueTan = ParamBase.tryGetValueAccession testCvParam2
+    let retrievedCvUnitValue = ParamBase.tryGetCvUnitValue testCvParam3
 
-        [<Fact>]
-        let ``is Some`` () =
-            Assert.True retrievedValueTan.IsSome
+    testCase "isSome" (fun _ ->
+        Expect.isTrue retrievedCvUnitValue.IsSome ""
+    )
+    testCase "returns correct CvUnit Value" (fun _ ->
+        let result = retrievedCvUnitValue.Value :?> string
+        Expect.equal "CvUnit_Value" result ""
+    )
+]
 
-        [<Fact>]
-        let ``returns correct ParamValue TAN`` () =
-            Assert.Equal("CvTerm_TAN", retrievedValueTan.Value)
+let private tryGetCvUnitName = testList "tryGetCvUnitName" [
 
+    let retrievedCvUnitName = ParamBase.tryGetCvUnitName testCvParam3
 
-    module tryGetValueRef =
+    testCase "isSome" (fun _ ->
+        Expect.isTrue retrievedCvUnitName.IsSome ""
+    )
+    testCase "returns correct CvUnit Name" (fun _ ->
+        let result = retrievedCvUnitName.Value
+        Expect.equal "CvUnit_Name" result ""
+    )
+]
 
-        let retreivedValueTsr = ParamBase.tryGetValueRef testCvParam2
+let private tryGetCvUnitAccession = testList "tryGetCvUnitAccession" [
 
-        [<Fact>]
-        let ``is Some`` () =
-            Assert.True retreivedValueTsr.IsSome
+    let retrievedCvUnitTan = ParamBase.tryGetCvUnitAccession testCvParam3
 
-        [<Fact>]
-        let ``returns correct ParamValue TSR`` () =
-            Assert.Equal("CvTerm_TSR", retreivedValueTsr.Value)
+    testCase "isSome" (fun _ ->
+        Expect.isTrue retrievedCvUnitTan.IsSome ""
+    )
+    testCase "returns correct CvUnit TAN" (fun _ ->
+        let result = retrievedCvUnitTan.Value
+        Expect.equal "CvUnit_TAN" result ""
+    )
+]
 
+let private tryGetCvUnitRef = testList "tryGetCvUnitRef" [
 
-    module tryGetCvUnit =
+    let retrievedCvUnitTsr = ParamBase.tryGetCvUnitRef testCvParam3
 
-        let retrievedCvUnit = ParamBase.tryGetCvUnit testCvParam3
+    testCase "isSome" (fun _ ->
+        Expect.isTrue retrievedCvUnitTsr.IsSome ""
+    )
+    testCase "returns correct CvUnit TSR" (fun _ ->
+        let result = retrievedCvUnitTsr.Value
+        Expect.equal "CvUnit_TSR" result ""
+    )
+]
 
-        [<Fact>]
-        let ``is Some`` () =
-            Assert.True retrievedCvUnit.IsSome
-
-        [<Fact>]
-        let ``returns correct ParamValue CvUnit Name`` () =
-            let name = retrievedCvUnit.Value |> fun (_,n,_) -> n
-            Assert.Equal("CvUnit_Name", name)
-
-        [<Fact>]
-        let ``returns correct ParamValue CvUnit TAN`` () =
-            let tan = retrievedCvUnit.Value |> fun (a,_,_) -> a
-            Assert.Equal("CvUnit_TAN", tan)
-
-        [<Fact>]
-        let ``returns correct ParamValue CvUnit TSR`` () =
-            let tsr = retrievedCvUnit.Value |> fun (_,_,r) -> r
-            Assert.Equal("CvUnit_TSR", tsr)
-
-
-    module tryGetCvUnitValue =
-
-        let retrievedCvUnitValue = ParamBase.tryGetCvUnitValue testCvParam3
-
-        [<Fact>]
-        let ``is Some`` () =
-            Assert.True retrievedCvUnitValue.IsSome
-
-        [<Fact>]
-        let ``returns correct CvUnit Value`` () =
-            Assert.Equal("CvUnit_Value", retrievedCvUnitValue.Value :?> string)
-
-
-    module tryGetCvUnitName =
-
-        let retrievedCvUnitName = ParamBase.tryGetCvUnitName testCvParam3
-
-        [<Fact>]
-        let ``is Some`` () =
-            Assert.True retrievedCvUnitName.IsSome
-
-        [<Fact>]
-        let ``returns correct CvUnit Name`` () =
-            Assert.Equal("CvUnit_Name", retrievedCvUnitName.Value)
-
-
-    module tryGetCvUnitAccession =
-
-        let retrievedCvUnitTan = ParamBase.tryGetCvUnitAccession testCvParam3
-
-        [<Fact>]
-        let ``is Some`` () =
-            Assert.True retrievedCvUnitTan.IsSome
-
-        [<Fact>]
-        let ``returns correct CvUnit TAN`` () =
-            Assert.Equal("CvUnit_TAN", retrievedCvUnitTan.Value)
-
-
-    module tryGetCvUnitRef =
-
-        let retrievedCvUnitTsr = ParamBase.tryGetCvUnitRef testCvParam3
-
-        [<Fact>]
-        let ``is Some`` () =
-            Assert.True retrievedCvUnitTsr.IsSome
-
-        [<Fact>]
-        let ``returns correct CvUnit TSR`` () =
-            Assert.Equal("CvUnit_TSR", retrievedCvUnitTsr.Value)
+let main =
+    testList "ParamTests" [
+        getCvAccession
+        getCvName
+        getCvRef
+        getValue
+        tryGetValueAccession
+        tryGetValueRef
+        tryGetCvUnit
+        tryGetCvUnitValue
+        tryGetCvUnitName
+        tryGetCvUnitAccession
+        tryGetCvUnitRef
+    ]

@@ -23,12 +23,12 @@
 
   <ItemGroup>
     <PackageReference Include="FSharp.FGL.ArrayAdjacencyGraph" Version="0.0.2" />
-    <PackageReference Include="FSharpAux" Version="1.1.0" />
+    <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
     <PackageReference Include="FsSpreadsheet" Version="1.2.0-preview" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="6.0.7" />
+    <PackageReference Update="FSharp.Core" Version="[6.0.7]" />
   </ItemGroup>
 
 	<PropertyGroup>
@@ -37,12 +37,12 @@
 		<Summary></Summary>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<!--<PackageIcon>logo.png</PackageIcon>-->
-		<PackageTags>F# FSharp datascience</PackageTags>
+		<PackageTags>F# FSharp datascience rdm fable fable-library fable-javascript</PackageTags>
 		<RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
-	<ItemGroup Condition=" '$(PackageId)' == 'ArcGraphModel.Fable' ">
+	<ItemGroup>
 		<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
 	</ItemGroup>
 

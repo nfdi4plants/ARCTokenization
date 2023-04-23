@@ -1,8 +1,14 @@
-﻿namespace ArcGraphModel.Tests
+﻿module ContainerTests
 
-open Xunit
-open ArcGraphModel
+#if FABLE_COMPILER
+open Fable.Mocha
+#else
+open Expecto
+#endif
+open System
 open FSharpAux
+open ArcGraphModel
+open ParamTests
 
 module Terms = 
     
@@ -23,8 +29,8 @@ type Protocol () =
 
     static member VersionProperty = "Version"
 
-
-module GenericContainer =
+[<AutoOpen>]
+module private GenericContainer =
     
     let name = "MyContainer"
     let id = "Test:123456"
@@ -32,116 +38,120 @@ module GenericContainer =
 
     let testTerm = id,name,ref
 
-      
-    module correctlyImplementsICvBase =
-
-        let container = CvContainer(testTerm)
-
-        [<Fact>]
-        let ``returns correct TAN`` () =
-            let retrievedTan = CvBase.getCvAccession container
-            Assert.Equal(id, retrievedTan)
-
-        [<Fact>]
-        let ``returns correct Name`` () =
-            let retrievedName = CvBase.getCvName container
-            Assert.Equal(name, retrievedName)
-
-        [<Fact>]
-        let ``returns correct TSR`` () =
-            let retrievedTsr = CvBase.getCvRef container
-            Assert.Equal(ref, retrievedTsr)
-
-        [<Fact>]
-        let ``hasNoItems`` () =
-            let c = Dictionary.count container
-            Assert.Equal(0, c)
-
-
-    module setSingleProperty =
-        
-        let container = CvContainer(testTerm)
-
-        let param = Parameter.testCvParam1
-        let name = (param :> ICvBase).Name
-
-        do CvContainer.setSingle param container
-
-        [<Fact>]
-        let ``HasValue`` () =           
-            Assert.True (Dictionary.containsKey name container)
-
-        [<Fact>]
-        let ``HasOneItem`` () =
-            let c = Dictionary.count container
-            Assert.Equal(1, c)
-
-        [<Fact>]
-        let ``CanRetrieve`` () =
-            let v = CvContainer.getSingleAs<CvParam> name container
-            Assert.Equal<CvParam>(param, v)
-
-    module setManyProperty =
-        
-        let container = CvContainer(testTerm)
-
-        let differentParams = seq [Parameter.testCvParam1 :> ICvBase;Parameter.testCvParam2]
-        let correctParams = seq [Parameter.testCvParam1;Parameter.testCvParam1]
-        let name = (Parameter.testCvParam1 :> ICvBase).Name
-
-        [<Fact>]
-        let ``FailsForDifferentCvs`` () =
-            let hasFailed = 
-                try 
-                    CvContainer.setMany differentParams container
-                    false
-                with
-                | _ -> true
-            Assert.True hasFailed
-
-        [<Fact>]
-        let ``WorksForSameCvs`` () =
-            let hasFailed = 
-                try 
-                    CvContainer.setMany (correctParams |> Seq.cast<ICvBase>) container
-                    false
-                with
-                | _ -> true
-            Assert.False hasFailed
-
-        do CvContainer.setMany (correctParams |> Seq.cast<ICvBase>) container
-
-        [<Fact>]
-        let ``hasOneItem`` () =
-            let c = Dictionary.count container
-            Assert.Equal(1, c)
-
-        [<Fact>]
-        let ``HasValue`` () =           
-            Assert.True (Dictionary.containsKey name container)
-
-        [<Fact>]
-        let ``CanRetrieve`` () =
-            let v = CvContainer.getManyAs<CvParam> name container
-            Assert.Equal<CvParam>(correctParams, v)
-
-module ExtendedContainer = 
+let private correctlyImplementsICvBase = testList "correctlyImplementsICvBase" [
     
+    let container = CvContainer(testTerm)
+
+    testCase "returns correct TAN" (fun _ ->
+        let result = CvBase.getCvAccession container
+        Expect.equal id result ""
+    )
+    testCase "returns correct Name" (fun _ ->
+        let result = CvBase.getCvName container
+        Expect.equal name result ""
+    )
+    testCase "returns correct TSR" (fun _ ->
+        let result = CvBase.getCvRef container
+        Expect.equal ref result ""
+    )
+    testCase "hasNoItems" (fun _ ->
+        let result = Dictionary.count container
+        Expect.equal 0 result ""
+    )
+]
+
+let private setSingleProperty = testList "setSingleProperty" [
+
+    let container = CvContainer(testTerm)
+
+    /// Not sure if i like reusing these testcases over multiple files
+    let param = Parameter.testCvParam1
+    let name = (param :> ICvBase).Name
+
+    do CvContainer.setSingle param container
+
+    testCase "HasValue" (fun _ ->
+        let result = Dictionary.containsKey name container
+        Expect.isTrue result ""
+    )
+    testCase "HasOneItem" (fun _ ->
+        let result = Dictionary.count container
+        Expect.equal 1 result ""
+    )
+    testCase "CanRetrieve" (fun _ ->
+        let result = CvContainer.getSingleAs<CvParam> name container
+        Expect.equal param result ""
+    )
+]
+
+let private setManyProperty = testList "setManyProperty" [
+
+    let container = CvContainer(testTerm)
+
+    let differentParams = seq [Parameter.testCvParam1 :> ICvBase;Parameter.testCvParam2]
+    let correctParams = seq [Parameter.testCvParam1;Parameter.testCvParam1]
+    let name = (Parameter.testCvParam1 :> ICvBase).Name
+
+    testCase "FailsForDifferentCvs" (fun _ ->
+        let hasFailed = 
+            try 
+                CvContainer.setMany differentParams container
+                false
+            with
+            | _ -> true 
+        Expect.isTrue hasFailed ""
+    )
+    testCase "WorksForSameCvs" (fun _ ->
+        let hasFailed = 
+            try 
+                CvContainer.setMany (correctParams |> Seq.cast<ICvBase>) container
+                false
+            with
+            | _ -> true
+        Expect.isFalse hasFailed ""
+    )
+
+    do CvContainer.setMany (correctParams |> Seq.cast<ICvBase>) container
+
+    testCase "HasValue" (fun _ ->
+        let result = Dictionary.containsKey name container
+        Expect.isTrue result ""
+    )
+    testCase "HasOneItem" (fun _ ->
+        let result = Dictionary.count container
+        Expect.equal 1 result ""
+    )
+    testCase "CanRetrieve" (fun _ ->
+        let result = CvContainer.getManyAs<CvParam> name container
+        Expect.equal correctParams result ""
+    )
+]
+
+let private ExtendedContainer = testList "ExtendedContainer" [
+
     let version = "0.0.1"
-    let protocol = Protocol()
+    let protocol = new Protocol()
 
     do protocol.Version <- version
 
-    [<Fact>]
-    let ``hasOneItem`` () =
-        let c = Dictionary.count protocol
-        Assert.Equal(1, c)
+    testCase "HasValue" (fun _ ->
+        let result = Dictionary.containsKey Protocol.VersionProperty protocol
+        Expect.isTrue result ""
+    )
+    testCase "HasOneItem" (fun _ ->
+        let result = Dictionary.count protocol
+        Expect.equal 1 result ""
+    )
+    testCase "CanRetrieve" (fun _ ->
+        let result = protocol.Version
+        Expect.equal version result ""
+    )
+]
 
-    [<Fact>]
-    let ``HasValue`` () =           
-        Assert.True (Dictionary.containsKey Protocol.VersionProperty protocol)
-
-    [<Fact>]
-    let ``CanRetrieve`` () =
-        let v = protocol.Version
-        Assert.Equal(version, v)
+let main =
+    testList "ParamTests" [
+        correctlyImplementsICvBase
+        setSingleProperty
+        setManyProperty
+        ExtendedContainer
+    ]

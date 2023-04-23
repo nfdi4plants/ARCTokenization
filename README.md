@@ -5,6 +5,12 @@
 ### prerequisites
 
 - .NET 6 SDK
+- nodejs (tested with ~v16)
+
+### setup
+
+- dotnet tool restore
+- npm install
 
 ### build
 
@@ -29,7 +35,7 @@ run `build.cmd`
 
 #### Windows
 
-run `build.cmd runTests`
+- run `build.cmd runTests`
 
 #### or run the build project directly:
 
