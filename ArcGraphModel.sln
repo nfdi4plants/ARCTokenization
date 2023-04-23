@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArcGraphModel.JsNativeTests
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Build", "build\Build.fsproj", "{CAC69396-1A09-4D95-B552-78712A4DA166}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ArcGraphModel.IO", "ArcGraphModel.IO\ArcGraphModel.IO.fsproj", "{BEFEB611-C6FD-4EAA-8ACB-FB5B90A3DC5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{CAC69396-1A09-4D95-B552-78712A4DA166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAC69396-1A09-4D95-B552-78712A4DA166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAC69396-1A09-4D95-B552-78712A4DA166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEFEB611-C6FD-4EAA-8ACB-FB5B90A3DC5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEFEB611-C6FD-4EAA-8ACB-FB5B90A3DC5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEFEB611-C6FD-4EAA-8ACB-FB5B90A3DC5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEFEB611-C6FD-4EAA-8ACB-FB5B90A3DC5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{32B01B13-37E2-4C86-9612-4BD8F33313D3} = {67DA0DCC-75F4-4F30-91C3-309A48B13D49}
 		{81CE2F06-74BE-45F9-B2EB-2BFADD5B9C95} = {2EB71559-9BE4-4E02-9763-9092876D1E4A}
 		{5C9428BF-8CBE-41C1-AB54-64493155A6B6} = {2EB71559-9BE4-4E02-9763-9092876D1E4A}
+		{BEFEB611-C6FD-4EAA-8ACB-FB5B90A3DC5C} = {67DA0DCC-75F4-4F30-91C3-309A48B13D49}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933E3470-7D09-4F22-A056-2407458B9600}
