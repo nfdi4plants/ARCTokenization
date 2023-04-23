@@ -9,6 +9,8 @@
     <Compile Include="Address.fs" />
     <Compile Include="ISA\KeyParser.fs" />
     <Compile Include="ISA\Tokenization.fs" />
+    <Compile Include="ISA\TokenAggregation.fs" />
+    <Compile Include="ISA\Worksheet.fs" />
   </ItemGroup>
 
   <ItemGroup>
