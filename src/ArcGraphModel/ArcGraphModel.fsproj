@@ -16,6 +16,7 @@
     <Compile Include="CvTokens\UserParam.fs" />
     <Compile Include="CvTokens\CvObject.fs" />
     <Compile Include="CvTokens\CvContainer.fs" />
+    <Compile Include="Terms.fs" />
     <Compile Include="FGLAux.fs" />
     <Compile Include="ArcType.fs" />
     <Compile Include="TableTransform.fs" />
@@ -42,8 +43,6 @@
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<Content Include="*.fsproj; **\*.fs; **\*.fsi" PackagePath="fable\" />
-	</ItemGroup>
+	<ItemGroup />
 
 </Project>
