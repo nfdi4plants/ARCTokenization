@@ -4,35 +4,51 @@ open System
 open System.Collections.Generic
 open FSharpAux
 
+
+
 /// Represents a structured value, annotated with a controlled vocabulary term
 ///
-/// Qualifiers can be used to further describe the CvParam
-type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue, qualifiers : IDictionary<string,CvParam>) =
+/// Attributes can be used to further describe the CvParam
+type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue, attributes : IDictionary<string,IParam>) =
 
-    inherit Dictionary<string,CvParam>(qualifiers)        
+    inherit CvAttributeCollection(attributes)
 
-    interface ICvBase with 
+    interface IParam with 
         member this.ID     = cvAccession
         member this.Name   = cvName
         member this.RefUri = cvRefUri
-    interface IParamBase with 
         member this.Value  = paramValue
 
-    new (id,name,ref,pv,qualifiers : seq<CvParam>) = 
-        let dict = 
-            qualifiers
-            |> Seq.map (fun cvp -> (cvp :> ICvBase).Name, cvp)
-            |> Dictionary.ofSeq
+    new (id,name,ref,pv,attributes : seq<IParam>) =  
+        let dict = CvAttributeCollection(attributes)
         CvParam (id,name,ref,pv,dict)
     new (id,name,ref,pv) = 
         CvParam (id,name,ref,pv,Seq.empty)
 
-    new ((id,name,ref) : CvTerm,pv,qualifiers : seq<CvParam>) = 
-        CvParam (id,name,ref,pv,qualifiers)
+    new ((id,name,ref) : CvTerm,pv,attributes : seq<IParam>) = 
+        CvParam (id,name,ref,pv,attributes)
     new (cvTerm,pv : ParamValue) = 
         CvParam (cvTerm,pv,Seq.empty)
 
-    /// Creates a CvParam from a category and a simple value.
+    member this.Equals (term : CvTerm) = 
+        CvBase.equalsTerm term this
+
+    member this.Equals (cv : ICvBase) = 
+        CvBase.equals cv this
+
+    /// Returns Some Param, if the given cv item can be downcast, else returns None
+    static member tryCvParam (cv : ICvBase) =
+        match cv with
+        | :? CvParam as param -> Some param
+        | _ -> None
+
+    /// Returns Some Param, if the given value item can be downcast, else returns None
+    static member tryCvParam (cv : IParamBase) =
+        match cv with
+        | :? CvParam as param -> Some param
+        | _ -> None
+
+    /// Create a CvParam from a category and a simple value
     static member fromValue (category : CvTerm) (v : 'T) =
         CvParam(category, ParamValue.Value (v :> IConvertible))
 
@@ -44,38 +60,38 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
     static member fromValueWithUnit (category : CvTerm) (v : 'T) (unit : CvUnit) =
         CvParam(category, ParamValue.WithCvUnitAccession (v :> IConvertible,unit))
 
-    /// Returns the typed value of the CvParam.
-    static member getValue (cvParam : CvParam) =
-        (cvParam :> IParamBase).Value
+    static member mapValue (f : ParamValue -> ParamValue) (param : CvParam) = 
+        CvParam(
+            param |> CvBase.getTerm,
+            param |> ParamBase.getParamValue |> f,
+            param |> CvParam.getQualifiers
+        )
 
-    /// Returns the value of the CvParam as a string.
-    static member getValueAsString (cvParam : CvParam) =
-        (cvParam :> IParamBase).Value
-        |> ParamValue.getValueAsString
+    static member tryMapValue (f : ParamValue -> ParamValue option) (param : CvParam) = 
+        match param |> ParamBase.getParamValue |> f with
+        | Some value -> 
+            CvParam(
+                param |> CvBase.getTerm,
+                value,
+                param |> CvParam.getQualifiers
+            )
+            |> Some
+        | None -> None
 
-    /// Returns the value of the CvParam as an int if possible, else fails.
-    static member getValueAsInt (cvParam : CvParam) =
-        (cvParam :> IParamBase).Value
-        |> ParamValue.getValueAsInt
+    static member tryAddName (name : string) (param : CvParam) = 
+        CvParam.tryMapValue (ParamValue.tryAddName name) param
 
-    /// Returns the value of the CvParam as a CvTerm.
-    static member getValueAsTerm (cvParam : CvParam) =
-        (cvParam :> IParamBase).Value
-        |> ParamValue.getValueAsTerm
+    static member tryAddAnnotationID (id : string) (param : CvParam) = 
+        CvParam.tryMapValue (ParamValue.tryAddAnnotationID id) param
 
-    /// Returns the qualifier with the given name if present in the CvParam. Else returns None.
-    static member tryGetQualifier qualifierName (cvParam : CvParam) =
-        Dictionary.tryFind qualifierName cvParam
+    static member tryAddReference (ref : string) (param : CvParam) = 
+        CvParam.tryMapValue (ParamValue.tryAddReference ref) param
 
-    /// Returns the ParamValue of the qualifier with the given name if present in the CvParam. Else returns None.
-    static member tryGetQualifierValue qualifierName (cvParam : CvParam) =
-        CvParam.tryGetQualifier qualifierName cvParam
-        |> Option.map CvParam.getValue
+    static member tryAddUnit (unit : CvUnit) (param : CvParam) = 
+        CvParam.tryMapValue (ParamValue.tryAddUnit unit) param
 
-    /// Returns the ParamValue of the qualifier with the given name if present in the CvParam as string. Else returns None.
-    static member tryGetQualifierValueAsString qualifierName (cvParam : CvParam) =
-        CvParam.tryGetQualifierValue qualifierName cvParam
-        |> Option.map ParamValue.getValueAsString
+    static member getQualifiers (param : CvParam) =
+        param.Values |> Seq.cast
 
     override this.ToString() = 
-        $"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}"
+        $"CvParam: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}\n\tAttributes: {this.Keys |> Seq.toList}"
