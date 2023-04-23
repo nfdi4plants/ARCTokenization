@@ -6,14 +6,27 @@ open System
 type IParamBase =
     abstract member Value : ParamValue
 
-
 module ParamBase = 
 
-    let getValue (param : #IParamBase) =
-        match param.Value with
-        | Value                    v    -> v
-        | CvValue               (_,v,_) -> v
-        | WithCvUnitAccession     (v,_) -> v
+    /// Returns the value of the Param as a ParamValue
+    let getParamValue (param:IParamBase) =
+        param.Value
+
+    /// Returns the value of the Param as IConvertible
+    let getValue (param:IParamBase) =
+        ParamValue.getValue param.Value
+
+    /// Returns the value of the Param as string
+    let getValueAsString (param:IParamBase) =
+        ParamValue.getValueAsString param.Value
+        
+    /// Returns the value of the Param as int if possible, else fails
+    let getValueAsInt (param:IParamBase) =
+        ParamValue.getValueAsInt param.Value
+
+    /// Returns the value of the Param as a term
+    let getValueAsTerm (param:IParamBase) =
+        ParamValue.getValueAsTerm param.Value
 
     let tryGetValueAccession (param : #IParamBase) =
         match param.Value with

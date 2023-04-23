@@ -11,7 +11,7 @@
     <Compile Include="CvTokens\IParamBase.fs" />
     <Compile Include="CvTokens\ICvBase.fs" />
     <Compile Include="CvTokens\IParam.fs" />
-    <Compile Include="CvTokens\CvDescriptorCollection.fs" />
+    <Compile Include="CvTokens\CvAttributeCollection.fs" />
     <Compile Include="CvTokens\CvParam.fs" />
     <Compile Include="CvTokens\UserParam.fs" />
     <Compile Include="CvTokens\CvObject.fs" />

@@ -8,120 +8,286 @@ type internal CvContainer (
     cvAccession : string, 
     cvName : string, 
     cvRefUri : string, 
-    attributes : IDictionary<string,IParam>, 
-    parameters : IDictionary<string,IParam seq>, 
-    cvContainers : Dictionary<string,CvContainer seq>
+    attributes : IDictionary<string,IParam>,
+    properties : IDictionary<string,seq<ICvBase>>
     ) =
 
     inherit CvAttributeCollection(attributes)
-
-    let _cvContainers = cvContainers
-    let _parameters = parameters
 
     interface ICvBase with 
         member this.ID     = cvAccession
         member this.Name   = cvName
         member this.RefUri = cvRefUri    
 
-
+    new (cvAccession : string, cvName : string, cvRefUri : string, attributes : IDictionary<string,IParam>) =
+        CvContainer(cvAccession, cvName, cvRefUri, attributes, Dictionary<string, ICvBase seq>())
+    new (cvAccession : string, cvName : string, cvRefUri : string, attributes : seq<IParam>) =
+        let dict = CvAttributeCollection(attributes)
+        CvContainer(cvAccession, cvName, cvRefUri, dict)
     new (cvAccession : string, cvName : string, cvRefUri : string) =
-        CvContainer(cvAccession, cvName, cvRefUri, Dictionary<string, IParam>(), Dictionary<string, IParam seq>(), Dictionary<string, CvContainer seq>())
+        CvContainer(cvAccession, cvName, cvRefUri, Seq.empty)
+    
 
     new ((id,name,ref) : CvTerm, attributes : IDictionary<string,IParam>) = 
-        CvContainer(id, name, ref, attributes, Dictionary<string, IParam seq>(), Dictionary<string, CvContainer seq>())
-
-    new (term : CvTerm,items : seq<IParam>) = 
-        let parameters : IDictionary<string,IParam seq> = 
-            items
-            |> Seq.groupBy (fun v -> v.Name)
-            |> Dictionary.ofSeq
-        CvContainer(term, Dictionary<string,IParam>(), parameters, Dictionary<string,CvContainer seq>())
-
+        CvContainer(id, name, ref, attributes, Dictionary<string, ICvBase seq>())
+    new (term : CvTerm,attributes : seq<IParam>) = 
+        let dict = CvAttributeCollection(attributes)
+        CvContainer(term, dict)
     new (term : CvTerm) = CvContainer (term, Seq.empty)  
 
-
-    member internal this.CvContainers
-        with get() = _cvContainers
+    /// Returns Some CvContainer, if the given cv item can be downcast, else returns None
+    static member tryCvContainer (cv : ICvBase) =
+        match cv with
+        | :? CvContainer as container -> Some container
+        | _ -> None
 
     member internal this.Properties
-        with get() = _parameters
-
-    member this.lel v =
-        this.CvContainers["lel"] <- v
+        with get() = properties
 
 
     /// Retrieves children with the given name of the CvContainer as sequence.
     ///
     /// Fails if the propertyName cannot be found.
-    static member getManyAs<'T when 'T :> ICvBase> propertyName (cvContainer : CvContainer) =
-        Dictionary.item propertyName cvContainer
-        |> Seq.map (fun cv -> cv :?> 'T)
+    member this.GetMany propertyName =
+        Dictionary.item propertyName this.Properties
 
-    /// Retrieves children with the given name of the CvContainer as sequence if they exist. Else returns None.
-    static member tryGetManyAs<'T when 'T :> ICvBase> propertyName (cvContainer : CvContainer) =
-        Dictionary.tryFind propertyName cvContainer
-        |> Option.map (Seq.map (fun cv -> cv :?> 'T))
+    /// Retrieves children with the given name and which can be cast to the given type of the CvContainer as sequence.
+    ///
+    /// Fails if the propertyName cannot be found.
+    member this.GetManyAs<'T when 'T :> ICvBase> propertyName =
+        Dictionary.item propertyName this.Properties
+        |> Seq.choose CvBase.tryAs<'T>
 
-    /// Retrieves the values of children with the given name of the CvContainer as sequence if they exist. Else returns None.
-    static member tryGetManyAsValues<'T when 'T :> IParamBase and 'T :> ICvBase> propertyName (cvContainer : CvContainer) =
-        CvContainer.tryGetManyAs<'T> propertyName cvContainer
-        |> Option.map (Seq.map (fun cvb -> cvb :> IParamBase |> ParamBase.getValue))
+    /// Retrieves CvContainer children with the given name of the CvContainer as sequence.
+    ///
+    /// Fails if the propertyName cannot be found.
+    member this.GetManyContainers propertyName =
+        Dictionary.item propertyName this.Properties
+        |> Seq.choose CvContainer.tryCvContainer
+
+    /// Retrieves Param children with the given name of the CvContainer as sequence.
+    ///
+    /// Fails if the propertyName cannot be found.
+    member this.GetManyParams propertyName =
+        Dictionary.item propertyName this.Properties
+        |> Seq.choose Param.tryParam
 
     /// Retrieves child with the given name of the CvContainer.
     ///
     /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
-    static member getSingleAs<'T when 'T :> ICvBase> propertyName (cvContainer : CvContainer) =
-        Dictionary.item propertyName cvContainer
-        |> Seq.exactlyOne 
-        |> fun cv -> cv :?> 'T
+    member this.GetSingle propertyName =
+        Dictionary.item propertyName this.Properties
+        |> Seq.exactlyOne
 
-    /// Retrieves child with the given name of the CvContainer if it exists. Else returns None.
-    static member tryGetSingleAs<'T when 'T :> ICvBase> propertyName (cvContainer : CvContainer) =
-        try     // <- to catch the exception if `Seq.exactlyOne` throws
-            Dictionary.tryFind propertyName cvContainer
-            |> Option.map (
-                Seq.exactlyOne 
-                >> (fun cv -> cv :?> 'T)
-            )
-        with _ -> None
-
-    /// Retrieves the value of the child with the given name of the CvContainer if it exists. Else returns None.
-    static member tryGetSingleAsValue<'T when 'T :> ICvBase and 'T :> IParamBase> propertyName (cvContainer : CvContainer) =
-        CvContainer.tryGetSingleAs<'T> propertyName cvContainer
-        |> Option.map (fun cvb -> cvb :> IParamBase |> ParamBase.getValue)
-
-    /// Sets children as a property of the CvContainer.
+    /// Retrieves child with the given name and which can be cast to the given type of the CvContainer.
     ///
-    /// These children are supposed to all have the same name, as they will be grouped into one property of the container, accessible
-    /// by this shared name.
-    /// 
-    /// Fails if values has elements with different names.
-    static member setMany (values : seq<#ICvBase>) (cvContainer : CvContainer) =
-        let propertyName = 
-            values
-            |> Seq.countBy (fun v -> v.Name)
-            |> Seq.exactlyOne
-            |> fst
-        Dictionary.addOrUpdateInPlace propertyName values cvContainer
-        |> ignore
+    /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
+    member this.GetSingleAs<'T when 'T :> ICvBase> propertyName =
+        Dictionary.item propertyName this.Properties
+        |> Seq.choose CvBase.tryAs<'T>
+        |> Seq.exactlyOne
 
-    /// Sets a single child as a property of the CvContainer, accessible by its name.
-    static member setSingle (value : #ICvBase) (cvContainer : CvContainer) =
-        Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer
-        |> ignore
+    /// Retrieves CvContainer child with the given name of the CvContainer.
+    ///
+    /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
+    member this.GetSingleContainer propertyName =
+        Dictionary.item propertyName this.Properties
+        |> Seq.choose CvContainer.tryCvContainer
+        |> Seq.exactlyOne
 
-    ///// Returns the values of the given key in the CvContainer if they exist. Else returns None.
-    //static member tryGetValues key (cvContainer : CvContainer) =
-    //    try 
-    //        Dictionary.tryFind key cvContainer
-    //        |> Option.map (Seq.map (fun cvb -> cvb :?> CvParam |> ParamBase.getValue))
-    //    with _ -> None
+    /// Retrieves Param child with the given name of the CvContainer.
+    ///
+    /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
+    member this.GetSingleParam propertyName =
+        Dictionary.item propertyName this.Properties
+        |> Seq.choose Param.tryParam
+        |> Seq.exactlyOne
+        
 
-    ///// Returns the head of the ICvBase sequence under the given key in the CvContainer if it exists. Else returns None.
-    //static member tryGetHead key (cvContainer : CvContainer) =
-    //    Dictionary.tryFind key cvContainer
-    //    |> Option.map Seq.head
+    /// Retrieves children with the given name of the CvContainer as sequence.
+    ///
+    /// Returns None if the propertyName cannot be found.
+    member this.TryGetMany propertyName =
+        Dictionary.tryFind propertyName this.Properties
+
+    /// Retrieves children with the given name and which can be cast to the given type of the CvContainer as sequence.
+    ///
+    /// Returns None if the propertyName cannot be found.
+    member this.TryGetManyAs<'T when 'T :> ICvBase> propertyName =
+        Dictionary.tryFind propertyName this.Properties
+        |> Option.bind (fun many ->
+            Seq.choose CvBase.tryAs<'T> many
+            |> fun items -> if Seq.isEmpty items then None else Some items
+        )
+
+    /// Retrieves CvContainer children with the given name of the CvContainer as sequence.
+    ///
+    /// Returns None if the propertyName cannot be found.
+    member this.TryGetManyContainers propertyName =
+        Dictionary.tryFind propertyName this.Properties
+        |> Option.bind (fun many ->
+            Seq.choose CvContainer.tryCvContainer many
+            |> fun items -> if Seq.isEmpty items then None else Some items
+        )
+
+    /// Retrieves Param children with the given name of the CvContainer as sequence.
+    ///
+    /// Returns None if the propertyName cannot be found.
+    member this.TryGetManyParams propertyName =
+        Dictionary.tryFind propertyName this.Properties
+        |> Option.bind (fun many ->
+            many
+            |> Seq.choose Param.tryParam
+            |> fun items -> if Seq.isEmpty items then None else Some items
+        )
+
+    /// Retrieves child with the given name of the CvContainer.
+    ///
+    /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
+    member this.TryGetSingle propertyName =
+        Dictionary.tryFind propertyName this.Properties
+        |> Option.bind Seq.tryExactlyOne
+
+    /// Retrieves child with the given name and which can be cast to the given type of the CvContainer.
+    ///
+    /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
+    member this.TryGetSingleAs<'T when 'T :> ICvBase> propertyName =
+        Dictionary.tryFind propertyName this.Properties
+        |> Option.bind (Seq.choose CvBase.tryAs<'T> >> Seq.tryExactlyOne)
+
+    /// Retrieves CvContainer child with the given name of the CvContainer.
+    ///
+    /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
+    member this.TryGetSingleContainer propertyName =
+        Dictionary.tryFind propertyName this.Properties
+        |> Option.bind (Seq.choose CvContainer.tryCvContainer >> Seq.tryExactlyOne)
+
+    /// Retrieves Param child with the given name of the CvContainer.
+    ///
+    /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
+    member this.TryGetSingleParam propertyName =
+        Dictionary.tryFind propertyName this.Properties
+        |> Option.bind (Seq.choose Param.tryParam >> Seq.tryExactlyOne)
+
+    
+
+    /// Retrieves children with the given name of the CvContainer as sequence.
+    ///
+    /// Fails if the propertyName cannot be found.
+    static member getMany propertyName (container : CvContainer) =
+        container.GetMany propertyName
+
+    /// Retrieves children with the given name and which can be cast to the given type of the CvContainer as sequence.
+    ///
+    /// Fails if the propertyName cannot be found.
+    static member getManyAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
+        container.GetManyAs<'T> propertyName
+
+    /// Retrieves CvContainer children with the given name of the CvContainer as sequence.
+    ///
+    /// Fails if the propertyName cannot be found.
+    static member getManyContainers propertyName (container : CvContainer) =
+        container.GetManyContainers propertyName
+
+    /// Retrieves Param children with the given name of the CvContainer as sequence.
+    ///
+    /// Fails if the propertyName cannot be found.
+    static member getManyParams propertyName (container : CvContainer) =
+        container.GetManyParams propertyName
+
+    /// Retrieves child with the given name of the CvContainer.
+    ///
+    /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
+    static member getSingle propertyName (container : CvContainer) =
+        container.GetSingle propertyName
+
+    /// Retrieves child with the given name and which can be cast to the given type of the CvContainer.
+    ///
+    /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
+    static member getSingleAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
+        container.GetSingleAs<'T> propertyName
+
+    /// Retrieves CvContainer child with the given name of the CvContainer.
+    ///
+    /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
+    static member getSingleContainer propertyName (container : CvContainer) =
+        container.GetSingleContainer propertyName
+
+    /// Retrieves Param child with the given name of the CvContainer.
+    ///
+    /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
+    static member getSingleParam propertyName (container : CvContainer) =
+        container.GetSingleParam propertyName
+        
+
+    /// Retrieves children with the given name of the CvContainer as sequence.
+    ///
+    /// Returns None if the propertyName cannot be found.
+    static member tryGetMany propertyName (container : CvContainer) =
+        container.TryGetMany propertyName
+
+    /// Retrieves children with the given name and which can be cast to the given type of the CvContainer as sequence.
+    ///
+    /// Returns None if the propertyName cannot be found.
+    static member tryGetManyAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
+        container.TryGetManyAs<'T> propertyName
+
+    /// Retrieves CvContainer children with the given name of the CvContainer as sequence.
+    ///
+    /// Returns None if the propertyName cannot be found.
+    static member tryGetManyContainers propertyName (container : CvContainer) =
+        container.TryGetManyContainers propertyName
+
+    /// Retrieves Param children with the given name of the CvContainer as sequence.
+    ///
+    /// Returns None if the propertyName cannot be found.
+    static member tryGetManyParams propertyName (container : CvContainer) =
+        container.TryGetManyParams propertyName
+
+    /// Retrieves child with the given name of the CvContainer.
+    ///
+    /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
+    static member tryGetSingle propertyName (container : CvContainer) =
+        container.TryGetSingle propertyName
+
+    /// Retrieves child with the given name and which can be cast to the given type of the CvContainer.
+    ///
+    /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
+    static member tryGetSingleAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
+        container.TryGetSingleAs<'T> propertyName
+
+    /// Retrieves CvContainer child with the given name of the CvContainer.
+    ///
+    /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
+    static member tryGetSingleContainer propertyName (container : CvContainer) =
+        container.TryGetSingleContainer propertyName
+
+    /// Retrieves Param child with the given name of the CvContainer.
+    ///
+    /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
+    static member tryGetSingleParam propertyName (container : CvContainer) =
+        container.TryGetSingleParam propertyName
+
+
+
+    ///// Sets children as a property of the CvContainer.
+    /////
+    ///// These children are supposed to all have the same name, as they will be grouped into one property of the container, accessible
+    ///// by this shared name.
+    ///// 
+    ///// Fails if values has elements with different names.
+    //static member setMany (values : seq<#ICvBase>) (cvContainer : CvContainer) =
+    //    let propertyName = 
+    //        values
+    //        |> Seq.countBy (fun v -> v.Name)
+    //        |> Seq.exactlyOne
+    //        |> fst
+    //    Dictionary.addOrUpdateInPlace propertyName values cvContainer
+    //    |> ignore
+
+    ///// Sets a single child as a property of the CvContainer, accessible by its name.
+    //static member setSingle (value : #ICvBase) (cvContainer : CvContainer) =
+    //    Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer
 
     override this.ToString() = 
-        //$"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tQualifiers: {(this.Keys, this.Values) ||> Seq.zip |> Seq.truncate 4 |> Seq.fold (fun acc x -> acc + x.ToString() + System.Environment.NewLine) System.String.Empty}"
-        $"Name: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}"
+        $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Keys |> Seq.toList}"
