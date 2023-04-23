@@ -32,22 +32,45 @@ type Param =
         | :? IParam as param -> Some param
         | _ -> None
 
-    /// Returns the typed value of the CvParam.
-    static member getValue (cvParam : IParam) =
-        (cvParam :> IParamBase).Value
+    /// Returns the typed value of the param.
+    static member getParamValue (param : IParam) =
+        param |> ParamBase.getParamValue
 
-    /// Returns the value of the CvParam as a string.
+    /// Returns the value of the Param as a IConvertiböe
+    static member getValue (param:IParamBase) =
+        param |> ParamBase.getValue
+
+
+    /// Returns the value of the param as a string.
     static member getValueAsString (cvParam : IParam) =
         (cvParam :> IParamBase).Value
         |> ParamValue.getValueAsString
 
-    /// Returns the value of the CvParam as an int if possible, else fails.
+    /// Returns the value of the param as an int if possible, else fails.
     static member getValueAsInt (cvParam : IParam) =
         (cvParam :> IParamBase).Value
         |> ParamValue.getValueAsInt
 
-    /// Returns the value of the CvParam as a CvTerm.
+    /// Returns the value of the param as a CvTerm.
     static member getValueAsTerm (cvParam : IParam) =
         (cvParam :> IParamBase).Value
         |> ParamValue.getValueAsTerm
+
+    static member mapValue (f : ParamValue -> ParamValue) (param : IParam) = 
+        ParamBase.mapValue f param :?> IParam
+
+    static member tryMapValue (f : ParamValue -> ParamValue option) (param : IParam) = 
+        ParamBase.tryMapValue f param |> Option.map (fun v -> v :?> IParam)
+
+    static member tryAddName (name : string) (param : IParam) = 
+        ParamBase.tryAddName name param |> Option.map (fun v -> v :?> IParam)
+
+    static member tryAddAnnotationID (id : string) (param : IParam) = 
+        ParamBase.tryAddAnnotationID id param |> Option.map (fun v -> v :?> IParam)
+
+    static member tryAddReference (ref : string) (param : IParam) = 
+        ParamBase.tryAddReference ref param |> Option.map (fun v -> v :?> IParam)
+
+    static member tryAddUnit (unit : CvUnit) (param : IParam) = 
+        ParamBase.tryAddUnit unit param |> Option.map (fun v -> v :?> IParam)
 // TO DO: create-Funktionen in UserParam und CvParam sollen IParam zurückgeben statt ihren eigenen Typ

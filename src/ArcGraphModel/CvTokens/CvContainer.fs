@@ -4,7 +4,7 @@ open System.Collections.Generic
 open FSharpAux
 
 /// Represents a collection of structured properties, annotated with a controlled vocabulary term.
-type internal CvContainer (
+type CvContainer internal (
     cvAccession : string, 
     cvName : string, 
     cvRefUri : string, 
@@ -18,6 +18,8 @@ type internal CvContainer (
         member this.ID     = cvAccession
         member this.Name   = cvName
         member this.RefUri = cvRefUri    
+        member this.HasAttributes 
+            with get() = this.Attributes |> Seq.isEmpty |> not
 
     new (cvAccession : string, cvName : string, cvRefUri : string, attributes : IDictionary<string,IParam>) =
         CvContainer(cvAccession, cvName, cvRefUri, attributes, Dictionary<string, ICvBase seq>())
@@ -41,7 +43,7 @@ type internal CvContainer (
         | :? CvContainer as container -> Some container
         | _ -> None
 
-    member internal this.Properties
+    member this.Properties
         with get() = properties
 
 
@@ -269,25 +271,42 @@ type internal CvContainer (
         container.TryGetSingleParam propertyName
 
 
+    member this.ContainsProperty propertyName =
+        this.Properties.ContainsKey propertyName
 
-    ///// Sets children as a property of the CvContainer.
-    /////
-    ///// These children are supposed to all have the same name, as they will be grouped into one property of the container, accessible
-    ///// by this shared name.
-    ///// 
-    ///// Fails if values has elements with different names.
-    //static member setMany (values : seq<#ICvBase>) (cvContainer : CvContainer) =
-    //    let propertyName = 
-    //        values
-    //        |> Seq.countBy (fun v -> v.Name)
-    //        |> Seq.exactlyOne
-    //        |> fst
-    //    Dictionary.addOrUpdateInPlace propertyName values cvContainer
-    //    |> ignore
+    static member containsProperty propertyName (container : CvContainer) =
+        container.ContainsProperty propertyName
 
-    ///// Sets a single child as a property of the CvContainer, accessible by its name.
-    //static member setSingle (value : #ICvBase) (cvContainer : CvContainer) =
-    //    Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer
+    member this.CountProperties() =
+        this.Properties.Count
+
+    static member countProperties (container : CvContainer) =
+        container.CountProperties()
+
+    member this.CountChildren() =
+        this.Properties.Values |> Seq.concat |> Seq.length
+
+    static member countChildren (container : CvContainer) =
+        container.CountChildren()
+
+    /// Sets children as a property of the CvContainer.
+    ///
+    /// These children are supposed to all have the same name, as they will be grouped into one property of the container, accessible
+    /// by this shared name.
+    /// 
+    /// Fails if values has elements with different names.
+    static member setMany (values : seq<ICvBase>) (cvContainer : CvContainer) =
+        let propertyName = 
+            values
+            |> Seq.countBy (fun v -> v.Name)
+            |> Seq.exactlyOne
+            |> fst
+        Dictionary.addOrUpdateInPlace propertyName values cvContainer.Properties
+        |> ignore
+
+    /// Sets a single child as a property of the CvContainer, accessible by its name.
+    static member setSingle (value : ICvBase) (cvContainer : CvContainer) =
+        Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer.Properties
 
     override this.ToString() = 
         $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Keys |> Seq.toList}"

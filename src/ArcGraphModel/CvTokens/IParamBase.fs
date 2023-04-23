@@ -5,6 +5,7 @@ open System
 /// Interface ensures the value as ParamValue<'T>  
 type IParamBase =
     abstract member Value : ParamValue
+    abstract member WithValue : ParamValue -> IParamBase
 
 module ParamBase = 
 
@@ -71,3 +72,23 @@ module ParamBase =
         | CvValue                _          -> None
         | WithCvUnitAccession   (_,(_,_,r)) -> Some r
 
+    let mapValue (f : ParamValue -> ParamValue) (param : IParamBase) = 
+        param.WithValue(f param.Value)
+
+    let tryMapValue (f : ParamValue -> ParamValue option) (param : IParamBase) = 
+        match f param.Value with
+        | Some value -> 
+            Some (param.WithValue(value))
+        | None -> None
+
+    let tryAddName (name : string) (param : IParamBase) = 
+        tryMapValue (ParamValue.tryAddName name) param
+
+    let tryAddAnnotationID (id : string) (param : IParamBase) = 
+        tryMapValue (ParamValue.tryAddAnnotationID id) param
+
+    let tryAddReference (ref : string) (param : IParamBase) = 
+        tryMapValue (ParamValue.tryAddReference ref) param
+
+    let tryAddUnit (unit : CvUnit) (param : IParamBase) = 
+        tryMapValue (ParamValue.tryAddUnit unit) param

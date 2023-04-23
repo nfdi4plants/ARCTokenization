@@ -20,10 +20,18 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
     member this.Attributes 
         with get() = this.Values |> Seq.toList
 
-    /// Add an IParam as an attribute, fails, if an attribute with the same key already exists
+    /// Add an IParam as an attribute. Fails, if an attribute with the same key already exists
     member this.AddAttribute (param : IParam) =
         Dictionary.addInPlace (param |> CvBase.getCvName) param this
         |> ignore
+
+    /// Add an IParam as an attribute. Does not fail, if an attribute with the same key already exists
+    member this.TryAddAttribute (param : IParam) =
+        let key = param |> CvBase.getCvName 
+        if this.ContainsAttribute key then false
+        else 
+            this.AddAttribute param
+            true
 
     /// Retrieves an IParam attribute by its name, if it exists, else returns None
     member this.TryGetAttribute (name : string) =
@@ -60,18 +68,28 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
         this.ContainsAttribute (CvBase.getTerm parent)
 
     /// Returns true, if an attribute with the same term as the given parent exists in the collection
-    static member isStructuralChildOf (parent : ICvBase) (child : #CvAttributeCollection) =
-        child.IsStructuralChildOf(parent)
+    static member isStructuralChildOf (parent : ICvBase) (child : IAttributeCollection) =
+        match box child with
+        | :? CvAttributeCollection as ac -> 
+            ac.ContainsAttribute (CvBase.getTerm parent)
+        | _ -> false
 
     /// Returns the attribute of the value, if it implements CvAttributeCollection and the attribute exists, else returns None
-    static member tryGetAttribute (name : string) (v : 'T) =
+    static member tryAddAttribute (param : IParam) (v : IAttributeCollection) =
+        match box v with
+        | :? CvAttributeCollection as ac -> 
+            ac.TryAddAttribute param
+        | _ -> false
+
+    /// Returns the attribute of the value, if it implements CvAttributeCollection and the attribute exists, else returns None
+    static member tryGetAttribute (name : string) (v : IAttributeCollection) =
         match box v with
         | :? CvAttributeCollection as ac -> 
             ac.TryGetAttribute name
         | _ -> None
 
     /// Returns true, if it implements a CvAttributeCollection and the attribute exists, else returns None
-    static member containsAttribute (name : string) (v : 'T) =
+    static member containsAttribute (name : string) (v : IAttributeCollection) =
         match box v with
         | :? CvAttributeCollection as ac -> 
             ac.ContainsAttribute name

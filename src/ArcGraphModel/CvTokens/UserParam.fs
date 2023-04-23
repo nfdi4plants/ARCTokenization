@@ -13,6 +13,9 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
         member this.Name   = name
         member this.RefUri = "UserTerm"
         member this.Value  = paramValue
+        member this.WithValue(v : ParamValue) = UserParam(name,v,attributes)
+        member this.HasAttributes 
+            with get() = this.Attributes |> Seq.isEmpty |> not
 
     new (name,pv,attributes : seq<IParam>) = 
         let dict = CvAttributeCollection(attributes)

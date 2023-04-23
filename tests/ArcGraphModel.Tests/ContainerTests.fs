@@ -22,10 +22,11 @@ type Protocol () =
     member this.Version 
         with get() = 
             CvContainer.getSingleAs<CvParam> Protocol.VersionProperty this
-            |> CvParam.getValueAsString
+            |> Param.getValueAsString
         and set(version : string) =
             CvParam.fromValue Terms.version version
-            |> fun cvp -> CvContainer.setSingle cvp this
+            |> fun cvp -> CvContainer.setSingle cvp this 
+            |> ignore
 
     static member VersionProperty = "Version"
 
@@ -61,38 +62,41 @@ let private correctlyImplementsICvBase = testList "correctlyImplementsICvBase" [
 ]
 
 let private setSingleProperty = testList "setSingleProperty" [
-
-    let container = CvContainer(testTerm)
-
+   
     /// Not sure if i like reusing these testcases over multiple files
     let param = Parameter.testCvParam1
     let name = (param :> ICvBase).Name
 
-    do CvContainer.setSingle param container
-
     testCase "HasValue" (fun _ ->
-        let result = Dictionary.containsKey name container
+        let container = CvContainer(testTerm)
+        do CvContainer.setSingle param container |> ignore
+        let result = CvContainer.containsProperty name container
         Expect.isTrue result ""
     )
     testCase "HasOneItem" (fun _ ->
-        let result = Dictionary.count container
-        Expect.equal 1 result ""
+        let container = CvContainer(testTerm)
+        do CvContainer.setSingle param container |> ignore
+        let result = CvContainer.countProperties container
+        Expect.equal result 1 ""
     )
     testCase "CanRetrieve" (fun _ ->
+        let container = CvContainer(testTerm)
+        do CvContainer.setSingle param container |> ignore
         let result = CvContainer.getSingleAs<CvParam> name container
-        Expect.equal param result ""
+        Expect.equal result param ""
     )
 ]
 
 let private setManyProperty = testList "setManyProperty" [
 
-    let container = CvContainer(testTerm)
+    
 
     let differentParams = seq [Parameter.testCvParam1 :> ICvBase;Parameter.testCvParam2]
-    let correctParams = seq [Parameter.testCvParam1;Parameter.testCvParam1]
+    let correctParams = seq [Parameter.testCvParam1 :> ICvBase;Parameter.testCvParam1]
     let name = (Parameter.testCvParam1 :> ICvBase).Name
 
     testCase "FailsForDifferentCvs" (fun _ ->
+        let container = CvContainer(testTerm)
         let hasFailed = 
             try 
                 CvContainer.setMany differentParams container
@@ -102,6 +106,7 @@ let private setManyProperty = testList "setManyProperty" [
         Expect.isTrue hasFailed ""
     )
     testCase "WorksForSameCvs" (fun _ ->
+        let container = CvContainer(testTerm)
         let hasFailed = 
             try 
                 CvContainer.setMany (correctParams |> Seq.cast<ICvBase>) container
@@ -111,19 +116,30 @@ let private setManyProperty = testList "setManyProperty" [
         Expect.isFalse hasFailed ""
     )
 
-    do CvContainer.setMany (correctParams |> Seq.cast<ICvBase>) container
 
     testCase "HasValue" (fun _ ->
-        let result = Dictionary.containsKey name container
+        let container = CvContainer(testTerm)
+        do CvContainer.setMany correctParams container
+        let result = CvContainer.containsProperty name container
         Expect.isTrue result ""
     )
-    testCase "HasOneItem" (fun _ ->
-        let result = Dictionary.count container
-        Expect.equal 1 result ""
+    testCase "HasOneProperty" (fun _ ->
+        let container = CvContainer(testTerm)
+        do CvContainer.setMany correctParams container
+        let result = CvContainer.countProperties container
+        Expect.equal result 1 ""
+    )
+    testCase "HasTwoChildren" (fun _ ->
+        let container = CvContainer(testTerm)
+        do CvContainer.setMany correctParams container
+        let result = CvContainer.countChildren container
+        Expect.equal result 2 ""
     )
     testCase "CanRetrieve" (fun _ ->
-        let result = CvContainer.getManyAs<CvParam> name container
-        Expect.equal correctParams result ""
+        let container = CvContainer(testTerm)
+        do CvContainer.setMany correctParams container
+        let result = CvContainer.getMany name container
+        Expect.equal result correctParams ""
     )
 ]
 
@@ -135,11 +151,11 @@ let private ExtendedContainer = testList "ExtendedContainer" [
     do protocol.Version <- version
 
     testCase "HasValue" (fun _ ->
-        let result = Dictionary.containsKey Protocol.VersionProperty protocol
+        let result = CvContainer.containsProperty Protocol.VersionProperty protocol
         Expect.isTrue result ""
     )
     testCase "HasOneItem" (fun _ ->
-        let result = Dictionary.count protocol
+        let result = CvContainer.countProperties protocol
         Expect.equal 1 result ""
     )
     testCase "CanRetrieve" (fun _ ->
