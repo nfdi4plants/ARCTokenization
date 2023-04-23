@@ -1,14 +1,18 @@
 ﻿namespace ArcGraphModel
 
+open System.Collections.Generic
+
+type IAttributeCollection = 
+
+    abstract member HasAttributes : bool // Dictionary<string,ICvBase seq>
 
 /// Interface ensures the propterties necessary for CvTerm 
-type ICvBase =
+and ICvBase =
     abstract member ID       : string
     abstract member Name     : string
     abstract member RefUri   : string
-    // here or as node/edge abstraction 
-    // abstract member DataType   : ModelDataType
-    // abstract member Adress     : Adress / Location / Position
+    
+    inherit IAttributeCollection
 
     //override this.ToString() = 
     //    $"Name: {this.Name}\nID: {this.ID}\nRefUri: {this.RefUri}"

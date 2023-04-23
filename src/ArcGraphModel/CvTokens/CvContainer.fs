@@ -4,7 +4,7 @@ open System.Collections.Generic
 open FSharpAux
 
 /// Represents a collection of structured properties, annotated with a controlled vocabulary term.
-type internal CvContainer (
+type CvContainer internal (
     cvAccession : string, 
     cvName : string, 
     cvRefUri : string, 
@@ -18,6 +18,8 @@ type internal CvContainer (
         member this.ID     = cvAccession
         member this.Name   = cvName
         member this.RefUri = cvRefUri    
+        member this.HasAttributes 
+            with get() = this.Attributes |> Seq.isEmpty |> not
 
     new (cvAccession : string, cvName : string, cvRefUri : string, attributes : IDictionary<string,IParam>) =
         CvContainer(cvAccession, cvName, cvRefUri, attributes, Dictionary<string, ICvBase seq>())

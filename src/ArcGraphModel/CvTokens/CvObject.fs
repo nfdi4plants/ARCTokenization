@@ -11,6 +11,8 @@ type CvObject<'T>(cvAccession : string, cvName : string, cvRefUri : string, obje
         member this.ID     = cvAccession
         member this.Name   = cvName
         member this.RefUri = cvRefUri
+        member this.HasAttributes 
+            with get() = this.Attributes |> Seq.isEmpty |> not
 
     new ((id,name,ref) : CvTerm,object : 'T, attributes) = CvObject (id,name,ref,object,attributes)
 

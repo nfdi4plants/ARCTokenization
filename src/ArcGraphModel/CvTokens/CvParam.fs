@@ -18,6 +18,9 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
         member this.Name   = cvName
         member this.RefUri = cvRefUri
         member this.Value  = paramValue
+        member this.WithValue(v : ParamValue) = CvParam(cvAccession,cvName,cvRefUri,v,attributes)
+        member this.HasAttributes 
+            with get() = this.Attributes |> Seq.isEmpty |> not
 
     new (id,name,ref,pv,attributes : seq<IParam>) =  
         let dict = CvAttributeCollection(attributes)
@@ -61,36 +64,24 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
         CvParam(category, ParamValue.WithCvUnitAccession (v :> IConvertible,unit))
 
     static member mapValue (f : ParamValue -> ParamValue) (param : CvParam) = 
-        CvParam(
-            param |> CvBase.getTerm,
-            param |> ParamBase.getParamValue |> f,
-            param |> CvParam.getQualifiers
-        )
+        Param.mapValue f param
 
     static member tryMapValue (f : ParamValue -> ParamValue option) (param : CvParam) = 
-        match param |> ParamBase.getParamValue |> f with
-        | Some value -> 
-            CvParam(
-                param |> CvBase.getTerm,
-                value,
-                param |> CvParam.getQualifiers
-            )
-            |> Some
-        | None -> None
+        Param.tryMapValue f param
 
     static member tryAddName (name : string) (param : CvParam) = 
-        CvParam.tryMapValue (ParamValue.tryAddName name) param
+        Param.tryAddName name param
 
     static member tryAddAnnotationID (id : string) (param : CvParam) = 
-        CvParam.tryMapValue (ParamValue.tryAddAnnotationID id) param
+        Param.tryAddAnnotationID id param
 
     static member tryAddReference (ref : string) (param : CvParam) = 
-        CvParam.tryMapValue (ParamValue.tryAddReference ref) param
+        Param.tryAddReference ref param
 
     static member tryAddUnit (unit : CvUnit) (param : CvParam) = 
-        CvParam.tryMapValue (ParamValue.tryAddUnit unit) param
+        Param.tryAddUnit unit param
 
-    static member getQualifiers (param : CvParam) =
+    static member getAttributes (param : CvParam) =
         param.Values |> Seq.cast
 
     override this.ToString() = 
