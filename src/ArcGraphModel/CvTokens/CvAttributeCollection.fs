@@ -27,7 +27,11 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
 
     /// Add an IParam as an attribute. Does not fail, if an attribute with the same key already exists
     member this.TryAddAttribute (param : IParam) =
-        this.TryAdd(param |> CvBase.getCvName,param)
+        let key = param |> CvBase.getCvName 
+        if this.ContainsAttribute key then false
+        else 
+            this.AddAttribute param
+            true
 
     /// Retrieves an IParam attribute by its name, if it exists, else returns None
     member this.TryGetAttribute (name : string) =
