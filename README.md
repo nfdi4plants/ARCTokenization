@@ -1,5 +1,59 @@
 # ArcGraphModel
 
+## Library structure
+### CvTokens
+```mermaid
+classDiagram
+    ICvBase <|-- IParam : Inherits
+    IParamBase <|-- IParam : Inherits
+    ICvBase <|.. CvObject : Implements
+    ICvBase <|.. CvContainer : Implements
+    IParam <|.. UserParam : Implements
+    IParam <|.. CvParam : Implements
+    <<Interface>> ICvBase
+    <<Interface>> IParamBase
+    <<Interface>> IParam
+    class ICvBase{
+        + CvTerm     
+    }
+    class IParamBase{
+        + CvValue
+        + WithValue()
+    }
+    class IParam{
+        + CvTerm 
+        + CvValue
+        + WithValue()
+    }
+    class CvObject{
+        + Attributes
+        + CvTerm
+        + Generic Value
+    }
+    class CvContainer{
+        + Attributes
+        + CvTerm
+        + Children        
+        + GetSingle()       
+        + SetSingle()
+        + GetMany()
+        + SetMany()
+
+    }
+    class CvParam{
+        + Attributes
+        + CvTerm
+        + CvValue
+        + WithValue()
+    }
+    class UserParam{
+        + Attributes
+        + Term
+        + CvValue
+        + WithValue()
+    }
+```
+
 ## develop
 
 ### prerequisites
