@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\ArcGraphModel\ArcGraphModel.fsproj" />
+    <ProjectReference Include="..\ArcGraphModel\ArcGraphModel.fsproj" />
   </ItemGroup>
 
   <ItemGroup>
