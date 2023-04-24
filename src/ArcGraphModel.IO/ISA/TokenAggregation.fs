@@ -44,10 +44,13 @@ module TokenAggregation =
                     CvAttributeCollection.containsAttribute (CvTerm.getName Address.column) t 
                     && CvAttributeCollection.containsAttribute (CvTerm.getName Address.row) t 
                     && (CvAttributeCollection.isStructuralChildOf container t || CvBase.equals container t))   
-
             packable
             |> List.groupBy (fun t -> CvAttributeCollection.tryGetAttribute (CvTerm.getName Address.column) t |> Option.map Param.getValue)
-            |> List.map (fun (_,parameters) -> CvContainer(container |> CvBase.getTerm, aggregateParams parameters |> Seq.cast) :> ICvBase)
+            |> List.map (fun (_,parameters) -> 
+                let container = CvContainer(container |> CvBase.getTerm, container.Attributes)
+                let parameters = aggregateParams parameters
+                CvContainer.addMany (parameters |> Seq.map (fun v -> v :> ICvBase)) container               
+                container :> ICvBase)
             |> fun l -> List.append l (unpackable |> List.map (fun v -> v :> ICvBase))
 
 

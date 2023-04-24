@@ -20,6 +20,9 @@ type ContainerBase =
     static member study : ContainerBase = 
         {Term = Terms.study; Key = "STUDY"}
 
+    static member studyAssays : ContainerBase = 
+        {Term = Terms.assay; Key = "STUDY ASSAYS"}
+
     static member studyContacts : ContainerBase = 
         {Term = Terms.person; Key = "STUDY CONTACTS"}
 
@@ -38,6 +41,8 @@ type TokenBase =
 
     static member name : TokenBase = {Term = Terms.name; Key = "Name"}
 
+    static member fileName : TokenBase = {Term = Terms.filepath; Key = "File Name"}
+
     static member description : TokenBase = {Term = Terms.descriptor; Key = "Description"}
 
     static member familyName : TokenBase = {Term = Terms.familyName; Key = "Last Name"}
@@ -54,33 +59,47 @@ type TokenBase =
 
     static member designType : TokenBase = {Term = Terms.design; Key = "Design Type"}
 
+    static member sample : TokenBase = {Term = Terms.sample; Key = "Sample Name"}
+
+    static member source : TokenBase = {Term = Terms.source; Key = "Source Name"}
+
+    static member data : TokenBase = {Term = Terms.data; Key = "Data File"}
+
     static member termSourceRef : TokenBase = {Term = Terms.termSourceRef; Key = "Term Source REF"}
 
     static member annotationID : TokenBase = {Term = Terms.annotationID; Key = "Term Accession Number"}
 
-type QualifierBase =   
+type AttributeBase =   
     {
         Term    : CvTerm
         Key     : string
     }
 
-    static member person : QualifierBase = {Term = Terms.person; Key = "Person"}
+    static member person : AttributeBase = {Term = Terms.person; Key = "Person"}
 
-    static member study : QualifierBase = {Term = Terms.study; Key = "Study"}
+    static member study : AttributeBase = {Term = Terms.study; Key = "Study"}
 
-    static member assay : QualifierBase = {Term = Terms.assay; Key = "Assay"}
+    static member assay : AttributeBase = {Term = Terms.assay; Key = "Assay"}
 
-    static member publication : QualifierBase = {Term = Terms.publication; Key = "Publication"}
+    static member publication : AttributeBase = {Term = Terms.publication; Key = "Publication"}
 
-    static member investigation : QualifierBase = {Term = Terms.investigation; Key = "Investigation"}
+    static member investigation : AttributeBase = {Term = Terms.investigation; Key = "Investigation"}
 
-    static member factor : QualifierBase = {Term = Terms.factor; Key = "Factor"}
+    static member factor : AttributeBase = {Term = Terms.factor; Key = "Factor"}
 
-    static member factorType : QualifierBase = {Term = Terms.factor; Key = "Factor Type"}
+    static member parameter : AttributeBase = {Term = Terms.parameter; Key = "Parameter"}
 
-    static member designType : QualifierBase = {Term = Terms.design; Key = "Design Type"}
+    static member characteristic : AttributeBase = {Term = Terms.characteristic; Key = "Characteristic"}
 
-    //static member person : QualifierBase = {Term = Terms.person; Key = "Person"}
+    static member factorType : AttributeBase = {Term = Terms.factor; Key = "Factor Type"}
+
+    static member designType : AttributeBase = {Term = Terms.design; Key = "Design Type"}
+    
+    static member rawData : AttributeBase = {Term = Terms.rawData; Key = "Raw"}
+
+    static member processedData : AttributeBase = {Term = Terms.processedData; Key = "Derived"}
+
+    //static member person : AttributeBase = {Term = Terms.person; Key = "Person"}
 
 module KeyParser =
 
@@ -90,12 +109,12 @@ module KeyParser =
         else 
             None
 
-    let (|Qualifier|_|) (token : QualifierBase) (key : string) =
+    let (|Attribute|_|) (token : AttributeBase) (key : string) =
     
         if key.Contains token.Key then 
             let newKey = key.Replace(token.Key,"").Trim()
-            let qualifier = CvParam(token.Term,ParamValue.Value "")
-            Some (qualifier,newKey)
+            let Attribute = CvParam(token.Term,ParamValue.Value "")
+            Some (Attribute,newKey)
         else None
 
     let (|Token|_|) (token : TokenBase) (key : string) : CvTerm Option =
@@ -124,23 +143,30 @@ module KeyParser =
         | Token TokenBase.email term
         | Token TokenBase.factorType term
         | Token TokenBase.designType term
+        | Token TokenBase.data term
+        | Token TokenBase.source term
+        | Token TokenBase.sample term
         | Token TokenBase.annotationID term
         | Token TokenBase.termSourceRef term
         | Token TokenBase.phone term -> 
             fun (pv) -> CvParam(term,pv,attributes)
 
-        | Qualifier QualifierBase.person (attribute,key) 
-        | Qualifier QualifierBase.investigation (attribute,key) 
-        | Qualifier QualifierBase.study (attribute,key) 
-        | Qualifier QualifierBase.assay (attribute,key) 
-        | Qualifier QualifierBase.publication (attribute,key) 
-        | Qualifier QualifierBase.factorType (attribute,key) 
-        | Qualifier QualifierBase.designType (attribute,key)
-        | Qualifier QualifierBase.factor (attribute,key) -> 
+        | Attribute AttributeBase.person (attribute,key) 
+        | Attribute AttributeBase.investigation (attribute,key) 
+        | Attribute AttributeBase.study (attribute,key) 
+        | Attribute AttributeBase.assay (attribute,key) 
+        | Attribute AttributeBase.publication (attribute,key) 
+        | Attribute AttributeBase.factorType (attribute,key) 
+        | Attribute AttributeBase.designType (attribute,key)
+        | Attribute AttributeBase.parameter (attribute,key) 
+        | Attribute AttributeBase.characteristic (attribute,key) 
+        | Attribute AttributeBase.rawData (attribute,key) 
+        | Attribute AttributeBase.processedData (attribute,key)
+        | Attribute AttributeBase.factor (attribute,key) -> 
             parseKey (attribute :: attributes) key
 
         | StructuredName term ->
             fun (pv) -> CvParam(term,pv,attributes)
 
         | UnMatchable name -> 
-            fun (pv) -> UserParam(name,pv,attributes) // UserParam(name,pv,qualifiers)
+            fun (pv) -> UserParam(name,pv,attributes) // UserParam(name,pv,Attributes)

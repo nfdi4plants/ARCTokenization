@@ -3,6 +3,13 @@
 open System.Collections.Generic
 open FSharpAux
 
+module internal Dictionary = 
+    
+    let addOrAppendInPlace (k : 'Key) (v : 'Value) (dict : IDictionary<'Key, 'Value seq>) =
+        if dict.ContainsKey k then
+            dict.[k] <- Seq.append dict.[k] (Seq.singleton v)
+        else dict.[k] <- Seq.singleton v
+
 /// Represents a collection of structured properties, annotated with a controlled vocabulary term.
 type CvContainer internal (
     cvAccession : string, 
@@ -28,10 +35,10 @@ type CvContainer internal (
         CvContainer(cvAccession, cvName, cvRefUri, dict)
     new (cvAccession : string, cvName : string, cvRefUri : string) =
         CvContainer(cvAccession, cvName, cvRefUri, Seq.empty)
-    
+
 
     new ((id,name,ref) : CvTerm, attributes : IDictionary<string,IParam>) = 
-        CvContainer(id, name, ref, attributes, Dictionary<string, ICvBase seq>())
+        CvContainer(id,name,ref, attributes, Dictionary<string, ICvBase seq>())
     new (term : CvTerm,attributes : seq<IParam>) = 
         let dict = CvAttributeCollection(attributes)
         CvContainer(term, dict)
@@ -289,6 +296,20 @@ type CvContainer internal (
     static member countChildren (container : CvContainer) =
         container.CountChildren()
 
+    /// Adds children as a property of the CvContainer.
+    ///
+    /// If values with the same key already exist in the container, appends the new child
+    static member addMany (values : seq<ICvBase>) (cvContainer : CvContainer) =
+        values
+        |> Seq.iter (fun v -> CvContainer.addSingle v cvContainer)
+
+    /// Adds a child as a property of the CvContainer.
+    ///
+    /// If a value with the same key already exist in the container, appends the new child
+    static member addSingle (value : ICvBase) (cvContainer : CvContainer) =
+        Dictionary.addOrAppendInPlace value.Name value cvContainer.Properties
+        
+
     /// Sets children as a property of the CvContainer.
     ///
     /// These children are supposed to all have the same name, as they will be grouped into one property of the container, accessible
@@ -309,4 +330,4 @@ type CvContainer internal (
         Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer.Properties
 
     override this.ToString() = 
-        $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Keys |> Seq.toList}"
+        $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Properties.Keys |> Seq.toList}"

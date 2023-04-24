@@ -28,6 +28,7 @@ module Tokenization =
         | [Container (ContainerBase.investigation) container]
         | [Container (ContainerBase.study) container]
         | [Container (ContainerBase.studyContacts) container]
+        | [Container (ContainerBase.studyAssays) container]
         | [Container (ContainerBase.studyDesignDescriptors) container]
         | [Container (ContainerBase.studyFactors) container] ->
             [container] |> Seq.cast<ICvBase>

@@ -35,6 +35,20 @@ module Terms =
 
     let factor = "ARCO:12345","Factor","ARCO"
 
+    let parameter = "ARCO:12346","Parameter","ARCO"
+
+    let characteristic = "ARCO:12347","Characteristic","ARCO"
+
+    let rawData = "http://purl.obolibrary.org/obo/NCIT_C142663","Raw Data","NCIT"
+
+    let processedData = "http://purl.obolibrary.org/obo/NCIT_C84340","Processed Data","NCIT"
+
+    let data = "http://purl.obolibrary.org/obo/NCIT_C25474","Data","NCIT"
+
+    let source = "ARCO:12349","Source Material","ARCO"
+
+    let sample = "ARCO:12350","Sample","ARCO"
+
     let annotationID = "ARCO:1","AnnotationID","ARCO"
 
     let termSourceRef = "ARCO:2","termSourceRef","ARCO"
