@@ -7,6 +7,7 @@ let project = "ArcGraphModel"
 let testProjects = 
     [
         "tests/ArcGraphModel.Tests"
+        "tests/ArcGraphModel.IO.Tests"
     ]
 
 let solutionFile  = $"{project}.sln"

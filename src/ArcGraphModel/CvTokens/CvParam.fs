@@ -51,6 +51,10 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
         | :? CvParam as param -> Some param
         | _ -> None
 
+    /// Returns true, if the given value item can be downcast to CvParam
+    static member isCvParam (cv : ICvBase) = 
+        CvBase.is<CvParam> cv
+
     /// Create a CvParam from a category and a simple value
     static member fromValue (category : CvTerm) (v : 'T) =
         CvParam(category, ParamValue.Value (v :> IConvertible))
@@ -83,6 +87,7 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
 
     static member getAttributes (param : CvParam) =
         param.Values |> Seq.cast
+
 
     override this.ToString() = 
         $"CvParam: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}\n\tAttributes: {this.Keys |> Seq.toList}"

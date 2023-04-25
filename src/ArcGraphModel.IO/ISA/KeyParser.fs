@@ -123,7 +123,7 @@ module KeyParser =
         else None
 
     let (|StructuredName|_|) (key : string) : CvTerm Option =
-        let namePattern = @"(?<= \[).*(?=[\]])"
+        let namePattern = @"(?<=\[).*(?=[\]])"
         Regex.tryParseValue namePattern key
         |> Option.map (fun n ->
             "",n,""

@@ -49,4 +49,10 @@ module CvBase =
         match cv with
         | :? 'T as cv -> Some cv
         | _ -> None
+
+    /// Returns true, if the given cv item can be downcast
+    let is<'T when 'T :> ICvBase> (cv : ICvBase) =
+        match cv with
+        | :? 'T as cv -> true
+        | _ -> false
         
