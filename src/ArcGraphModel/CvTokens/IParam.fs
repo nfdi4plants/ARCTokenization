@@ -20,6 +20,10 @@ type Param =
     static member equals (param1 : IParam) (param2 : IParam) =
         CvBase.equals param1 param2
 
+    /// Returns true, if the name of the given params match
+    static member equalsName (param1 : IParam) (param2 : IParam) =
+        CvBase.equalsName param1 param2
+
     /// Returns Some Param, if the given cv item can be downcast, else returns None
     static member tryParam (cv : ICvBase) =
         match cv with

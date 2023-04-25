@@ -9,6 +9,10 @@ module Terms =
 
     let name = "http://semanticscience.org/resource/SIO_000116","name","SIO"
 
+    let identifier = "http://semanticscience.org/resource/SIO_000115","identifier","SIO"
+
+    let title = "http://semanticscience.org/resource/SIO_000185","title","SIO"
+
     let descriptor = "http://semanticscience.org/resource/SIO_000133","descriptor","SIO"
 
     let familyName = "http://purl.obolibrary.org/obo/IAO_0020017","family name","IAO"

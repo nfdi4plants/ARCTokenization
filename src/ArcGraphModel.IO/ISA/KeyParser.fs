@@ -14,6 +14,9 @@ type ContainerBase =
     static member investigation : ContainerBase = 
         {Term = Terms.investigation; Key = "INVESTIGATION"}
 
+    static member investigationContacts : ContainerBase = 
+        {Term = Terms.person; Key = "INVESTIGATION CONTACTS"}
+
     static member investigationPublication : ContainerBase = 
         {Term = Terms.publication; Key = "INVESTIGATION PUBLICATIONS"}
 
@@ -38,6 +41,10 @@ type TokenBase =
         Term    : CvTerm
         Key     : string
     }
+
+    static member title : TokenBase = {Term = Terms.title; Key = "Title"}
+
+    static member identifier : TokenBase = {Term = Terms.identifier; Key = "Identifier"}
 
     static member name : TokenBase = {Term = Terms.name; Key = "Name"}
 
@@ -129,13 +136,22 @@ module KeyParser =
             "",n,""
         )
 
+    let (|AnnotationID|_|) (key : string) : CvTerm Option =
+        let namePattern = @"(?<=\[).*(?=[\]])"
+        Regex.tryParseValue namePattern key
+        |> Option.map (fun n ->
+            "",n,""
+        )
+
     let (|UnMatchable|) (key : string) : string =
         key
 
 
     let rec parseKey (attributes : IParam list) (key : string) : ParamValue -> IParam = 
         match key with
+        | Token TokenBase.identifier term
         | Token TokenBase.name term
+        | Token TokenBase.title term
         | Token TokenBase.description term
         | Token TokenBase.familyName term
         | Token TokenBase.givenName term

@@ -26,6 +26,8 @@ module Tokenization =
         match line |> Seq.toList |> List.filter (fun c -> c.Value <> "") with
         | [] -> seq []
         | [Container (ContainerBase.investigation) container]
+        | [Container (ContainerBase.investigationContacts) container]
+        | [Container (ContainerBase.investigationPublication) container]
         | [Container (ContainerBase.study) container]
         | [Container (ContainerBase.studyContacts) container]
         | [Container (ContainerBase.studyAssays) container]
