@@ -33,12 +33,12 @@
   </ItemGroup>
 
 	<PropertyGroup>
-		<Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey</Authors>
-		<Description></Description>
-		<Summary></Summary>
+		<Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey, Kevin Schneider</Authors>
+		<Description>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Description>
+		<Summary>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Summary>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<!--<PackageIcon>logo.png</PackageIcon>-->
-		<PackageTags>F# FSharp datascience rdm fable fable-library fable-javascript</PackageTags>
+		<PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants fable fable-library fable-javascript</PackageTags>
 		<RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>

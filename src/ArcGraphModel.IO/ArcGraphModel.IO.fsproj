@@ -18,7 +18,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="6.0.7" />
+    <PackageReference Update="FSharp.Core" Version="[6.0.7]" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey, Kevin Schneider</Authors>
+    <Description>Fsharp Library for tokenization of isa and cwl files into the ArcGraphModel</Description>
+    <Summary>Fsharp Library for tokenization of isa and cwl files into the ArcGraphModel</Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!--<PackageIcon>logo.png</PackageIcon>-->
+    <PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants xlsx io isa fable fable-library fable-javascript</PackageTags>
+    <RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
 
 </Project>
