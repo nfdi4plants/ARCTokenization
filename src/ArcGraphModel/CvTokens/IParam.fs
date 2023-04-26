@@ -36,6 +36,18 @@ type Param =
         | :? IParam as param -> Some param
         | _ -> None
 
+    /// Returns Some Value of type 'T, if the given param can be downcast, else returns None
+    static member inline tryAs<'T when 'T :> IParam> (cv : IParam) =
+        match cv with
+        | :? 'T as cv -> Some cv
+        | _ -> None
+
+    /// Returns true, if the given param can be downcast
+    static member inline is<'T when 'T :> IParam> (cv : IParam) =
+        match cv with
+        | :? 'T as cv -> true
+        | _ -> false
+
     /// Returns the typed value of the param.
     static member getParamValue (param : IParam) =
         param |> ParamBase.getParamValue

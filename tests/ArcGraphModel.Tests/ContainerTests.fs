@@ -9,15 +9,26 @@ open System
 open FSharpAux
 open ArcGraphModel
 open ParamTests
+open System.Collections.Generic
 
 module Terms = 
     
     let protocol = "Test:123", "Protocol", "Test"
     let version = "Test:456", "Version", "Test"
 
-type Protocol () =  
+type Protocol internal (
+    cvAccession : string, 
+    cvName : string, 
+    cvRefUri : string, 
+    attributes : IDictionary<string,IParam>,
+    properties : IDictionary<string,seq<ICvBase>>) =
 
-    inherit CvContainer(Terms.protocol)
+    inherit CvContainer(cvAccession,cvName,cvRefUri,attributes,properties)
+
+    new () = 
+        let (id,name,ref) = Terms.protocol
+
+        Protocol(id,name,ref,Dictionary(),Dictionary())
 
     member this.Version 
         with get() = 

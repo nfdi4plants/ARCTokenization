@@ -48,13 +48,13 @@ module CvBase =
         getCvName cv1 = getCvName cv2
 
     /// Returns Some Value of type 'T, if the given cv item can be downcast, else returns None
-    let tryAs<'T when 'T :> ICvBase> (cv : ICvBase) =
+    let inline tryAs<'T when 'T :> ICvBase> (cv : ICvBase) =
         match cv with
         | :? 'T as cv -> Some cv
         | _ -> None
 
     /// Returns true, if the given cv item can be downcast
-    let is<'T when 'T :> ICvBase> (cv : ICvBase) =
+    let inline is<'T when 'T :> ICvBase> (cv : ICvBase) =
         match cv with
         | :? 'T as cv -> true
         | _ -> false

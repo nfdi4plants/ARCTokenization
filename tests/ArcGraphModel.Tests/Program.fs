@@ -11,6 +11,7 @@ let all =
     testList "All"
         [
             ArcTypeTests.main
+            CvBaseTests.main
             ParamTests.main
             ContainerTests.main
         ]
