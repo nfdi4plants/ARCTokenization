@@ -18,7 +18,7 @@ let private casting = testList "casting" [
             |> Param.getValueAsInt
         Expect.equal result2 5 "Value could not be retrieved correctly"    
     )
-    testCase "CanBeCastToCvParamGeneric" (fun _ ->
+    testCase "CanBeCastToCvParam" (fun _ ->
         let v = CvParam(Terms.assay,ParamValue.Value 5) :> ICvBase
         let result = CvParam.tryCvParam v
         Expect.isSome result "Could not downcast CvBase to CvParam, consider inlining the used function."
