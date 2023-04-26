@@ -1,11 +1,15 @@
 
 #r "nuget: FSharpAux.Core,2.0.0"
+#r "nuget: FsSpreadsheet, 1.3.0-preview"
 #r "nuget: FsSpreadsheet.ExcelIO"
 
 //#I @"src\ArcGraphModel\bin\Release\net6.0"
 #I @"src\ArcGraphModel.IO\bin\Release\net6.0"
 #r "ArcGraphModel.dll"
 #r "ArcGraphModel.IO.dll"
+
+#r "nuget: ArcGraphModel, 0.1.0-preview.1"
+
 
 open FsSpreadsheet
 open ArcGraphModel
@@ -29,20 +33,67 @@ fsi.AddPrinter (fun (cvp : ICvBase) ->
 )
 
 let p = @"C:\Users\HLWei\Downloads\testArc\isa.investigation.xlsx"
-let inv = FsWorkbook.fromXlsxFile p
+let shortP = @"C:\Users\HLWei\Downloads\testArc\testPersons.xlsx"
+let pa = @"C:\Users\HLWei\Downloads\testArc\testAssay.xlsx"
+
+
+let inv = FsWorkbook.fromXlsxFile pa
 
 let worksheet = 
     let ws = inv.GetWorksheets().Head
     ws.RescanRows()
     ws
 
+
+
 let tokens = 
+    //worksheet.Tables.[0].Columns(worksheet.CellCollection)
+    //|> Seq.toList
+    //|> List.choose (fun r -> 
+    //        match r.Cells |> Tokenization.parseLine |> Seq.toList with
+    //        | [] -> None
+    //        | l -> Some l
+    //    )
+    //|> List.concat
     worksheet
-    |> Worksheet.parseRows
+    |> Worksheet.parseTableColumns
+
+
+tokens
+|> Seq.head
+|> CvAttributeCollection.tryGetAttribute (CvTerm.getName Address.worksheet)
+|> Option.get
+|> Param.getValue
+
+
+tokens.[tokens.Length - 1].ToString()
+
+
+
+tokens
+|> List.choose (CvBase.tryAs<IParam>)
+|> List.map (fun param ->
+    CvBase.getTerm param,
+    Param.getValue param
+)
 
 let containers = 
     tokens
     |> TokenAggregation.aggregateTokens 
+    |> List.filter (fun cv -> CvBase.is<UserParam> cv |> not)
+
+containers
+|> List.choose (CvContainer.tryCvContainer)
+|> List.filter (CvBase.equalsTerm Terms.assay)
+|> List.item 0
+|> CvContainer.getSingleAs<IParam>("File Name") 
+|> Param.getValue
+
+
+
+
+containers.[2].ToString()
+
 
 containers
 |> Seq.choose CvContainer.tryCvContainer
@@ -52,32 +103,8 @@ containers
 |> Param.getValue
 
 
-//let p2 = @"C:\Users\HLWei\Downloads\testArc\testPersons.xlsx"
-//let assay = FsWorkbook.fromXlsxFile p2
-
-//let worksheet2 = 
-//    let ws = assay.GetWorksheets().Head
-//    ws.RescanRows()
-//    ws
-
-//let tokens2 = 
-//    worksheet2
-//    |> List.choose (fun r -> 
-//        match r.Cells |> Tokenization.parseLine |> Seq.toList with
-//        | [] -> None
-//        | l -> Some l
-//    )
-//    |> List.concat
-
-//let containers = 
-//    tokens
-//    |> TokenAggregation.aggregateTokens 
 
 
-
-
-
-//let merge
 
 
 //let paramLine = 
