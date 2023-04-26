@@ -39,14 +39,23 @@ module CvBase =
     let equalsTerm (term : CvTerm) (cv : #ICvBase) =
         getTerm cv = term
 
-    /// Returns true, if the given terms of the given cv items match
+    /// Returns true, if the terms of the given cv items match
     let equals (cv1 : #ICvBase) (cv2 : #ICvBase) =
         getTerm cv1 = getTerm cv2
 
+    /// Returns true, if the names of the given cv items match
+    let equalsName (cv1 : #ICvBase) (cv2 : #ICvBase) =
+        getCvName cv1 = getCvName cv2
 
     /// Returns Some Value of type 'T, if the given cv item can be downcast, else returns None
-    let tryAs<'T when 'T :> ICvBase> (cv : ICvBase) =
+    let inline tryAs<'T when 'T :> ICvBase> (cv : ICvBase) =
         match cv with
         | :? 'T as cv -> Some cv
         | _ -> None
+
+    /// Returns true, if the given cv item can be downcast
+    let inline is<'T when 'T :> ICvBase> (cv : ICvBase) =
+        match cv with
+        | :? 'T as cv -> true
+        | _ -> false
         
