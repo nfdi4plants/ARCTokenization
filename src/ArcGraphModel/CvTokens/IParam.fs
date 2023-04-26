@@ -20,6 +20,10 @@ type Param =
     static member equals (param1 : IParam) (param2 : IParam) =
         CvBase.equals param1 param2
 
+    /// Returns true, if the name of the given params match
+    static member equalsName (param1 : IParam) (param2 : IParam) =
+        CvBase.equalsName param1 param2
+
     /// Returns Some Param, if the given cv item can be downcast, else returns None
     static member tryParam (cv : ICvBase) =
         match cv with
@@ -31,6 +35,18 @@ type Param =
         match cv with
         | :? IParam as param -> Some param
         | _ -> None
+
+    /// Returns Some Value of type 'T, if the given param can be downcast, else returns None
+    static member inline tryAs<'T when 'T :> IParam> (cv : IParam) =
+        match cv with
+        | :? 'T as cv -> Some cv
+        | _ -> None
+
+    /// Returns true, if the given param can be downcast
+    static member inline is<'T when 'T :> IParam> (cv : IParam) =
+        match cv with
+        | :? 'T as cv -> true
+        | _ -> false
 
     /// Returns the typed value of the param.
     static member getParamValue (param : IParam) =

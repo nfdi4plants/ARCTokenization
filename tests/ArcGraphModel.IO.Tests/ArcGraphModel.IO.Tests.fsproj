@@ -7,17 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="ArcTypeTests.fs" />
-    <Compile Include="CvBaseTests.fs" />
-    <Compile Include="ParamTests.fs" />
-    <Compile Include="ContainerTests.fs" />
-    <Compile Include="TableTransformTests.fs" />
+    <Compile Include="KeyParserTests.fs" />
+    <Compile Include="TokenAggregationTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Fable.Mocha" Version="2.16.0" />
-		<PackageReference Include="Expecto" Version="9.*" />
+    <PackageReference Include="Fable.Mocha" Version="2.16.0" />
+    <PackageReference Include="Expecto" Version="9.*" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -26,7 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-    <ProjectReference Include="..\..\src\ArcGraphModel\ArcGraphModel.fsproj" />
+    <ProjectReference Include="..\..\src\ArcGraphModel.IO\ArcGraphModel.IO.fsproj" />
   </ItemGroup>
 
   <ItemGroup>

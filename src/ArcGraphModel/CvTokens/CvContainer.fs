@@ -3,8 +3,15 @@
 open System.Collections.Generic
 open FSharpAux
 
+module internal Dictionary = 
+    
+    let addOrAppendInPlace (k : 'Key) (v : 'Value) (dict : IDictionary<'Key, 'Value seq>) =
+        if dict.ContainsKey k then
+            dict.[k] <- Seq.append dict.[k] (Seq.singleton v)
+        else dict.[k] <- Seq.singleton v
+
 /// Represents a collection of structured properties, annotated with a controlled vocabulary term.
-type CvContainer internal (
+type CvContainer (
     cvAccession : string, 
     cvName : string, 
     cvRefUri : string, 
@@ -28,10 +35,10 @@ type CvContainer internal (
         CvContainer(cvAccession, cvName, cvRefUri, dict)
     new (cvAccession : string, cvName : string, cvRefUri : string) =
         CvContainer(cvAccession, cvName, cvRefUri, Seq.empty)
-    
+
 
     new ((id,name,ref) : CvTerm, attributes : IDictionary<string,IParam>) = 
-        CvContainer(id, name, ref, attributes, Dictionary<string, ICvBase seq>())
+        CvContainer(id,name,ref, attributes, Dictionary<string, ICvBase seq>())
     new (term : CvTerm,attributes : seq<IParam>) = 
         let dict = CvAttributeCollection(attributes)
         CvContainer(term, dict)
@@ -56,7 +63,7 @@ type CvContainer internal (
     /// Retrieves children with the given name and which can be cast to the given type of the CvContainer as sequence.
     ///
     /// Fails if the propertyName cannot be found.
-    member this.GetManyAs<'T when 'T :> ICvBase> propertyName =
+    member inline this.GetManyAs<'T when 'T :> ICvBase> propertyName =
         Dictionary.item propertyName this.Properties
         |> Seq.choose CvBase.tryAs<'T>
 
@@ -84,7 +91,7 @@ type CvContainer internal (
     /// Retrieves child with the given name and which can be cast to the given type of the CvContainer.
     ///
     /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
-    member this.GetSingleAs<'T when 'T :> ICvBase> propertyName =
+    member inline this.GetSingleAs<'T when 'T :> ICvBase> propertyName =
         Dictionary.item propertyName this.Properties
         |> Seq.choose CvBase.tryAs<'T>
         |> Seq.exactlyOne
@@ -115,7 +122,7 @@ type CvContainer internal (
     /// Retrieves children with the given name and which can be cast to the given type of the CvContainer as sequence.
     ///
     /// Returns None if the propertyName cannot be found.
-    member this.TryGetManyAs<'T when 'T :> ICvBase> propertyName =
+    member inline this.TryGetManyAs<'T when 'T :> ICvBase> propertyName =
         Dictionary.tryFind propertyName this.Properties
         |> Option.bind (fun many ->
             Seq.choose CvBase.tryAs<'T> many
@@ -153,7 +160,7 @@ type CvContainer internal (
     /// Retrieves child with the given name and which can be cast to the given type of the CvContainer.
     ///
     /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
-    member this.TryGetSingleAs<'T when 'T :> ICvBase> propertyName =
+    member inline this.TryGetSingleAs<'T when 'T :> ICvBase> propertyName =
         Dictionary.tryFind propertyName this.Properties
         |> Option.bind (Seq.choose CvBase.tryAs<'T> >> Seq.tryExactlyOne)
 
@@ -182,7 +189,7 @@ type CvContainer internal (
     /// Retrieves children with the given name and which can be cast to the given type of the CvContainer as sequence.
     ///
     /// Fails if the propertyName cannot be found.
-    static member getManyAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
+    static member inline getManyAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
         container.GetManyAs<'T> propertyName
 
     /// Retrieves CvContainer children with the given name of the CvContainer as sequence.
@@ -206,7 +213,7 @@ type CvContainer internal (
     /// Retrieves child with the given name and which can be cast to the given type of the CvContainer.
     ///
     /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
-    static member getSingleAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
+    static member inline getSingleAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
         container.GetSingleAs<'T> propertyName
 
     /// Retrieves CvContainer child with the given name of the CvContainer.
@@ -231,7 +238,7 @@ type CvContainer internal (
     /// Retrieves children with the given name and which can be cast to the given type of the CvContainer as sequence.
     ///
     /// Returns None if the propertyName cannot be found.
-    static member tryGetManyAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
+    static member inline tryGetManyAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
         container.TryGetManyAs<'T> propertyName
 
     /// Retrieves CvContainer children with the given name of the CvContainer as sequence.
@@ -255,7 +262,7 @@ type CvContainer internal (
     /// Retrieves child with the given name and which can be cast to the given type of the CvContainer.
     ///
     /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
-    static member tryGetSingleAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
+    static member inline tryGetSingleAs<'T when 'T :> ICvBase> propertyName (container : CvContainer) =
         container.TryGetSingleAs<'T> propertyName
 
     /// Retrieves CvContainer child with the given name of the CvContainer.
@@ -289,6 +296,20 @@ type CvContainer internal (
     static member countChildren (container : CvContainer) =
         container.CountChildren()
 
+    /// Adds children as a property of the CvContainer.
+    ///
+    /// If values with the same key already exist in the container, appends the new child
+    static member addMany (values : seq<ICvBase>) (cvContainer : CvContainer) =
+        values
+        |> Seq.iter (fun v -> CvContainer.addSingle v cvContainer)
+
+    /// Adds a child as a property of the CvContainer.
+    ///
+    /// If a value with the same key already exist in the container, appends the new child
+    static member addSingle (value : ICvBase) (cvContainer : CvContainer) =
+        Dictionary.addOrAppendInPlace value.Name value cvContainer.Properties
+        
+
     /// Sets children as a property of the CvContainer.
     ///
     /// These children are supposed to all have the same name, as they will be grouped into one property of the container, accessible
@@ -309,4 +330,4 @@ type CvContainer internal (
         Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer.Properties
 
     override this.ToString() = 
-        $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Keys |> Seq.toList}"
+        $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Properties.Keys |> Seq.toList}"

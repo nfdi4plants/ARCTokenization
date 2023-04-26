@@ -24,7 +24,7 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
         UserParam (name,pv,Seq.empty)
 
     /// Returns Some UserParam, if the given value item can be downcast, else returns None
-    static member tryCvParam (cv : IParamBase) =
+    static member tryUserParam (cv : ICvBase) =
         match cv with
         | :? UserParam as param -> Some param
         | _ -> None
