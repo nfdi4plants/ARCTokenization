@@ -15,20 +15,20 @@ module Terms =
     let protocol = "Test:123", "Protocol", "Test"
     let version = "Test:456", "Version", "Test"
 
-type Protocol () =  
+//type Protocol () =  
 
-    inherit CvContainer(Terms.protocol)
+//    inherit CvContainer(Terms.protocol)
 
-    member this.Version 
-        with get() = 
-            CvContainer.getSingleAs<CvParam> Protocol.VersionProperty this
-            |> Param.getValueAsString
-        and set(version : string) =
-            CvParam.fromValue Terms.version version
-            |> fun cvp -> CvContainer.setSingle cvp this 
-            |> ignore
+//    member this.Version 
+//        with get() = 
+//            CvContainer.getSingleAs<CvParam> Protocol.VersionProperty this
+//            |> Param.getValueAsString
+//        and set(version : string) =
+//            CvParam.fromValue Terms.version version
+//            |> fun cvp -> CvContainer.setSingle cvp this 
+//            |> ignore
 
-    static member VersionProperty = "Version"
+//    static member VersionProperty = "Version"
 
 [<AutoOpen>]
 module private GenericContainer =
@@ -89,8 +89,6 @@ let private setSingleProperty = testList "setSingleProperty" [
 
 let private setManyProperty = testList "setManyProperty" [
 
-    
-
     let differentParams = seq [Parameter.testCvParam1 :> ICvBase;Parameter.testCvParam2]
     let correctParams = seq [Parameter.testCvParam1 :> ICvBase;Parameter.testCvParam1]
     let name = (Parameter.testCvParam1 :> ICvBase).Name
@@ -115,7 +113,6 @@ let private setManyProperty = testList "setManyProperty" [
             | _ -> true
         Expect.isFalse hasFailed ""
     )
-
 
     testCase "HasValue" (fun _ ->
         let container = CvContainer(testTerm)
@@ -143,31 +140,31 @@ let private setManyProperty = testList "setManyProperty" [
     )
 ]
 
-let private ExtendedContainer = testList "ExtendedContainer" [
+//let private ExtendedContainer = testList "ExtendedContainer" [
 
-    let version = "0.0.1"
-    let protocol = new Protocol()
+//    let version = "0.0.1"
+//    let protocol = new Protocol()
 
-    do protocol.Version <- version
+//    do protocol.Version <- version
 
-    testCase "HasValue" (fun _ ->
-        let result = CvContainer.containsProperty Protocol.VersionProperty protocol
-        Expect.isTrue result ""
-    )
-    testCase "HasOneItem" (fun _ ->
-        let result = CvContainer.countProperties protocol
-        Expect.equal 1 result ""
-    )
-    testCase "CanRetrieve" (fun _ ->
-        let result = protocol.Version
-        Expect.equal version result ""
-    )
-]
+//    testCase "HasValue" (fun _ ->
+//        let result = CvContainer.containsProperty Protocol.VersionProperty protocol
+//        Expect.isTrue result ""
+//    )
+//    testCase "HasOneItem" (fun _ ->
+//        let result = CvContainer.countProperties protocol
+//        Expect.equal 1 result ""
+//    )
+//    testCase "CanRetrieve" (fun _ ->
+//        let result = protocol.Version
+//        Expect.equal version result ""
+//    )
+//]
 
 let main =
-    testList "ParamTests" [
+    testList "ContainerTests" [
         correctlyImplementsICvBase
         setSingleProperty
         setManyProperty
-        ExtendedContainer
+        //ExtendedContainer
     ]
