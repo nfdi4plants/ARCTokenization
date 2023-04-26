@@ -4,7 +4,8 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "pretest": "dotnet fable tests/ArcGraphModel.Tests -o tests/ArcGraphModel.JsNativeTests/fable",
+    "fable": "dotnet fable tests/ArcGraphModel.Tests -o tests/ArcGraphModel.JsNativeTests/fable --lang ts --fableLib fable-library",
+    "pretest": "npm run fable && tsc --outDir ./dist",
     "test": "mocha tests/ArcGraphModel.JsNativeTests/fable",
     "posttest": "mocha tests/ArcGraphModel.JsNativeTests",
     "test:live": "mocha --watch --parallel tests/ArcGraphModel.JsNativeTests/fable",
@@ -21,6 +22,12 @@
   },
   "homepage": "https://github.com/nfdi4plants/ArcGraphModel#readme",
   "dependencies": {
-    "mocha": "^10.2.0"
+    "fable-library": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.16.1",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4"
   }
 }
