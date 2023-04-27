@@ -10,6 +10,7 @@ open Expecto
 let all =
     testList "All"
         [
+            TokenAggregationTests.main
             KeyParserTests.main
         ]
 
