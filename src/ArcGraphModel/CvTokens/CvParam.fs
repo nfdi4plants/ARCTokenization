@@ -27,11 +27,15 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
         CvParam (id,name,ref,pv,dict)
     new (id,name,ref,pv) = 
         CvParam (id,name,ref,pv,Seq.empty)
+    new (id,name,ref,v : IConvertible) = 
+        CvParam (id,name,ref,ParamValue.Value v)
 
     new ((id,name,ref) : CvTerm,pv,attributes : seq<IParam>) = 
         CvParam (id,name,ref,pv,attributes)
     new (cvTerm,pv : ParamValue) = 
         CvParam (cvTerm,pv,Seq.empty)
+    new (cvTerm,v : IConvertible) = 
+        CvParam (cvTerm,ParamValue.Value v)
 
     member this.Equals (term : CvTerm) = 
         CvBase.equalsTerm term this

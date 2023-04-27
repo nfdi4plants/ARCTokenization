@@ -18,6 +18,11 @@ module CvTerm =
         match cvTerm with
         | id, name, refUri -> id
 
+    /// gets the source reference of the CvTerm
+    let getRef (cvTerm : CvTerm) = 
+        match cvTerm with
+        | id, name, refUri -> refUri
+
     /// creates a CvTerm from name
     let fromName (name : string) : CvTerm= 
         "", name, ""
