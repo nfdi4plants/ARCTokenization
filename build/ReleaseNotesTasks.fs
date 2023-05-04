@@ -9,7 +9,7 @@ let createAssemblyVersion = BuildTask.create "createvfs" [] {
 }
 
 // https://github.com/Freymaurer/Fake.Extensions.Release#releaseupdate
-let updateReleaseNotes = BuildTask.createFn "ReleaseNotes" [] (fun config ->
+let updateReleaseNotes = BuildTask.createFn "UpdateReleaseNotes" [] (fun config ->
     ReleaseNotes.update(ProjectInfo.gitOwner, ProjectInfo.project, config)
 )
 

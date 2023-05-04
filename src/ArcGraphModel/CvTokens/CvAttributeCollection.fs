@@ -88,9 +88,23 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
             ac.TryGetAttribute name
         | _ -> None
 
-    /// Returns true, if it implements a CvAttributeCollection and the attribute exists, else returns None
+    /// Returns the attribute of the value, if it implements CvAttributeCollection and the attribute exists, else returns None
+    static member tryGetAttributeByTerm (term : string) (v : IAttributeCollection) =
+        match box v with
+        | :? CvAttributeCollection as ac -> 
+            ac.TryGetAttribute term
+        | _ -> None
+
+    /// Returns true, if it implements a CvAttributeCollection and the attribute exists
     static member containsAttribute (name : string) (v : IAttributeCollection) =
         match box v with
         | :? CvAttributeCollection as ac -> 
             ac.ContainsAttribute name
+        | _ -> false
+
+    /// Returns true, if it implements a CvAttributeCollection and the attribute exists
+    static member containsAttributeTerm (term : CvTerm) (v : IAttributeCollection) =
+        match box v with
+        | :? CvAttributeCollection as ac -> 
+            ac.ContainsAttribute term
         | _ -> false
