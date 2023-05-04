@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETStandard,Version=v2.0": {
+      "FSharp.Core": {
+        "type": "Direct",
+        "requested": "[6.0.7, 6.0.7]",
+        "resolved": "6.0.7",
+        "contentHash": "e6wGrq5smV3Yk2fBE/Y0nBG5oFyF59k5Je0a0QDydUpg6liyaafGjD3xvutciKepCP2knspZ/sWViC/F1OyyQQ=="
+      },
+      "NETStandard.Library": {
+        "type": "Direct",
+        "requested": "[2.0.3, )",
+        "resolved": "2.0.3",
+        "contentHash": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Aether": {
+        "type": "Transitive",
+        "resolved": "8.3.1",
+        "contentHash": "GKedgXPkm3nUO+Zbj9suNFQ/wCjw30ixUTgnrPvj0oJ9WiAyy1kDacJTHgTPTjyD1RILuDEPTPwsKGWlSpWLOw==",
+        "dependencies": {
+          "FSharp.Core": "4.3.4"
+        }
+      },
+      "FSharp.FGL": {
+        "type": "Transitive",
+        "resolved": "0.0.2",
+        "contentHash": "6tOOMs0Rm4bPIVPZ5eE3x2aQ299heMv3LCJBFGca0mb7JOPN5IeBRvcdVpHokQ1ag9ndCuFC98nOUQqu2DquEw==",
+        "dependencies": {
+          "Aether": "8.3.1",
+          "FSharp.Core": "5.0.0"
+        }
+      },
+      "FSharp.FGL.ArrayAdjacencyGraph": {
+        "type": "Transitive",
+        "resolved": "0.0.2",
+        "contentHash": "L7JmdDkb375CcOVdAW5HFDpuj0ZQFuzVNhHOp/eJhH3xPWGJ5skeTLm8P0XWyxTjpCCAtoW2B0oScU+QtCgxSw==",
+        "dependencies": {
+          "FSharp.Core": "5.0.0",
+          "FSharp.FGL": "0.0.2"
+        }
+      },
+      "FSharpAux.Core": {
+        "type": "Transitive",
+        "resolved": "2.0.0",
+        "contentHash": "ltsM7H9SsfnvjcWXm5TcoyBysatHpwR8krCfyXdWriMT0DBxZxji3bhxNOcm4HeQXD4slL2TrJgULXyiCtJBRQ==",
+        "dependencies": {
+          "FSharp.Core": "6.0.7"
+        }
+      },
+      "FsSpreadsheet": {
+        "type": "Transitive",
+        "resolved": "1.3.0-preview",
+        "contentHash": "DjLwdkucZduA8fKfdc8oUJbjYlLuK+JCukkKWWAJpvTCeCFkCUPsYGxYIVJ5/K1vmfGyG62moV8y9vEGTRn2BQ==",
+        "dependencies": {
+          "FSharp.Core": "6.0.7"
+        }
+      },
+      "Microsoft.NETCore.Platforms": {
+        "type": "Transitive",
+        "resolved": "1.1.0",
+        "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
+      },
+      "arcgraphmodel": {
+        "type": "Project",
+        "dependencies": {
+          "FSharp.Core": "[6.0.7, 6.0.7]",
+          "FSharp.FGL.ArrayAdjacencyGraph": "[0.0.2, )",
+          "FSharpAux.Core": "[2.0.0, 2.0.0]",
+          "FsSpreadsheet": "[1.3.0-preview, )"
+        }
+      }
+    }
+  }
+}
