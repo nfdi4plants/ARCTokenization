@@ -21,7 +21,7 @@ module Worksheet =
             token
         )
 
-    let parseColumns (worksheet : FsWorksheet) = 
+    let parseTableColumns (worksheet : FsWorksheet) = 
         let sheetName = Address.createWorksheetParam worksheet.Name
         worksheet.Tables.Head.Columns(worksheet.CellCollection)
         |> Seq.toList
@@ -36,7 +36,7 @@ module Worksheet =
             token
         )
 
-    let parseTableColumns (worksheet : FsWorksheet) = 
+    let parseColumns (worksheet : FsWorksheet) = 
         let sheetName = Address.createWorksheetParam worksheet.Name
         worksheet.Columns
         |> Seq.toList
