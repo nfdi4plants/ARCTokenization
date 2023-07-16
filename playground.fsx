@@ -24,7 +24,9 @@ open System.Collections.Generic
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll"
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll"
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll"
-#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
+//#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
+#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\netstandard2.0\ArcGraphModel.dll"
+#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel.IO\bin\Debug\netstandard2.0\ArcGraphModel.IO.dll"
 //#r @"C:/Users/olive/.nuget/packages/fsharpaux/1.1.0/lib/net5.0/FSharpAux.dll"
 
 open FsSpreadsheet
@@ -36,6 +38,17 @@ open ArcGraphModel.TableTransform
 open FGLAux
 open ArcType
 
+
+
+let inves = FsWorkbook.fromXlsxFile @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
+
+let invesWs = FsWorkbook.getWorksheets inves |> Seq.head
+invesWs.RescanRows()
+invesWs.CellCollection
+invesWs.Rows
+
+let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsAggregated invesWs
+let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsFlat invesWs
 
 
 
