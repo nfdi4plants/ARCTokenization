@@ -7,15 +7,12 @@ open KeyParser
 module Tokenization = 
     
     let convertTokens (line : FsCell seq) =
-        printfn "line: %A" line
         match line |> Seq.toList with
         | [] -> failwith "Cannot convert nothin"
         | key :: [] -> 
-            printfn "case key :: []"
             let f = parseKey [] key.Value
             [f (ParamValue.Value "")]
         | key :: cells ->
-            printfn "case key :: cells"
             let f = parseKey [] key.Value
             cells
             |> List.map (fun c -> 
