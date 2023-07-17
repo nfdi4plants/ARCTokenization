@@ -4,6 +4,7 @@ open System.Collections.Generic
 open FSharpAux
 
 /// Represents a structured value, annotated by a user defined name
+[<StructuredFormatDisplay("{DisplayText}")>]
 type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<string,IParam>) =
 
     inherit CvAttributeCollection(attributes)        
@@ -29,5 +30,20 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
         | :? UserParam as param -> Some param
         | _ -> None
 
+    /// Returns Some Param if the given value item can be downcast, else returns None
+    static member tryUserParam (cv : IParamBase) =
+        match cv with
+        | :? UserParam as param -> Some param
+        | _ -> None
+
+    /// Returns Some Param if the given param item can be downcast, else returns None
+    static member tryUserParam (cv : IParam) =
+        match cv with
+        | :? UserParam as param -> Some param
+        | _ -> None
+
     override this.ToString() = 
         $"Name: {(this :> ICvBase).Name}\n\tValue: {(this :> IParamBase).Value}\n\tQualifiers: {this.Keys |> Seq.toList}"
+
+    member this.DisplayText = 
+        this.ToString()

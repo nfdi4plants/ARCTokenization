@@ -9,6 +9,7 @@ open FSharpAux
 /// Represents a structured value, annotated with a controlled vocabulary term
 ///
 /// Attributes can be used to further describe the CvParam
+[<StructuredFormatDisplay("{DisplayText}")>]
 type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue, attributes : IDictionary<string,IParam>) =
 
     inherit CvAttributeCollection(attributes)
@@ -43,14 +44,23 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
     member this.Equals (cv : ICvBase) = 
         CvBase.equals cv this
 
-    /// Returns Some Param, if the given cv item can be downcast, else returns None
+    member this.Equals (cvp : CvParam) =
+        this.Equals(cvp :> ICvBase)
+
+    /// Returns Some Param if the given cv item can be downcast, else returns None
     static member tryCvParam (cv : ICvBase) =
         match cv with
         | :? CvParam as param -> Some param
         | _ -> None
 
-    /// Returns Some Param, if the given value item can be downcast, else returns None
+    /// Returns Some Param if the given value item can be downcast, else returns None
     static member tryCvParam (cv : IParamBase) =
+        match cv with
+        | :? CvParam as param -> Some param
+        | _ -> None
+
+    /// Returns Some Param if the given param item can be downcast, else returns None
+    static member tryCvParam (cv : IParam) =
         match cv with
         | :? CvParam as param -> Some param
         | _ -> None
@@ -95,3 +105,6 @@ type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValu
 
     override this.ToString() = 
         $"CvParam: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}\n\tAttributes: {this.Keys |> Seq.toList}"
+
+    member this.DisplayText = 
+        this.ToString()
