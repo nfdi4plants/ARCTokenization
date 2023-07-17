@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="TestUtils.fs" />
+    <Compile Include="IntegrationTests\ParseInvestigationTests.fs" />
+    <None Include="Fixtures\**" CopyToOutputDirectory="Always" />
     <Compile Include="KeyParserTests.fs" />
     <Compile Include="TokenAggregationTests.fs" />
     <Compile Include="Program.fs" />
@@ -15,6 +18,8 @@
 	<ItemGroup>
     <PackageReference Include="Fable.Mocha" Version="2.16.0" />
     <PackageReference Include="Expecto" Version="9.*" />
+    <PackageReference Include="FsSpreadsheet" Version="[2.0.2]" />
+    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[2.0.2]" />
 	</ItemGroup>
 
 	<ItemGroup>
