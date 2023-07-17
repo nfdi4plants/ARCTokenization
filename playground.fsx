@@ -9,8 +9,8 @@
 
 #r "nuget: DocumentFormat.OpenXml"
 #r "nuget: FSharpAux"
-#r "nuget: FsSpreadsheet, 1.2.0-preview"
-#r "nuget: FsSpreadsheet.ExcelIO, 1.2.0-preview"
+#r "nuget: FsSpreadsheet, 1.3.0-preview"
+#r "nuget: FsSpreadsheet.ExcelIO, 1.3.0-preview"
 #r "nuget: FSharp.FGL"
 #r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
@@ -40,16 +40,65 @@ open ArcType
 
 
 
-let inves = FsWorkbook.fromXlsxFile @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
+//let inves = FsWorkbook.fromXlsxFile @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
+let inves = FsWorkbook.fromXlsxFile @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
 
 let invesWs = FsWorkbook.getWorksheets inves |> Seq.head
 invesWs.RescanRows()
 invesWs.CellCollection
 invesWs.Rows
 
-let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsAggregated invesWs
+//let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsAggregated invesWs
+//let invesWsParsed = ArcGraphModel.IO.Worksheet.parseColumnsAggregated invesWs
 let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsFlat invesWs
+//invesWsParsed |> Seq.cast<CvParam>
+invesWsParsed |> Seq.cast<IParamBase> |> Seq.cast<CvParam>
+//invesWsParsed |> List.map (fun x -> x :> CvParam)
+invesWsParsed
+|> List.take 10
+|> List.map (
+    fun x ->
+        match x with
+        | :? CvParam as p -> 
+            Param.getValue p
+            p.ToString()
+        | :? UserParam as p -> 
+            Param.getValue p
+            p.ToString()
+)
 
+invesWsParsed
+invesWsParsed |> List.iter (List.iter (printfn "%A"))
+invesWsParsed.Head |> printfn "%A"
+invesWsParsed.Head |> printfn "%O"
+(invesWsParsed.Head :?> CvAttributeCollection)
+invesWsParsed.Head.ToString()
+
+[1 .. 10] |> printfn "%A"
+[1 .. 10] |> printfn "%O"
+
+open System.Text.RegularExpressions
+
+let namePattern = @"(?<=\[).*(?=[\]])"
+let key = "Comment[<Investigation Person ORCID>]"
+Regex.tryParseValue namePattern key
+|> Option.map (fun n ->
+    CvTerm("",n,"")
+)
+|> Option.get
+|> fun term -> CvParam(term,ParamValue.Value "Hallo",[])
+
+let lol = CvParam("lol", "lol", "lol", ParamValue.Value "lol")
+let lol2 = CvParam("lol", "lol", "lol", ParamValue.Value "lol")
+
+lol = lol2
+
+let dict1 = Dictionary<string,string>()
+dict1.Add("kek", "lil")
+let dict2 = Dictionary<string,string>()
+dict2.Add("kek", "lil")
+
+dict1 = dict2
 
 
 // new CvTypes - testin' and foolin' around

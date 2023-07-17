@@ -24,7 +24,7 @@ module Worksheet =
 
     /// Parses rows of a given FsWorksheet via a given tokenization function and returns the resulting IAttributeCollection list.
     let parseRows tokenizationFunction (worksheet : FsWorksheet) = 
-        parseCells (worksheet.Rows |> List.map (fun x -> x.Cells)) tokenizationFunction worksheet
+        parseCells (worksheet.Rows) tokenizationFunction worksheet
 
     /// Parses rows of a given FsWorksheet and returns the resulting aggregated ICvBase list.
     let parseRowsAggregated (worksheet : FsWorksheet) = 
@@ -36,7 +36,7 @@ module Worksheet =
 
     /// Parses columns of a given FsWorksheet via a given tokenization function and returns the resulting IAttributeCollection list.
     let parseColumns tokenizationFunction (worksheet : FsWorksheet) = 
-        parseCells (Seq.toList worksheet.Columns |> List.map (fun x -> x.Cells)) tokenizationFunction worksheet
+        parseCells (Seq.toList worksheet.Columns) tokenizationFunction worksheet
 
     /// Parses columns of a given FsWorksheet and returns the resulting aggregated ICvBase list.
     let parseColumnsAggregated (worksheet : FsWorksheet) =
@@ -48,7 +48,7 @@ module Worksheet =
 
     /// Parses the columns of the first FsTable in a given FsWorksheet via a given tokenization function and returns the resulting IAttributeCollection list.
     let parseTableColumns tokenizationFunction (worksheet : FsWorksheet) = 
-        parseCells (worksheet.Tables.Head.Columns(worksheet.CellCollection) |> Seq.toList |> List.map (fun x -> x.Cells)) tokenizationFunction worksheet
+        parseCells (worksheet.Tables.Head.Columns(worksheet.CellCollection) |> Seq.toList) tokenizationFunction worksheet
 
     /// Parses the columns of the first FsTable in a given FsWorksheet and returns the resulting aggregated ICvBase list.
     let parseTableColumnsAggregated (worksheet : FsWorksheet) =

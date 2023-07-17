@@ -133,14 +133,14 @@ module KeyParser =
         let namePattern = @"(?<=\[).*(?=[\]])"
         Regex.tryParseValue namePattern key
         |> Option.map (fun n ->
-            "",n,""
+            CvTerm("",n,"")
         )
 
     let (|AnnotationID|_|) (key : string) : CvTerm Option =
         let namePattern = @"(?<=\[).*(?=[\]])"
         Regex.tryParseValue namePattern key
         |> Option.map (fun n ->
-            "",n,""
+            CvTerm("",n,"")
         )
 
     let (|UnMatchable|) (key : string) : string =
@@ -167,21 +167,22 @@ module KeyParser =
         | Token TokenBase.phone term -> 
             fun (pv) -> CvParam(term,pv,attributes)
 
-        | Attribute AttributeBase.person (attribute,key) 
-        | Attribute AttributeBase.investigation (attribute,key) 
-        | Attribute AttributeBase.study (attribute,key) 
-        | Attribute AttributeBase.assay (attribute,key) 
-        | Attribute AttributeBase.publication (attribute,key) 
-        | Attribute AttributeBase.factorType (attribute,key) 
-        | Attribute AttributeBase.designType (attribute,key)
-        | Attribute AttributeBase.parameter (attribute,key) 
-        | Attribute AttributeBase.characteristic (attribute,key) 
-        | Attribute AttributeBase.rawData (attribute,key) 
-        | Attribute AttributeBase.processedData (attribute,key)
-        | Attribute AttributeBase.factor (attribute,key) -> 
-            parseKey (attribute :: attributes) key
+        //| Attribute AttributeBase.person (attribute,key) 
+        //| Attribute AttributeBase.investigation (attribute,key) 
+        //| Attribute AttributeBase.study (attribute,key) 
+        //| Attribute AttributeBase.assay (attribute,key) 
+        //| Attribute AttributeBase.publication (attribute,key) 
+        //| Attribute AttributeBase.factorType (attribute,key) 
+        //| Attribute AttributeBase.designType (attribute,key)
+        //| Attribute AttributeBase.parameter (attribute,key) 
+        //| Attribute AttributeBase.characteristic (attribute,key) 
+        //| Attribute AttributeBase.rawData (attribute,key) 
+        //| Attribute AttributeBase.processedData (attribute,key)
+        //| Attribute AttributeBase.factor (attribute,key) -> 
+        //    parseKey (attribute :: attributes) key
 
         | StructuredName term ->
+            printfn "term is %O\tkey is %s" term key
             fun (pv) -> CvParam(term,pv,attributes)
 
         | UnMatchable name -> 
