@@ -18,9 +18,6 @@
     <Compile Include="CvTokens\CvObject.fs" />
     <Compile Include="CvTokens\CvContainer.fs" />
     <Compile Include="Terms.fs" />
-    <Compile Include="FGLAux.fs" />
-    <Compile Include="ArcType.fs" />
-    <Compile Include="TableTransform.fs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,22 +25,16 @@
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
     <PackageReference Include="FsSpreadsheet" Version="[2.0.2]" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="[6.0.7]" />
-  </ItemGroup>
-
-	<PropertyGroup>
-		<Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey, Kevin Schneider</Authors>
-		<Description>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Description>
-		<Summary>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Summary>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<!--<PackageIcon>logo.png</PackageIcon>-->
-		<PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants fable fable-library fable-javascript</PackageTags>
-		<RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-	</PropertyGroup>
-
-	<ItemGroup />
+  
+  <PropertyGroup>
+    <Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey, Kevin Schneider</Authors>
+    <Description>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Description>
+    <Summary>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!--<PackageIcon>logo.png</PackageIcon>-->
+    <PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants fable fable-library fable-javascript</PackageTags>
+    <RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
 
 </Project>

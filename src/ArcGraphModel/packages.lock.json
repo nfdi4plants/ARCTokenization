@@ -4,13 +4,13 @@
     ".NETStandard,Version=v2.0": {
       "FSharp.Core": {
         "type": "Direct",
-        "requested": "[6.0.7, 6.0.7]",
+        "requested": "[6.0.7, )",
         "resolved": "6.0.7",
         "contentHash": "e6wGrq5smV3Yk2fBE/Y0nBG5oFyF59k5Je0a0QDydUpg6liyaafGjD3xvutciKepCP2knspZ/sWViC/F1OyyQQ=="
       },
       "FSharp.FGL.ArrayAdjacencyGraph": {
         "type": "Direct",
-        "requested": "[0.0.2, )",
+        "requested": "[0.0.2, 0.0.2]",
         "resolved": "0.0.2",
         "contentHash": "L7JmdDkb375CcOVdAW5HFDpuj0ZQFuzVNhHOp/eJhH3xPWGJ5skeTLm8P0XWyxTjpCCAtoW2B0oScU+QtCgxSw==",
         "dependencies": {
@@ -29,11 +29,11 @@
       },
       "FsSpreadsheet": {
         "type": "Direct",
-        "requested": "[1.3.0-preview, )",
-        "resolved": "1.3.0-preview",
-        "contentHash": "DjLwdkucZduA8fKfdc8oUJbjYlLuK+JCukkKWWAJpvTCeCFkCUPsYGxYIVJ5/K1vmfGyG62moV8y9vEGTRn2BQ==",
+        "requested": "[2.0.2, 2.0.2]",
+        "resolved": "2.0.2",
+        "contentHash": "4KdG85i/FGWRdV0PLqWaKoAOtXV0nTGs3bszRUds3x+aP91cRkKZg6/eKGAhTzKTyPHezAYBoOpzPwwN6miu8Q==",
         "dependencies": {
-          "FSharp.Core": "6.0.7"
+          "FSharp.Core": "6.0.6"
         }
       },
       "NETStandard.Library": {
