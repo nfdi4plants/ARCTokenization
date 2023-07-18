@@ -41,12 +41,13 @@ open ArcType
 
 
 //let inves = FsWorkbook.fromXlsxFile @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
-let inves = FsWorkbook.fromXlsxFile @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
+//let inves = FsWorkbook.fromXlsxFile @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
+let inves = FsWorkbook.fromXlsxFile @"C:\Repos\nfdi4plants\ArcGraphModel\tests\ArcGraphModel.IO.Tests\Fixtures\isa.investigation.xlsx"
 
 let invesWs = FsWorkbook.getWorksheets inves |> Seq.head
 invesWs.RescanRows()
 invesWs.CellCollection
-invesWs.Rows
+invesWs.Rows[20] |> Seq.toList
 
 //let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsAggregated invesWs
 //let invesWsParsed = ArcGraphModel.IO.Worksheet.parseColumnsAggregated invesWs
@@ -55,16 +56,24 @@ let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsFlat invesWs
 invesWsParsed |> Seq.cast<IParamBase> |> Seq.cast<CvParam>
 //invesWsParsed |> List.map (fun x -> x :> CvParam)
 invesWsParsed
-|> List.take 10
-|> List.map (
-    fun x ->
+//|> List
+|> List.mapi (
+    fun i x ->
+        printfn "\n%i\n" i
         match x with
         | :? CvParam as p -> 
-            Param.getValue p
-            p.ToString()
-        | :? UserParam as p -> 
-            Param.getValue p
-            p.ToString()
+            printfn "CvParam"
+            CvBase.getCvName p |> printfn "CvName: %s"
+            Param.getValue p |> printfn "Value: %A"
+            //p.ToString()
+            p.Attributes.ToString() |> printfn "Attributes: %A"
+        //| :? UserParam as p -> 
+        //    printfn "UserParam"
+        //    CvBase.getCvName p |> printfn "CvName: %s"
+        //    Param.getValue p |> printfn "Value: %A"
+        //    //p.ToString()
+        //    p.Attributes.ToString() |> printfn "Attributes: %A"
+        | _ -> ()
 )
 
 invesWsParsed
