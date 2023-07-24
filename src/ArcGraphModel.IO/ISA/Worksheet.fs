@@ -48,7 +48,7 @@ module Worksheet =
 
     /// Parses the columns of the first FsTable in a given FsWorksheet via a given tokenization function and returns the resulting IAttributeCollection list.
     let parseTableColumns tokenizationFunction (worksheet : FsWorksheet) = 
-        parseCells (worksheet.Tables.Head.Columns(worksheet.CellCollection) |> Seq.toList) tokenizationFunction worksheet
+        parseCells (worksheet.Tables.Head.GetColumns(worksheet.CellCollection) |> Seq.toList) tokenizationFunction worksheet
 
     /// Parses the columns of the first FsTable in a given FsWorksheet and returns the resulting aggregated ICvBase list.
     let parseTableColumnsAggregated (worksheet : FsWorksheet) =

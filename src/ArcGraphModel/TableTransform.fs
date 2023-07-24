@@ -266,7 +266,6 @@ module TableTransform =
                 let termRelatedBuildingBlocks =
                     headerCells
                     |> groupTermRelatedBuildingBlocks t ws.CellCollection
-                    //|> fun x
                     |> List.map (parseTermRelatedBuildingBlocks true t ws.CellCollection)
                 ws.Name,
                 {|
