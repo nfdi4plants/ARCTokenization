@@ -9,8 +9,8 @@
 
 #r "nuget: DocumentFormat.OpenXml"
 #r "nuget: FSharpAux"
-#r "nuget: FsSpreadsheet, 1.3.0-preview"
-#r "nuget: FsSpreadsheet.ExcelIO, 1.3.0-preview"
+#r "nuget: FsSpreadsheet, 3.1.0"
+#r "nuget: FsSpreadsheet.ExcelIO, 3.1.0"
 #r "nuget: FSharp.FGL"
 #r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
@@ -25,9 +25,11 @@ open System.Collections.Generic
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll"
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll"
 //#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
-#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\netstandard2.0\ArcGraphModel.dll"
-#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel.IO\bin\Debug\netstandard2.0\ArcGraphModel.IO.dll"
+//#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\netstandard2.0\ArcGraphModel.dll"
+//#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel.IO\bin\Debug\netstandard2.0\ArcGraphModel.IO.dll"
 //#r @"C:/Users/olive/.nuget/packages/fsharpaux/1.1.0/lib/net5.0/FSharpAux.dll"
+#r "src/ArcGraphModel/bin/Debug/netstandard2.0/ArcGraphModel.dll"
+#r "src/ArcGraphModel.IO/bin/Debug/netstandard2.0/ArcGraphModel.IO.dll"
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
@@ -238,10 +240,10 @@ let getColumnHeaders (table : FsTable) =
     range.RangeAddress
     table.GetHeaderCell
 
-let ioToCvParam headerCell dataCell =
+//let ioToCvParam headerCell dataCell =
     
 
-let buildingBlockToCvParam headerCell dataCells =
+//let buildingBlockToCvParam headerCell dataCells =
 
 
 let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
