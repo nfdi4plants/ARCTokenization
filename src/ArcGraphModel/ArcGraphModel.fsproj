@@ -17,13 +17,14 @@
     <Compile Include="CvTokens\UserParam.fs" />
     <Compile Include="CvTokens\CvObject.fs" />
     <Compile Include="CvTokens\CvContainer.fs" />
+    <Compile Include="TableTransform.fs" />
     <Compile Include="Terms.fs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FSharp.FGL.ArrayAdjacencyGraph" Version="[0.0.2]" />
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
-    <PackageReference Include="FsSpreadsheet" Version="[2.0.2]" />
+    <PackageReference Include="FsSpreadsheet" Version="[3.1.0]" />
   </ItemGroup>
   
   <PropertyGroup>

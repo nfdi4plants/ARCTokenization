@@ -25,6 +25,11 @@
           "FSharp.Core": "4.3.4"
         }
       },
+      "Fable.Core": {
+        "type": "Transitive",
+        "resolved": "4.0.0",
+        "contentHash": "crDLkyN4xADgnCqIneMUGVDo2oS92W4oufbIH/jwc8Fk7nIH6pS/Ds1rBB4R1jUfU1WM1k9GEPa4Up8cNj5VYw=="
+      },
       "FSharp.FGL": {
         "type": "Transitive",
         "resolved": "0.0.2",
@@ -53,10 +58,11 @@
       },
       "FsSpreadsheet": {
         "type": "Transitive",
-        "resolved": "2.0.2",
-        "contentHash": "4KdG85i/FGWRdV0PLqWaKoAOtXV0nTGs3bszRUds3x+aP91cRkKZg6/eKGAhTzKTyPHezAYBoOpzPwwN6miu8Q==",
+        "resolved": "3.1.0",
+        "contentHash": "ZBFN/UHnY5SvNTI4YB++saHRqwFlO/agYm/FzraW+uT/iNWz3DuHVDdFfL70a4Ngmtkntond23JBbV66NJhxbw==",
         "dependencies": {
-          "FSharp.Core": "6.0.6"
+          "FSharp.Core": "6.0.6",
+          "Fable.Core": "4.0.0"
         }
       },
       "Microsoft.NETCore.Platforms": {
@@ -70,7 +76,7 @@
           "FSharp.Core": "[6.0.7, )",
           "FSharp.FGL.ArrayAdjacencyGraph": "[0.0.2, 0.0.2]",
           "FSharpAux.Core": "[2.0.0, 2.0.0]",
-          "FsSpreadsheet": "[2.0.2, 2.0.2]"
+          "FsSpreadsheet": "[3.1.0, 3.1.0]"
         }
       }
     }
