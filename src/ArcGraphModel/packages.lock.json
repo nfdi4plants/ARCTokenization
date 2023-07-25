@@ -29,12 +29,23 @@
       },
       "FsSpreadsheet": {
         "type": "Direct",
-        "requested": "[3.1.0, 3.1.0]",
-        "resolved": "3.1.0",
-        "contentHash": "ZBFN/UHnY5SvNTI4YB++saHRqwFlO/agYm/FzraW+uT/iNWz3DuHVDdFfL70a4Ngmtkntond23JBbV66NJhxbw==",
+        "requested": "[3.1.1, 3.1.1]",
+        "resolved": "3.1.1",
+        "contentHash": "dD9Je8u6XO8J2ZMrfRTljmlD992pW+8tvxsbCtvnvmDnzzuos/cxP1jYRjsEneSG4FSpRRQhzwtqkyvhCqxS1Q==",
         "dependencies": {
           "FSharp.Core": "6.0.6",
           "Fable.Core": "4.0.0"
+        }
+      },
+      "FsSpreadsheet.ExcelIO": {
+        "type": "Direct",
+        "requested": "[3.1.1, 3.1.1]",
+        "resolved": "3.1.1",
+        "contentHash": "HVxKVw2lF+/1EWr6571thtHbEVcCP7MjFS1+OMEpQLTMZH3M8dJbNA0xFKaP2mMVzK2HESobbn7hrMzc6hi6zQ==",
+        "dependencies": {
+          "DocumentFormat.OpenXml": "[2.12.3]",
+          "FSharp.Core": "6.0.6",
+          "FsSpreadsheet": "[3.0.0, 4.0.0)"
         }
       },
       "NETStandard.Library": {
@@ -52,6 +63,14 @@
         "contentHash": "GKedgXPkm3nUO+Zbj9suNFQ/wCjw30ixUTgnrPvj0oJ9WiAyy1kDacJTHgTPTjyD1RILuDEPTPwsKGWlSpWLOw==",
         "dependencies": {
           "FSharp.Core": "4.3.4"
+        }
+      },
+      "DocumentFormat.OpenXml": {
+        "type": "Transitive",
+        "resolved": "2.12.3",
+        "contentHash": "qLww6khV25dTzGU3+9rG5vB6RbMoWuNA015151ZmazoepkvxW6/4a5u4QQASoXsZsBITsw5ZO0/Xpzm31tQ43g==",
+        "dependencies": {
+          "System.IO.Packaging": "4.7.0"
         }
       },
       "Fable.Core": {
@@ -72,6 +91,18 @@
         "type": "Transitive",
         "resolved": "1.1.0",
         "contentHash": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A=="
+      },
+      "System.IO.Packaging": {
+        "type": "Transitive",
+        "resolved": "4.7.0",
+        "contentHash": "9VV4KAbgRQZ79iEoG40KIeZy38O30oWwewScAST879+oki8g/Wa2HXZQgrhDDxQM4GkP1PnRJll05NMiVPbYAw=="
+      },
+      "controlledvocabulary": {
+        "type": "Project",
+        "dependencies": {
+          "FSharp.Core": "[6.0.7, )",
+          "FSharpAux.Core": "[2.0.0, 2.0.0]"
+        }
       }
     }
   }

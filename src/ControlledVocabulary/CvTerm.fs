@@ -1,4 +1,4 @@
-﻿namespace ArcGraphModel
+﻿namespace ControlledVocabulary
 
 /// Represents a term from a controlled vocabulary (Cv)
 /// in the form of: id|accession * name|value * refUri

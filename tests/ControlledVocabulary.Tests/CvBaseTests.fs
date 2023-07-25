@@ -1,11 +1,13 @@
 ﻿module CvBaseTests.Casting
 
-open ArcGraphModel
+open ControlledVocabulary
 open Xunit
+
+let assayTerm = "ARCO:1234","Assay","ARCO"
 
 [<Fact>]
 let ``ICvBase can be cast to CvParam using generic tryAs`` () = 
-    let v = CvParam(Terms.assay,ParamValue.Value 5) :> ICvBase
+    let v = CvParam(assayTerm,ParamValue.Value 5) :> ICvBase
     let result = CvBase.tryAs<CvParam> v
     Assert.True(result.IsSome)
 
@@ -16,7 +18,7 @@ let ``ICvBase can be cast to CvParam using generic tryAs`` () =
 
 [<Fact>]
 let ``ICvBase can be cast to CvParam using tryCvParam`` () =
-    let v = CvParam(Terms.assay,ParamValue.Value 5) :> ICvBase
+    let v = CvParam(assayTerm,ParamValue.Value 5) :> ICvBase
     let result = CvParam.tryCvParam v
     Assert.True(result.IsSome)
 
@@ -49,12 +51,12 @@ let ``ICvBase can be cast to UserParam using tryUserParam`` () =
 
 [<Fact>]
 let ``ICvBase can be cast to CvContainer using generic tryAs`` () =
-    let v = CvContainer(Terms.assay) :> ICvBase
+    let v = CvContainer(assayTerm) :> ICvBase
     let result = CvBase.tryAs<CvContainer> v
     Assert.True(result.IsSome)
 
 [<Fact>]
 let ``ICvBase can be cast to UserParam using tryCvContainer`` () =
-    let v = CvContainer(Terms.assay) :> ICvBase
+    let v = CvContainer(assayTerm) :> ICvBase
     let result = CvContainer.tryCvContainer v
     Assert.True(result.IsSome)

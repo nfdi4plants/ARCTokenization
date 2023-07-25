@@ -29,7 +29,7 @@ open System.Collections.Generic
 //#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel.IO\bin\Debug\netstandard2.0\ArcGraphModel.IO.dll"
 //#r @"C:/Users/olive/.nuget/packages/fsharpaux/1.1.0/lib/net5.0/FSharpAux.dll"
 #r "src/ArcGraphModel/bin/Debug/netstandard2.0/ArcGraphModel.dll"
-#r "src/ArcGraphModel.IO/bin/Debug/netstandard2.0/ArcGraphModel.IO.dll"
+#r "src/ControlledVocabulary/bin/Debug/netstandard2.0/ControlledVocabulary.dll"
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO

@@ -1,19 +1,20 @@
-﻿namespace ArcGraphModel.IO
+﻿namespace ArcGraphModel
 
-open ArcGraphModel
+open ControlledVocabulary
 
-module List = 
-    
-    let splitByPredicate (predicate : 'T -> bool) (l : list<'T>) : 'T list * 'T list = 
-        let rec loop toDo positives negatives = 
-            match toDo with
-            | head :: tail when predicate head -> loop tail (head :: positives) negatives
-            | head :: tail -> loop tail positives (head :: negatives)
-            | [] -> positives |> List.rev,negatives |> List.rev
-        loop l [] []
 
 module TokenAggregation = 
     
+    module List = 
+    
+        let splitByPredicate (predicate : 'T -> bool) (l : list<'T>) : 'T list * 'T list = 
+            let rec loop toDo positives negatives = 
+                match toDo with
+                | head :: tail when predicate head -> loop tail (head :: positives) negatives
+                | head :: tail -> loop tail positives (head :: negatives)
+                | [] -> positives |> List.rev,negatives |> List.rev
+            loop l [] []
+
     /// Merge two parameters
     ///
     /// First checks what kind of value the child param stores and then merges it into the parent

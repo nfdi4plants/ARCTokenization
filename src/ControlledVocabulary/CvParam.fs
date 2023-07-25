@@ -1,4 +1,4 @@
-﻿namespace ArcGraphModel
+﻿namespace ControlledVocabulary
 
 open System
 open System.Collections.Generic

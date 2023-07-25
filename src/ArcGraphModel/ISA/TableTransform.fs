@@ -1,5 +1,6 @@
 ﻿namespace ArcGraphModel
 
+open ControlledVocabulary
 open FSharpAux
 open FsSpreadsheet
 open FSharp.FGL

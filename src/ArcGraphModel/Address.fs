@@ -1,6 +1,6 @@
-﻿namespace ArcGraphModel.IO
+﻿namespace ArcGraphModel
 
-open ArcGraphModel
+open ControlledVocabulary
 
 module Address = 
 
