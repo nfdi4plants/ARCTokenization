@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="arcstructuralontology\arc_structure.obo" />
     <Compile Include="CvTokens\CvTerm.fs" />
     <Compile Include="CvTokens\ParamValue.fs" />
     <Compile Include="CvTokens\IParamBase.fs" />
@@ -26,6 +27,12 @@
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
     <PackageReference Include="FsSpreadsheet" Version="[3.1.0]" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ArcStructuralOntology\" />
+  </ItemGroup>
+
+  <ItemGroup />
   
   <PropertyGroup>
     <Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey, Kevin Schneider</Authors>
