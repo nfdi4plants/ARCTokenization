@@ -2,6 +2,8 @@
 
 open Xunit
 open ControlledVocabulary
+open ArcGraphModel
+open ArcGraphModel.AnnotationTable
 
 module CvParam =
 
@@ -13,7 +15,6 @@ module CvParam =
             (CvBase.getCvName cvpExpectec)
         )
 
-
 module UserParam =
 
     open ArcGraphModel
@@ -23,3 +24,7 @@ module UserParam =
             (CvBase.getCvName upActual),
             (CvBase.getCvName upExpectec)
         )
+
+module TokenizedAnnotationTable =
+    
+    ()

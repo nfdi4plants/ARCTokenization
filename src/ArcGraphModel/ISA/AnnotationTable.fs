@@ -9,7 +9,7 @@ open FSharp.FGL.ArrayAdjacencyGraph
 open System
 
 
-module List =   // remove as soon as this is available in next F#Aux NuGet release
+module internal List =   // remove as soon as this is available in next F#Aux NuGet release
     let map4 (mapping : 'T -> 'T -> 'T -> 'T -> 'U) (list1 : 'T list) (list2 : 'T list) (list3 : 'T list) (list4 : 'T list) =
         if list1.Length <> list2.Length || list1.Length <> list3.Length || list1.Length <> list4.Length then
             failwithf "The input lists have different lengths.\n\tlist1.Length = %i; list2.Length = %i; list3.Length = %i; list4.Length = %i" list1.Length list2.Length list3.Length list4.Length
@@ -34,11 +34,21 @@ module List =   // remove as soon as this is available in next F#Aux NuGet relea
 /// <summary>
 /// Functions to work with FsTables into graph-based models.
 /// </summary>
-module TableTransform =
+module AnnotationTable =
 
     // -----
     // TYPES
     // -----
+
+    type TokenizedAnnotationTable = {
+        IOColumns : CvParam list list
+        TermRelatedBuildingBlocks : CvParam list list
+    } with
+        static member create io terms =
+            {
+                IOColumns = io
+                TermRelatedBuildingBlocks = terms
+            }
 
     /// <summary>
     /// Modelling of the different types of nodes / Building Blocks.
@@ -260,19 +270,19 @@ module TableTransform =
         worksheetsAndTables
         |> List.map (
             fun (ws,t) ->
-                let headerCells = getHeaderCellsOf ws.CellCollection t |> List.ofSeq
+                let ioHeaderCells, termRelatedBuildingBlockHeaderCells = 
+                    getHeaderCellsOf ws.CellCollection t 
+                    |> List.ofSeq
+                    |> splitColumns t ws.CellCollection
                 let ioColumns = 
-                    headerCells
+                    ioHeaderCells
                     |> List.map (parseIOColumns ws.CellCollection t)
                 let termRelatedBuildingBlocks =
-                    headerCells
+                    termRelatedBuildingBlockHeaderCells
                     |> groupTermRelatedBuildingBlocks t ws.CellCollection
                     |> List.map (parseTermRelatedBuildingBlocks true t ws.CellCollection)
                 ws.Name,
-                {|
-                    IOColumns = ioColumns
-                    TermRelatedBuildingBlocks = termRelatedBuildingBlocks
-                |}
+                TokenizedAnnotationTable.create ioColumns termRelatedBuildingBlocks
         )
 
     /// <summary>
