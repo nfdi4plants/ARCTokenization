@@ -1,0 +1,560 @@
+format-version: 1.2
+data-version: init/2023-07-20
+saved-by: Kevin Schneider
+default-namespace: ARCSO
+ontology: arcso
+
+[Term]
+id: ARCSO:00000001
+name: Annotated Research Context
+def: "The Annotated Research Context (ARC) is a specification for a standardized way of creating a working environment and packaging file-based research data and necessary additional contextual information for working, collaboration, preservation, reproduction, re-use, and archiving as well as distribution."
+
+  [Term]
+  id: ARCSO:00000002
+  name: ISA Metadata
+  def: "The ISA Metadata part of an Annotated Research Context contains metadata about the contained Investigation, Studies, and Assays following the ISA Metadata scheme"
+  relationship: part_of ARCSO:00000001 ! Annotated Research Context
+
+    [Term]
+    id: ARCSO:00000003
+    name: Ontology Source Reference
+    def: ""
+    relationship: part_of ARCSO:00000002 ! ISA Metadata
+        
+        [Term]
+        id: ARCSO:00000004
+        name: Ontology Source Name
+        def: ""
+        relationship: part_of ARCSO:00000003 ! Ontology Source Reference
+  
+        [Term]
+        id: ARCSO:00000005
+        name: Ontology Source File
+        def: ""
+        relationship: part_of ARCSO:00000003 ! Ontology Source Reference
+  
+        [Term]
+        id: ARCSO:00000006
+        name: Ontology Source Version
+        def: ""
+        relationship: part_of ARCSO:00000003 ! Ontology Source Reference
+  
+        [Term]
+        id: ARCSO:00000007
+        name: Ontology Source Description
+        def: ""
+        relationship: part_of ARCSO:00000003 ! Ontology Source Reference
+
+    [Term]
+    id: ARCSO:0000008
+    name: Investigation
+    def: "An Investigation contains all the information needed to understand the overall goals and means used in an experiment"
+    relationship: part_of ARCSO:00000002 ! ISA Metadata
+
+      [Term]
+      id: ARCSO:0000009
+      name: Investigation Identifier
+      def: "A unique identifier for the Investigation"
+      relationship: part_of ARCSO:0000008 ! Investigation
+
+      [Term]
+      id: ARCSO:0000010
+      name: Investigation Title
+      def: "A short description of the Investigation"
+      relationship: part_of ARCSO:0000008 ! Investigation
+
+      [Term]
+      id: ARCSO:0000011
+      name: Investigation Description
+      def: ""
+      relationship: part_of ARCSO:0000008 ! Investigation
+
+      [Term]
+      id: ARCSO:0000012
+      name: Investigation Submission Date
+      def: ""
+      relationship: part_of ARCSO:0000008 ! Investigation
+
+      [Term]
+      id: ARCSO:0000013
+      name: Investigation Public Release Date
+      def: ""
+      relationship: part_of ARCSO:0000008 ! Investigation
+
+      [Term]
+      id: ARCSO:0000014
+      name: Investigation publications
+      def: ""
+      relationship: part_of ARCSO:0000008 ! Investigation
+
+        [Term]
+        id: ARCSO:0000016
+        name: Investigation Publication DOI
+        def: ""
+        relationship: part_of ARCSO:0000014 ! Investigation publications
+
+        [Term]
+        id: ARCSO:0000017
+        name: Investigation Publication Author List
+        def: ""
+        relationship: part_of ARCSO:0000014 ! Investigation publications
+
+        [Term]
+        id: ARCSO:0000018
+        name: Investigation Publication Title
+        def: ""
+        relationship: part_of ARCSO:0000014 ! Investigation publications
+        
+        [Term]
+        id: ARCSO:0000019
+        name: Investigation Publication Status
+        def: ""
+        relationship: part_of ARCSO:0000014 ! Investigation publications
+
+        [Term]
+        id: ARCSO:0000020
+        name: Investigation Publication Status Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000014 ! Investigation publications
+
+        [Term]
+        id: ARCSO:0000021
+        name: Investigation Publication Status Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000014 ! Investigation publications
+
+      [Term]
+      id: ARCSO:0000022
+      name: Investigation Contacts
+      def: ""
+      relationship: part_of ARCSO:0000008 ! Investigation
+
+        [Term]
+        id: ARCSO:0000024
+        name: Investigation Person Last Name
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000025
+        name: Investigation Person First Name
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000026
+        name: Investigation Person Mid Initials
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000027
+        name: Investigation Person Email
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000028
+        name: Investigation Person Phone
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000029
+        name: Investigation Person Fax
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000030
+        name: Investigation Person Address
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000031
+        name: Investigation Person Affiliation
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000032
+        name: Investigation Person Roles
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000033
+        name: Investigation Person Roles Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000034
+        name: Investigation Person Roles Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+        [Term]
+        id: ARCSO:0000035
+        name: Investigation Person ORCID
+        def: ""
+        relationship: part_of ARCSO:0000022 ! Investigation Contacts
+
+    [Term]
+    name: Study
+    def: "A Study is contains information on the subject under study, its characteristics and any treatments applied."
+    relationship: part_of ARCSO:00000002 ! ISA Metadata
+
+      [Term]
+      id: ARCSO:0000036
+      name: Study Identifier
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+      [Term]
+      id: ARCSO:0000037
+      name: Study Title
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+      [Term]
+      id: ARCSO:0000038
+      name: Study Description
+      def: ""
+
+      [Term]
+      id: ARCSO:0000039
+      name: Study Submission Date
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+      [Term]
+      id: ARCSO:0000040
+      name: Study Public Release Date
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+      [Term]
+      id: ARCSO:0000041
+      name: Study File Name
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+      [Term]
+      id: ARCSO:0000042
+      name: Study Design Descriptors
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+        [Term]
+        id: ARCSO:0000044
+        name: Study Design Type
+        def: ""
+        relationship: part_of ARCSO:0000042 ! Study Design Descriptors
+
+        [Term]
+        id: ARCSO:0000045
+        name: Study Design Type Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000042 ! Study Design Descriptors
+
+        [Term]
+        id: ARCSO:0000046
+        name: Study Design Type Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000042 ! Study Design Descriptors
+      
+      [Term]
+      id: ARCSO:0000047
+      name: Study Publications
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+        [Term]
+        id: ARCSO:0000049
+        name: Study Publication PubMed ID
+        def: ""
+        relationship: part_of ARCSO:0000047 ! Study Publications
+
+        [Term]
+        id: ARCSO:0000050
+        name: Study Publication DOI
+        def: ""
+        relationship: part_of ARCSO:0000047 ! Study Publications
+
+        [Term]
+        id: ARCSO:0000051
+        name: Study Publication Author List
+        def: ""
+        relationship: part_of ARCSO:0000047 ! Study Publications
+
+        [Term]
+        id: ARCSO:0000052
+        name: Study Publication Title
+        def: ""
+        relationship: part_of ARCSO:0000047 ! Study Publications
+
+        [Term]
+        id: ARCSO:0000053
+        name: Study Publication Status
+        def: ""
+        relationship: part_of ARCSO:0000047 ! Study Publications
+
+        [Term]
+        id: ARCSO:0000054
+        name: Study Publication Status Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000047 ! Study Publications
+
+        [Term]
+        id: ARCSO:0000055
+        name: Study Publication Status Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000047 ! Study Publications
+
+      [Term]
+      id: ARCSO:0000056
+      name: Study Factors
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+        [Term]
+        id: ARCSO:0000058
+        name: Study Factor Name
+        def: ""
+        relationship: part_of ARCSO:0000056 ! Study Factors
+
+        [Term]
+        id: ARCSO:0000059
+        name: Study Factor Type
+        def: ""
+        relationship: part_of ARCSO:0000056 ! Study Factors
+
+        [Term]
+        id: ARCSO:0000060
+        name: Study Factor Type Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000056 ! Study Factors
+
+        [Term]
+        id: ARCSO:0000061
+        name: Study Factor Type Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000056 ! Study Factors
+
+      [Term]
+      id: ARCSO:0000062
+      name: Study Assays
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+        [Term]
+        id: ARCSO:0000064
+        name: Study Assay Measurement Type
+        def: ""
+        relationship: part_of ARCSO:0000062 ! Study Assays
+
+        [Term]
+        id: ARCSO:0000065
+        name: Study Assay Measurement Type Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000062 ! Study Assays
+
+        [Term]
+        id: ARCSO:0000066
+        name: Study Assay Measurement Type Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000062 ! Study Assays
+
+        [Term]
+        id: ARCSO:0000067
+        name: Study Assay Technology Type
+        def: ""
+        relationship: part_of ARCSO:0000062 ! Study Assay
+
+        [Term]
+        id: ARCSO:0000068
+        name: Study Assay Technology Type Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000062 ! Study Assay
+
+        [Term]
+        id: ARCSO:0000069
+        name: Study Assay Technology Type Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000062 ! Study Assay
+
+        [Term]
+        id: ARCSO:0000070
+        name: Study Assay Technology Platform
+        def: ""
+        relationship: part_of ARCSO:0000062 ! Study Assays
+
+        [Term]
+        id: ARCSO:0000071
+        name: Study Assay File Name
+        def: ""
+        relationship: part_of ARCSO:0000062 ! Study Assays
+
+      [Term]
+      id: ARCSO:0000072
+      name: Study Protocols
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+        [Term]
+        id: ARCSO:0000074
+        name: Study Protocol Name
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000075
+        name: Study Protocol Type
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000076
+        name: Study Protocol Type Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000077
+        name: Study Protocol Type Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000078
+        name: Study Protocol Description
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000079
+        name: Study Protocol URI
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000080
+        name: Study Protocol Version
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000081
+        name: Study Protocol Parameters Name
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000082
+        name: Study Protocol Parameters Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000083
+        name: Study Protocol Parameters Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000084
+        name: Study Protocol Components Name
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000085
+        name: Study Protocol Components Type
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000086
+        name: Study Protocol Components Type Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+        [Term]
+        id: ARCSO:0000087
+        name: Study Protocol Components Type Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000072 ! Study Protocols
+
+      [Term]
+      id: ARCSO:0000088
+      name: Study Contacts
+      def: ""
+      relationship: part_of ARCSO:0000035 ! Study
+
+        [Term]
+        id: ARCSO:0000090
+        name: Study Person Last Name
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000091
+        name: Study Person First Name
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000092
+        name: Study Person Mid Initials
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000093
+        name: Study Person Email
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000094
+        name: Study Person Phone
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000095
+        name: Study Person Fax
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000096
+        name: Study Person Address
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000097
+        name: Study Person Affiliation
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000098
+        name: Study Person Roles
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000099
+        name: Study Person Roles Term Accession Number
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts
+
+        [Term]
+        id: ARCSO:0000100
+        name: Study Person Roles Term Source REF
+        def: ""
+        relationship: part_of ARCSO:0000088 ! Study Contacts

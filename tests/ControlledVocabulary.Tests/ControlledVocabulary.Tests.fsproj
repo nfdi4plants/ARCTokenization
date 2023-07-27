@@ -7,16 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Fixtures\**" CopyToOutputDirectory="Always" />
-    <Compile Include="TestUtils.fs" />
-    <Compile Include="TestObjects.fs" />
-    <Compile Include="IntegrationTests\Assay.fs" />
-    <Compile Include="IntegrationTests\ParseInvestigationTests.fs" />
+    <Compile Include="CvBaseTests.fs" />
+    <Compile Include="ParamTests.fs" />
+    <Compile Include="ContainerTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -30,11 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ArcGraphModel\ArcGraphModel.fsproj" />
-    <PackageReference Include="FSharp.FGL.ArrayAdjacencyGraph" Version="[0.0.2]" />
-    <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
-    <PackageReference Include="FsSpreadsheet" Version="[3.1.1]" />
-    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[3.1.1]" />
+    <ProjectReference Include="..\..\src\ControlledVocabulary\ControlledVocabulary.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="6.0.7" />
   </ItemGroup>
 
 </Project>

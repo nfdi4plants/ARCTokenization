@@ -9,8 +9,8 @@
 
 #r "nuget: DocumentFormat.OpenXml"
 #r "nuget: FSharpAux"
-#r "nuget: FsSpreadsheet, 1.2.0-preview"
-#r "nuget: FsSpreadsheet.ExcelIO, 1.2.0-preview"
+#r "nuget: FsSpreadsheet, 3.1.1"
+#r "nuget: FsSpreadsheet.ExcelIO, 3.1.1"
 #r "nuget: FSharp.FGL"
 #r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
@@ -25,250 +25,312 @@ open System.Collections.Generic
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll"
 //#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll"
 //#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
-#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\netstandard2.0\ArcGraphModel.dll"
-#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel.IO\bin\Debug\netstandard2.0\ArcGraphModel.IO.dll"
+//#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\netstandard2.0\ArcGraphModel.dll"
+//#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel.IO\bin\Debug\netstandard2.0\ArcGraphModel.IO.dll"
 //#r @"C:/Users/olive/.nuget/packages/fsharpaux/1.1.0/lib/net5.0/FSharpAux.dll"
+#r "src/ArcGraphModel/bin/Release/netstandard2.0/ArcGraphModel.dll"
+#r "src/ControlledVocabulary/bin/Release/netstandard2.0/ControlledVocabulary.dll"
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 //open FsSpreadsheet.DSL
+open ControlledVocabulary
+open ControlledVocabulary.ParamBase
 open ArcGraphModel
-open ArcGraphModel.ParamBase
-open ArcGraphModel.TableTransform
-open FGLAux
-open ArcType
 
+// Assay annotation table parsing
 
+let assayTokens = Assay.parseAnnotationTablesFromFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/assay_with_single_characteristics.xlsx")
 
-let inves = FsWorkbook.fromXlsxFile @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
+// Investigation metadata parsing
+
+//let inves = FsWorkbook.fromXlsxFile @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
+//let inves = FsWorkbook.fromXlsxFile @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
+let inves = FsWorkbook.fromXlsxFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/isa.investigation.xlsx")
 
 let invesWs = FsWorkbook.getWorksheets inves |> Seq.head
 invesWs.RescanRows()
 invesWs.CellCollection
-invesWs.Rows
+invesWs.Rows[20] |> Seq.toList
 
-let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsAggregated invesWs
-let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsFlat invesWs
+//let invesWsParsed = ArcGraphModel.IO.Worksheet.parseRowsAggregated invesWs
+//let invesWsParsed = ArcGraphModel.IO.Worksheet.parseColumnsAggregated invesWs
+let invesWsParsed = ArcGraphModel.Worksheet.parseRowsFlat invesWs
+//invesWsParsed |> Seq.cast<CvParam>
+invesWsParsed |> Seq.cast<IParamBase> |> Seq.cast<CvParam>
+//invesWsParsed |> List.map (fun x -> x :> CvParam)
+invesWsParsed
+//|> List
+|> List.mapi (
+    fun i x ->
+        printfn "\n%i\n" i
+        match x with
+        | :? CvParam as p -> 
+            printfn "CvParam"
+            CvBase.getCvName p |> printfn "CvName: %s"
+            Param.getValue p |> printfn "Value: %A"
+            //p.ToString()
+            p.Attributes.ToString() |> printfn "Attributes: %A"
+        //| :? UserParam as p -> 
+        //    printfn "UserParam"
+        //    CvBase.getCvName p |> printfn "CvName: %s"
+        //    Param.getValue p |> printfn "Value: %A"
+        //    //p.ToString()
+        //    p.Attributes.ToString() |> printfn "Attributes: %A"
+        | _ -> ()
+)
 
+invesWsParsed
+invesWsParsed |> List.iter ((printfn "%A"))
+invesWsParsed.Head |> printfn "%A"
+invesWsParsed.Head |> printfn "%O"
+(invesWsParsed.Head :?> CvAttributeCollection)
+invesWsParsed.Head.ToString()
+
+[1 .. 10] |> printfn "%A"
+[1 .. 10] |> printfn "%O"
+
+open System.Text.RegularExpressions
+
+let namePattern = @"(?<=\[).*(?=[\]])"
+let key = "Comment[<Investigation Person ORCID>]"
+Regex.tryParseValue namePattern key
+|> Option.map (fun n ->
+    CvTerm("",n,"")
+)
+|> Option.get
+|> fun term -> CvParam(term,ParamValue.Value "Hallo",[])
+
+let lol = CvParam("lol", "lol", "lol", ParamValue.Value "lol")
+let lol2 = CvParam("lol", "lol", "lol", ParamValue.Value "lol")
+
+lol = lol2
+
+let dict1 = Dictionary<string,string>()
+dict1.Add("kek", "lil")
+let dict2 = Dictionary<string,string>()
+dict2.Add("kek", "lil")
+
+dict1 = dict2
 
 
 // new CvTypes - testin' and foolin' around
 
-type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue, qualifiers : IDictionary<string,CvParam>) =
+//type CvParam(cvAccession : string, cvName : string, cvRefUri : string, paramValue : ParamValue, qualifiers : IDictionary<string,CvParam>) =
 
-    inherit Dictionary<string,CvParam>(qualifiers)
+//    inherit Dictionary<string,CvParam>(qualifiers)
 
-    let mutable _cvContainers = Dictionary<string,CvContainer list>()
+//    let mutable _cvContainers = Dictionary<string,CvContainer list>()
 
-    interface ICvBase with 
-        member this.ID     = cvAccession
-        member this.Name   = cvName
-        member this.RefUri = cvRefUri
-    interface IParamBase with 
-        member this.Value  = paramValue
+//    interface ICvBase with 
+//        member this.ID     = cvAccession
+//        member this.Name   = cvName
+//        member this.RefUri = cvRefUri
+//    interface IParamBase with 
+//        member this.Value  = paramValue
 
-    new (id,name,ref,pv,qualifiers : seq<CvParam>) = 
-        let dict = 
-            qualifiers
-            |> Seq.map (fun cvp -> (cvp :> ICvBase).Name, cvp)
-            |> Dictionary.ofSeq
-        CvParam (id,name,ref,pv,dict)
-    new (id,name,ref,pv) = 
-        CvParam (id,name,ref,pv,Seq.empty)
+//    new (id,name,ref,pv,qualifiers : seq<CvParam>) = 
+//        let dict = 
+//            qualifiers
+//            |> Seq.map (fun cvp -> (cvp :> ICvBase).Name, cvp)
+//            |> Dictionary.ofSeq
+//        CvParam (id,name,ref,pv,dict)
+//    new (id,name,ref,pv) = 
+//        CvParam (id,name,ref,pv,Seq.empty)
 
-    new ((id,name,ref) : CvTerm,pv,qualifiers : seq<CvParam>) = 
-        CvParam (id,name,ref,pv,qualifiers)
-    new (cvTerm,pv : ParamValue) = 
-        CvParam (cvTerm,pv,Seq.empty)
+//    new ((id,name,ref) : CvTerm,pv,qualifiers : seq<CvParam>) = 
+//        CvParam (id,name,ref,pv,qualifiers)
+//    new (cvTerm,pv : ParamValue) = 
+//        CvParam (cvTerm,pv,Seq.empty)
 
-    member this.CvContainers
-        with private get() = _cvContainers
-        //with get(item) = _cvContainers[item]
-        and private set(item, value) = _cvContainers[item] <- value
+//    member this.CvContainers
+//        with private get() = _cvContainers
+//        //with get(item) = _cvContainers[item]
+//        and private set(item, value) = _cvContainers[item] <- value
 
-    member this.CvContainers.Item item =
-        this.CvContainers[item]
+//    member this.CvContainers.Item item =
+//        this.CvContainers[item]
 
-    static member addCvContainerItem (item : CvContainer list) (cvParam : CvParam) =
-        cvParam.CvContainers.Add(item.Head |> CvBase.getCvName, item)
-
-
-// working backwards
-
-let tryAddVertex vertex graph =
-    try ArrayAdjacencyGraph.Vertices.add vertex graph
-    with _ -> graph
-
-let tryAddEdge vertex1 vertex2 edge graph =
-    try ArrayAdjacencyGraph.Edges.add (vertex1, vertex2, edge) graph
-    with _ -> graph
-
-let cvParamsToGraph (cvParams : CvParam list) = 
-    cvParams
-    |> List.fold (
-        fun graph cvp ->
-            let label = 
-                cvp :> IParamBase 
-                |> ParamBase.getValue :?> IParamBase
-                |> ParamBase.getValue :?> CvParam
-            match BuildingBlockType.tryOfString (cvp :> ICvBase).Name with
-            | Some Sample
-            | Some RawDataFile
-            | Some DerivedDataFile
-            | Some Source -> 
-                let vertexId = 
-                    label :> IParamBase 
-                    |> ParamBase.getValue :?> ICvBase
-                    |> CvBase.getCvName
-                let vertex = LVertex (vertexId, label)
-                tryAddVertex vertex graph
-            | Some Parameter
-            | Some Characteristic
-            | Some Factor
-            | Some Component ->
-                let vertex1id = 
-                    cvp["Address"] // string * int * int
-                tryAddEdge 
-            //| Some (Freetext e) ->
-            //    let vertex1id = 
-            //        cvp["Address"] // string * int * int
-            //    tryAddEdge 
-    ) (Graph.create [] [])
+//    static member addCvContainerItem (item : CvContainer list) (cvParam : CvParam) =
+//        cvParam.CvContainers.Add(item.Head |> CvBase.getCvName, item)
 
 
+//// working backwards
+
+//let tryAddVertex vertex graph =
+//    try ArrayAdjacencyGraph.Vertices.add vertex graph
+//    with _ -> graph
+
+//let tryAddEdge vertex1 vertex2 edge graph =
+//    try ArrayAdjacencyGraph.Edges.add (vertex1, vertex2, edge) graph
+//    with _ -> graph
+
+//let cvParamsToGraph (cvParams : CvParam list) = 
+//    cvParams
+//    |> List.fold (
+//        fun graph cvp ->
+//            let label = 
+//                cvp :> IParamBase 
+//                |> ParamBase.getValue :?> IParamBase
+//                |> ParamBase.getValue :?> CvParam
+//            match BuildingBlockType.tryOfString (cvp :> ICvBase).Name with
+//            | Some Sample
+//            | Some RawDataFile
+//            | Some DerivedDataFile
+//            | Some Source -> 
+//                let vertexId = 
+//                    label :> IParamBase 
+//                    |> ParamBase.getValue :?> ICvBase
+//                    |> CvBase.getCvName
+//                let vertex = LVertex (vertexId, label)
+//                tryAddVertex vertex graph
+//            | Some Parameter
+//            | Some Characteristic
+//            | Some Factor
+//            | Some Component ->
+//                let vertex1id = 
+//                    cvp["Address"] // string * int * int
+//                tryAddEdge 
+//            //| Some (Freetext e) ->
+//            //    let vertex1id = 
+//            //        cvp["Address"] // string * int * int
+//            //    tryAddEdge 
+//    ) (Graph.create [] [])
 
 
-let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-//let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
-let wb = FsWorkbook.fromXlsxFile fp
-let shts = FsWorkbook.getWorksheets wb
 
-//let mutable testDic = new Dictionary<string,int>()
-//testDic.Add("first", 24)
-//testDic.Add("second", 1337)
-//testDic.Add("third", 69)
-//let oldTestDic = testDic
-//testDic <- new Dictionary<string,int>()
-//let testDic2 = new Dictionary<int,Dictionary<int,string>>()
-//let testDic3 = new Dictionary<int,string>()
-//testDic3.Add(3,"sheesh")
-//testDic3.Add(4,"shnash")
-//testDic2.Add(2,testDic3)
-//testDic2.Add(6,testDic3)
-//testDic2.Values |> Seq.minBy (fun d -> d.Keys |> Seq.min) |> fun d -> d.Keys |> Seq.min
 
-let tbls = FsWorkbook.getTables wb
-let tblsFiltered = tbls |> List.filter (fun t -> String.contains "annotationTable" t.Name)
-let tbl1 = tblsFiltered.Head
-let associatedWorksheet = shts.Head
-let fcc = associatedWorksheet.CellCollection
-//tbl1.Field("Source Name", fcc).DataCells(fcc, false) |> Seq.length
-//tbl1.Field("Source Name", fcc).DataCells(fcc, true)
-//tbl1.RescanRange()
-//tbl1.Field("test", fcc).DataCells(fcc, false)
-//tbl1.FieldNames
+//let fp = @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+////let fp = @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\assays\aid\isa.assay.xlsx"
+//let wb = FsWorkbook.fromXlsxFile fp
+//let shts = FsWorkbook.getWorksheets wb
 
-/// Takes an FsWorkbook and returns all Annotation Tables it contains.
-let getAnnotationTables workbook =
-    let tables = FsWorkbook.getTables workbook
-    tables |> List.filter (fun t -> String.contains "annotationTable" t.Name)
+////let mutable testDic = new Dictionary<string,int>()
+////testDic.Add("first", 24)
+////testDic.Add("second", 1337)
+////testDic.Add("third", 69)
+////let oldTestDic = testDic
+////testDic <- new Dictionary<string,int>()
+////let testDic2 = new Dictionary<int,Dictionary<int,string>>()
+////let testDic3 = new Dictionary<int,string>()
+////testDic3.Add(3,"sheesh")
+////testDic3.Add(4,"shnash")
+////testDic2.Add(2,testDic3)
+////testDic2.Add(6,testDic3)
+////testDic2.Values |> Seq.minBy (fun d -> d.Keys |> Seq.min) |> fun d -> d.Keys |> Seq.min
 
-(getAnnotationTables wb).Head.CellsCollection.Count
+//let tbls = FsWorkbook.getTables wb
+//let tblsFiltered = tbls |> List.filter (fun t -> String.contains "annotationTable" t.Name)
+//let tbl1 = tblsFiltered.Head
+//let associatedWorksheet = shts.Head
+//let fcc = associatedWorksheet.CellCollection
+////tbl1.Field("Source Name", fcc).DataCells(fcc, false) |> Seq.length
+////tbl1.Field("Source Name", fcc).DataCells(fcc, true)
+////tbl1.RescanRange()
+////tbl1.Field("test", fcc).DataCells(fcc, false)
+////tbl1.FieldNames
 
-let getColumnHeaders (table : FsTable) =
-    let range = table.HeadersRow()
-    range.RangeAddress
-    table.GetHeaderCell
+///// Takes an FsWorkbook and returns all Annotation Tables it contains.
+//let getAnnotationTables workbook =
+//    let tables = FsWorkbook.getTables workbook
+//    tables |> List.filter (fun t -> String.contains "annotationTable" t.Name)
 
-let ioToCvParam headerCell dataCell =
+//(getAnnotationTables wb).Head.CellsCollection.Count
+
+//let getColumnHeaders (table : FsTable) =
+//    let range = table.HeadersRow()
+//    range.RangeAddress
+//    table.GetHeaderCell
+
+////let ioToCvParam headerCell dataCell =
     
 
-let buildingBlockToCvParam headerCell dataCells =
+////let buildingBlockToCvParam headerCell dataCells =
 
 
-let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
-let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> List.ofSeq
-let nodeHeaders, edgeHeaders = columnHeaders |> List.partition (fun c -> List.contains c.Value nodeColumnNames)
-let groupedEdgeHeaders = edgeHeaders |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
-//let nodeHeaders = columnHeaders |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
-//let groupedHeadersStr = 
+//let columnHeadersRowAddress = tbl1.HeadersRow().RangeAddress.FirstAddress.RowNumber
+//let columnHeaders = associatedWorksheet.CellCollection.GetCellsInRow columnHeadersRowAddress |> List.ofSeq
+//let nodeHeaders, edgeHeaders = columnHeaders |> List.partition (fun c -> List.contains c.Value nodeColumnNames)
+//let groupedEdgeHeaders = edgeHeaders |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
+////let nodeHeaders = columnHeaders |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
+////let groupedHeadersStr = 
 
-//let ftf = FsTableField()
-//let header1 = tbl1.Field("Source Name", fcc)
-//header1.DataCells(fcc, true)
-//header1.DataCells(fcc, false) |> Seq.length
-//header1.Index
-//let header2 = tbl1.Field("Parameter [Protocol]", fcc)
-//header2.Index
-//tbl1.RescanRange()
-//tbl1.FieldNames(obj)
-
-
-//parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray)
-//groupedHeaders |> Array.map (parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray))
-
-//// for FsCells & CvParams
-//type BuildingBlock<'a> =
-//    | Triple of ('a * 'a * 'a)
-//    | Quadruple of ('a * 'a * 'a * 'a)
+////let ftf = FsTableField()
+////let header1 = tbl1.Field("Source Name", fcc)
+////header1.DataCells(fcc, true)
+////header1.DataCells(fcc, false) |> Seq.length
+////header1.Index
+////let header2 = tbl1.Field("Parameter [Protocol]", fcc)
+////header2.Index
+////tbl1.RescanRange()
+////tbl1.FieldNames(obj)
 
 
-let parsedNodes = List.map (parseNode fcc) nodeHeaders
-let parsedEdges = List.map (parseEdges true fcc) groupedEdgeHeaders
-let nodeTypes = parsedNodes |> List.map (List.map getNodeType)
-parsedNodes.Head.Head |> ArcGraphModel.ParamBase.getValue
-parsedNodes.Head[1] |> ArcGraphModel.ParamBase.getValue
-parsedNodes.Length
-parsedNodes.Head.Length
-parsedEdges.Head.Head |> ArcGraphModel.CvBase.getCvAccession
-parsedEdges.Head.Head |> ArcGraphModel.ParamBase.getValue
-parsedEdges.Head[1] |> ArcGraphModel.ParamBase.getValue
-parsedEdges |> List.map (List.map ParamBase.getValue)
-parsedEdges |> List.map (List.map CvBase.getCvName)
+////parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray)
+////groupedHeaders |> Array.map (parse true (groupedHeaders |> Array.collect (Array.map (fun c -> c.Value)) |> List.ofArray))
+
+////// for FsCells & CvParams
+////type BuildingBlock<'a> =
+////    | Triple of ('a * 'a * 'a)
+////    | Quadruple of ('a * 'a * 'a * 'a)
 
 
-
-let sourceNodes, sinkNodes, protocolRefNodes = separateNodes (List.concat parsedNodes)
-
-
-let t2 = tbls.Item 1
-let assWs2 = FsTable.getWorksheetOfTable wb t2
-let fcc2 = assWs2.CellCollection
-let columnHeadersRowAddress2 = t2.HeadersRow().RangeAddress.FirstAddress.RowNumber
-let columnHeaders2 = fcc2.GetCellsInRow columnHeadersRowAddress2 |> List.ofSeq
-let nodeHeaders2, edgeHeaders2 = columnHeaders2 |> List.partition (fun c -> List.contains c.Value nodeColumnNames)
-let groupedEdgeHeaders2 = edgeHeaders2 |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
-let parsedEdges2 = groupedEdgeHeaders2 |> List.map (parseEdges true fcc2)
-//let nodeHeaders2 = columnHeaders2 |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
-let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
-
-
-let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
-testGraph.EdgeCount
-testGraph.VertexCount
-let extractedVertices = testGraph.GetVertices()
-//let extractedVertices : LVertex<int,CvParam<string>> = testGraph.GetVertices()
-let extractedEdges = testGraph.GetEdges()
-//Graph.get
-testGraph.GetLabels()
-//testGraph.
-Graph.extractVerticesWithLabels
-
-let (sourceNodes2, sinkNodes2, protocolRefNodes2) = separateNodes (List.concat parsedNodes2)
-
-let testParamValue = ParamValue.Value "testParamValue.Value"
-let testCvParam = CvParam("testCvParamTAN", "testCvParamName", "testCvParamTSR", testParamValue)
+//let parsedNodes = List.map (parseNode fcc) nodeHeaders
+//let parsedEdges = List.map (parseEdges true fcc) groupedEdgeHeaders
+//let nodeTypes = parsedNodes |> List.map (List.map getNodeType)
+//parsedNodes.Head.Head |> ArcGraphModel.ParamBase.getValue
+//parsedNodes.Head[1] |> ArcGraphModel.ParamBase.getValue
+//parsedNodes.Length
+//parsedNodes.Head.Length
+//parsedEdges.Head.Head |> ArcGraphModel.CvBase.getCvAccession
+//parsedEdges.Head.Head |> ArcGraphModel.ParamBase.getValue
+//parsedEdges.Head[1] |> ArcGraphModel.ParamBase.getValue
+//parsedEdges |> List.map (List.map ParamBase.getValue)
+//parsedEdges |> List.map (List.map CvBase.getCvName)
 
 
 
-// function input
+//let sourceNodes, sinkNodes, protocolRefNodes = separateNodes (List.concat parsedNodes)
 
-let newSources = snd sourceNodes2
-let newSinks = snd sinkNodes2
-let newEdges = parsedEdges2
-newEdges.Length
-newEdges.Head.Length
-let graph = testGraph
+
+//let t2 = tbls.Item 1
+//let assWs2 = FsTable.getWorksheetOfTable wb t2
+//let fcc2 = assWs2.CellCollection
+//let columnHeadersRowAddress2 = t2.HeadersRow().RangeAddress.FirstAddress.RowNumber
+//let columnHeaders2 = fcc2.GetCellsInRow columnHeadersRowAddress2 |> List.ofSeq
+//let nodeHeaders2, edgeHeaders2 = columnHeaders2 |> List.partition (fun c -> List.contains c.Value nodeColumnNames)
+//let groupedEdgeHeaders2 = edgeHeaders2 |> Seq.groupWhen (fun h -> String.contains "[" h.Value) |> List.ofSeq |> List.map List.ofSeq
+//let parsedEdges2 = groupedEdgeHeaders2 |> List.map (parseEdges true fcc2)
+////let nodeHeaders2 = columnHeaders2 |> List.filter (fun ch -> List.contains ch.Value nodeColumnNames)
+//let parsedNodes2 = nodeHeaders2 |> List.map (parseNode fcc2)
+
+
+//let testGraph = initGraphWithElements (snd sourceNodes) parsedEdges (snd sinkNodes)
+//testGraph.EdgeCount
+//testGraph.VertexCount
+//let extractedVertices = testGraph.GetVertices()
+////let extractedVertices : LVertex<int,CvParam<string>> = testGraph.GetVertices()
+//let extractedEdges = testGraph.GetEdges()
+////Graph.get
+//testGraph.GetLabels()
+////testGraph.
+//Graph.extractVerticesWithLabels
+
+//let (sourceNodes2, sinkNodes2, protocolRefNodes2) = separateNodes (List.concat parsedNodes2)
+
+//let testParamValue = ParamValue.Value "testParamValue.Value"
+//let testCvParam = CvParam("testCvParamTAN", "testCvParamName", "testCvParamTSR", testParamValue)
+
+
+
+//// function input
+
+//let newSources = snd sourceNodes2
+//let newSinks = snd sinkNodes2
+//let newEdges = parsedEdges2
+//newEdges.Length
+//newEdges.Head.Length
+//let graph = testGraph
 
 // function body
 

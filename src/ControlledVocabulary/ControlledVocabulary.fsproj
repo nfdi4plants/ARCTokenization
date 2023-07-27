@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="ArcStructuralOntology\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="CvTerm.fs" />
+    <Compile Include="ParamValue.fs" />
+    <Compile Include="IParamBase.fs" />
+    <Compile Include="ICvBase.fs" />
+    <Compile Include="IParam.fs" />
+    <Compile Include="CvAttributeCollection.fs" />
+    <Compile Include="CvParam.fs" />
+    <Compile Include="UserParam.fs" />
+    <Compile Include="CvObject.fs" />
+    <Compile Include="CvContainer.fs" />
+  </ItemGroup>
+
+  <ItemGroup />
+  
+  <PropertyGroup>
+    <Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey, Kevin Schneider</Authors>
+    <Description>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Description>
+    <Summary>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!--<PackageIcon>logo.png</PackageIcon>-->
+    <PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants fable fable-library fable-javascript</PackageTags>
+    <RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+</Project>
