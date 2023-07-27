@@ -9,6 +9,8 @@
   <ItemGroup>
     <None Include="Fixtures\**" CopyToOutputDirectory="Always" />
     <Compile Include="TestUtils.fs" />
+    <Compile Include="TestObjects.fs" />
+    <Compile Include="IntegrationTests\Assay.fs" />
     <Compile Include="IntegrationTests\ParseInvestigationTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

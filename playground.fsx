@@ -40,19 +40,7 @@ open ArcGraphModel
 
 // Assay annotation table parsing
 
-let assay = FsWorkbook.fromXlsxFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/isa.assay.xlsx")
-
-let sheet1 = FsWorkbook.getWorksheets assay |> Seq.item 0
-let sheet2 = FsWorkbook.getWorksheets assay |> Seq.item 1
-
-sheet1.Rows[0] |> Seq.toList
-sheet2.Rows[0] |> Seq.toList
-
-let assayTables = AnnotationTable.parseWorkbook assay
-
-assayTables[1] 
-|> snd
-|> fun x -> x.TermRelatedBuildingBlocks
+let assayTokens = Assay.parseAnnotationTablesFromFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/assay_with_only_source_and_sample_column.xlsx")
 
 // Investigation metadata parsing
 

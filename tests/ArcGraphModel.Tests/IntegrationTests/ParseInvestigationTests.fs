@@ -8,7 +8,6 @@ open Xunit
 
 open TestUtils
 
-
 let inves = FsWorkbook.fromXlsxFile "Fixtures/isa.investigation.xlsx"
 let invesWs = FsWorkbook.getWorksheets inves |> Seq.head
 let invesWsParsed = Worksheet.parseRowsFlat invesWs
