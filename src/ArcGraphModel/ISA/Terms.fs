@@ -26,7 +26,7 @@ module InvestigationMetadata =
         ontology.Terms
         |> List.map (fun t -> CvTerm(t.Id,t.Name,"INVMSO"))
 
-module Study =
+module StudyMetadata =
     
     let internal obo = (EmbeddedResource.load "structural_ontologies.study_metadata_structural_ontology.obo").Replace("\r\n", "\n").Split('\n')
 
@@ -36,7 +36,7 @@ module Study =
         ontology.Terms
         |> List.map (fun t -> CvTerm(t.Id,t.Name,"STDMSO"))    
 
-module Assay = 
+module AssayMetadata = 
     
     let internal obo = (EmbeddedResource.load "structural_ontologies.assay_metadata_structural_ontology.obo").Replace("\r\n", "\n").Split('\n')
 

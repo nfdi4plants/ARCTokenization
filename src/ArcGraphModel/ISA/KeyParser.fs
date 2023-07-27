@@ -157,24 +157,29 @@ module KeyParser =
         | Term InvestigationMetadata.cvTerms term ->
             fun (pv) -> CvParam(term,pv,attributes)
 
-        | Token TokenBase.identifier term
-        | Token TokenBase.name term
-        | Token TokenBase.title term
-        | Token TokenBase.description term
-        | Token TokenBase.familyName term
-        | Token TokenBase.givenName term
-        | Token TokenBase.midInitials term
-        | Token TokenBase.email term
-        | Token TokenBase.factorType term
-        | Token TokenBase.designType term
-        | Token TokenBase.data term
-        | Token TokenBase.source term
-        | Token TokenBase.sample term
-        | Token TokenBase.annotationID term
-        | Token TokenBase.termSourceRef term
-        | Token TokenBase.phone term -> 
+        | Term StudyMetadata.cvTerms term ->
             fun (pv) -> CvParam(term,pv,attributes)
 
+        | Term AssayMetadata.cvTerms term ->
+            fun (pv) -> CvParam(term,pv,attributes)
+
+        //| Token TokenBase.identifier term
+        //| Token TokenBase.name term
+        //| Token TokenBase.title term
+        //| Token TokenBase.description term
+        //| Token TokenBase.familyName term
+        //| Token TokenBase.givenName term
+        //| Token TokenBase.midInitials term
+        //| Token TokenBase.email term
+        //| Token TokenBase.factorType term
+        //| Token TokenBase.designType term
+        //| Token TokenBase.data term
+        //| Token TokenBase.source term
+        //| Token TokenBase.sample term
+        //| Token TokenBase.annotationID term
+        //| Token TokenBase.termSourceRef term
+        //| Token TokenBase.phone term -> 
+        //    fun (pv) -> CvParam(term,pv,attributes)
         //| Attribute AttributeBase.person (attribute,key) 
         //| Attribute AttributeBase.investigation (attribute,key) 
         //| Attribute AttributeBase.study (attribute,key) 
