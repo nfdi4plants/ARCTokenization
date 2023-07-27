@@ -1,0 +1,556 @@
+format-version: 1.2
+data-version: init/2023-07-20
+saved-by: Kevin Schneider
+default-namespace: invmso
+ontology: INVMSO
+
+[Term]
+id: INVMSO:00000001
+name: Investigation Metadata
+def: ""
+
+[Term]
+id: INVMSO:00000002
+name: ONTOLOGY SOURCE REFERENCE
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000003
+name: Ontology Source Name
+def: ""
+relationship: part_of INVMSO:00000002 ! ONTOLOGY SOURCE REFERENCE
+
+[Term]
+id: INVMSO:00000004
+name: Ontology Source File
+def: ""
+relationship: part_of INVMSO:00000002 ! ONTOLOGY SOURCE REFERENCE
+
+[Term]
+id: INVMSO:00000005
+name: Ontology Source Version
+def: ""
+relationship: part_of INVMSO:00000002 ! ONTOLOGY SOURCE REFERENCE
+
+[Term]
+id: INVMSO:00000006
+name: Ontology Source Description
+def: ""
+relationship: part_of INVMSO:00000002 ! ONTOLOGY SOURCE REFERENCE
+
+[Term]
+id: INVMSO:00000007
+name: INVESTIGATION
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000008
+name: Investigation Identifier
+def: "A unique identifier for the Investigation"
+relationship: part_of INVMSO:00000007 ! INVESTIGATION
+
+[Term]
+id: INVMSO:00000009
+name: Investigation Title
+def: "A short description of the Investigation"
+relationship: part_of INVMSO:00000007 ! INVESTIGATION
+
+[Term]
+id: INVMSO:00000010
+name: Investigation Description
+def: ""
+relationship: part_of INVMSO:00000007 ! INVESTIGATION
+
+[Term]
+id: INVMSO:00000011
+name: Investigation Submission Date
+def: ""
+relationship: part_of INVMSO:00000007 ! INVESTIGATION
+
+[Term]
+id: INVMSO:00000012
+name: Investigation Public Release Date
+def: ""
+relationship: part_of INVMSO:00000007 ! INVESTIGATION
+
+[Term]
+id: INVMSO:0000014
+name: INVESTIGATION PUBLICATIONS
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000015
+name: Investigation Publication DOI
+def: ""
+relationship: part_of INVMSO:0000014 ! INVESTIGATION PUBLICATIONS
+
+[Term]
+id: INVMSO:00000016
+name: Investigation Publication Author List
+def: ""
+relationship: part_of INVMSO:0000014 ! INVESTIGATION PUBLICATIONS
+
+[Term]
+id: INVMSO:00000017
+name: Investigation Publication Title
+def: ""
+relationship: part_of INVMSO:0000014 ! INVESTIGATION PUBLICATIONS
+
+[Term]
+id: INVMSO:00000018
+name: Investigation Publication Status
+def: ""
+relationship: part_of INVMSO:0000014 ! INVESTIGATION PUBLICATIONS
+
+[Term]
+id: INVMSO:00000019
+name: Investigation Publication Status Term Accession Number
+def: ""
+relationship: part_of INVMSO:0000014 ! INVESTIGATION PUBLICATIONS
+
+[Term]
+id: INVMSO:00000020
+name: Investigation Publication Status Term Source REF
+def: ""
+relationship: part_of INVMSO:0000014 ! INVESTIGATION PUBLICATIONS
+
+[Term]
+id: INVMSO:00000021
+name: INVESTIGATION CONTACTS
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000022
+name: Investigation Person Last Name
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000023
+name: Investigation Person First Name
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000024
+name: Investigation Person Mid Initials
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000025
+name: Investigation Person Email
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000026
+name: Investigation Person Phone
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000027
+name: Investigation Person Fax
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000028
+name: Investigation Person Address
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000029
+name: Investigation Person Affiliation
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000030
+name: Investigation Person Roles
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000031
+name: Investigation Person Roles Term Accession Number
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000032
+name: Investigation Person Roles Term Source REF
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000033
+name: Investigation Person ORCID
+def: ""
+relationship: part_of INVMSO:0000021 ! INVESTIGATION CONTACTS
+
+[Term]
+name: STUDY
+id: INVMSO:00000034
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000035
+name: Study Identifier
+def: ""
+relationship: part_of INVMSO:00000034 ! STUDY
+
+[Term]
+id: INVMSO:00000036
+name: Study Title
+def: ""
+relationship: part_of INVMSO:00000034 ! STUDY
+
+[Term]
+id: INVMSO:00000037
+name: Study Description
+def: ""
+relationship: part_of INVMSO:00000034 ! STUDY
+
+[Term]
+id: INVMSO:00000038
+name: Study Submission Date
+def: ""
+relationship: part_of INVMSO:00000034 ! STUDY
+
+[Term]
+id: INVMSO:00000039
+name: Study Public Release Date
+def: ""
+relationship: part_of INVMSO:00000034 ! STUDY
+
+[Term]
+id: INVMSO:00000040
+name: Study File Name
+def: ""
+relationship: part_of INVMSO:00000034 ! STUDY
+
+[Term]
+id: INVMSO:00000041
+name: STUDY DESIGN DESCRIPTORS
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000042
+name: Study Design Type
+def: ""
+relationship: part_of INVMSO:00000041 ! STUDY DESIGN DESCRIPTORS
+
+[Term]
+id: INVMSO:00000043
+name: Study Design Type Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000041 ! STUDY DESIGN DESCRIPTORS
+
+[Term]
+id: INVMSO:00000044
+name: Study Design Type Term Source REF
+def: ""
+relationship: part_of INVMSO:00000041 ! STUDY DESIGN DESCRIPTORS
+
+[Term]
+id: INVMSO:00000045
+name: STUDY PUBLICATIONS
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000046
+name: Study Publication PubMed ID
+def: ""
+relationship: part_of INVMSO:00000045 ! STUDY PUBLICATIONS
+
+[Term]
+id: INVMSO:00000047
+name: Study Publication DOI
+def: ""
+relationship: part_of INVMSO:00000045 ! STUDY PUBLICATIONS
+
+[Term]
+id: INVMSO:00000048
+name: Study Publication Author List
+def: ""
+relationship: part_of INVMSO:00000045 ! STUDY PUBLICATIONS
+
+[Term]
+id: INVMSO:00000049
+name: Study Publication Title
+def: ""
+relationship: part_of INVMSO:00000045 ! STUDY PUBLICATIONS
+
+[Term]
+id: INVMSO:00000050
+name: Study Publication Status
+def: ""
+relationship: part_of INVMSO:00000045 ! STUDY PUBLICATIONS
+
+[Term]
+id: INVMSO:00000051
+name: Study Publication Status Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000045 ! STUDY PUBLICATIONS
+
+[Term]
+id: INVMSO:00000052
+name: Study Publication Status Term Source REF
+def: ""
+relationship: part_of INVMSO:00000045 ! STUDY PUBLICATIONS
+
+[Term]
+id: INVMSO:00000053
+name: STUDY FACTORS
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000054
+name: Study Factor Name
+def: ""
+relationship: part_of INVMSO:00000053 ! STUDY FACTORS
+
+[Term]
+id: INVMSO:00000055
+name: Study Factor Type
+def: ""
+relationship: part_of INVMSO:00000053 ! STUDY FACTORS
+
+[Term]
+id: INVMSO:00000056
+name: Study Factor Type Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000053 ! STUDY FACTORS
+
+[Term]
+id: INVMSO:00000057
+name: Study Factor Type Term Source REF
+def: ""
+relationship: part_of INVMSO:00000053 ! STUDY FACTORS
+
+[Term]
+id: INVMSO:00000058
+name: STUDY ASSAYS
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000059
+name: Study Assay Measurement Type
+def: ""
+relationship: part_of INVMSO:00000058 ! STUDY ASSAYS
+
+[Term]
+id: INVMSO:00000060
+name: Study Assay Measurement Type Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000058 ! STUDY ASSAYS
+
+[Term]
+id: INVMSO:00000061
+name: Study Assay Measurement Type Term Source REF
+def: ""
+relationship: part_of INVMSO:00000058 ! STUDY ASSAYS
+
+[Term]
+id: INVMSO:00000062
+name: Study Assay Technology Type
+def: ""
+relationship: part_of INVMSO:00000058 ! STUDY ASSAYS
+
+[Term]
+id: INVMSO:00000063
+name: Study Assay Technology Type Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000058 ! STUDY ASSAYS
+
+[Term]
+id: INVMSO:00000064
+name: Study Assay Technology Type Term Source REF
+def: ""
+relationship: part_of INVMSO:00000058 ! STUDY ASSAYS
+
+[Term]
+id: INVMSO:00000065
+name: Study Assay Technology Platform
+def: ""
+relationship: part_of INVMSO:00000058 ! STUDY ASSAYS
+
+[Term]
+id: INVMSO:00000066
+name: Study Assay File Name
+def: ""
+relationship: part_of INVMSO:00000058 ! STUDY ASSAYS
+
+[Term]
+id: INVMSO:00000067
+name: STUDY PROTOCOLS
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000068
+name: Study Protocol Name
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000069
+name: Study Protocol Type
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000070
+name: Study Protocol Type Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000071
+name: Study Protocol Type Term Source REF
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000072
+name: Study Protocol Description
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000073
+name: Study Protocol URI
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000074
+name: Study Protocol Version
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000075
+name: Study Protocol Parameters Name
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000076
+name: Study Protocol Parameters Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000077
+name: Study Protocol Parameters Term Source REF
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000078
+name: Study Protocol Components Name
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000079
+name: Study Protocol Components Type
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000080
+name: Study Protocol Components Type Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000081
+name: Study Protocol Components Type Term Source REF
+def: ""
+relationship: part_of INVMSO:00000067 ! STUDY PROTOCOLS
+
+[Term]
+id: INVMSO:00000082
+name: STUDY CONTACTS
+def: ""
+relationship: part_of INVMSO:00000001 ! Investigation Metadata
+
+[Term]
+id: INVMSO:00000083
+name: Study Person Last Name
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000084
+name: Study Person First Name
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000085
+name: Study Person Mid Initials
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000086
+name: Study Person Email
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000087
+name: Study Person Phone
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000088
+name: Study Person Fax
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000089
+name: Study Person Address
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000090
+name: Study Person Affiliation
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000091
+name: Study Person Roles
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000092
+name: Study Person Roles Term Accession Number
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS
+
+[Term]
+id: INVMSO:00000093
+name: Study Person Roles Term Source REF
+def: ""
+relationship: part_of INVMSO:00000082 ! STUDY CONTACTS

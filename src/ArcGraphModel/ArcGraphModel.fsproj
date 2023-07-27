@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="ArcStructuralOntology/arc_structure.obo" />
-    <None Include="ArcStructuralOntology/arc_structure.yml" />
+    <None Include="ArcStructuralOntology\assay_metadata_structural_ontology.yml" />
+    <None Include="ArcStructuralOntology\study_metadata_structural_ontology.obo" />
+    <None Include="ArcStructuralOntology\study_metadata_structural_ontology.yml" />
+    <None Include="ArcStructuralOntology\investigation_metadata_structural_ontology.obo" />
+    <None Include="ArcStructuralOntology\investigation_metadata_structural_ontology.yml" />
     <Compile Include="Address.fs" />
     <Compile Include="ISA\Terms.fs" />
     <Compile Include="ISA\AnnotationTable.fs" />
