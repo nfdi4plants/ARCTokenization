@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="ArcStructuralOntology\assay_metadata_structural_ontology.yml" />
-    <None Include="ArcStructuralOntology\study_metadata_structural_ontology.obo" />
-    <None Include="ArcStructuralOntology\study_metadata_structural_ontology.yml" />
-    <None Include="ArcStructuralOntology\investigation_metadata_structural_ontology.obo" />
-    <None Include="ArcStructuralOntology\investigation_metadata_structural_ontology.yml" />
+
+    <EmbeddedResource Include="structural_ontologies/investigation_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
+    <EmbeddedResource Include="structural_ontologies/study_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
+    <EmbeddedResource Include="structural_ontologies/assay_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
+    <None Include="structural_ontologies/investigation_metadata_structural_ontology.yml" />
+    <None Include="structural_ontologies/study_metadata_structural_ontology.yml" />
+    <None Include="structural_ontologies/assay_metadata_structural_ontology.yml" />
+
     <Compile Include="Address.fs" />
     <Compile Include="ISA\Terms.fs" />
     <Compile Include="ISA\AnnotationTable.fs" />
@@ -34,6 +37,9 @@
     <RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+
+
+  <ItemGroup />
 
   <ItemGroup>
     <ProjectReference Include="..\ControlledVocabulary\ControlledVocabulary.fsproj" PackageVersion="[0.0.0, 1.0.0)" />

@@ -1,7 +1,7 @@
 ﻿namespace ArcGraphModel
 
 open ControlledVocabulary
-
+open ArcGraphModel.Terms
 
 module TokenAggregation = 
     

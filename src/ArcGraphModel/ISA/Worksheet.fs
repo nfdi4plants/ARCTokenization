@@ -3,7 +3,7 @@
 open ControlledVocabulary
 open FSharpAux
 open FsSpreadsheet
-
+open ArcGraphModel.Terms
 
 module Worksheet =
 

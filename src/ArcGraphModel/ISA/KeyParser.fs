@@ -3,6 +3,7 @@
 open ControlledVocabulary
 open FSharpAux
 open FsSpreadsheet
+open ArcGraphModel.Terms
 
 type ContainerBase =
     
@@ -146,9 +147,16 @@ module KeyParser =
     let (|UnMatchable|) (key : string) : string =
         key
 
+    let (|Term|_|) (terms : CvTerm list) (key : string) : CvTerm Option =
+        terms 
+        |> List.tryFind (fun (term) -> CvTerm.getName term = key)
 
     let rec parseKey (attributes : IParam list) (key : string) : ParamValue -> IParam = 
         match key with
+
+        | Term InvestigationMetadata.cvTerms term ->
+            fun (pv) -> CvParam(term,pv,attributes)
+
         | Token TokenBase.identifier term
         | Token TokenBase.name term
         | Token TokenBase.title term
