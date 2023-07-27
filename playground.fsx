@@ -40,7 +40,7 @@ open ArcGraphModel
 
 // Assay annotation table parsing
 
-let assayTokens = Assay.parseAnnotationTablesFromFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/assay_with_only_source_and_sample_column.xlsx")
+let assayTokens = Assay.parseAnnotationTablesFromFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/assay_with_single_characteristics.xlsx")
 
 // Investigation metadata parsing
 

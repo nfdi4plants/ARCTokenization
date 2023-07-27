@@ -74,8 +74,29 @@ module UserParam =
 
 module TokenizedAnnotationTable =
     
+    let IOColumnsEqual (expectedIOColumns : CvParam list list) (table : TokenizedAnnotationTable) =
+        (expectedIOColumns, table.IOColumns)
+        ||> List.iter2 (fun expectedGroup actualGroup ->
+            (expectedGroup, actualGroup)
+            ||> List.iter2 (fun expectedParam actualParam ->
+                CvParam.structuralEquality expectedParam actualParam
+            )
+        )
+
     let hasIOColumnAmount (expectedIOColumnAmount : int) (table : TokenizedAnnotationTable) =
         Assert.Equal(expectedIOColumnAmount, table.IOColumns.Length)
 
+
+    let termRelatedBuildingBlocksEqual (expectedTermRelatedBuildingBlocks : CvParam list list) (table : TokenizedAnnotationTable) =
+        (expectedTermRelatedBuildingBlocks, table.TermRelatedBuildingBlocks)
+        ||> List.iter2 (fun expectedGroup actualGroup ->
+            (expectedGroup, actualGroup)
+            ||> List.iter2 (fun expectedParam actualParam ->
+                CvParam.structuralEquality expectedParam actualParam
+            )
+        )
+
     let hasTermRelatedBuildingBlockAmount (expectedTermRelatedBuildingBlockAmount : int) (table : TokenizedAnnotationTable) =
         Assert.Equal(expectedTermRelatedBuildingBlockAmount, table.TermRelatedBuildingBlocks.Length)
+
+
