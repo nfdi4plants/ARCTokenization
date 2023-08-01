@@ -76,14 +76,14 @@ def: ""
     relationship: part_of INVMSO:00000007 ! INVESTIGATION
 
   [Term]
-  id: INVMSO:0000013
+  id: INVMSO:00000013
   name: INVESTIGATION PUBLICATIONS
   def: ""
   relationship: part_of INVMSO:00000001 ! Investigation Metadata
 
     [Term]
     id: INVMSO:00000014
-    name: Investigation PubMed ID
+    name: Investigation Publication PubMed ID
     def: ""
     relationship: part_of INVMSO:0000014 ! INVESTIGATION PUBLICATIONS
 
