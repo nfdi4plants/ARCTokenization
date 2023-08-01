@@ -16,14 +16,20 @@
     <None Include="structural_ontologies/assay_metadata_structural_ontology.yml" />
 
     <Compile Include="Address.fs" />
-    <Compile Include="ISA\Terms.fs" />
-    <Compile Include="ISA\AnnotationTable.fs" />
-    <Compile Include="ISA\Regex.fs" />
-    <Compile Include="ISA\KeyParser.fs" />
-    <Compile Include="ISA\Tokenization.fs" />
-    <Compile Include="ISA\TokenAggregation.fs" />
-    <Compile Include="ISA\Worksheet.fs" />
-    <Compile Include="ISA\TopLevelParsers.fs" />
+
+    <Compile Include="Terms.fs" />
+
+    <Compile Include="Regex.fs" />
+
+    <Compile Include="AnnotationTable.fs" />
+
+    <Compile Include="MetadataSheet.fs" />
+
+    <Compile Include="Tokenization.fs" />
+
+    <Compile Include="Workbook.fs" />
+    <Compile Include="Worksheet.fs" />
+    <Compile Include="TopLevelParsers.fs" />
   </ItemGroup>
 
 
@@ -38,9 +44,6 @@
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
-
-  <ItemGroup />
-
   <ItemGroup>
     <ProjectReference Include="..\ControlledVocabulary\ControlledVocabulary.fsproj" PackageVersion="[0.0.0, 1.0.0)" />
     <PackageReference Include="FSharp.FGL.ArrayAdjacencyGraph" Version="[0.0.2]" />
@@ -48,6 +51,10 @@
     <PackageReference Include="FsOboParser" Version="0.1.0" />
     <PackageReference Include="FsSpreadsheet" Version="[3.1.1]" />
     <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[3.1.1]" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ISA\" />
   </ItemGroup>
 
   <Target Name="UseExplicitPackageVersions" BeforeTargets="GenerateNuspec">

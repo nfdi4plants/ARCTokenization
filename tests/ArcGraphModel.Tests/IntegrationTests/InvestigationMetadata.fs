@@ -8,9 +8,10 @@ open Xunit
 
 open TestUtils
 
-let parsedInvestigationMetadata = Investigation.parseMetadataSheetfromXlsxFile "Fixtures/incorrect/investigation_empty.xlsx"
+let parsedInvestigationMetadataEmpty = Investigation.parseMetadataSheetFromFile "Fixtures/incorrect/investigation_empty.xlsx"
+let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetFromFile "Fixtures/correct/investigation_simple.xlsx"
 
-let allExpectedMetadataTerms = 
+let allExpectedMetadataTermsEmpty = 
     // maybe we want to not rely on parsed obo? i think we can.
     //[
     //    CvParam(("INVMSO:00000002","ONTOLOGY SOURCE REFERENCE", "INVMSO"), ParamValue.Value "", [])
@@ -111,14 +112,122 @@ let allExpectedMetadataTerms =
 
 [<Fact>]
 let ``First Param is CvParam`` () =
-    Assert.True (parsedInvestigationMetadata.Head |> CvParam.tryCvParam).IsSome 
+    Assert.True (parsedInvestigationMetadataEmpty.Head |> CvParam.tryCvParam).IsSome 
 
 [<Fact>]
-let ``First CvParam`` () = CvParam.structuralEquality (parsedInvestigationMetadata.Head :?> CvParam) allExpectedMetadataTerms[0]
+let ``First CvParam`` () = CvParam.structuralEquality (parsedInvestigationMetadataEmpty.Head :?> CvParam) allExpectedMetadataTermsEmpty[0]
 
 [<Fact>]
 let ``Empty investigation is parsed with all structural ontology terms in order`` () =
-    Assert.All((List.zip allExpectedMetadataTerms parsedInvestigationMetadata), (fun (expected,actual) ->
+    Assert.All((List.zip allExpectedMetadataTermsEmpty parsedInvestigationMetadataEmpty), (fun (expected,actual) ->
         CvParam.structuralEquality (expected) (actual :?> CvParam)
     ))
 
+let expectedTermValuesSimple = 
+    [
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "iid"]
+        [""; "ititle"]
+        [""; "idesc"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "Maus"; "Keider"; "müller"; "oih"]
+        [""; "Oliver"; "andreas"]
+        [""; "L. I."; "C."]
+        [""; "maus@nfdi4plants.org"]
+        [""]
+        [""]
+        [""]
+        [""; "Affe"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "sid"]
+        [""; "stitle"]
+        [""; "sdesc"]
+        [""]
+        [""]
+        [""; "sid\isa.study.xlsx"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "aid\isa.assay.xlsx"; "aid2\isa.assay.xlsx"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "weil"]
+        [""; "lukas"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+    ] |> List.concat
+
+//let allExpectedMetadataTermsFull =
+//    Terms.InvestigationMetadata.cvTerms
+//    |> List.skip 1
+//    |> List.zip expectedTermValuesSimple
+//    |> List.map (fun (value,term) ->
+//        CvParam(term, ParamValue.Value value, [])
+//    )
+
+//[<Fact>]
+//let ``Simple investigation is parsed with all structural ontology terms in order`` () =
+//    Assert.All((List.zip allExpectedMetadataTermsFull parsedInvestigationMetadataSimple), (fun (expected,actual) ->
+//        CvParam.structuralEquality (expected) (actual :?> CvParam)
+//    ))
