@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Authors>Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey</Authors>
+    <Authors>Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey</Authors>
     <Description>A generic data model for representing controlled vocabularies</Description>
     <Summary>A generic data model for representing controlled vocabularies</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

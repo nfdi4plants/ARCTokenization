@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <Authors>Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey</Authors>
+    <Authors>Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey</Authors>
     <Description>F# library for tokenization of ARC metadata into controlled vocabulary tokens</Description>
     <Summary>F# library for tokenization of ARC metadata into controlled vocabulary tokens</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
