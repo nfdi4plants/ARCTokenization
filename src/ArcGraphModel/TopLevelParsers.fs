@@ -5,7 +5,7 @@ open FSharpAux
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 
-type Investigation() =
+type Investigation =
 
     /// <summary>
     /// Parses the metadata sheet from an ISA Investigation  XLSX file as a row-based 2D list of `IParam`s.
@@ -38,7 +38,7 @@ type Investigation() =
         )
         |> List.concat
 
-type Study() =
+type Study =
 
     /// <summary>
     /// Parses the metadata sheet from an ISA Study XLSX file as a row-based 2D list of `IParam`s.
@@ -71,7 +71,15 @@ type Study() =
         )
         |> List.concat
 
-type Assay() =
+    /// <summary>
+    /// Parses all annotation tables from an ISA Study XLSX file as a list of `TokenizedAnnotationTable`s, a type that contains IO columns separated from the other columns.
+    /// </summary>
+    /// <param name="path">he path to the study xlsx file</param>
+    static member parseAnnotationTablesFromFile (path: string) =
+        FsWorkbook.fromXlsxFile path
+        |> AnnotationTable.parseWorkbook
+
+type Assay =
 
     /// <summary>
     /// Parses the metadata sheet from an ISA Assay XLSX file as a row-based 2D list of `IParam`s.
@@ -103,7 +111,6 @@ type Assay() =
             ?UseLastSheetOnIncorrectName = UseLastSheetOnIncorrectName
         )
         |> List.concat
-
 
     /// <summary>
     /// Parses all annotation tables from an ISA Assay XLSX file as a list of `TokenizedAnnotationTable`s, a type that contains IO columns separated from the other columns.
