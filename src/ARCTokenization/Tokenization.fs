@@ -1,9 +1,9 @@
-﻿namespace ArcGraphModel
+﻿namespace ARCTokenization
 
 open ControlledVocabulary
 open FsSpreadsheet
 open MetadataSheet
-open ArcGraphModel.Terms
+open ARCTokenization.Terms
 
 module Tokenization = 
     

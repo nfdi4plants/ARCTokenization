@@ -1,6 +1,6 @@
 ﻿module TestObjects
 
-open ArcGraphModel
+open ARCTokenization
 
 module Assays =
     

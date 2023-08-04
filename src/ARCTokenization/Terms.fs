@@ -1,4 +1,4 @@
-﻿namespace ArcGraphModel.Terms
+﻿namespace ARCTokenization.Terms
 
 open FsOboParser
 open System.IO
@@ -12,7 +12,7 @@ module internal EmbeddedResource =
     let assembly = Assembly.GetExecutingAssembly()
 
     let load file = 
-        use str = assembly.GetManifestResourceStream($"ArcGraphModel.{file}")
+        use str = assembly.GetManifestResourceStream($"ARCTokenization.{file}")
         use r = new StreamReader(str)
         r.ReadToEnd()
 

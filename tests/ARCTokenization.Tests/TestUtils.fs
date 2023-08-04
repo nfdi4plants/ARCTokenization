@@ -2,8 +2,8 @@
 
 open Xunit
 open ControlledVocabulary
-open ArcGraphModel
-open ArcGraphModel.AnnotationTable
+open ARCTokenization
+open ARCTokenization.AnnotationTable
 
 module CvParam =
 
@@ -64,7 +64,7 @@ module CvParam =
 
 module UserParam =
 
-    open ArcGraphModel
+    open ARCTokenization
 
     let termNamesEqual (upActual : UserParam) (upExpectec : UserParam) =
         Assert.Equal(

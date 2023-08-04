@@ -27,15 +27,13 @@
     <Compile Include="CvContainer.fs" />
   </ItemGroup>
 
-  <ItemGroup />
-  
   <PropertyGroup>
-    <Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey, Kevin Schneider</Authors>
-    <Description>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Description>
-    <Summary>Fsharp Library for working on ARCs as collection of controlled vocabulary token</Summary>
+    <Authors>Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey</Authors>
+    <Description>A generic data model for representing controlled vocabularies</Description>
+    <Summary>A generic data model for representing controlled vocabularies</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <!--<PackageIcon>logo.png</PackageIcon>-->
-    <PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants fable fable-library fable-javascript</PackageTags>
+    <PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants</PackageTags>
     <RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>

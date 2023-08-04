@@ -38,7 +38,7 @@ open FsOboParser
 //open FsSpreadsheet.DSL
 open ControlledVocabulary
 open ControlledVocabulary.ParamBase
-open ArcGraphModel
+open ARCTokenization
 
 
 let expectedTermValuesSimple = 

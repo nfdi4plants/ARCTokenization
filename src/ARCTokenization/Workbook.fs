@@ -1,9 +1,9 @@
-﻿namespace ArcGraphModel
+﻿namespace ARCTokenization
 
 open ControlledVocabulary
 open FSharpAux
 open FsSpreadsheet
-open ArcGraphModel.Terms
+open ARCTokenization.Terms
 
 module Workbook =
 

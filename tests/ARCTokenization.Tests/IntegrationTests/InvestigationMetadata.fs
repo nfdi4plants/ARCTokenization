@@ -3,7 +3,7 @@
 open ControlledVocabulary
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
-open ArcGraphModel
+open ARCTokenization
 open Xunit
 
 open TestUtils

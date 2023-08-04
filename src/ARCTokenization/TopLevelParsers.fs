@@ -1,4 +1,4 @@
-﻿namespace ArcGraphModel
+﻿namespace ARCTokenization
 
 open ControlledVocabulary
 open FSharpAux
