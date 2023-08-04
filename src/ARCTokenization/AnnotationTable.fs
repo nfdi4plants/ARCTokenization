@@ -3,8 +3,6 @@
 open ControlledVocabulary
 open FSharpAux
 open FsSpreadsheet
-open FSharp.FGL
-open FSharp.FGL.ArrayAdjacencyGraph
 
 open System
 
