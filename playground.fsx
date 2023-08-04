@@ -138,23 +138,33 @@ let expectedTermValuesSimple =
 
 let allExpectedMetadataTermsFull =
     Terms.InvestigationMetadata.cvTerms
-    |> List.skip 1
+    |> List.skip 1 //(ignore root term)
     |> List.zip expectedTermValuesSimple
     |> List.map (fun (values,term) ->
-        values |> List.map ( fun v ->  CvParam(term, ParamValue.Value v, []))
+        values
+        |> List.mapi (fun i v ->
+            if i = 0 then
+                CvParam(term, ParamValue.CvValue (CvTerm("AGMO:00000001", "Metadata Section Key", "AGMO")), [])
+            else
+                CvParam(term, ParamValue.Value v, [])
+        )
     )
     |> List.concat
+allExpectedMetadataTermsFull.Length
 
-let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetfromXlsxFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/investigation_simple.xlsx")
+let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetFromFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/investigation_simple.xlsx")
+parsedInvestigationMetadataSimple.Length
 
 let i_fs = FsWorkbook.fromXlsxFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/investigation_simple.xlsx")
 
 (FsWorkbook.getWorksheetByName "isa_investigation" i_fs).CellCollection.GetCells()
 |> Seq.filter(fun c -> c.RowNumber = 1)
 
+
+
 parsedInvestigationMetadataSimple
-|> List.skip 20
-|> List.take 20
+|> List.skip 10
+|> List.take 10
 
 // Assay annotation table parsing
 

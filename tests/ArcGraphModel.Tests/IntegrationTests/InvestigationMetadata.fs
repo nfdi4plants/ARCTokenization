@@ -108,7 +108,7 @@ let allExpectedMetadataTermsEmpty =
     //]
     Terms.InvestigationMetadata.cvTerms
     |> List.skip 1 //(ignore root term)
-    |> List.map (fun p -> CvParam(p, ParamValue.Value "", []))
+    |> List.map (fun p -> CvParam(p, ParamValue.CvValue (CvTerm("AGMO:00000001", "Metadata Section Key", "AGMO")), []))
 
 [<Fact>]
 let ``First Param is CvParam`` () =
@@ -216,18 +216,25 @@ let expectedTermValuesSimple =
         [""]
         [""]
         [""]
-    ] |> List.concat
+    ]
 
-//let allExpectedMetadataTermsFull =
-//    Terms.InvestigationMetadata.cvTerms
-//    |> List.skip 1
-//    |> List.zip expectedTermValuesSimple
-//    |> List.map (fun (value,term) ->
-//        CvParam(term, ParamValue.Value value, [])
-//    )
+let allExpectedMetadataTermsFull =
+    Terms.InvestigationMetadata.cvTerms
+    |> List.skip 1 //(ignore root term)
+    |> List.zip expectedTermValuesSimple
+    |> List.map (fun (values,term) ->
+        values
+        |> List.mapi (fun i v ->
+            if i = 0 then
+                CvParam(term, ParamValue.CvValue (CvTerm("AGMO:00000001", "Metadata Section Key", "AGMO")), [])
+            else
+                CvParam(term, ParamValue.Value v, [])
+        )
+    )
+    |> List.concat
 
-//[<Fact>]
-//let ``Simple investigation is parsed with all structural ontology terms in order`` () =
-//    Assert.All((List.zip allExpectedMetadataTermsFull parsedInvestigationMetadataSimple), (fun (expected,actual) ->
-//        CvParam.structuralEquality (expected) (actual :?> CvParam)
-//    ))
+[<Fact>]
+let ``Simple investigation is parsed with all structural ontology terms in order`` () =
+    Assert.All((List.zip allExpectedMetadataTermsFull parsedInvestigationMetadataSimple), (fun (expected,actual) ->
+        CvParam.structuralEquality (expected) (actual :?> CvParam)
+    ))
