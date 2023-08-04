@@ -29,7 +29,7 @@
       },
       "FsOboParser": {
         "type": "Direct",
-        "requested": "[0.1.0, )",
+        "requested": "[0.1.0, 0.1.0]",
         "resolved": "0.1.0",
         "contentHash": "xe5bQB+HXA+sauov0ZZlDVrkVFKBM+m8S7clP04d1SqOkuPDkgum5k5g5bOZNoDVP9WEu0YaNSkR31CS2RwENQ==",
         "dependencies": {

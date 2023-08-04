@@ -1,6 +1,6 @@
 ﻿module ParamTests
 
-//open ArcGraphModel
+//open ARCTokenization
 //open Xunit
 
 //[<AutoOpenAttribute>]

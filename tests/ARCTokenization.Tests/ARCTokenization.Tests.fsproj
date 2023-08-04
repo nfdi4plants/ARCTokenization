@@ -10,8 +10,11 @@
     <None Include="Fixtures\**" CopyToOutputDirectory="Always" />
     <Compile Include="TestUtils.fs" />
     <Compile Include="TestObjects.fs" />
-    <Compile Include="IntegrationTests\Assay.fs" />
-    <Compile Include="IntegrationTests\ParseInvestigationTests.fs" />
+    <Compile Include="IntegrationTests\StudyMetadata.fs" />
+    <Compile Include="IntegrationTests\StudyAnnotationTable.fs" />
+    <Compile Include="IntegrationTests\AssayMetadata.fs" />
+    <Compile Include="IntegrationTests\AssayAnnotationTable.fs" />
+    <Compile Include="IntegrationTests\InvestigationMetadata.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -30,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ArcGraphModel\ArcGraphModel.fsproj" />
+    <ProjectReference Include="..\..\src\ARCTokenization\ARCTokenization.fsproj" />
     <PackageReference Include="FSharp.FGL.ArrayAdjacencyGraph" Version="[0.0.2]" />
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
     <PackageReference Include="FsSpreadsheet" Version="[3.1.1]" />

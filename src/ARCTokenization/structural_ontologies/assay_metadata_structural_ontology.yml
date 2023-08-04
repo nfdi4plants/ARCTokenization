@@ -1,0 +1,334 @@
+format-version: 1.2
+data-version: init/2023-07-27
+saved-by: Kevin Schneider
+default-namespace: assmso
+ontology: ASSMSO
+
+[Term]
+id: ASSMSO:00000001
+name: Assay Metadata
+def: ""
+
+  [Term]
+  id: ASSMSO:00000002
+  name: ASSAY
+  def: ""
+  synonym: "ASSAY METADATA" EXACT []
+  relationship: part_of ASSMSO:00000001 ! Assay Metadata
+
+  [Term]
+  id: ASSMSO:00000003
+  name: ASSAY METADATA
+  def: ""
+  synonym: "ASSAY" EXACT []
+  is_obsolete: true
+  relationship: part_of ASSMSO:00000001 ! Assay Metadata
+
+    [Term]
+    id: ASSMSO:00000004
+    name: Assay Measurement Type
+    def: ""
+    synonym: "Measurement Type" EXACT []
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+
+    [Term]
+    id: ASSMSO:00000005
+    name: Measurement Type
+    def: ""
+    synonym: "Assay Measurement Type" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+
+    [Term]
+    id: ASSMSO:00000006
+    name: Assay Measurement Type Term Accession Number
+    def: ""
+    synonym: "Measurement Type Term Accession Number" EXACT []
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+
+    [Term]
+    id: ASSMSO:00000007
+    name: Measurement Type Term Accession Number
+    def: "Assay Measurement Type Term Accession Number"
+    synonym: "" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+
+    [Term]
+    id: ASSMSO:00000008
+    name: Assay Measurement Type Term Source REF
+    def: ""
+    synonym: "Measurement Type Term Source REF" EXACT []
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+
+    [Term]
+    id: ASSMSO:00000009
+    name: Measurement Type Term Source REF
+    def: ""
+    synonym: "Assay Measurement Type Term Source REF" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+
+    [Term]
+    id: ASSMSO:00000010
+    name: Technology Type
+    def: ""
+    synonym: "Assay Technology Type" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000011
+    name: Assay Technology Type
+    def: ""
+    synonym: "Technology Type" EXACT []
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000012
+    name: Technology Type Term Accession Number
+    def: ""
+    synonym: "Assay Technology Type Term Accession Number" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000013
+    name: Assay Technology Type Term Accession Number
+    def: ""
+    synonym: "Technology Type Term Accession Number" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000014
+    name: Technology Type Term Source REF
+    def: ""
+    synonym: "Assay Technology Type Term Source REF" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000015
+    name: Assay Technology Type Term Source REF
+    def: ""
+    synonym: "Technology Type Term Source REF" EXACT []
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000016
+    name: Technology Platform
+    def: ""
+    synonym: "Assay Technology Platform" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000017
+    name: Assay Technology Platform
+    def: ""
+    synonym: "Technology Platform" EXACT []
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000018
+    name: File Name
+    def: ""
+    synonym: "Assay File Name" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+    [Term]
+    id: ASSMSO:00000019
+    name: Assay File Name
+    def: ""
+    synonym: "File Name" EXACT []
+    relationship: part_of ASSMSO:00000002 ! ASSAY
+    relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
+    
+  [Term]
+  id: ASSMSO:00000020
+  name: ASSAY PERFORMERS
+  def: ""
+  relationship: part_of ASSMSO:00000001 ! ASSAY Metadata
+
+    [Term]
+    id: ASSMSO:00000021
+    name: Assay Performer Last Name
+    def: ""
+    synonym: "Last Name" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+
+    [Term]
+    id: ASSMSO:00000022
+    name: Last Name
+    def: ""
+    synonym: "Assay Performer Last Name" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+
+    [Term]
+    id: ASSMSO:00000023
+    name: Assay Performer First Name
+    def: ""
+    synonym: "First Name" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+
+    [Term]
+    id: ASSMSO:00000024
+    name: First Name
+    def: ""
+    synonym: "Assay Performer First Name" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000025
+    name: Assay Performer Mid Initials
+    def: ""
+    synonym: "Mid Initials" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000026
+    name: Mid Initials
+    def: ""
+    synonym: "Assay Performer Mid Initials" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000027
+    name: Assay Performer Email
+    def: ""
+    synonym: "Email" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000028
+    name: Email
+    def: ""
+    synonym: "Assay Performer Email" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000029
+    name: Assay Performer Phone
+    def: ""
+    synonym: "Phone" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000030
+    name: Phone
+    def: ""
+    synonym: "Assay Performer Phone" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000031
+    name: Assay Performer Fax
+    def: ""
+    synonym: "Fax" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000032
+    name: Fax
+    def: ""
+    synonym: "Assay Performer Fax" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000033
+    name: Assay Performer Address
+    def: ""
+    synonym: "Address" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000034
+    name: Address
+    def: ""
+    synonym: "Assay Performer Address" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000035
+    name: Assay Performer Affiliation
+    def: ""
+    synonym: "Affiliation" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000036
+    name: Affiliation
+    def: ""
+    synonym: "Assay Performer Affiliation" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000037
+    name: Assay Performer Roles
+    def: ""
+    synonym: "Roles" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000038
+    name: Roles
+    def: ""
+    synonym: "Assay Performer Roles" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000039
+    name: Assay Performer Roles Term Accession Number
+    def: ""
+    synonym: "Roles Term Accession Number" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000040
+    name: Roles Term Accession Number
+    def: ""
+    synonym: "Assay Performer Roles Term Accession Number" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000041
+    name: Assay Performer Roles Term Source REF
+    def: ""
+    synonym: "Roles Term Source REF" EXACT []
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    
+    [Term]
+    id: ASSMSO:00000042
+    name: Roles Term Source REF
+    def: ""
+    synonym: "Assay Performer Roles Term Source REF" EXACT []
+    is_obsolete: true
+    relationship: part_of ASSMSO:00000020 ! ASSAY PERFORMERS
+    

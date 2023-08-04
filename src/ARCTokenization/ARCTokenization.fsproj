@@ -7,27 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="ArcStructuralOntology/arc_structure.obo" />
-    <None Include="ArcStructuralOntology/arc_structure.yml" />
+    <EmbeddedResource Include="structural_ontologies/investigation_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
+    <EmbeddedResource Include="structural_ontologies/study_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
+    <EmbeddedResource Include="structural_ontologies/assay_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
+    <None Include="structural_ontologies/investigation_metadata_structural_ontology.yml" />
+    <None Include="structural_ontologies/study_metadata_structural_ontology.yml" />
+    <None Include="structural_ontologies/assay_metadata_structural_ontology.yml" />
     <Compile Include="Address.fs" />
-    <Compile Include="ISA\Terms.fs" />
-    <Compile Include="ISA\AnnotationTable.fs" />
-    <Compile Include="ISA\Regex.fs" />
-    <Compile Include="ISA\KeyParser.fs" />
-    <Compile Include="ISA\Tokenization.fs" />
-    <Compile Include="ISA\TokenAggregation.fs" />
-    <Compile Include="ISA\Worksheet.fs" />
-    <Compile Include="ISA\TopLevelParsers.fs" />
+    <Compile Include="Terms.fs" />
+    <Compile Include="Regex.fs" />
+    <Compile Include="AnnotationTable.fs" />
+    <Compile Include="MetadataSheet.fs" />
+    <Compile Include="Tokenization.fs" />
+    <Compile Include="Workbook.fs" />
+    <Compile Include="Worksheet.fs" />
+    <Compile Include="TopLevelParsers.fs" />
   </ItemGroup>
 
-
   <PropertyGroup>
-    <Authors>Oliver Maus, Heinrich Lukas Weil, Timo Mühlhaus, Kevin Frey, Kevin Schneider</Authors>
-    <Description>Fsharp Library for tokenization of isa and cwl files into the ArcGraphModel</Description>
-    <Summary>Fsharp Library for tokenization of isa and cwl files into the ArcGraphModel</Summary>
+    <Authors>Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey</Authors>
+    <Description>F# library for tokenization of ARC metadata into controlled vocabulary tokens</Description>
+    <Summary>F# library for tokenization of ARC metadata into controlled vocabulary tokens</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <!--<PackageIcon>logo.png</PackageIcon>-->
-    <PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants xlsx io isa fable fable-library fable-javascript</PackageTags>
+    <PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants xlsx isa</PackageTags>
     <RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
@@ -36,7 +39,7 @@
     <ProjectReference Include="..\ControlledVocabulary\ControlledVocabulary.fsproj" PackageVersion="[0.0.0, 1.0.0)" />
     <PackageReference Include="FSharp.FGL.ArrayAdjacencyGraph" Version="[0.0.2]" />
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
-    <PackageReference Include="FsOboParser" Version="0.1.0" />
+    <PackageReference Include="FsOboParser" Version="[0.1.0]" />
     <PackageReference Include="FsSpreadsheet" Version="[3.1.1]" />
     <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[3.1.1]" />
   </ItemGroup>

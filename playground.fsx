@@ -9,6 +9,7 @@
 
 #r "nuget: DocumentFormat.OpenXml"
 #r "nuget: FSharpAux"
+#r "nuget: FsOboParser"
 #r "nuget: FsSpreadsheet, 3.1.1"
 #r "nuget: FsSpreadsheet.ExcelIO, 3.1.1"
 #r "nuget: FSharp.FGL"
@@ -33,10 +34,137 @@ open System.Collections.Generic
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
+open FsOboParser
 //open FsSpreadsheet.DSL
 open ControlledVocabulary
 open ControlledVocabulary.ParamBase
-open ArcGraphModel
+open ARCTokenization
+
+
+let expectedTermValuesSimple = 
+    [
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "iid"]
+        [""; "ititle"]
+        [""; "idesc"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "Maus"; "Keider"; "müller"; "oih"]
+        [""; "Oliver"; "andreas"]
+        [""; "L. I."; "C."]
+        [""; "maus@nfdi4plants.org"]
+        [""]
+        [""]
+        [""]
+        [""; "Affe"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "sid"]
+        [""; "stitle"]
+        [""; "sdesc"]
+        [""]
+        [""]
+        [""; "sid\isa.study.xlsx"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "aid\isa.assay.xlsx"; "aid2\isa.assay.xlsx"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""; "weil"]
+        [""; "lukas"]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+        [""]
+    ]
+
+let allExpectedMetadataTermsFull =
+    Terms.InvestigationMetadata.cvTerms
+    |> List.skip 1 //(ignore root term)
+    |> List.zip expectedTermValuesSimple
+    |> List.map (fun (values,term) ->
+        values
+        |> List.mapi (fun i v ->
+            if i = 0 then
+                CvParam(term, ParamValue.CvValue (CvTerm("AGMO:00000001", "Metadata Section Key", "AGMO")), [])
+            else
+                CvParam(term, ParamValue.Value v, [])
+        )
+    )
+    |> List.concat
+allExpectedMetadataTermsFull.Length
+
+let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetFromFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/investigation_simple.xlsx")
+parsedInvestigationMetadataSimple.Length
+
+let i_fs = FsWorkbook.fromXlsxFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/investigation_simple.xlsx")
+
+(FsWorkbook.getWorksheetByName "isa_investigation" i_fs).CellCollection.GetCells()
+|> Seq.filter(fun c -> c.RowNumber = 1)
+
+
+
+parsedInvestigationMetadataSimple
+|> List.skip 10
+|> List.take 10
 
 // Assay annotation table parsing
 
@@ -44,9 +172,11 @@ let assayTokens = Assay.parseAnnotationTablesFromFile (__SOURCE_DIRECTORY__ + "/
 
 // Investigation metadata parsing
 
+let investigationTokens = Investigation.parseMetadataSheetfromXlsxFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/full_investigation_mkay.xlsx")
+
 //let inves = FsWorkbook.fromXlsxFile @"C:\Users\revil\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
 //let inves = FsWorkbook.fromXlsxFile @"C:\Users\olive\OneDrive\CSB-Stuff\NFDI\testARC30\isa.investigation.xlsx"
-let inves = FsWorkbook.fromXlsxFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/isa.investigation.xlsx")
+let inves = FsWorkbook.fromXlsxFile (__SOURCE_DIRECTORY__ + "/tests/ArcGraphModel.Tests/Fixtures/correct/full_investigation_mkay.xlsx")
 
 let invesWs = FsWorkbook.getWorksheets inves |> Seq.head
 invesWs.RescanRows()
