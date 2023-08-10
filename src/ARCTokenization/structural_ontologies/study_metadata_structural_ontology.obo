@@ -31,6 +31,8 @@ name: Study Identifier
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
 relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: follows STDMSO:00000002 ! STUDY
+relationship: follows STDMSO:00000051 ! STUDY METADATA
 
 [Term]
 id: STDMSO:00000004
@@ -38,6 +40,7 @@ name: Study Title
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
 relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: follows STDMSO:00000003 ! Study Identifier
 
 [Term]
 id: STDMSO:00000005
@@ -45,6 +48,7 @@ name: Study Description
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
 relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: follows STDMSO:00000004 ! Study Title
 
 [Term]
 id: STDMSO:00000006
@@ -52,6 +56,7 @@ name: Study Submission Date
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
 relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: follows STDMSO:00000005 ! Study Description
 
 [Term]
 id: STDMSO:00000007
@@ -59,6 +64,7 @@ name: Study Public Release Date
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
 relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: follows STDMSO:00000006 ! Study Submission Date
 
 [Term]
 id: STDMSO:00000008
@@ -66,321 +72,375 @@ name: Study File Name
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
 relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: follows STDMSO:00000007 ! Study Public Release Date
 
 [Term]
 id: STDMSO:00000009
 name: STUDY DESIGN DESCRIPTORS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: follows STDMSO:00000008 ! Study File Name
 
 [Term]
 id: STDMSO:00000010
 name: Study Design Type
 def: ""
 relationship: part_of STDMSO:00000009 ! STUDY DESIGN DESCRIPTORS
+relationship: follows STDMSO:00000009 ! STUDY DESIGN DESCRIPTORS
 
 [Term]
 id: STDMSO:00000011
 name: Study Design Type Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000009 ! STUDY DESIGN DESCRIPTORS
+relationship: follows STDMSO:00000010 ! Study Design Type
 
 [Term]
 id: STDMSO:00000012
 name: Study Design Type Term Source REF
 def: ""
 relationship: part_of STDMSO:00000009 ! STUDY DESIGN DESCRIPTORS
+relationship: follows STDMSO:00000011 ! Study Design Type Term Accession Number
 
 [Term]
 id: STDMSO:00000013
 name: STUDY PUBLICATIONS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: follows STDMSO:00000012 ! Study Design Type Term Source REF
 
 [Term]
 id: STDMSO:00000014
 name: Study Publication PubMed ID
 def: ""
 relationship: part_of STDMSO:00000013 ! STUDY PUBLICATIONS
+relationship: follows STDMSO:00000013 ! STUDY PUBLICATIONS
 
 [Term]
 id: STDMSO:00000015
 name: Study Publication DOI
 def: ""
 relationship: part_of STDMSO:00000013 ! STUDY PUBLICATIONS
+relationship: follows STDMSO:00000014 ! Study Publication PubMed ID
 
 [Term]
 id: STDMSO:00000016
 name: Study Publication Author List
 def: ""
 relationship: part_of STDMSO:00000013 ! STUDY PUBLICATIONS
+relationship: follows STDMSO:00000015 ! Study Publication DOI
 
 [Term]
 id: STDMSO:00000017
 name: Study Publication Title
 def: ""
 relationship: part_of STDMSO:00000013 ! STUDY PUBLICATIONS
+relationship: follows STDMSO:00000016 ! Study Publication Author List
 
 [Term]
 id: STDMSO:00000018
 name: Study Publication Status
 def: ""
 relationship: part_of STDMSO:00000013 ! STUDY PUBLICATIONS
+relationship: follows STDMSO:00000017 ! Study Publication Title
 
 [Term]
 id: STDMSO:00000019
 name: Study Publication Status Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000013 ! STUDY PUBLICATIONS
+relationship: follows STDMSO:00000018 ! Study Publication Status
 
 [Term]
 id: STDMSO:00000020
 name: Study Publication Status Term Source REF
 def: ""
 relationship: part_of STDMSO:00000013 ! STUDY PUBLICATIONS
+relationship: follows STDMSO:00000019 ! Study Publication Status Term Accession Number
 
 [Term]
 id: STDMSO:00000021
 name: STUDY FACTORS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: follows STDMSO:00000020 ! Study Publication Status Term Source REF
 
 [Term]
 id: STDMSO:00000022
 name: Study Factor Name
 def: ""
 relationship: part_of STDMSO:00000021 ! STUDY FACTORS
+relationship: follows STDMSO:00000021 ! STUDY FACTORS
 
 [Term]
 id: STDMSO:00000023
 name: Study Factor Type
 def: ""
 relationship: part_of STDMSO:00000021 ! STUDY FACTORS
+relationship: follows STDMSO:00000022 ! Study Factor Name
 
 [Term]
 id: STDMSO:00000024
 name: Study Factor Type Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000021 ! STUDY FACTORS
+relationship: follows STDMSO:00000023 ! Study Factor Type
 
 [Term]
 id: STDMSO:00000025
 name: Study Factor Type Term Source REF
 def: ""
 relationship: part_of STDMSO:00000021 ! STUDY FACTORS
+relationship: follows STDMSO:00000024 ! Study Factor Type Term Accession Number
 
 [Term]
 id: STDMSO:00000026
 name: STUDY ASSAYS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: follows STDMSO:00000025 ! Study Factor Type Term Source REF
 
 [Term]
 id: STDMSO:00000027
 name: Study Assay Measurement Type
 def: ""
 relationship: part_of STDMSO:00000026 ! STUDY ASSAYS
+relationship: follows STDMSO:00000026 ! STUDY ASSAYS
 
 [Term]
 id: STDMSO:00000028
 name: Study Assay Measurement Type Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000026 ! STUDY ASSAYS
+relationship: follows STDMSO:00000027 ! Study Assay Measurement Type
 
 [Term]
 id: STDMSO:00000029
 name: Study Assay Measurement Type Term Source REF
 def: ""
 relationship: part_of STDMSO:00000026 ! STUDY ASSAYS
+relationship: follows STDMSO:00000028 ! Study Assay Measurement Type Term Accession Number
 
 [Term]
 id: STDMSO:00000030
 name: Study Assay Technology Type
 def: ""
 relationship: part_of STDMSO:00000026 ! STUDY ASSAYS
+relationship: follows STDMSO:00000029 ! Study Assay Measurement Type Term Source REF
 
 [Term]
 id: STDMSO:00000031
 name: Study Assay Technology Type Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000026 ! STUDY ASSAYS
+relationship: follows STDMSO:00000030 ! Study Assay Technology Type
 
 [Term]
 id: STDMSO:00000032
 name: Study Assay Technology Type Term Source REF
 def: ""
 relationship: part_of STDMSO:00000026 ! STUDY ASSAYS
+relationship: follows STDMSO:00000031 ! Study Assay Technology Type Term Accession Number
 
 [Term]
 id: STDMSO:00000033
 name: Study Assay Technology Platform
 def: ""
 relationship: part_of STDMSO:00000026 ! STUDY ASSAYS
+relationship: follows STDMSO:00000032 ! Study Assay Technology Type Term Source REF
 
 [Term]
 id: STDMSO:00000034
 name: Study Assay File Name
 def: ""
 relationship: part_of STDMSO:00000026 ! STUDY ASSAYS
+relationship: follows STDMSO:00000033 ! Study Assay Technology Platform
 
 [Term]
 id: STDMSO:00000035
 name: STUDY PROTOCOLS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: follows STDMSO:00000034 ! Study Assay File Name
 
 [Term]
 id: STDMSO:00000036
 name: Study Protocol Name
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000035 ! STUDY PROTOCOLS
 
 [Term]
 id: STDMSO:00000037
 name: Study Protocol Type
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000036 ! Study Protocol Name
 
 [Term]
 id: STDMSO:00000038
 name: Study Protocol Type Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000037 ! Study Protocol Type
 
 [Term]
 id: STDMSO:00000039
 name: Study Protocol Type Term Source REF
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000038 ! Study Protocol Type Term Accession Number
 
 [Term]
 id: STDMSO:00000040
 name: Study Protocol Description
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000039 ! Study Protocol Type Term Source REF
 
 [Term]
 id: STDMSO:00000041
 name: Study Protocol URI
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000040 ! Study Protocol Description
 
 [Term]
 id: STDMSO:00000042
 name: Study Protocol Version
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000041 ! Study Protocol URI
 
 [Term]
 id: STDMSO:00000043
 name: Study Protocol Parameters Name
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000042 ! Study Protocol Version
 
 [Term]
 id: STDMSO:00000044
 name: Study Protocol Parameters Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000043 ! Study Protocol Parameters Name
 
 [Term]
 id: STDMSO:00000045
 name: Study Protocol Parameters Term Source REF
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000044 ! Study Protocol Parameters Term Accession Number
 
 [Term]
 id: STDMSO:00000046
 name: Study Protocol Components Name
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000045 ! Study Protocol Parameters Term Source REF
 
 [Term]
 id: STDMSO:00000047
 name: Study Protocol Components Type
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000046 ! Study Protocol Components Name
 
 [Term]
 id: STDMSO:00000048
 name: Study Protocol Components Type Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000047 ! Study Protocol Components Type
 
 [Term]
 id: STDMSO:00000049
 name: Study Protocol Components Type Term Source REF
 def: ""
 relationship: part_of STDMSO:00000035 ! STUDY PROTOCOLS
+relationship: follows STDMSO:00000048 ! Study Protocol Components Type Term Accession Number
 
 [Term]
 id: STDMSO:00000050
 name: STUDY CONTACTS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: follows STDMSO:00000049 ! Study Protocol Components Type Term Source REF
 
 [Term]
 id: STDMSO:00000051
 name: Study Person Last Name
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000050 ! STUDY CONTACTS
 
 [Term]
 id: STDMSO:00000052
 name: Study Person First Name
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000051 ! Study Person Last Name
 
 [Term]
 id: STDMSO:00000053
 name: Study Person Mid Initials
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000052 ! Study Person First Name
 
 [Term]
 id: STDMSO:00000054
 name: Study Person Email
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000053 ! Study Person Mid Initials
 
 [Term]
 id: STDMSO:00000055
 name: Study Person Phone
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000054 ! Study Person Email
 
 [Term]
 id: STDMSO:00000056
 name: Study Person Fax
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000055 ! Study Person Phone
 
 [Term]
 id: STDMSO:00000057
 name: Study Person Address
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000056 ! Study Person Fax
 
 [Term]
 id: STDMSO:00000058
 name: Study Person Affiliation
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000057 ! Study Person Address
 
 [Term]
 id: STDMSO:00000059
 name: Study Person Roles
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000058 ! Study Person Affiliation
 
 [Term]
 id: STDMSO:00000060
 name: Study Person Roles Term Accession Number
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000059 ! Study Person Roles
 
 [Term]
 id: STDMSO:00000061
 name: Study Person Roles Term Source REF
 def: ""
 relationship: part_of STDMSO:00000050 ! STUDY CONTACTS
+relationship: follows STDMSO:00000060 ! Study Person Roles Term Accession Number
