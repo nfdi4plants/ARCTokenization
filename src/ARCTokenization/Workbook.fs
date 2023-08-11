@@ -13,7 +13,7 @@ module Workbook =
         with _ ->
             if useLastSheetOnIncorrectName then
                 FsWorkbook.getWorksheets investigation
-                |> List.last
+                |> Seq.last
             else
                 failwith "No worksheet named 'isa_investigation' found in the workbook"
 
@@ -24,7 +24,7 @@ module Workbook =
         with _ ->
             if useLastSheetOnIncorrectName then
                 FsWorkbook.getWorksheets study
-                |> List.last
+                |> Seq.last
             else
                 failwith "No worksheet named 'Study' or 'isa_study' found in the workbook"
 
@@ -35,6 +35,6 @@ module Workbook =
         with _ ->
             if useLastSheetOnIncorrectName then
                 FsWorkbook.getWorksheets assay
-                |> List.last
+                |> Seq.last
             else
                 failwith "No worksheet named 'Assay' or 'isa_assay' found in the workbook"

@@ -84,7 +84,7 @@ module AnnotationTable =
     /// Takes an FsWorkbook and returns all Annotation Tables it contains.
     /// </summary>
     let getAnnotationTables workbook =
-        let tables = FsWorkbook.getTables workbook
+        let tables = FsWorkbook.getTables workbook |> List.ofArray
         tables |> List.filter (fun t -> String.contains "annotationTable" t.Name)
 
     /// <summary>
@@ -254,19 +254,19 @@ module AnnotationTable =
         // get worksheet and its AnnotationTable as tuple
         let worksheetsAndTables =
             tables
-            |> List.map (
+            |> Seq.map (
                 fun t ->
                     let associatedWs = 
                         worksheets
-                        |> List.find (
+                        |> Seq.find (
                             fun ws -> 
                                 ws.Tables
-                                |> List.exists (fun t2 -> t2.Name = t.Name)
+                                |> Seq.exists (fun t2 -> t2.Name = t.Name)
                         )
                     associatedWs, t
             )
         worksheetsAndTables
-        |> List.map (
+        |> Seq.map (
             fun (ws,t) ->
                 let ioHeaderCells, termRelatedBuildingBlockHeaderCells = 
                     getHeaderCellsOf ws.CellCollection t 
@@ -282,6 +282,7 @@ module AnnotationTable =
                 ws.Name,
                 TokenizedAnnotationTable.create ioColumns termRelatedBuildingBlocks
         )
+        |> List.ofSeq
 
     /// <summary>
     /// Takes a CvParam and returns the type of Node it contains.

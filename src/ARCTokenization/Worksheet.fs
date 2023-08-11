@@ -37,12 +37,12 @@ module Worksheet =
 
     /// Parses rows of a given FsWorksheet via a given tokenization function and returns the resulting IParam list.
     let parseRowsWith tokenizationFunction (worksheet : FsWorksheet) = 
-        parseCellsWith (worksheet.Rows) tokenizationFunction worksheet
+        parseCellsWith (worksheet.Rows |> Seq.map FsRow.toDenseRow |> Seq.toList) tokenizationFunction worksheet
 
     /// Parses rows of a given FsWorksheet via a given tokenization function and returns the resulting IParam list.
     /// Concatenates the resulting lists of IParams into a single list.
     let parseRowsFlatWith tokenizationFunction (worksheet : FsWorksheet) = 
-        parseCellsFlatWith (worksheet.Rows) tokenizationFunction worksheet
+        parseCellsFlatWith (worksheet.Rows |> Seq.map FsRow.toDenseRow |> Seq.toList) tokenizationFunction worksheet
 
     /// Parses columns of a given FsWorksheet via a given tokenization function and returns the resulting IParam list.
     let parseColumnsWith tokenizationFunction (worksheet : FsWorksheet) = 
