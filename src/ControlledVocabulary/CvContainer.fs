@@ -79,7 +79,7 @@ type CvContainer (
     /// Fails if the propertyName cannot be found.
     member this.GetManyParams propertyName =
         Dictionary.item propertyName this.Properties
-        |> Seq.choose Param.tryParam
+        |> Seq.choose CvBase.tryParam
 
     /// Retrieves child with the given name of the CvContainer.
     ///
@@ -109,7 +109,7 @@ type CvContainer (
     /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
     member this.GetSingleParam propertyName =
         Dictionary.item propertyName this.Properties
-        |> Seq.choose Param.tryParam
+        |> Seq.choose CvBase.tryParam
         |> Seq.exactlyOne
         
 
@@ -146,7 +146,7 @@ type CvContainer (
         Dictionary.tryFind propertyName this.Properties
         |> Option.bind (fun many ->
             many
-            |> Seq.choose Param.tryParam
+            |> Seq.choose CvBase.tryParam
             |> fun items -> if Seq.isEmpty items then None else Some items
         )
 
@@ -176,7 +176,7 @@ type CvContainer (
     /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
     member this.TryGetSingleParam propertyName =
         Dictionary.tryFind propertyName this.Properties
-        |> Option.bind (Seq.choose Param.tryParam >> Seq.tryExactlyOne)
+        |> Option.bind (Seq.choose CvBase.tryParam >> Seq.tryExactlyOne)
 
     
 

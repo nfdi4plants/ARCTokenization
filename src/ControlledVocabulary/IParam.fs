@@ -96,6 +96,7 @@ type Param =
     //-------------------- IParam specific implementations -------------------//
 
 
+[<AutoOpen>]
 module IParamExtensions =
     type CvBase with
         /// Returns Some Param, if the given param item can be downcast, else returns None
