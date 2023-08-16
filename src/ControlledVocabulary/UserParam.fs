@@ -11,8 +11,8 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
 
     interface IParam with 
         member this.Accession   = name
-        member this.Value       = name
-        member this.RefUri         = "UserTerm"
+        member this.Name        = name
+        member this.RefUri      = "UserTerm"
         member this.Value  = paramValue
         member this.WithValue(v : ParamValue) = UserParam(name,v,attributes)
         member this.HasAttributes 
@@ -43,7 +43,7 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
         | _ -> None
 
     override this.ToString() = 
-        $"Name: {(this :> ICvBase).Value}\n\tValue: {(this :> IParamBase).Value}\n\tQualifiers: {this.Keys |> Seq.toList}"
+        $"Name: {(this :> ICvBase).Name}\n\tValue: {(this :> IParamBase).Value}\n\tQualifiers: {this.Keys |> Seq.toList}"
 
     member this.DisplayText = 
         this.ToString()

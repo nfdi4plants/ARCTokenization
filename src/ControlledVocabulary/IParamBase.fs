@@ -54,11 +54,11 @@ module ParamBase =
         | CvValue                _  -> None
         | WithCvUnitAccession (v,_) -> Some v
 
-    let tryGetCvUnitTermValue (param : #IParamBase) =
+    let tryGetCvUnitTermName (param : #IParamBase) =
         match param.Value with
         | Value                  _          -> None
         | CvValue                _          -> None
-        | WithCvUnitAccession   (_,cvu)     -> Some cvu.Value
+        | WithCvUnitAccession   (_,cvu)     -> Some cvu.Name
 
     let tryGetCvUnitTermAccession (param : #IParamBase) =
         match param.Value with
@@ -81,8 +81,8 @@ module ParamBase =
             Some (param.WithValue(value))
         | None -> None
 
-    let tryAddValue (value : string) (param : IParamBase) = 
-        tryMapValue (ParamValue.tryAddValue value) param
+    let tryAddName (value : string) (param : IParamBase) = 
+        tryMapValue (ParamValue.tryAddName value) param
 
     let tryAddAccession (acc : string) (param : IParamBase) = 
         tryMapValue (ParamValue.tryAddAccession acc) param

@@ -16,29 +16,29 @@ type ParamValue =
     static member getValue (param:ParamValue) =
         match param with
         | Value   v                 -> v
-        | CvValue cv                -> cv.Value :> IConvertible
+        | CvValue cv                -> cv.Name :> IConvertible
         | WithCvUnitAccession (v,_) -> v
 
     /// Returns the value of the Param as string
     static member getValueAsString (param:ParamValue) =
         match param with
         | Value   v                 -> string v
-        | CvValue cv                -> cv.Value
+        | CvValue cv                -> cv.Name
         | WithCvUnitAccession (v,_) -> string v
         
     /// Returns the value of the Param as int if possible, else fails
     static member getValueAsInt (param:ParamValue) =
         match param with
         | Value   v                 -> v :?> int
-        | CvValue cv                -> cv.Value |> int
+        | CvValue cv                -> cv.Name |> int
         | WithCvUnitAccession (v,_) -> v :?> int
 
     /// Returns the value of the Param as a term
     static member getValueAsTerm (param:ParamValue) =
         match param with
-        | Value   v                 -> CvTerm.create(value = (v |> string))
+        | Value   v                 -> CvTerm.create(name = (v |> string))
         | CvValue term              -> term
-        | WithCvUnitAccession (v,_) -> CvTerm.create(value = (v |> string))
+        | WithCvUnitAccession (v,_) -> CvTerm.create(name = (v |> string))
 
     /// Returns the unit of the Param if it exists, else returns None
     static member tryGetUnit  (param:ParamValue) : CvUnit option =
@@ -48,17 +48,17 @@ type ParamValue =
         | WithCvUnitAccession (_,u) -> Some u
 
     /// Returns a new paramValue with the given name if possible, else returns None
-    static member tryAddValue (value : string) (param : ParamValue) = 
+    static member tryAddName (name : string) (param : ParamValue) = 
         match param with
-        | Value v                       -> Some (Value value)
-        | CvValue cv when cv.Value = "" -> Some (CvValue {cv with Value = value})
+        | Value v                       -> Some (Value name)
+        | CvValue cv when cv.Name = ""  -> Some (CvValue {cv with Name = name})
         | CvValue term                  -> None
         | WithCvUnitAccession (_,u)     -> None
         
     /// Returns a new paramValue with the given annotationID if possible, else returns None
     static member tryAddAccession (accession : string) (param : ParamValue) = 
         match param with
-        | Value (:? string as v)            -> Some (CvValue (CvTerm.create(accession = accession, value = v, ref = "")))
+        | Value (:? string as v)            -> Some (CvValue (CvTerm.create(accession = accession, name = v, ref = "")))
         | Value v                           -> None
         | CvValue cv when cv.Accession = "" -> Some (CvValue {cv with Accession = accession})
         | CvValue term                      -> None
@@ -67,7 +67,7 @@ type ParamValue =
     /// Returns a new paramValue with the given reference if possible, else returns None
     static member tryAddReference (ref : string) (param : ParamValue) = 
         match param with
-        | Value (:? string as v)        -> Some (CvValue (CvTerm.create(accession = "", value = v, ref = ref)))
+        | Value (:? string as v)        -> Some (CvValue (CvTerm.create(accession = "", name = v, ref = ref)))
         | Value v                       -> None
         | CvValue cv when cv.RefUri = ""   -> Some (CvValue {cv with RefUri = ref})
         | CvValue term                  -> None

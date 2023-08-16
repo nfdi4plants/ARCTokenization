@@ -3,7 +3,7 @@
 open ControlledVocabulary
 open Xunit
 
-let assayTerm = CvTerm.create(accession = "ARCO:1234", value = "Assay",ref = "ARCO")
+let assayTerm = CvTerm.create(accession = "ARCO:1234", name = "Assay",ref = "ARCO")
 
 [<Fact>]
 let ``ICvBase can be cast to CvParam using generic tryAs`` () = 

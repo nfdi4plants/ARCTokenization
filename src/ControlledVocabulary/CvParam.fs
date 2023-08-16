@@ -10,16 +10,16 @@ open FSharpAux
 ///
 /// Attributes can be used to further describe the CvParam
 [<StructuredFormatDisplay("{DisplayText}")>]
-type CvParam(cvAccession : string, cvValue : string, cvRef : string, paramValue : ParamValue, attributes : IDictionary<string,IParam>) =
+type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue : ParamValue, attributes : IDictionary<string,IParam>) =
 
     inherit CvAttributeCollection(attributes)
 
     interface IParam with 
         member this.Accession   = cvAccession
-        member this.Value       = cvValue
-        member this.RefUri         = cvRef
+        member this.Name        = cvName
+        member this.RefUri      = cvRef
         member this.Value       = paramValue
-        member this.WithValue(v : ParamValue) = CvParam(cvAccession,cvValue,cvRef,v,attributes)
+        member this.WithValue(v : ParamValue) = CvParam(cvAccession,cvName,cvRef,v,attributes)
         member this.HasAttributes 
             with get() = this.Attributes |> Seq.isEmpty |> not
 
@@ -32,7 +32,7 @@ type CvParam(cvAccession : string, cvValue : string, cvRef : string, paramValue 
         CvParam (id,name,ref,ParamValue.Value v)
 
     new (term : CvTerm, pv, attributes : seq<IParam>) = 
-        CvParam (term.Accession, term.Value, term.RefUri, pv, attributes)
+        CvParam (term.Accession, term.Name, term.RefUri, pv, attributes)
     new (cvTerm,pv : ParamValue) = 
         CvParam (cvTerm,pv,Seq.empty)
     new (cvTerm,v : IConvertible) = 
@@ -87,8 +87,8 @@ type CvParam(cvAccession : string, cvValue : string, cvRef : string, paramValue 
     static member tryMapValue (f : ParamValue -> ParamValue option) (param : CvParam) = 
         Param.tryMapValue f param
 
-    static member tryAddValue (value : string) (param : CvParam) = 
-        Param.tryAddValue value param
+    static member tryAddName (value : string) (param : CvParam) = 
+        Param.tryAddName value param
 
     static member tryAddAccession (id : string) (param : CvParam) = 
         Param.tryAddAccession id param
@@ -104,7 +104,7 @@ type CvParam(cvAccession : string, cvValue : string, cvRef : string, paramValue 
 
 
     override this.ToString() = 
-        $"CvParam: {(this :> ICvBase).Value}\n\tID: {(this :> ICvBase).Accession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}\n\tAttributes: {this.Keys |> Seq.toList}"
+        $"CvParam: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).Accession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}\n\tAttributes: {this.Keys |> Seq.toList}"
 
     member this.DisplayText = 
         this.ToString()

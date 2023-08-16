@@ -13,7 +13,7 @@ module internal Dictionary =
 /// Represents a collection of structured properties, annotated with a controlled vocabulary term.
 type CvContainer (
     cvAccession : string, 
-    cvValue     : string, 
+    cvName     : string, 
     cvRef       : string, 
     attributes  : IDictionary<string,IParam>,
     properties  : IDictionary<string,seq<ICvBase>>
@@ -23,8 +23,8 @@ type CvContainer (
 
     interface ICvBase with 
         member this.Accession   = cvAccession
-        member this.Value       = cvValue
-        member this.RefUri         = cvRef
+        member this.Name        = cvName
+        member this.RefUri      = cvRef
         member this.HasAttributes 
             with get() = this.Attributes |> Seq.isEmpty |> not
 
@@ -38,7 +38,7 @@ type CvContainer (
 
 
     new (term : CvTerm, attributes : IDictionary<string,IParam>) = 
-        CvContainer(term.Accession, term.Value, term.RefUri, attributes, Dictionary<string, ICvBase seq>())
+        CvContainer(term.Accession, term.Name, term.RefUri, attributes, Dictionary<string, ICvBase seq>())
     new (term : CvTerm,attributes : seq<IParam>) = 
         let dict = CvAttributeCollection(attributes)
         CvContainer(term, dict)
@@ -307,7 +307,7 @@ type CvContainer (
     ///
     /// If a value with the same key already exist in the container, appends the new child
     static member addSingle (value : ICvBase) (cvContainer : CvContainer) =
-        Dictionary.addOrAppendInPlace value.Value value cvContainer.Properties
+        Dictionary.addOrAppendInPlace value.Name value cvContainer.Properties
         
 
     /// Sets children as a property of the CvContainer.
@@ -319,7 +319,7 @@ type CvContainer (
     static member setMany (values : seq<ICvBase>) (cvContainer : CvContainer) =
         let propertyName = 
             values
-            |> Seq.countBy (fun v -> v.Value)
+            |> Seq.countBy (fun v -> v.Name)
             |> Seq.exactlyOne
             |> fst
         Dictionary.addOrUpdateInPlace propertyName values cvContainer.Properties
@@ -327,7 +327,7 @@ type CvContainer (
 
     /// Sets a single child as a property of the CvContainer, accessible by its name.
     static member setSingle (value : ICvBase) (cvContainer : CvContainer) =
-        Dictionary.addOrUpdateInPlace value.Value (Seq.singleton value) cvContainer.Properties
+        Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer.Properties
 
     override this.ToString() = 
-        $"CvContainer: {(this :> ICvBase).Value}\n\tID: {(this :> ICvBase).Accession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Properties.Keys |> Seq.toList}"
+        $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).Accession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Properties.Keys |> Seq.toList}"

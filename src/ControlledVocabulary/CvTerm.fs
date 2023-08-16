@@ -6,21 +6,21 @@
 //[<Struct>]
 type CvTerm = {
     Accession: string
-    Value: string
+    Name: string
     RefUri: string
 } with
     static member create(
         accession: string,
-        value: string,
+        name: string,
         ref : string
     ) = 
-        {Accession = accession; Value = value; RefUri = ref}
+        {Accession = accession; Name = name; RefUri = ref}
 
     static member create(
-        value: string
+        name: string
     ) = 
         CvTerm.create(
-            value = value,
+            name = name,
             accession = "",
             ref = ""
         )
