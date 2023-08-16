@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="ReferenceObjects.fs" />
+    <Compile Include="CvParamTests.fs" />
     <Compile Include="CvBaseTests.fs" />
     <Compile Include="ParamTests.fs" />
     <Compile Include="ContainerTests.fs" />
