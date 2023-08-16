@@ -1,37 +1,31 @@
 ﻿namespace ControlledVocabulary
 
 /// Represents a term from a controlled vocabulary (Cv)
-/// in the form of: id|accession * name|value * refUri
+/// in the form of: id|accession ; name|value ; refUri
 // ?Maybe [<Struct>]
 //[<Struct>]
-type CvTerm = string * string * string
+type CvTerm = {
+    Accession: string
+    Value: string
+    RefUri: string
+} with
+    static member create(
+        accession: string,
+        value: string,
+        ref : string
+    ) = 
+        {Accession = accession; Value = value; RefUri = ref}
 
-module CvTerm =
-    
-    /// gets the name of the CvTerm
-    let getName (cvTerm : CvTerm) = 
-        match cvTerm with
-        | id, name, refUri -> name
-       
-    /// gets the name of the CvTerm
-    let getId (cvTerm : CvTerm) = 
-        match cvTerm with
-        | id, name, refUri -> id
+    static member create(
+        value: string
+    ) = 
+        CvTerm.create(
+            value = value,
+            accession = "",
+            ref = ""
+        )
 
-    /// gets the source reference of the CvTerm
-    let getRef (cvTerm : CvTerm) = 
-        match cvTerm with
-        | id, name, refUri -> refUri
-
-    /// creates a CvTerm from name
-    let fromName (name : string) : CvTerm= 
-        "", name, ""
-
-    /// creates a CvTerm from a term triplet
-    let create id name ref : CvTerm = 
-        id,name,ref
-        
 /// Represents a unit term from the unit ontology 
 /// in the form of: id|accession * name * refUri
 // ?Maybe [<Struct>]
-type CvUnit = string * string * string
+type CvUnit = CvTerm

@@ -12,7 +12,7 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
     new(attributes) =
         let dict = 
             attributes
-            |> Seq.map (fun cvp -> (cvp :> ICvBase).Name, cvp)
+            |> Seq.map (fun cvp -> (cvp :> ICvBase).Value, cvp)
             |> Dictionary.ofSeq
         CvAttributeCollection(dict)
 
@@ -22,12 +22,12 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
 
     /// Add an IParam as an attribute. Fails, if an attribute with the same key already exists
     member this.AddAttribute (param : IParam) =
-        Dictionary.addInPlace (param |> CvBase.getCvName) param this
+        Dictionary.addInPlace (param |> CvBase.getCvValue) param this
         |> ignore
 
     /// Add an IParam as an attribute. Does not fail, if an attribute with the same key already exists
     member this.TryAddAttribute (param : IParam) =
-        let key = param |> CvBase.getCvName 
+        let key = param |> CvBase.getCvValue 
         if this.ContainsAttribute key then false
         else 
             this.AddAttribute param
@@ -39,7 +39,7 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
 
     /// Retrieves an IParam attribute by its term, if it exists, else returns None
     member this.TryGetAttribute (term : CvTerm) =
-        Dictionary.tryFind (CvTerm.getName term) this
+        Dictionary.tryFind term.Value this
         |> Option.bind (fun param -> 
             if CvBase.equalsTerm term param then 
                 Some param 
@@ -51,7 +51,7 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
 
     /// Retrieves an IParam attribute by its term, if it exists, else fails
     member this.GetAttribute (term : CvTerm) =
-        Dictionary.item (CvTerm.getName term) this
+        Dictionary.item term.Value this
 
     /// Returns true, if an attribute with the given name exists in the collection
     member this.ContainsAttribute (name : string) =
@@ -59,7 +59,7 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
 
     /// Returns true, if an attribute with the given term exists in the collection
     member this.ContainsAttribute (term : CvTerm) =
-        match Dictionary.tryFind (CvTerm.getName term) this with
+        match Dictionary.tryFind term.Value this with
         | Some param when CvBase.equalsTerm term param -> true
         | _ -> false
 

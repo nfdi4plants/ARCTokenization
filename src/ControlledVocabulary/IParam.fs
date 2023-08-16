@@ -20,9 +20,9 @@ type Param =
     static member equals (param1 : IParam) (param2 : IParam) =
         CvBase.equals param1 param2
 
-    /// Returns true, if the name of the given params match
-    static member equalsName (param1 : IParam) (param2 : IParam) =
-        CvBase.equalsName param1 param2
+    /// Returns true, if the value of the given params match
+    static member equalsValue (param1 : IParam) (param2 : IParam) =
+        CvBase.equalsValue param1 param2
 
     /// Returns Some Param, if the given cv item can be downcast, else returns None
     static member tryParam (cv : ICvBase) =
@@ -78,11 +78,11 @@ type Param =
     static member tryMapValue (f : ParamValue -> ParamValue option) (param : IParam) = 
         ParamBase.tryMapValue f param |> Option.map (fun v -> v :?> IParam)
 
-    static member tryAddName (name : string) (param : IParam) = 
-        ParamBase.tryAddName name param |> Option.map (fun v -> v :?> IParam)
+    static member tryAddValue (value : string) (param : IParam) = 
+        ParamBase.tryAddValue value param |> Option.map (fun v -> v :?> IParam)
 
-    static member tryAddAnnotationID (id : string) (param : IParam) = 
-        ParamBase.tryAddAnnotationID id param |> Option.map (fun v -> v :?> IParam)
+    static member tryAddAccession (id : string) (param : IParam) = 
+        ParamBase.tryAddAccession id param |> Option.map (fun v -> v :?> IParam)
 
     static member tryAddReference (ref : string) (param : IParam) = 
         ParamBase.tryAddReference ref param |> Option.map (fun v -> v :?> IParam)

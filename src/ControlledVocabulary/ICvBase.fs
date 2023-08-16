@@ -8,9 +8,9 @@ type IAttributeCollection =
 
 /// Interface ensures the propterties necessary for CvTerm 
 and ICvBase =
-    abstract member ID       : string
-    abstract member Name     : string
-    abstract member RefUri   : string
+    abstract member Accession   : string
+    abstract member Value       : string
+    abstract member RefUri         : string
     
     inherit IAttributeCollection
 
@@ -21,11 +21,11 @@ module CvBase =
     
     /// Returns the id of the cv item
     let getCvAccession (cv : #ICvBase) =
-        cv.ID
+        cv.Accession
 
     /// Returns the name of the cv item
-    let getCvName (cv : #ICvBase) =
-        cv.Name
+    let getCvValue (cv : #ICvBase) =
+        cv.Value
 
     /// Returns the reference of the cv item
     let getCvRef (cv : #ICvBase) =
@@ -33,7 +33,7 @@ module CvBase =
 
     /// Returns the full term of the cv item
     let getTerm (cv : #ICvBase) : CvTerm =
-        CvTerm.create cv.ID cv.Name cv.RefUri
+        CvTerm.create(accession = cv.Accession, value = cv.Value, ref = cv.RefUri)
 
     /// Returns true, if the given term matches the term of the cv item
     let equalsTerm (term : CvTerm) (cv : #ICvBase) =
@@ -44,8 +44,8 @@ module CvBase =
         getTerm cv1 = getTerm cv2
 
     /// Returns true, if the names of the given cv items match
-    let equalsName (cv1 : #ICvBase) (cv2 : #ICvBase) =
-        getCvName cv1 = getCvName cv2
+    let equalsValue (cv1 : #ICvBase) (cv2 : #ICvBase) =
+        getCvValue cv1 = getCvValue cv2
 
     /// Returns Some Value of type 'T, if the given cv item can be downcast, else returns None
     let inline tryAs<'T when 'T :> ICvBase> (cv : ICvBase) =

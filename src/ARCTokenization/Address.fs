@@ -4,11 +4,11 @@ open ControlledVocabulary
 
 module Address = 
 
-    let column : CvTerm = "http://purl.obolibrary.org/obo/NCIT_C43379","Column","NCIT"
+    let column = CvTerm.create(accession = "http://purl.obolibrary.org/obo/NCIT_C43379", value = "Column", ref = "NCIT")
 
-    let row : CvTerm = "http://purl.obolibrary.org/obo/NCIT_C43378","Row","NCIT"
+    let row = CvTerm.create(accession = "http://purl.obolibrary.org/obo/NCIT_C43378", value = "Row", ref = "NCIT")
 
-    let worksheet : CvTerm = "http://purl.obolibrary.org/obo/NCIT_C73541","Worksheet","NCIT"
+    let worksheet = CvTerm.create(accession = "http://purl.obolibrary.org/obo/NCIT_C73541", value = "Worksheet", ref = "NCIT")
 
     //"isa_investigation!A1"
 

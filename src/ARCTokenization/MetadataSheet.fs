@@ -9,7 +9,7 @@ module MetadataSheet =
 
     let (|Term|_|) (terms : CvTerm list) (key : string) : CvTerm Option =
         terms 
-        |> List.tryFind (fun (term) -> CvTerm.getName term = key)
+        |> List.tryFind (fun (term) -> term.Value = key)
 
     let (|UnMatchable|) (key : string) : string =
         key

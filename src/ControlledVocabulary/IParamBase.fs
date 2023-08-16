@@ -31,14 +31,14 @@ module ParamBase =
 
     let tryGetValueAccession (param : #IParamBase) =
         match param.Value with
-        | CvValue                   (a,_,_) -> Some a
+        | CvValue                   cv      -> Some cv.Accession
         | Value                      _      -> None     // mere Value has no accession number
         | WithCvUnitAccession        _      -> None     // use tryGetCvUnitAccession instead
         //| WithCvUnitAccession (_,(a,_,_))   -> Some a
 
     let tryGetValueRef (param : #IParamBase) =
         match param.Value with
-        | CvValue               (_,_,r) -> Some r
+        | CvValue                    cv -> Some cv.RefUri
         | Value                      _  -> None     // mere Value has no ref
         | WithCvUnitAccession        _  -> None     // use tryGetCvUnitRef instead
 
@@ -54,23 +54,23 @@ module ParamBase =
         | CvValue                _  -> None
         | WithCvUnitAccession (v,_) -> Some v
 
-    let tryGetCvUnitName (param : #IParamBase) =
+    let tryGetCvUnitTermValue (param : #IParamBase) =
         match param.Value with
         | Value                  _          -> None
         | CvValue                _          -> None
-        | WithCvUnitAccession   (_,(_,n,_)) -> Some n
+        | WithCvUnitAccession   (_,cvu)     -> Some cvu.Value
 
-    let tryGetCvUnitAccession (param : #IParamBase) =
+    let tryGetCvUnitTermAccession (param : #IParamBase) =
         match param.Value with
         | Value                  _          -> None
         | CvValue                _          -> None
-        | WithCvUnitAccession   (_,(a,_,_)) -> Some a
+        | WithCvUnitAccession   (_,cvu)     -> Some cvu.Accession
 
-    let tryGetCvUnitRef (param : #IParamBase) =
+    let tryGetCvUnitTermRef (param : #IParamBase) =
         match param.Value with
         | Value                  _          -> None
         | CvValue                _          -> None
-        | WithCvUnitAccession   (_,(_,_,r)) -> Some r
+        | WithCvUnitAccession   (_,cvu)     -> Some cvu.RefUri
 
     let mapValue (f : ParamValue -> ParamValue) (param : IParamBase) = 
         param.WithValue(f param.Value)
@@ -81,11 +81,11 @@ module ParamBase =
             Some (param.WithValue(value))
         | None -> None
 
-    let tryAddName (name : string) (param : IParamBase) = 
-        tryMapValue (ParamValue.tryAddName name) param
+    let tryAddValue (value : string) (param : IParamBase) = 
+        tryMapValue (ParamValue.tryAddValue value) param
 
-    let tryAddAnnotationID (id : string) (param : IParamBase) = 
-        tryMapValue (ParamValue.tryAddAnnotationID id) param
+    let tryAddAccession (acc : string) (param : IParamBase) = 
+        tryMapValue (ParamValue.tryAddAccession acc) param
 
     let tryAddReference (ref : string) (param : IParamBase) = 
         tryMapValue (ParamValue.tryAddReference ref) param

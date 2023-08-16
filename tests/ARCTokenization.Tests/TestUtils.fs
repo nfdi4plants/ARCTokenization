@@ -7,16 +7,16 @@ open ARCTokenization.AnnotationTable
 
 module CvParam =
 
-    let termNamesEqual (cvpExpectec : CvParam) (cvpActual : CvParam) =
+    let termValuesEqual (cvpExpectec : CvParam) (cvpActual : CvParam) =
         Assert.Equal(
-            (CvBase.getCvName cvpExpectec),
-            (CvBase.getCvName cvpActual)
+            (CvBase.getCvValue cvpExpectec),
+            (CvBase.getCvValue cvpActual)
         )
 
-    let hasTermName (expectedName : string) (cvpActual : CvParam) =
+    let hasTermValue (expectedValue : string) (cvpActual : CvParam) =
         Assert.Equal(
-            expectedName,
-            (CvBase.getCvName cvpActual)
+            expectedValue,
+            (CvBase.getCvValue cvpActual)
         )
 
     let accessionsEqual (cvpExpectec : CvParam) (cvpActual : CvParam) =
@@ -56,7 +56,7 @@ module CvParam =
         )
 
     let structuralEquality (cvpExpectec : CvParam) (cvpActual : CvParam) =
-        termNamesEqual cvpExpectec cvpActual
+        termValuesEqual cvpExpectec cvpActual
         accessionsEqual cvpExpectec cvpActual
         refUrisEqual cvpExpectec cvpActual
         valuesEqual cvpExpectec cvpActual
@@ -68,8 +68,8 @@ module UserParam =
 
     let termNamesEqual (upActual : UserParam) (upExpectec : UserParam) =
         Assert.Equal(
-            (CvBase.getCvName upActual),
-            (CvBase.getCvName upExpectec)
+            (CvBase.getCvValue upActual),
+            (CvBase.getCvValue upExpectec)
         )
 
 module TokenizedAnnotationTable =
