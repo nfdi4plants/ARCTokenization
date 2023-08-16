@@ -45,13 +45,95 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
         CvParam (cvTerm,ParamValue.Value v)
 
     member this.Equals (term : CvTerm) = 
-        CvBase.equalsTerm term this
+        Param.equalsTerm term this
 
     member this.Equals (cv : ICvBase) = 
         CvBase.equals cv this
 
     member this.Equals (cvp : CvParam) =
         this.Equals(cvp :> ICvBase)
+
+    //---------------------- IParam implementations ----------------------//
+
+    /// Returns the value of the Param as a ParamValue
+    static member getParamValue (cvp: CvParam) = Param.getParamValue cvp
+
+    /// Returns the value of the Param as IConvertible
+    static member getValue (cvp: CvParam) = Param.getValue cvp
+
+    /// Returns the value of the Param as string
+    static member getValueAsString (cvp: CvParam) = Param.getValueAsString cvp
+        
+    /// Returns the value of the Param as int if possible, else fails
+    static member getValueAsInt (cvp: CvParam) = Param.getValueAsInt cvp
+
+    /// Returns the value of the Param as a term
+    static member getValueAsTerm (cvp: CvParam) = Param.getValueAsTerm cvp
+
+    static member tryGetValueAccession (cvp: CvParam) = Param.tryGetValueAccession cvp
+
+    static member tryGetValueRef (cvp: CvParam) = Param.tryGetValueRef cvp
+
+    static member tryGetCvUnit (cvp: CvParam) : CvUnit option = Param.tryGetCvUnit cvp
+
+    static member tryGetCvUnitValue (cvp: CvParam) = Param.tryGetCvUnitValue cvp
+
+    static member tryGetCvUnitTermName (cvp: CvParam) = Param.tryGetCvUnitTermName cvp
+
+    static member tryGetCvUnitTermAccession (cvp: CvParam) = Param.tryGetCvUnitTermAccession cvp
+
+    static member tryGetCvUnitTermRef (cvp: CvParam) = Param.tryGetCvUnitTermRef cvp
+
+    static member mapValue (f : ParamValue -> ParamValue) (cvp: CvParam) = Param.mapValue f cvp :?> CvParam
+
+    static member tryMapValue (f : ParamValue -> ParamValue option) (cvp: CvParam) = 
+        Param.tryMapValue f cvp 
+        |> Option.map (fun v -> v :?> CvParam)
+
+    static member tryAddName (name : string) (cvp: CvParam) = 
+        Param.tryAddName name cvp
+        |> Option.map (fun v -> v :?> CvParam)
+
+    static member tryAddAccession (acc : string) (cvp: CvParam) = 
+        Param.tryAddAccession acc cvp
+        |> Option.map (fun v -> v :?> CvParam)
+
+    static member tryAddReference (ref : string) (cvp: CvParam) = 
+        Param.tryAddReference ref cvp
+        |> Option.map (fun v -> v :?> CvParam)
+
+    static member tryAddUnit (unit : CvUnit) (cvp: CvParam) = 
+        Param.tryAddUnit unit cvp
+        |> Option.map (fun v -> v :?> CvParam)
+
+    /// Returns the id of the cv item
+    static member getCvAccession (cvp: CvParam) = Param.getCvAccession cvp
+
+    /// Returns the name of the cv item
+    static member getCvName (cvp: CvParam) = Param.getCvName cvp
+
+    /// Returns the reference of the cv item
+    static member getCvRef (cvp: CvParam) = Param.getCvRef cvp
+
+    /// Returns the full term of the cv item
+    static member getTerm (cvp: CvParam) = Param.getTerm cvp
+
+    /// Returns true, if the given term matches the term of the cv item
+    static member equalsTerm (term : CvTerm) (cvp: CvParam) = Param.equalsTerm term cvp
+
+    /// Returns true, if the terms of the given param items match
+    static member equals (cvp1 : CvParam) (cvp2 : CvParam) = Param.equals cvp1 cvp2
+
+    /// Returns true, if the names of the given param items match
+    static member equalsName (cvp1 : CvParam) (cvp2 : CvParam) = Param.equalsName cvp1 cvp1
+
+    /// Returns Some Value of type 'T, if the given param item can be downcast, else returns None
+    static member inline tryAs<'T when 'T :> IParam> (cvp: CvParam) = Param.tryAs<'T> cvp
+
+    /// Returns true, if the given param item can be downcast
+    static member inline is<'T when 'T :> IParam> (cvp: CvParam) = Param.is<'T> cvp
+
+    //---------------------- CvParam specific implementations ----------------------//
 
     /// Create a CvParam from a category and a simple value
     static member fromValue (category : CvTerm) (v : 'T) =
@@ -65,27 +147,8 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
     static member fromValueWithUnit (category : CvTerm) (v : 'T) (unit : CvUnit) =
         CvParam(category, ParamValue.WithCvUnitAccession (v :> IConvertible,unit))
 
-    static member mapValue (f : ParamValue -> ParamValue) (param : CvParam) = 
-        Param.mapValue f param
-
-    static member tryMapValue (f : ParamValue -> ParamValue option) (param : CvParam) = 
-        Param.tryMapValue f param
-
-    static member tryAddName (value : string) (param : CvParam) = 
-        Param.tryAddName value param
-
-    static member tryAddAccession (id : string) (param : CvParam) = 
-        Param.tryAddAccession id param
-
-    static member tryAddReference (ref : string) (param : CvParam) = 
-        Param.tryAddReference ref param
-
-    static member tryAddUnit (unit : CvUnit) (param : CvParam) = 
-        Param.tryAddUnit unit param
-
     static member getAttributes (param : CvParam) =
         param.Values |> Seq.cast
-
 
     override this.ToString() = 
         $"CvParam: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).Accession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}\n\tAttributes: {this.Keys |> Seq.toList}"
