@@ -9,11 +9,16 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
 
     inherit CvAttributeCollection(attributes)        
 
+    member this.Accession   = name
+    member this.Name        = name
+    member this.RefUri      = "UserTerm"
+    member this.Value       = paramValue
+
     interface IParam with 
-        member this.Accession   = name
-        member this.Name        = name
-        member this.RefUri      = "UserTerm"
-        member this.Value  = paramValue
+        member this.Accession   = this.Accession
+        member this.Name        = this.Name     
+        member this.RefUri      = this.RefUri   
+        member this.Value       = this.Value    
         member this.WithValue(v : ParamValue) = UserParam(name,v,attributes)
         member this.HasAttributes 
             with get() = this.Attributes |> Seq.isEmpty |> not

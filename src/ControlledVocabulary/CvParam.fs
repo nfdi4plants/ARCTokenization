@@ -14,11 +14,17 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
 
     inherit CvAttributeCollection(attributes)
 
+    member this.Accession   = cvAccession
+    member this.Name        = cvName
+    member this.RefUri      = cvRef
+    member this.Value       = paramValue
+    member this.WithValue(v : ParamValue) = CvParam(cvAccession,cvName,cvRef,v,attributes)
+
     interface IParam with 
-        member this.Accession   = cvAccession
-        member this.Name        = cvName
-        member this.RefUri      = cvRef
-        member this.Value       = paramValue
+        member this.Accession   = this.Accession
+        member this.Name        = this.Name     
+        member this.RefUri      = this.RefUri   
+        member this.Value       = this.Value    
         member this.WithValue(v : ParamValue) = CvParam(cvAccession,cvName,cvRef,v,attributes)
         member this.HasAttributes 
             with get() = this.Attributes |> Seq.isEmpty |> not

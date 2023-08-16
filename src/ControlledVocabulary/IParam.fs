@@ -55,7 +55,6 @@ type Param =
     static member getValue (param:IParamBase) =
         param |> ParamBase.getValue
 
-
     /// Returns the value of the param as a string.
     static member getValueAsString (cvParam : IParam) =
         (cvParam :> IParamBase).Value
