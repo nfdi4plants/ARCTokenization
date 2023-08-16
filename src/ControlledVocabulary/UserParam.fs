@@ -24,26 +24,32 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
     new (name,pv) = 
         UserParam (name,pv,Seq.empty)
 
-    /// Returns Some UserParam, if the given value item can be downcast, else returns None
-    static member tryUserParam (cv : ICvBase) =
-        match cv with
-        | :? UserParam as param -> Some param
-        | _ -> None
-
-    /// Returns Some Param if the given value item can be downcast, else returns None
-    static member tryUserParam (cv : IParamBase) =
-        match cv with
-        | :? UserParam as param -> Some param
-        | _ -> None
-
-    /// Returns Some Param if the given param item can be downcast, else returns None
-    static member tryUserParam (cv : IParam) =
-        match cv with
-        | :? UserParam as param -> Some param
-        | _ -> None
-
     override this.ToString() = 
         $"Name: {(this :> ICvBase).Name}\n\tValue: {(this :> IParamBase).Value}\n\tQualifiers: {this.Keys |> Seq.toList}"
 
     member this.DisplayText = 
         this.ToString()
+
+[<AutoOpen>]
+module UserParamExtensions = 
+
+    type ParamBase with
+        /// Returns Some Param if the given value item can be downcast, else returns None
+        static member tryUserParam (cv : IParamBase) =
+            match cv with
+            | :? UserParam as param -> Some param
+            | _ -> None
+
+    type Param with
+        /// Returns Some Param if the given param item can be downcast, else returns None
+        static member tryUserParam (cv : IParam) =
+            match cv with
+            | :? UserParam as param -> Some param
+            | _ -> None
+
+    type CvBase with
+        /// Returns Some UserParam, if the given value item can be downcast, else returns None
+        static member tryUserParam (cv : ICvBase) =
+            match cv with
+            | :? UserParam as param -> Some param
+            | _ -> None

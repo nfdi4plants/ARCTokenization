@@ -9,7 +9,6 @@ type IParam =
     inherit ICvBase
     inherit IParamBase
 
-
 type Param =
 
     /// Returns true, if the given term matches the term of the param
@@ -89,4 +88,4 @@ type Param =
 
     static member tryAddUnit (unit : CvUnit) (param : IParam) = 
         ParamBase.tryAddUnit unit param |> Option.map (fun v -> v :?> IParam)
-// TO DO: create-Funktionen in UserParam und CvParam sollen IParam zurückgeben statt ihren eigenen Typ
+

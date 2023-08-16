@@ -47,28 +47,6 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
     member this.Equals (cvp : CvParam) =
         this.Equals(cvp :> ICvBase)
 
-    /// Returns Some Param if the given cv item can be downcast, else returns None
-    static member tryCvParam (cv : ICvBase) =
-        match cv with
-        | :? CvParam as param -> Some param
-        | _ -> None
-
-    /// Returns Some Param if the given value item can be downcast, else returns None
-    static member tryCvParam (cv : IParamBase) =
-        match cv with
-        | :? CvParam as param -> Some param
-        | _ -> None
-
-    /// Returns Some Param if the given param item can be downcast, else returns None
-    static member tryCvParam (cv : IParam) =
-        match cv with
-        | :? CvParam as param -> Some param
-        | _ -> None
-
-    /// Returns true, if the given value item can be downcast to CvParam
-    static member isCvParam (cv : ICvBase) = 
-        CvBase.is<CvParam> cv
-
     /// Create a CvParam from a category and a simple value
     static member fromValue (category : CvTerm) (v : 'T) =
         CvParam(category, ParamValue.Value (v :> IConvertible))
@@ -108,3 +86,31 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
 
     member this.DisplayText = 
         this.ToString()
+
+[<AutoOpen>]
+module CvParamExtensions = 
+
+    type ParamBase with
+        /// Returns Some Param if the given value item can be downcast, else returns None
+        static member tryCvParam (cv : IParamBase) =
+            match cv with
+            | :? CvParam as param -> Some param
+            | _ -> None
+
+    type Param with
+        /// Returns Some Param if the given param item can be downcast, else returns None
+        static member tryCvParam (cv : IParam) =
+            match cv with
+            | :? CvParam as param -> Some param
+            | _ -> None
+
+    type CvBase with
+        /// Returns Some Param if the given cv item can be downcast, else returns None
+        static member tryCvParam (cv : ICvBase) =
+            match cv with
+            | :? CvParam as param -> Some param
+            | _ -> None
+
+        /// Returns true, if the given value item can be downcast to CvParam
+        static member isCvParam (cv : ICvBase) = 
+            CvBase.is<CvParam> cv

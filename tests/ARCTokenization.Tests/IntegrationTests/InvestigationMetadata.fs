@@ -112,7 +112,7 @@ let allExpectedMetadataTermsEmpty =
 
 [<Fact>]
 let ``First Param is CvParam`` () =
-    Assert.True (parsedInvestigationMetadataEmpty.Head |> CvParam.tryCvParam).IsSome 
+    Assert.True (parsedInvestigationMetadataEmpty.Head |> Param.tryCvParam).IsSome 
 
 [<Fact>]
 let ``First CvParam`` () = CvParam.structuralEquality (parsedInvestigationMetadataEmpty.Head :?> CvParam) allExpectedMetadataTermsEmpty[0]
