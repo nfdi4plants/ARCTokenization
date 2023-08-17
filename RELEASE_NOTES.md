@@ -1,3 +1,26 @@
+### 1.0.0+e7faa34 (Released 2023-8-17)
+* Additions:
+    * [[#e7faa34](https://github.com/nfdi4plants/ArcGraphModel/commit/e7faa348c1d8128205a40e2186914380c466fed6)] Add ConvertTokens tests
+    * [[#1254645](https://github.com/nfdi4plants/ArcGraphModel/commit/1254645f3a7b4013d4e683b2fd44946e90596658)] Add tests for parseKeyWithTerms
+    * [[#ccb95fd](https://github.com/nfdi4plants/ArcGraphModel/commit/ccb95fd918a7cd4e032dd42577333745d71582c3)] Add conversion convenience functions for CvParam and UserParam
+    * [[#8ecd66b](https://github.com/nfdi4plants/ArcGraphModel/commit/8ecd66be81caf58af01c555c084642268170e588)] #29 add orcid terms, add a list of obsolete terms as convenience functions, add and adapt tests
+    * [[#04f5158](https://github.com/nfdi4plants/ArcGraphModel/commit/04f5158b5c5a490f2800a1666780bb5e1be0f953)] Merge pull request #28 from nfdi4plants/rework-cv
+    * [[#16926d5](https://github.com/nfdi4plants/ArcGraphModel/commit/16926d5972ce740255f70ea6521b602796cc7b40)] Add more static member tests for CvParam
+    * [[#9f393ea](https://github.com/nfdi4plants/ArcGraphModel/commit/9f393ea78e5406e2ccc32263aff91c8f57fd8190)] Add some tests for CvParam
+    * [[#b2aac3b](https://github.com/nfdi4plants/ArcGraphModel/commit/b2aac3b0f57b5b647f7216d6acdbc209a6060975)] implement Param convenience type static members on CvParam and UserParam
+    * [[#d2ae48c](https://github.com/nfdi4plants/ArcGraphModel/commit/d2ae48c6397ae3c0a882dbea0cf91c6d9e6644d3)] implement all static members from ParamBase and CvBase convenience types on Param convenience type
+    * [[#f4bfe52](https://github.com/nfdi4plants/ArcGraphModel/commit/f4bfe52793dccfe7a77a9da48a6c13c415fc87a0)] Add explicit interface implementations for CvParam and UserParam
+    * [[#ec8e312](https://github.com/nfdi4plants/ArcGraphModel/commit/ec8e312e20ad1e92f73528a3834c5dc912454c6f)] move some convenience functions into type extensions to better reflect naming based on input type
+    * [[#b3ddf3c](https://github.com/nfdi4plants/ArcGraphModel/commit/b3ddf3cc7332500b0e4869cb847b01daf20e4eca)] rename CvTern Value field -> Name
+    * [[#2293e3f](https://github.com/nfdi4plants/ArcGraphModel/commit/2293e3f66aafcb668f4e31d38adbb05f44d36dbc)] Rework CvTerm and CvUnit as record, use unified naming for their fields (Accession, Value, RefUri)
+* Deletions:
+    * [[#28599f7](https://github.com/nfdi4plants/ArcGraphModel/commit/28599f726526e307f5f7dec825228dee10a45522)] remove fable tool dependency
+    * [[#8767c8d](https://github.com/nfdi4plants/ArcGraphModel/commit/8767c8d4580eceac05e3d20d4bb2a3389e45eb0d)] remove fgl dependency
+* Bugfixes:
+    * [[#3decc9c](https://github.com/nfdi4plants/ArcGraphModel/commit/3decc9ca1a4d40d3a752192b12931759915a345b)] fix some occurences of Param.tryParam
+    * [[#c6e2072](https://github.com/nfdi4plants/ArcGraphModel/commit/c6e2072d529ede21912f46d7059a145f0aff8db3)] Update to FsSpreadsheet 3.4 (soon 4.0), fix nbackwards incompatible stuff, use dense rows
+    * [[#eebb4f4](https://github.com/nfdi4plants/ArcGraphModel/commit/eebb4f4c0f6a482fdb48512c88c615d43d67b017)] update ontologies with structural `follows` relationships, fix some numbering errors
+
 ### 0.2.0+c841135 (Released 2023-8-4)
 * Additions:
     * [[#196b63e](https://github.com/nfdi4plants/ArcGraphModel/commit/196b63ec4229ef3535c8556ed12e8820b5e42510)] release 0.1.0-preview.2

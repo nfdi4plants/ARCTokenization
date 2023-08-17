@@ -29,9 +29,9 @@
       },
       "FsSpreadsheet": {
         "type": "Direct",
-        "requested": "[3.4.0, 3.4.0]",
-        "resolved": "3.4.0",
-        "contentHash": "Uza3yL6hh/kiFhj+SYq91oeR08FVH95ce1b5gr64nPx3MXTo7bHJ2j5YJB63WaRwMwBKonsASD1fws58FC/ARA==",
+        "requested": "[4.0.0, 4.0.0]",
+        "resolved": "4.0.0",
+        "contentHash": "xOfm5r0iBiLQ3jhJL1puUoWU5md2Hdl0Q7CBBP4NAJQ//GyuRkHZprTWXBLSn7iQs4jnkd9omTKjhdDKa3i6xw==",
         "dependencies": {
           "FSharp.Core": "6.0.7",
           "Fable.Core": "4.0.0"
@@ -39,9 +39,9 @@
       },
       "FsSpreadsheet.ExcelIO": {
         "type": "Direct",
-        "requested": "[3.4.0, 3.4.0]",
-        "resolved": "3.4.0",
-        "contentHash": "UVPbuoQQDsfrjVdpN88396HUgX0OwtYBaDb2N4u29FxNRzcKaK6VVMlIVRatMURnHy4ofqLW9PkPqYBzNvgz4w==",
+        "requested": "[4.0.0, 4.0.0]",
+        "resolved": "4.0.0",
+        "contentHash": "IY33vb75XG/7fuzGGPL9f6g6P2gQsk+LSfbIWmRwy4ke7RCzdsvNBs5S5BMM7t5mo6FyWxFKyrI9Q6SFesyj7w==",
         "dependencies": {
           "DocumentFormat.OpenXml": "[2.12.3]",
           "FSharp.Core": "6.0.7",

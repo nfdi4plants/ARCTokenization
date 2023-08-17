@@ -42,11 +42,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ControlledVocabulary\ControlledVocabulary.fsproj" PackageVersion="[0.0.0, 1.0.0)" />
+    <ProjectReference Include="..\ControlledVocabulary\ControlledVocabulary.fsproj" PackageVersion="[1.0.0, 2.0.0)" />
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
     <PackageReference Include="FsOboParser" Version="[0.1.0]" />
-    <PackageReference Include="FsSpreadsheet" Version="[3.4.0]" />
-    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[3.4.0]" />
+    <PackageReference Include="FsSpreadsheet" Version="[4.1.0]" />
+    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[4.1.0]" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
   </ItemGroup>
 
