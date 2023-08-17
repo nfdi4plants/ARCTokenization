@@ -95,3 +95,59 @@ module Tokenization =
                 UserParam("fk you 
                 lmaoooo", ParamValue.Value 1)
             ]
+
+    module ConvertTokens =
+        
+        let referenceTerms = [
+            CvTerm.create(accession = "1", name = "ReferenceTerm1", ref = "1")
+            CvTerm.create(accession = "2", name = "ReferenceTerm2", ref = "2")
+            CvTerm.create(accession = "3", name = "ReferenceTerm3", ref = "3")
+        ]
+
+        let referenceRow = [
+            FsCell("ReferenceTerm1", address = FsAddress(rowNumber = 0, columnNumber = 0))
+            FsCell("some value", address = FsAddress(rowNumber = 0, columnNumber = 1))
+            FsCell("another value", address = FsAddress(rowNumber = 0, columnNumber = 2))
+        ]
+
+        let referenceCvParams = [
+            CvParam(CvTerm.create(accession = "1", name = "ReferenceTerm1", ref = "1"), ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey)
+            CvParam(CvTerm.create(accession = "1", name = "ReferenceTerm1", ref = "1"), ParamValue.Value "some value")
+            CvParam(CvTerm.create(accession = "1", name = "ReferenceTerm1", ref = "1"), ParamValue.Value "another value")
+        ]
+
+        let referenceCommentRow = [
+            FsCell("Comment[xD]", address = FsAddress(rowNumber = 1, columnNumber = 0))
+            FsCell("some value", address = FsAddress(rowNumber = 1, columnNumber = 1))
+            FsCell("another value", address = FsAddress(rowNumber = 1, columnNumber = 2))
+        ]
+
+        let referenceCommentCvParams = [
+            CvParam(Terms.StructuralTerms.userComment, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey)
+            CvParam(Terms.StructuralTerms.userComment, ParamValue.Value "some value")
+            CvParam(Terms.StructuralTerms.userComment, ParamValue.Value "another value")
+        ]
+
+        let referenceIgnoreLineRow = [
+            FsCell("# why am i even here?", address = FsAddress(rowNumber = 0, columnNumber = 0))
+            FsCell("some value", address = FsAddress(rowNumber = 0, columnNumber = 1))
+            FsCell("another value", address = FsAddress(rowNumber = 0, columnNumber = 2))
+        ]
+
+        let referenceIgnoreLineCvParams = [
+            CvParam(Terms.StructuralTerms.ignoreLine, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey)
+            CvParam(Terms.StructuralTerms.ignoreLine, ParamValue.Value "some value")
+            CvParam(Terms.StructuralTerms.ignoreLine, ParamValue.Value "another value")
+        ]
+
+        let referenceUserParamRow = [
+            FsCell("fk u lmaooooo", address = FsAddress(rowNumber = 0, columnNumber = 0))
+            FsCell("some value", address = FsAddress(rowNumber = 0, columnNumber = 1))
+            FsCell("another value", address = FsAddress(rowNumber = 0, columnNumber = 2))
+        ]
+
+        let referenceUserParams = [
+            UserParam("fk u lmaooooo", ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey)
+            UserParam("fk u lmaooooo", ParamValue.Value "some value")
+            UserParam("fk u lmaooooo", ParamValue.Value "another value")
+        ]

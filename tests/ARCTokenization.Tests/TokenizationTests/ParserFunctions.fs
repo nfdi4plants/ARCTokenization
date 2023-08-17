@@ -77,7 +77,75 @@ module ParseKeyWithTerms =
 
 module ConvertTokens = 
     
+    open ReferenceObjects.Tokenization.ConvertTokens
+    open FsSpreadsheet
+
+    let tokenizer : FsCell seq -> IParam list = Tokenization.convertTokens (MetadataSheet.parseKeyWithTerms referenceTerms)
+
+    let parsedCvParams = tokenizer referenceRow
+
     [<Fact>]
-    let ``?`` () =
-        let actual = Tokenization.convertTokens
-        ()
+    let ``Row with CvTerm as section key is tokenized as CvParams`` () =
+        let actual = parsedCvParams
+        let expected = referenceCvParams
+        Assert.All(
+            List.zip expected actual,
+            fun (e, a) -> Assert.True(Param.equals e a)
+        )
+
+    [<Fact>]
+    let ``CvTerm row has metadata section key as value of first token`` () =
+        let actual = parsedCvParams.[0] |> Param.getValueAsTerm
+        let expected = Terms.StructuralTerms.metadataSectionKey
+        Assert.Equal(expected, actual)
+
+    let parsedComments = tokenizer referenceCommentRow
+
+    [<Fact>]
+    let ``Row with Comment as section key is tokenized as CvParams`` () =
+        let actual = parsedComments
+        let expected = referenceCommentCvParams
+        Assert.All(
+            List.zip expected actual,
+            fun (e, a) -> Assert.True(Param.equals e a)
+        )
+
+    [<Fact>]
+    let ``Comment row has metadata section key as value of first token`` () =
+        let actual = parsedComments.[0] |> Param.getValueAsTerm
+        let expected = Terms.StructuralTerms.metadataSectionKey
+        Assert.Equal(expected, actual)
+
+    let parsedIgnoreLines = tokenizer referenceIgnoreLineRow
+
+    [<Fact>]
+    let ``Row with IgnoreLine as section key is tokenized as CvParams`` () =
+        let actual = parsedIgnoreLines
+        let expected = referenceIgnoreLineCvParams
+        Assert.All(
+            List.zip expected actual,
+            fun (e, a) -> Assert.True(Param.equals e a)
+        )
+
+    [<Fact>]
+    let ``IgnoreLine row has metadata section key as value of first token`` () =
+        let actual = parsedIgnoreLines.[0] |> Param.getValueAsTerm
+        let expected = Terms.StructuralTerms.metadataSectionKey
+        Assert.Equal(expected, actual)
+
+    let parsedUserParams = tokenizer referenceUserParamRow
+
+    [<Fact>]
+    let ``Row with UserParam as section key is tokenized as UserParams`` () =
+        let actual = parsedUserParams
+        let expected = referenceUserParams
+        Assert.All(
+            List.zip expected actual,
+            fun (e, a) -> Assert.True(Param.equals e a)
+        )
+
+    [<Fact>]
+    let ``UserParam row has metadata section key as value of first token`` () =
+        let actual = parsedUserParams.[0] |> Param.getValueAsTerm
+        let expected = Terms.StructuralTerms.metadataSectionKey
+        Assert.Equal(expected, actual)
