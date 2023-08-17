@@ -2,7 +2,7 @@
 
 open Fake.Core
 
-let project = "ArcGraphModel"
+let project = "ARCTokenization"
 
 let testProjects = 
     [
