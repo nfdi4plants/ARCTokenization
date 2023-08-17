@@ -10,11 +10,12 @@
     <None Include="Fixtures\**" CopyToOutputDirectory="Always" />
     <Compile Include="TestUtils.fs" />
     <Compile Include="TestObjects.fs" />
+    <Compile Include="StructuralOntologytests.fs" />
+    <Compile Include="IntegrationTests\InvestigationMetadata.fs" />
     <Compile Include="IntegrationTests\StudyMetadata.fs" />
     <Compile Include="IntegrationTests\StudyAnnotationTable.fs" />
     <Compile Include="IntegrationTests\AssayMetadata.fs" />
     <Compile Include="IntegrationTests\AssayAnnotationTable.fs" />
-    <Compile Include="IntegrationTests\InvestigationMetadata.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

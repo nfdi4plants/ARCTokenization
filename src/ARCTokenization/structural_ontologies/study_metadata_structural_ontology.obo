@@ -18,7 +18,7 @@ synonym: "STUDY METADATA" EXACT []
 relationship: part_of STDMSO:00000001 ! Study Metadata
 
 [Term]
-id: STDMSO:00000051
+id: STDMSO:00000062
 name: STUDY METADATA
 def: ""
 synonym: "STUDY" EXACT []

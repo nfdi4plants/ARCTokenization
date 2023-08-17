@@ -226,6 +226,21 @@ relationship: part_of INVMSO:00000021 ! INVESTIGATION CONTACTS
 relationship: follows INVMSO:00000031 ! Investigation Person Roles Term Accession Number
 
 [Term]
+id: INVMSO:00000093
+name: Comment[<Investigation Person ORCID>]
+def: ""
+synonym: "Comment[Investigation Person ORCID]" EXACT []
+is_obsolete: true
+relationship: part_of INVMSO:00000021 ! INVESTIGATION CONTACTS
+
+[Term]
+id: INVMSO:00000094
+name: Comment[Investigation Person ORCID]
+def: ""
+synonym: "Comment[<Investigation Person ORCID>]" EXACT []
+relationship: part_of INVMSO:00000021 ! INVESTIGATION CONTACTS
+
+[Term]
 name: STUDY
 id: INVMSO:00000033
 def: ""

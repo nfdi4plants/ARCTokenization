@@ -22,6 +22,11 @@ module InvestigationMetadata =
 
     let ontology = OboOntology.fromLines true obo
 
+    let obsoleteCvTerms = 
+        ontology.Terms
+        |> List.filter (fun t -> t.IsObsolete)
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
+
     let cvTerms = 
         ontology.Terms
         |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
@@ -32,9 +37,14 @@ module StudyMetadata =
 
     let ontology = OboOntology.fromLines true obo
 
+    let obsoleteCvTerms = 
+        ontology.Terms
+        |> List.filter (fun t -> t.IsObsolete)
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))
+
     let cvTerms = 
         ontology.Terms
-        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref ="STDMSO"))    
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))    
 
 module AssayMetadata = 
     
@@ -44,7 +54,13 @@ module AssayMetadata =
 
     let cvTerms = 
         ontology.Terms
-        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref ="ASSMSO"))
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
+
+    let obsoleteCvTerms = 
+        ontology.Terms
+        |> List.filter (fun t -> t.IsObsolete)
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
+
 
 module StructuralTerms =
     
