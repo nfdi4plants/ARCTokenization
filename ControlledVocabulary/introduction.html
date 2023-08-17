@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Introduction to ControlledVocabularies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey">
+
+    <!--Opengraph properties (https://ogp.me/)-->
+    <meta property="og:title" content="Introduction to ControlledVocabularies" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ARCTokenization" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://nfdi4plants.github.io/ARCTokenization//img/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-svg.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <div class="columns is-fullheight m-0">
+        <div id="fsdocs-menu" class="column is-2 is-paddingless">
+            <aside class="menu">
+                <div class="container is-paddingless is-marginless has-background-dark">
+                    <a href="https://nfdi4plants.github.io/ARCTokenization/">
+                        <figure class="image is-128x128 container">
+                            <img src="https://nfdi4plants.github.io/ARCTokenization/img/logo.png">
+                        </figure>
+                    </a>
+                    <h2 class="title has-text-centered has-text-white">ARCTokenization</h2>
+                    <h5 class="has-text-centered has-text-white pb-4">Documentation for 1.0.0</h5>
+                </div>
+                <div class="content">
+                    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+                    <div id="header">
+                        <div class="searchbox" id="fsdocs-searchbox">
+                            <label for="search-by">
+                                <i class="fas fa-search"></i>
+                            </label>
+                            <input data-search-input="" id="search-by" type="search" placeholder="Search..." class="input" />
+                            <span data-search-clear="">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- END SEARCH BOX: this adds support for the search box -->
+                    <ul class="navbar-nav">
+                        <li class="nav-header">Links</li>
+                        <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/blob/main/LICENSE">License (MIT)</a></li>
+                        <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/blob/main/RELEASE_NOTES.md">Release Notes</a></li>
+                        <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/">Source Repository</a></li>
+                        <li class="nav-header">
+  ControlledVocabulary
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/introduction.html">
+    Introduction to ControlledVocabularies
+  </a>
+</li>             
+<li class="nav-header">
+  ARCTokenization
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/introduction.html">
+    Introduction to ARCTokenization
+  </a>
+</li>
+                        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+        <div class="column is-10 is-paddingless">
+            <div class="section pt-4">
+                <div class="container" id="fsdocs-content">
+                    
+<h1><a name="Introduction-to-ControlledVocabularies" class="anchor" href="#Introduction-to-ControlledVocabularies">Introduction to ControlledVocabularies</a></h1>
+<p><code>&lt;insert introduction text about CVs and ontology terms here&gt;</code></p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">ControlledVocabulary</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">myTerm</span> <span class="o">=</span> 
+    <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="rt">CvTerm</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">create</span><span class="pn">(</span>
+        <span class="fn">accession</span> <span class="o">=</span> <span class="s">&quot;MYONT:00000001&quot;</span><span class="pn">,</span>
+        <span class="fn">name</span> <span class="o">=</span> <span class="s">&quot;My Term&quot;</span><span class="pn">,</span>
+        <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">ref</span> <span class="o">=</span> <span class="s">&quot;MyOntology&quot;</span>
+    <span class="pn">)</span>
+</code></pre>
+<table class="pre"><tr><td><pre><code>{ Accession = "MYONT:00000001"
+  Name = "My Term"
+  RefUri = "MyOntology" }</code></pre></td></tr></table>
+
+                </div>
+            </div>
+        </div>
+        <div class="fsdocs-tip" id="fs1">namespace ControlledVocabulary</div>
+<div class="fsdocs-tip" id="fs2">val myTerm: CvTerm</div>
+<div class="fsdocs-tip" id="fs3">type CvTerm =
+  {
+    Accession: string
+    Name: string
+    RefUri: string
+  }
+  static member create: accession: string * name: string * ref: string -&gt; CvTerm + 1 overload<br /><em>&lt;summary&gt;
+ Represents a term from a controlled vocabulary (Cv)
+ in the form of: id|accession ; name|value ; refUri
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs4">static member CvTerm.create: name: string -&gt; CvTerm<br />static member CvTerm.create: accession: string * name: string * ref: string -&gt; CvTerm</div>
+<div class="fsdocs-tip" id="fs5">Multiple items<br />val ref: value: &#39;T -&gt; &#39;T ref<br /><br />--------------------<br />type &#39;T ref = Ref&lt;&#39;T&gt;</div>
+
+    </div>
+
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <script type="text/javascript">var fsdocs_search_baseurl = 'https://nfdi4plants.github.io/ARCTokenization/'</script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+    <script type="text/javascript" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-search.js"></script>
+    <!-- END SEARCH BOX: this adds support for the search box -->
+</body>
+
+</html>
