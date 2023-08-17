@@ -13,15 +13,17 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
     member this.Name        = name
     member this.RefUri      = "UserTerm"
     member this.Value       = paramValue
+    member this.WithValue(v : ParamValue) = UserParam(name,v,attributes)
+    member this.HasAttributes 
+        with get() = this.Attributes |> Seq.isEmpty |> not
 
     interface IParam with 
-        member this.Accession   = this.Accession
-        member this.Name        = this.Name     
-        member this.RefUri      = this.RefUri   
-        member this.Value       = this.Value    
-        member this.WithValue(v : ParamValue) = UserParam(name,v,attributes)
-        member this.HasAttributes 
-            with get() = this.Attributes |> Seq.isEmpty |> not
+        member this.Accession                   = this.Accession
+        member this.Name                        = this.Name     
+        member this.RefUri                      = this.RefUri   
+        member this.Value                       = this.Value    
+        member this.WithValue(v : ParamValue)   = this.WithValue(v)
+        member this.HasAttributes               = this.HasAttributes
 
     new (name,pv,attributes : seq<IParam>) = 
         let dict = CvAttributeCollection(attributes)
@@ -103,20 +105,22 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
     /// Returns true, if the names of the given param items match
     static member equalsName (up1: UserParam) (up2: UserParam) = Param.equalsName up1 up2
 
-    /// Returns Some Value of type 'T, if the given param item can be downcast, else returns None
-    static member inline tryAs<'T when 'T :> IParam> (up: UserParam) = Param.tryAs<'T> up
+    //---------------------- UserParam specific implementations ----------------------//
 
-    /// Returns true, if the given param item can be downcast
-    static member inline is<'T when 'T :> IParam> (up: UserParam) = Param.is<'T> up
+    static member toCvParam (up: UserParam) = CvParam(CvTerm.create(up.Accession, up.Name, up.RefUri), up.Value, up.Attributes)
 
     override this.ToString() = 
-        $"Name: {(this :> ICvBase).Name}\n\tValue: {(this :> IParamBase).Value}\n\tQualifiers: {this.Keys |> Seq.toList}"
+        $"Name: {this.Name}\n\tValue: {this.Value}\n\tQualifiers: {this.Keys |> Seq.toList}"
 
     member this.DisplayText = 
         this.ToString()
 
 [<AutoOpen>]
 module UserParamExtensions = 
+
+    type CvParam with
+        static member toUserParam (cvp: CvParam) =
+            UserParam(cvp.Name, cvp.Value, cvp.Attributes)
 
     type ParamBase with
         /// Returns Some Param if the given value item can be downcast, else returns None
@@ -131,6 +135,18 @@ module UserParamExtensions =
             match cv with
             | :? UserParam as param -> Some param
             | _ -> None
+
+        static member toCvParam (cv : IParam) =
+            match cv with
+            | :? UserParam as up -> up |> UserParam.toCvParam
+            | :? CvParam as cvp -> cvp
+            | _ -> failwith "no conversion to CvParam available for this type"
+            
+        static member toUserParam (cv : IParam) =
+            match cv with
+            | :? UserParam as up -> up 
+            | :? CvParam as cvp -> cvp |> CvParam.toUserParam
+            | _ -> failwith "no conversion to CvParam available for this type"
 
     type CvBase with
         /// Returns Some UserParam, if the given value item can be downcast, else returns None

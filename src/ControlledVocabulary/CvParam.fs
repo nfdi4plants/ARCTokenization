@@ -19,15 +19,16 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
     member this.RefUri      = cvRef
     member this.Value       = paramValue
     member this.WithValue(v : ParamValue) = CvParam(cvAccession,cvName,cvRef,v,attributes)
+    member this.HasAttributes 
+        with get() = this.Attributes |> Seq.isEmpty |> not
 
     interface IParam with 
-        member this.Accession   = this.Accession
-        member this.Name        = this.Name     
-        member this.RefUri      = this.RefUri   
-        member this.Value       = this.Value    
-        member this.WithValue(v : ParamValue) = CvParam(cvAccession,cvName,cvRef,v,attributes)
-        member this.HasAttributes 
-            with get() = this.Attributes |> Seq.isEmpty |> not
+        member this.Accession                   = this.Accession
+        member this.Name                        = this.Name     
+        member this.RefUri                      = this.RefUri   
+        member this.Value                       = this.Value    
+        member this.WithValue(v : ParamValue)   = this.WithValue(v)
+        member this.HasAttributes               = this.HasAttributes
 
     new (id,name,ref,pv,attributes : seq<IParam>) =  
         let dict = CvAttributeCollection(attributes)
@@ -127,12 +128,6 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
     /// Returns true, if the names of the given param items match
     static member equalsName (cvp1 : CvParam) (cvp2 : CvParam) = Param.equalsName cvp1 cvp1
 
-    /// Returns Some Value of type 'T, if the given param item can be downcast, else returns None
-    static member inline tryAs<'T when 'T :> IParam> (cvp: CvParam) = Param.tryAs<'T> cvp
-
-    /// Returns true, if the given param item can be downcast
-    static member inline is<'T when 'T :> IParam> (cvp: CvParam) = Param.is<'T> cvp
-
     //---------------------- CvParam specific implementations ----------------------//
 
     /// Create a CvParam from a category and a simple value
@@ -151,7 +146,7 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
         param.Values |> Seq.cast
 
     override this.ToString() = 
-        $"CvParam: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).Accession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tValue: {(this :> IParamBase).Value}\n\tAttributes: {this.Keys |> Seq.toList}"
+        $"CvParam: {this.Name}\n\tID: {this.Accession}\n\tRefUri: {this.RefUri}\n\tValue: {this.Value}\n\tAttributes: {this.Keys |> Seq.toList}"
 
     member this.DisplayText = 
         this.ToString()
