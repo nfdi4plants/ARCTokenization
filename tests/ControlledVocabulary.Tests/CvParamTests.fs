@@ -109,3 +109,105 @@ module StaticMemberTests =
         let actual = testCvParams |> List.map CvParam.tryGetCvUnitTermRef
         Assert.Equal<Option<string> List>(expected, actual)
 
+    [<Fact>]
+    let ``mapValue`` () =
+        let expected = [ParamValue.Value 1; ParamValue.Value 1; ParamValue.Value 1]
+        let actual = testCvParams |> List.map (CvParam.mapValue (fun _ -> ParamValue.Value 1) >> CvParam.getParamValue)
+        Assert.Equal<ParamValue List>(expected, actual)
+    
+    [<Fact>]
+    let ``tryMapValue`` () =
+        let expected = [Some (ParamValue.Value 1); Some (ParamValue.Value 1); Some (ParamValue.Value 1)]
+        let actual = testCvParams |> List.map (CvParam.tryMapValue (fun _ -> Some (ParamValue.Value 1)) >> Option.map CvParam.getParamValue)
+        Assert.Equal<(ParamValue option) List>(expected, actual)
+    
+    [<Fact>]
+    let ``tryAddName`` () =
+        let expected = [Some testName1; None; None]
+        let actual = testCvParams |> List.map (CvParam.tryAddName testName1 >> Option.map CvParam.getCvName)
+        Assert.Equal<(string option) List>(expected, actual)
+
+    [<Fact>]
+    let ``tryAddAccession`` () =
+        let expected = [None; None; None]
+        let actual = testCvParams |> List.map (CvParam.tryAddAccession testAccession1 >> Option.map CvParam.getCvAccession)
+        Assert.Equal<(string option) List>(expected, actual)
+    
+    [<Fact>]
+    let ``tryAddReference`` () =
+        let expected = [None; None; None]
+        let actual = testCvParams |> List.map (CvParam.tryAddReference testRef1 >> Option.map CvParam.getCvRef)
+        Assert.Equal<(string option) List>(expected, actual)
+    
+    [<Fact>]
+    let ``tryAddUnit`` () =
+        let expected = [Some (ParamValue.WithCvUnitAccession (5, testTerm1)); None; None]
+        let actual = testCvParams |> List.map (CvParam.tryAddUnit testTerm1 >> Option.map CvParam.getParamValue)
+        Assert.Equal<(ParamValue option) List>(expected, actual)
+    
+    [<Fact>]
+    let ``getCvAccession`` () =
+        let expected = [testAccession1; testAccession1; testAccession2]
+        let actual = testCvParams |> List.map CvParam.getCvAccession
+        Assert.Equal<string List>(expected, actual)
+    
+    [<Fact>]
+    let ``getCvName`` () =
+        let expected = [testName1; testName1; testName2]
+        let actual = testCvParams |> List.map CvParam.getCvName
+        Assert.Equal<string List>(expected, actual)
+    
+    [<Fact>]
+    let ``getCvRef`` () =
+        let expected = [testRef1; testRef1; testRef2]
+        let actual = testCvParams |> List.map CvParam.getCvRef
+        Assert.Equal<string List>(expected, actual)
+    
+    [<Fact>]
+    let ``getTerm`` () =
+        let expected = [testTerm1; testTerm1; testTerm2]
+        let actual = testCvParams |> List.map CvParam.getTerm
+        Assert.Equal<CvTerm List>(expected, actual)
+
+    [<Fact>]
+    let ``equalsTerm`` () =
+        Assert.All(
+            (
+                List.zip 
+                    [testTerm1; testTerm1; testTerm2]
+                    testCvParams
+            ),
+            (fun (x,y) -> CvParam.equalsTerm x y |> Assert.True)
+        )
+    
+    [<Fact>]
+    let ``equals`` () =
+        Assert.All(
+            (
+                List.zip 
+                    [
+                        CvParam(testTerm1, ParamValue.Value 5)
+                        CvParam(testTerm1, ParamValue.CvValue testTerm2)
+                        CvParam(testTerm2, ParamValue.WithCvUnitAccession (5, testTerm1))
+                    ]
+                    testCvParams
+            ),
+            (fun (x,y) -> CvParam.equals x y |> Assert.True)
+        )
+    
+    [<Fact>]
+    let ``equalsName`` () =
+        Assert.All(
+            (
+                List.zip 
+                    [
+                        CvParam(testTerm1, ParamValue.Value 5)
+                        CvParam(testTerm1, ParamValue.CvValue testTerm2)
+                        CvParam(testTerm2, ParamValue.WithCvUnitAccession (5, testTerm1))
+                    ]
+                    testCvParams
+            ),
+            (fun (x,y) -> CvParam.equalsName x y |> Assert.True)
+        )
+
+
