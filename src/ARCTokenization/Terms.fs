@@ -65,3 +65,7 @@ module AssayMetadata =
 module StructuralTerms =
     
     let metadataSectionKey = CvTerm.create(accession = "AGMO:00000001", name = "Metadata Section Key", ref = "AGMO")
+
+    let userComment = CvTerm.create(accession = "AGMO:00000002", name = "User Comment", ref = "AGMO")
+
+    let ignoreLine = CvTerm.create(accession = "AGMO:00000003", name = "Ignore Line", ref = "AGMO")

@@ -7,14 +7,14 @@ open ARCTokenization
 open Xunit
 
 open TestUtils
-open TestObjects
+open TestObjects.Integration
 
 module Assay = 
     module Correct  =
     
         module ``Assay with only source and sample column`` = 
         
-            let assay = Assays.Correct.``assay with only source and sample column``
+            let assay = AssayAnnotationTable.Correct.``assay with only source and sample column``
 
             [<Fact>]
             let ``AnnotationTable count`` () =
@@ -68,7 +68,7 @@ module Assay =
 
         module ``Assay with single characteristics`` =
         
-            let assay = Assays.Correct.``assay with single characteristics``
+            let assay = AssayAnnotationTable.Correct.``assay with single characteristics``
 
             [<Fact>]
             let ``AnnotationTable count`` () =
