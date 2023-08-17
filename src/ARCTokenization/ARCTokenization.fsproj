@@ -37,8 +37,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <!--<PackageIcon>logo.png</PackageIcon>-->
     <PackageTags>F# FSharp datascience rdm arc dataplant nfdi4plants xlsx isa</PackageTags>
-    <RepositoryUrl>https://github.com/nfdi4plants/ArcGraphModel</RepositoryUrl>
+    <PackageProjectUrl>https://nfdi4plants.github.io/ARCTokenization</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nfdi4plants/ARCTokenization</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <FsDocsLicenseLink>https://github.com/nfdi4plants/ARCTokenization/blob/main/LICENSE</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/nfdi4plants/ARCTokenization/blob/main/RELEASE_NOTES.md</FsDocsReleaseNotesLink>
   </PropertyGroup>
 
   <ItemGroup>

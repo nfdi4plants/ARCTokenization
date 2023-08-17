@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 /tests/ArcGraphModel.JsNativeTests/fable/**/*.js
 /tests/ArcGraphModel.JsNativeTests/fable/**/*.js.map
+/.fsdocs
+/tmp/watch

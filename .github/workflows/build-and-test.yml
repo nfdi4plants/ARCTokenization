@@ -17,8 +17,10 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '6.0.x'
+    - name: make script executable
+      run: chmod u+x build.sh
     - name: Build and test
-      run: dotnet run --project ./build/Build.fsproj runTests
+      run: ./build.sh runTests
 
   build-and-test-windows:
     
@@ -31,4 +33,4 @@ jobs:
       with:
         dotnet-version: '6.0.x'
     - name: Build and test
-      run: dotnet run --project ./build/Build.fsproj runTests
+      run: ./build.cmd runTests
