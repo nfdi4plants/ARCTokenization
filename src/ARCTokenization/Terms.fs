@@ -24,7 +24,7 @@ module InvestigationMetadata =
 
     let cvTerms = 
         ontology.Terms
-        |> List.map (fun t -> CvTerm(t.Id,t.Name,"INVMSO"))
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
 
 module StudyMetadata =
     
@@ -34,7 +34,7 @@ module StudyMetadata =
 
     let cvTerms = 
         ontology.Terms
-        |> List.map (fun t -> CvTerm(t.Id,t.Name,"STDMSO"))    
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref ="STDMSO"))    
 
 module AssayMetadata = 
     
@@ -44,8 +44,8 @@ module AssayMetadata =
 
     let cvTerms = 
         ontology.Terms
-        |> List.map (fun t -> CvTerm(t.Id,t.Name,"ASSMSO"))
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref ="ASSMSO"))
 
 module StructuralTerms =
     
-    let metadataSectionKey = CvTerm("AGMO:00000001","Metadata Section Key","AGMO")
+    let metadataSectionKey = CvTerm.create(accession = "AGMO:00000001", name = "Metadata Section Key", ref = "AGMO")

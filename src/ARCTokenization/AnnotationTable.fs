@@ -151,7 +151,7 @@ module AnnotationTable =
                     let cvPars =
                         List.map4 (
                             fun (vl : FsCell) unt tan tsr -> 
-                                let valTerm = CvUnit(tan.Value, vl.Value, tsr.Value)
+                                let valTerm = CvUnit.create(accession = tan.Value, name = vl.Value, ref = tsr.Value)
                                 CvParam(d.Value, a.Value, c.Value, WithCvUnitAccession (unt.Value, valTerm))
                         ) dataCellsVal dataCellsUnt dataCellsTan dataCellsTsr 
                     yield! cvPars
@@ -166,7 +166,7 @@ module AnnotationTable =
                         (dataCellsVal, dataCellsTsr, dataCellsTan)
                         |||> List.map3 (
                             fun vl tsr tan ->
-                                let valTerm = CvTerm(tan.Value, vl.Value, tsr.Value)
+                                let valTerm = CvTerm.create(accession = tan.Value, name = vl.Value, ref = tsr.Value)
                                 CvParam(c.Value, a.Value, b.Value, CvValue valTerm)
                         )
                     yield! cvPars
@@ -182,7 +182,7 @@ module AnnotationTable =
                             (dataCellsVal, dataCellsTsr)
                             ||> List.map2 (
                                 fun vl tsr ->
-                                    let valTerm = CvTerm("(n/a)", vl.Value, tsr.Value)
+                                    let valTerm = CvTerm.create (accession = "(n/a)", name = vl.Value, ref = tsr.Value)
                                     CvParam("n/a", a.Value, b.Value, CvValue valTerm)
                             )
                         yield! cvPars
@@ -195,7 +195,7 @@ module AnnotationTable =
                             (dataCellsTsr, dataCellsTan)
                             ||> List.map2 (
                                 fun tsr tan ->
-                                    let valTerm = CvTerm(tan.Value, "n/a", tsr.Value)
+                                    let valTerm = CvTerm.create(accession = tan.Value, name = "n/a", ref = tsr.Value)
                                     CvParam(b.Value, "(n/a)", a.Value, CvValue valTerm)
                             )
                         yield! cvPars

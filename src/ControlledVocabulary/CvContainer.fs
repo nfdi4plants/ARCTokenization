@@ -13,18 +13,18 @@ module internal Dictionary =
 /// Represents a collection of structured properties, annotated with a controlled vocabulary term.
 type CvContainer (
     cvAccession : string, 
-    cvName : string, 
-    cvRefUri : string, 
-    attributes : IDictionary<string,IParam>,
-    properties : IDictionary<string,seq<ICvBase>>
+    cvName     : string, 
+    cvRef       : string, 
+    attributes  : IDictionary<string,IParam>,
+    properties  : IDictionary<string,seq<ICvBase>>
     ) =
 
     inherit CvAttributeCollection(attributes)
 
     interface ICvBase with 
-        member this.ID     = cvAccession
-        member this.Name   = cvName
-        member this.RefUri = cvRefUri    
+        member this.Accession   = cvAccession
+        member this.Name        = cvName
+        member this.RefUri      = cvRef
         member this.HasAttributes 
             with get() = this.Attributes |> Seq.isEmpty |> not
 
@@ -37,8 +37,8 @@ type CvContainer (
         CvContainer(cvAccession, cvName, cvRefUri, Seq.empty)
 
 
-    new ((id,name,ref) : CvTerm, attributes : IDictionary<string,IParam>) = 
-        CvContainer(id,name,ref, attributes, Dictionary<string, ICvBase seq>())
+    new (term : CvTerm, attributes : IDictionary<string,IParam>) = 
+        CvContainer(term.Accession, term.Name, term.RefUri, attributes, Dictionary<string, ICvBase seq>())
     new (term : CvTerm,attributes : seq<IParam>) = 
         let dict = CvAttributeCollection(attributes)
         CvContainer(term, dict)
@@ -79,7 +79,7 @@ type CvContainer (
     /// Fails if the propertyName cannot be found.
     member this.GetManyParams propertyName =
         Dictionary.item propertyName this.Properties
-        |> Seq.choose Param.tryParam
+        |> Seq.choose CvBase.tryParam
 
     /// Retrieves child with the given name of the CvContainer.
     ///
@@ -109,7 +109,7 @@ type CvContainer (
     /// Fails if there is not exactly one child with the given name or if the propertyName cannot be found.
     member this.GetSingleParam propertyName =
         Dictionary.item propertyName this.Properties
-        |> Seq.choose Param.tryParam
+        |> Seq.choose CvBase.tryParam
         |> Seq.exactlyOne
         
 
@@ -146,7 +146,7 @@ type CvContainer (
         Dictionary.tryFind propertyName this.Properties
         |> Option.bind (fun many ->
             many
-            |> Seq.choose Param.tryParam
+            |> Seq.choose CvBase.tryParam
             |> fun items -> if Seq.isEmpty items then None else Some items
         )
 
@@ -176,7 +176,7 @@ type CvContainer (
     /// Returns None if there is not exactly one child with the given name or if the propertyName cannot be found.
     member this.TryGetSingleParam propertyName =
         Dictionary.tryFind propertyName this.Properties
-        |> Option.bind (Seq.choose Param.tryParam >> Seq.tryExactlyOne)
+        |> Option.bind (Seq.choose CvBase.tryParam >> Seq.tryExactlyOne)
 
     
 
@@ -330,4 +330,4 @@ type CvContainer (
         Dictionary.addOrUpdateInPlace value.Name (Seq.singleton value) cvContainer.Properties
 
     override this.ToString() = 
-        $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).ID}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Properties.Keys |> Seq.toList}"
+        $"CvContainer: {(this :> ICvBase).Name}\n\tID: {(this :> ICvBase).Accession}\n\tRefUri: {(this :> ICvBase).RefUri}\n\tProperties: {this.Properties.Keys |> Seq.toList}"

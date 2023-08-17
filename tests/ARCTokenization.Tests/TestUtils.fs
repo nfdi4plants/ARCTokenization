@@ -13,9 +13,9 @@ module CvParam =
             (CvBase.getCvName cvpActual)
         )
 
-    let hasTermName (expectedName : string) (cvpActual : CvParam) =
+    let hasTermValue (expectedValue : string) (cvpActual : CvParam) =
         Assert.Equal(
-            expectedName,
+            expectedValue,
             (CvBase.getCvName cvpActual)
         )
 

@@ -3,7 +3,7 @@
 open ControlledVocabulary
 open Xunit
 
-let assayTerm = "ARCO:1234","Assay","ARCO"
+let assayTerm = CvTerm.create(accession = "ARCO:1234", name = "Assay",ref = "ARCO")
 
 [<Fact>]
 let ``ICvBase can be cast to CvParam using generic tryAs`` () = 
@@ -19,7 +19,7 @@ let ``ICvBase can be cast to CvParam using generic tryAs`` () =
 [<Fact>]
 let ``ICvBase can be cast to CvParam using tryCvParam`` () =
     let v = CvParam(assayTerm,ParamValue.Value 5) :> ICvBase
-    let result = CvParam.tryCvParam v
+    let result = CvBase.tryCvParam v
     Assert.True(result.IsSome)
 
     let result2 = 
@@ -41,7 +41,7 @@ let ``ICvBase can be cast to UserParam using generic tryAs`` () =
 [<Fact>]
 let ``ICvBase can be cast to UserParam using tryUserParam`` () =
     let v = UserParam("MyParam",ParamValue.Value 5) :> ICvBase
-    let result = UserParam.tryUserParam v
+    let result = CvBase.tryUserParam v
     Assert.True(result.IsSome)
 
     let result2 = 

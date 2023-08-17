@@ -39,7 +39,7 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
 
     /// Retrieves an IParam attribute by its term, if it exists, else returns None
     member this.TryGetAttribute (term : CvTerm) =
-        Dictionary.tryFind (CvTerm.getName term) this
+        Dictionary.tryFind term.Name this
         |> Option.bind (fun param -> 
             if CvBase.equalsTerm term param then 
                 Some param 
@@ -51,7 +51,7 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
 
     /// Retrieves an IParam attribute by its term, if it exists, else fails
     member this.GetAttribute (term : CvTerm) =
-        Dictionary.item (CvTerm.getName term) this
+        Dictionary.item term.Name this
 
     /// Returns true, if an attribute with the given name exists in the collection
     member this.ContainsAttribute (name : string) =
@@ -59,7 +59,7 @@ type CvAttributeCollection(attributes : IDictionary<string,IParam>) =
 
     /// Returns true, if an attribute with the given term exists in the collection
     member this.ContainsAttribute (term : CvTerm) =
-        match Dictionary.tryFind (CvTerm.getName term) this with
+        match Dictionary.tryFind term.Name this with
         | Some param when CvBase.equalsTerm term param -> true
         | _ -> false
 

@@ -112,7 +112,7 @@ module Correct  =
                         id = "Term Accession Number (OBI:0100026)",
                         name = "Characteristic [organism]",
                         ref = "Term Source REF (OBI:0100026)",
-                        pv = (ParamValue.CvValue ("http://purl.obolibrary.org/obo/NCBITaxon_3702","Arabidopsis thaliana","NCBITaxon")),
+                        pv = ParamValue.CvValue (CvTerm.create(accession = "http://purl.obolibrary.org/obo/NCBITaxon_3702", name = "Arabidopsis thaliana", ref = "NCBITaxon")),
                         attributes = []
                     )
                 ]

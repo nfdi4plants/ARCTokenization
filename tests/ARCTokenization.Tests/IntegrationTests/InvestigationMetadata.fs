@@ -108,11 +108,11 @@ let allExpectedMetadataTermsEmpty =
     //]
     Terms.InvestigationMetadata.cvTerms
     |> List.skip 1 //(ignore root term)
-    |> List.map (fun p -> CvParam(p, ParamValue.CvValue (CvTerm("AGMO:00000001", "Metadata Section Key", "AGMO")), []))
+    |> List.map (fun p -> CvParam(p, ParamValue.CvValue (CvTerm.create(accession = "AGMO:00000001", name = "Metadata Section Key", ref = "AGMO")), []))
 
 [<Fact>]
 let ``First Param is CvParam`` () =
-    Assert.True (parsedInvestigationMetadataEmpty.Head |> CvParam.tryCvParam).IsSome 
+    Assert.True (parsedInvestigationMetadataEmpty.Head |> Param.tryCvParam).IsSome 
 
 [<Fact>]
 let ``First CvParam`` () = CvParam.structuralEquality (parsedInvestigationMetadataEmpty.Head :?> CvParam) allExpectedMetadataTermsEmpty[0]
@@ -226,7 +226,7 @@ let allExpectedMetadataTermsFull =
         values
         |> List.mapi (fun i v ->
             if i = 0 then
-                CvParam(term, ParamValue.CvValue (CvTerm("AGMO:00000001", "Metadata Section Key", "AGMO")), [])
+                CvParam(term, ParamValue.CvValue (CvTerm.create(accession = "AGMO:00000001", name = "Metadata Section Key", ref = "AGMO")), [])
             else
                 CvParam(term, ParamValue.Value v, [])
         )
