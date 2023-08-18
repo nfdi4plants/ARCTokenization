@@ -20,7 +20,7 @@ id: INVMSO:00000003
 name: Term Source Name
 def: ""
 relationship: part_of INVMSO:00000002 ! ONTOLOGY SOURCE REFERENCE
-relationship: follws INVMSO:00000002 ! ONTOLOGY SOURCE REFERENCE
+relationship: follows INVMSO:00000002 ! ONTOLOGY SOURCE REFERENCE
 
 [Term]
 id: INVMSO:00000004
