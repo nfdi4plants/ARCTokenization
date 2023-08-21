@@ -41,6 +41,7 @@ let buildOntologies =
             ontologySource
             |> File.read
             |> Seq.map (fun line -> line.Trim())
+            |> fun lines -> Seq.concat [seq{"!This file was auto generated. Do not edit it. All manual changes will be overwritten by the next generator run eventually."}; lines]
             |> File.write false (ontologySource.Replace(".yml", ".obo"))
         )
     }
@@ -93,7 +94,7 @@ let build = BuildTask.create "Build" [clean; buildOntologies] {
             }
             // Use this if you want to speed up your build. Especially helpful in large projects
             // Ensure that the order in your project list is correct (e.g. projects that are depended on are built first)
-            //|> DotNet.Options.withCustomParams (Some "--no-dependencies") 
+            |> DotNet.Options.withCustomParams (Some "--no-dependencies") 
         )
     )
 }
