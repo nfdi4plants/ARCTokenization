@@ -1,5 +1,6 @@
 ### 1.0.2 - (Released 2023-8-21)
-
+- Additions:
+    - Include structural ontologies in the nuget package
 - Bugfixes:
     - Add missing follows relationships for [STUY](https://github.com/nfdi4plants/ARCTokenization/issues/31) and [orcid](https://github.com/nfdi4plants/ARCTokenization/issues/30) terms
 
