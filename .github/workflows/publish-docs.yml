@@ -4,7 +4,6 @@ on:
   push:
     branches: ['main']
     paths:
-# this ensures that docker image is only published when source code or Dockerfile is changed
       - 'docs/**'
 
 jobs:
@@ -20,6 +19,10 @@ jobs:
         dotnet-version: '6.0.x'
     - name: Restore tools
       run: dotnet tool restore
+    - name: setup-conda
+      uses: s-weigand/setup-conda@v1.1.1
+    - name: install nbconvert
+      run: conda install nbconvert -y
     - name: make script executable
       run: chmod u+x build.sh
     - name: Build docs
@@ -30,5 +33,5 @@ jobs:
       with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: ./output/ # The folder the action should deploy.
+          FOLDER: ./_site/ # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch

@@ -23,11 +23,11 @@ let _release =
         "Release" 
         [clean; buildOntologies; build; runTests; pack; buildDocs; createTag; publishNuget; releaseDocs]
 
-/// Full release of nuget package, git tag, and documentation for the prerelease version.
-let _preRelease = 
-    BuildTask.createEmpty 
-        "PreRelease" 
-        [setPrereleaseTag; clean; buildOntologies; build; runTests; packPrerelease; buildDocsPrerelease; createPrereleaseTag; publishNugetPrerelease; prereleaseDocs]
+///// Full release of nuget package, git tag, and documentation for the prerelease version.
+//let _preRelease = 
+//    BuildTask.createEmpty 
+//        "PreRelease" 
+//        [setPrereleaseTag; clean; buildOntologies; build; runTests; packPrerelease; buildDocsPrerelease; createPrereleaseTag; publishNugetPrerelease; prereleaseDocs]
 
 /// Full release of nuget package for the prerelease version.
 let _releaseNoDocs = 

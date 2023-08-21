@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{CE1B84FD-33D
 		LICENSE = LICENSE
 		package.json = package.json
 		playground.fsx = playground.fsx
+		.github\workflows\publish-docs.yml = .github\workflows\publish-docs.yml
 		README.md = README.md
 		RELEASE_NOTES.md = RELEASE_NOTES.md
 	EndProjectSection
@@ -39,31 +40,34 @@ EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ARCTokenization.Tests", "tests\ARCTokenization.Tests\ARCTokenization.Tests.fsproj", "{30177EF1-3980-4FFE-9B49-90B75DCEBDA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx_project", "docfx_project", "{86CD7F81-ADB4-4991-A960-063FE02D907D}"
 	ProjectSection(SolutionItems) = preProject
-		docs\index.fsx = docs\index.fsx
-		docs\_template.html = docs\_template.html
-		docs\_template.ipynb = docs\_template.ipynb
+		docs\docfx_project\.gitignore = docs\docfx_project\.gitignore
+		docs\convert-notebook.ps1 = docs\convert-notebook.ps1
+		docs\convert-notebooks.ps1 = docs\convert-notebooks.ps1
+		docs\docfx_project\docfx.json = docs\docfx_project\docfx.json
+		docs\docfx_project\index.md = docs\docfx_project\index.md
+		docs\docfx_project\toc.yml = docs\docfx_project\toc.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ControlledVocabulary", "ControlledVocabulary", "{3EA724A7-9928-4C6B-A19C-7DFE6AC239DC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ARCTokenization", "ARCTokenization", "{E669BA6D-4327-40AE-8CE1-E6FEA8F89A15}"
 	ProjectSection(SolutionItems) = preProject
-		docs\ControlledVocabulary\introduction.fsx = docs\ControlledVocabulary\introduction.fsx
+		docs\docfx_project\ARCTokenization\intro.md = docs\docfx_project\ARCTokenization\intro.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{DC3541E0-C65F-48A3-98CA-6615C29756C2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ControlledVocabulary", "ControlledVocabulary", "{F6471491-8FE4-48A7-BA9E-1113DE63B5F5}"
 	ProjectSection(SolutionItems) = preProject
-		docs\content\fsdocs-custom.css = docs\content\fsdocs-custom.css
+		docs\docfx_project\ControlledVocabulary\CvParam.ipynb = docs\docfx_project\ControlledVocabulary\CvParam.ipynb
+		docs\docfx_project\ControlledVocabulary\intro.ipynb = docs\docfx_project\ControlledVocabulary\intro.ipynb
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ARCTokenization", "ARCTokenization", "{48212177-66FF-42D5-A2A1-FA0EF4905E87}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{9031C346-A994-4943-AB58-1095882E725C}"
 	ProjectSection(SolutionItems) = preProject
-		docs\ARCTokenization\introduction.fsx = docs\ARCTokenization\introduction.fsx
+		docs\docfx_project\api\index.md = docs\docfx_project\api\index.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reference", "reference", "{300C4B4A-F907-4E43-92E0-5DED1099A932}"
-	ProjectSection(SolutionItems) = preProject
-		docs\reference\_template.html = docs\reference\_template.html
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{31DCBC4B-41D9-4CE1-9E5D-3F5A3F5E01CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,10 +105,11 @@ Global
 		{ED24D0E3-BA79-4F6D-9A30-D05FF4EBAFDB} = {3DB2A5F4-23F6-4A06-9AE5-CEAC0707735B}
 		{24D99DC2-DF18-45A3-B444-B60351F131DB} = {67DA0DCC-75F4-4F30-91C3-309A48B13D49}
 		{30177EF1-3980-4FFE-9B49-90B75DCEBDA3} = {2EB71559-9BE4-4E02-9763-9092876D1E4A}
-		{3EA724A7-9928-4C6B-A19C-7DFE6AC239DC} = {551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}
-		{DC3541E0-C65F-48A3-98CA-6615C29756C2} = {551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}
-		{48212177-66FF-42D5-A2A1-FA0EF4905E87} = {551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}
-		{300C4B4A-F907-4E43-92E0-5DED1099A932} = {551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}
+		{86CD7F81-ADB4-4991-A960-063FE02D907D} = {551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}
+		{E669BA6D-4327-40AE-8CE1-E6FEA8F89A15} = {86CD7F81-ADB4-4991-A960-063FE02D907D}
+		{F6471491-8FE4-48A7-BA9E-1113DE63B5F5} = {86CD7F81-ADB4-4991-A960-063FE02D907D}
+		{9031C346-A994-4943-AB58-1095882E725C} = {86CD7F81-ADB4-4991-A960-063FE02D907D}
+		{31DCBC4B-41D9-4CE1-9E5D-3F5A3F5E01CA} = {86CD7F81-ADB4-4991-A960-063FE02D907D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933E3470-7D09-4F22-A056-2407458B9600}
