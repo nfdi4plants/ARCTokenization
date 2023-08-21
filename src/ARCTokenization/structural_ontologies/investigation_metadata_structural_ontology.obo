@@ -231,15 +231,29 @@ id: INVMSO:00000093
 name: Comment[<Investigation Person ORCID>]
 def: ""
 synonym: "Comment[Investigation Person ORCID]" EXACT []
+synonym: "Comment[ORCID]" EXACT []
 is_obsolete: true
 relationship: part_of INVMSO:00000021 ! INVESTIGATION CONTACTS
+relationship: follows INVMSO:00000032 ! Investigation Person Roles Term Source REF
 
 [Term]
 id: INVMSO:00000094
 name: Comment[Investigation Person ORCID]
 def: ""
 synonym: "Comment[<Investigation Person ORCID>]" EXACT []
+synonym: "Comment[ORCID]" EXACT []
+is_obsolete: true
 relationship: part_of INVMSO:00000021 ! INVESTIGATION CONTACTS
+relationship: follows INVMSO:00000032 ! Investigation Person Roles Term Source REF
+
+[Term]
+id: INVMSO:00000095
+name: Comment[ORCID]
+def: ""
+synonym: "Comment[Investigation Person ORCID]" EXACT []
+synonym: "Comment[<Investigation Person ORCID>]" EXACT []
+relationship: part_of INVMSO:00000021 ! INVESTIGATION CONTACTS
+relationship: follows INVMSO:00000032 ! Investigation Person Roles Term Source REF
 
 [Term]
 name: STUDY
@@ -247,6 +261,9 @@ id: INVMSO:00000033
 def: ""
 relationship: part_of INVMSO:00000001 ! Investigation Metadata
 relationship: follows INVMSO:00000032 ! Investigation Person Roles Term Source REF
+relationship: follows INVMSO:00000093 ! Comment[<Investigation Person ORCID>]
+relationship: follows INVMSO:00000094 ! Comment[Investigation Person ORCID]
+relationship: follows INVMSO:00000095 ! Comment[ORCID]
 
 [Term]
 id: INVMSO:00000034
