@@ -13,6 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="RELEASE_NOTES.md" />
     <EmbeddedResource Include="structural_ontologies/investigation_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
     <EmbeddedResource Include="structural_ontologies/study_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
     <EmbeddedResource Include="structural_ontologies/assay_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
@@ -50,7 +51,7 @@
     <PackageReference Include="FsOboParser" Version="[0.1.0]" />
     <PackageReference Include="FsSpreadsheet" Version="[4.1.0]" />
     <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[4.1.0]" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <Target Name="UseExplicitPackageVersions" BeforeTargets="GenerateNuspec">

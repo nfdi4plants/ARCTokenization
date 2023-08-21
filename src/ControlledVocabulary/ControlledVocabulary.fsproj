@@ -18,10 +18,11 @@
 
   <ItemGroup>
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="RELEASE_NOTES.md" />
     <Compile Include="CvTerm.fs" />
     <Compile Include="ParamValue.fs" />
     <Compile Include="IParamBase.fs" />
@@ -33,6 +34,8 @@
     <Compile Include="CvObject.fs" />
     <Compile Include="CvContainer.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
   <PropertyGroup>
     <Authors>Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey</Authors>

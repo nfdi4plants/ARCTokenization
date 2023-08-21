@@ -1,3 +1,8 @@
+### 1.0.1
+
+- Bugfixes:
+    - [Fix typos in structural ontologies](https://github.com/nfdi4plants/ARCTokenization/commit/2dfd46f6884a61853baa76971620e868b66b4987), thanks [@omaus](https://github.com/omaus)
+
 ### 1.0.0+
 
 Starting from 1.0.0, Versions of the packages in this project are decoupled, meaning this single release notes page does not work anymore.

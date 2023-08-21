@@ -1,11 +1,3 @@
-### 1.0.0+
-
-Starting from 1.0.0, Versions of the packages in this project are decoupled, meaning this single release notes page does not work anymore.
-
-For the individual package release notes, please refer to these files:
-- [ControlledVocabulary](./src/ControlledVocabulary/RELEASE_NOTES.md)
-- [ARCTokenization](./src/ARCTokenization/RELEASE_NOTES.md)
-
 ### 1.0.0+e7faa34 (Released 2023-8-17)
 * Additions:
     * [[#e7faa34](https://github.com/nfdi4plants/ArcGraphModel/commit/e7faa348c1d8128205a40e2186914380c466fed6)] Add ConvertTokens tests

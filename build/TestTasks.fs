@@ -6,16 +6,31 @@ open Fake.DotNet
 open ProjectInfo
 open BasicTasks
 
+
+let buildTests = 
+    BuildTask.create "BuildTests" [clean; build] {
+        testProjects
+        |> List.iter (fun pInfo ->
+            let proj = pInfo.ProjFile
+            proj
+            |> DotNet.build (fun p ->
+                p
+                // Use this if you want to speed up your build. Especially helpful in large projects
+                // Ensure that the order in your project list is correct (e.g. projects that are depended on are built first)
+                //|> DotNet.Options.withCustomParams (Some "--no-dependencies")
+            )
+        )
+    }
+
 let runTests = BuildTask.create "RunTests" [clean; build] {
     testProjects
-    |> Seq.iter (fun testProject ->
-        Fake.DotNet.DotNet.test(fun testParams ->
-            {
-                testParams with
+    |> Seq.iter (fun testProjectInfo ->
+        Fake.DotNet.DotNet.test
+            (fun testParams ->
+                { testParams with
                     Logger = Some "console;verbosity=detailed"
                     Configuration = DotNet.BuildConfiguration.fromString configuration
                     NoBuild = true
-            }
-        ) testProject
-    )
+                })
+            testProjectInfo.ProjFile)
 }
