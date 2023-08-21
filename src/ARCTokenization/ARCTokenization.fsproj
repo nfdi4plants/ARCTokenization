@@ -14,9 +14,9 @@
 
   <ItemGroup>
     <None Include="RELEASE_NOTES.md" />
-    <EmbeddedResource Include="structural_ontologies/investigation_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
-    <EmbeddedResource Include="structural_ontologies/study_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
-    <EmbeddedResource Include="structural_ontologies/assay_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" />
+    <EmbeddedResource Include="structural_ontologies/investigation_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath ="structural_ontologies" />
+    <EmbeddedResource Include="structural_ontologies/study_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath ="structural_ontologies" />
+    <EmbeddedResource Include="structural_ontologies/assay_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath ="structural_ontologies" />
     <None Include="structural_ontologies/investigation_metadata_structural_ontology.yml" />
     <None Include="structural_ontologies/study_metadata_structural_ontology.yml" />
     <None Include="structural_ontologies/assay_metadata_structural_ontology.yml" />
