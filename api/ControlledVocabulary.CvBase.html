@@ -1,0 +1,557 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class CvBase
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class CvBase
+ ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="ControlledVocabulary.CvBase">
+
+
+
+  <h1 id="ControlledVocabulary_CvBase" data-uid="ControlledVocabulary.CvBase" class="text-break">
+    Class CvBase
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="ControlledVocabulary.html">ControlledVocabulary</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>ControlledVocabulary.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class CvBase</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">CvBase</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="ControlledVocabulary_CvBase_equalsName_" data-uid="ControlledVocabulary.CvBase.equalsName*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_equalsName__2___0___1_" data-uid="ControlledVocabulary.CvBase.equalsName``2(``0,``1)">
+  equalsName&lt;a, b&gt;(a, b)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns true, if the names of the given cv items match</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool equalsName&lt;a, b&gt;(a cv1, b cv2) where a : ICvBase where b : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cv1</code> <span class="xref">a</span></dt>
+    <dd></dd>
+    <dt><code>cv2</code> <span class="xref">b</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code></dt>
+    <dd></dd>
+    <dt><code>b</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_CvBase_equalsTerm_" data-uid="ControlledVocabulary.CvBase.equalsTerm*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_equalsTerm__1_ControlledVocabulary_CvTerm___0_" data-uid="ControlledVocabulary.CvBase.equalsTerm``1(ControlledVocabulary.CvTerm,``0)">
+  equalsTerm&lt;a&gt;(CvTerm, a)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns true, if the given term matches the term of the cv item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool equalsTerm&lt;a&gt;(CvTerm term, a cv) where a : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>term</code> <a class="xref" href="ControlledVocabulary.CvTerm.html">CvTerm</a></dt>
+    <dd></dd>
+    <dt><code>cv</code> <span class="xref">a</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_CvBase_equals_" data-uid="ControlledVocabulary.CvBase.equals*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_equals__2___0___1_" data-uid="ControlledVocabulary.CvBase.equals``2(``0,``1)">
+  equals&lt;a, b&gt;(a, b)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns true, if the terms of the given cv items match</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool equals&lt;a, b&gt;(a cv1, b cv2) where a : ICvBase where b : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cv1</code> <span class="xref">a</span></dt>
+    <dd></dd>
+    <dt><code>cv2</code> <span class="xref">b</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code></dt>
+    <dd></dd>
+    <dt><code>b</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_CvBase_getCvAccession_" data-uid="ControlledVocabulary.CvBase.getCvAccession*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_getCvAccession__1___0_" data-uid="ControlledVocabulary.CvBase.getCvAccession``1(``0)">
+  getCvAccession&lt;a&gt;(a)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the id of the cv item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string getCvAccession&lt;a&gt;(a cv) where a : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cv</code> <span class="xref">a</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_CvBase_getCvName_" data-uid="ControlledVocabulary.CvBase.getCvName*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_getCvName__1___0_" data-uid="ControlledVocabulary.CvBase.getCvName``1(``0)">
+  getCvName&lt;a&gt;(a)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the name of the cv item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string getCvName&lt;a&gt;(a cv) where a : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cv</code> <span class="xref">a</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_CvBase_getCvRef_" data-uid="ControlledVocabulary.CvBase.getCvRef*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_getCvRef__1___0_" data-uid="ControlledVocabulary.CvBase.getCvRef``1(``0)">
+  getCvRef&lt;a&gt;(a)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the reference of the cv item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string getCvRef&lt;a&gt;(a cv) where a : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cv</code> <span class="xref">a</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_CvBase_getTerm_" data-uid="ControlledVocabulary.CvBase.getTerm*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_getTerm__1___0_" data-uid="ControlledVocabulary.CvBase.getTerm``1(``0)">
+  getTerm&lt;a&gt;(a)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the full term of the cv item</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CvTerm getTerm&lt;a&gt;(a cv) where a : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cv</code> <span class="xref">a</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="ControlledVocabulary.CvTerm.html">CvTerm</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>a</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_CvBase_is_" data-uid="ControlledVocabulary.CvBase.is*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_is__1_ControlledVocabulary_ICvBase_" data-uid="ControlledVocabulary.CvBase.is``1(ControlledVocabulary.ICvBase)">
+  is&lt;T&gt;(ICvBase)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns true, if the given cv item can be downcast</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool @is&lt;T&gt;(ICvBase cv) where T : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cv</code> <a class="xref" href="ControlledVocabulary.ICvBase.html">ICvBase</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_CvBase_tryAs_" data-uid="ControlledVocabulary.CvBase.tryAs*"></a>
+
+  <h3 id="ControlledVocabulary_CvBase_tryAs__1_ControlledVocabulary_ICvBase_" data-uid="ControlledVocabulary.CvBase.tryAs``1(ControlledVocabulary.ICvBase)">
+  tryAs&lt;T&gt;(ICvBase)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns Some Value of type 'T, if the given cv item can be downcast, else returns None</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSharpOption&lt;T&gt; tryAs&lt;T&gt;(ICvBase cv) where T : ICvBase</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>cv</code> <a class="xref" href="ControlledVocabulary.ICvBase.html">ICvBase</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">FSharpOption</span>&lt;T&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

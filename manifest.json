@@ -1,0 +1,529 @@
+{
+  "homepages": [],
+  "source_base_path": "/home/runner/work/ARCTokenization/ARCTokenization/docs/docfx_project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ARCTokenization/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "ARCTokenization/intro.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ControlledVocabulary/CvParam.md",
+      "output": {
+        ".html": {
+          "relative_path": "ControlledVocabulary/CvParam.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ControlledVocabulary/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "ControlledVocabulary/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "ControlledVocabulary/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "ControlledVocabulary/intro.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Address.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Address.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.AnnotationTable.NodeType.Tags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.AnnotationTable.NodeType.Tags.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.AnnotationTable.NodeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.AnnotationTable.NodeType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.AnnotationTable.TokenizedAnnotationTable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.AnnotationTable.TokenizedAnnotationTable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.AnnotationTable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.AnnotationTable.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Assay.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Assay.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Investigation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Investigation.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.MetadataSheet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.MetadataSheet.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Regex.ActivePatterns.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Regex.ActivePatterns.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Regex.Pattern.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Regex.Pattern.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Regex.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Regex.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Study.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Study.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Terms.AssayMetadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Terms.AssayMetadata.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Terms.InvestigationMetadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Terms.InvestigationMetadata.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Terms.StructuralTerms.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Terms.StructuralTerms.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Terms.StudyMetadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Terms.StudyMetadata.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Terms.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Terms.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Tokenization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Tokenization.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Workbook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Workbook.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.Worksheet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.Worksheet.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ARCTokenization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ARCTokenization.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.CvAttributeCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.CvAttributeCollection.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.CvBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.CvBase.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.CvContainer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.CvContainer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.CvObject-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.CvObject-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.CvParam.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.CvParam.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.CvParamExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.CvParamExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.CvTerm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.CvTerm.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.IAttributeCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.IAttributeCollection.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.ICvBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.ICvBase.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.IParam.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.IParam.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.IParamBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.IParamBase.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.IParamExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.IParamExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.Param.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.Param.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.ParamBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.ParamBase.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.ParamValue.CvValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.ParamValue.CvValue.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.ParamValue.Tags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.ParamValue.Tags.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.ParamValue.Value.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.ParamValue.Value.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.ParamValue.WithCvUnitAccession.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.ParamValue.WithCvUnitAccession.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.ParamValue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.ParamValue.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.UserParam.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.UserParam.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.UserParamExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.UserParamExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ControlledVocabulary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ControlledVocabulary.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

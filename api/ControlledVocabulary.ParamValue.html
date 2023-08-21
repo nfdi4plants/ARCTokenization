@@ -1,0 +1,964 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ParamValue
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ParamValue
+ ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="ControlledVocabulary.ParamValue">
+
+
+
+  <h1 id="ControlledVocabulary_ParamValue" data-uid="ControlledVocabulary.ParamValue" class="text-break">
+    Class ParamValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="ControlledVocabulary.html">ControlledVocabulary</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>ControlledVocabulary.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represent the different cases of a parameter, which is either a simple value,
+a CvTerm or a simple value with CvUnit</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class ParamValue : IEquatable&lt;ParamValue&gt;, IStructuralEquatable</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ParamValue</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.istructuralequatable">IStructuralEquatable</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="ControlledVocabulary.ParamValue.CvValue.html">ParamValue.CvValue</a></div>
+      <div><a class="xref" href="ControlledVocabulary.ParamValue.Value.html">ParamValue.Value</a></div>
+      <div><a class="xref" href="ControlledVocabulary.ParamValue.WithCvUnitAccession.html">ParamValue.WithCvUnitAccession</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="ControlledVocabulary_ParamValue_IsCvValue_" data-uid="ControlledVocabulary.ParamValue.IsCvValue*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_IsCvValue" data-uid="ControlledVocabulary.ParamValue.IsCvValue">
+  IsCvValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsCvValue { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_IsValue_" data-uid="ControlledVocabulary.ParamValue.IsValue*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_IsValue" data-uid="ControlledVocabulary.ParamValue.IsValue">
+  IsValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsValue { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_IsWithCvUnitAccession_" data-uid="ControlledVocabulary.ParamValue.IsWithCvUnitAccession*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_IsWithCvUnitAccession" data-uid="ControlledVocabulary.ParamValue.IsWithCvUnitAccession">
+  IsWithCvUnitAccession
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsWithCvUnitAccession { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_Tag_" data-uid="ControlledVocabulary.ParamValue.Tag*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_Tag" data-uid="ControlledVocabulary.ParamValue.Tag">
+  Tag
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Tag { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="ControlledVocabulary_ParamValue_Equals_" data-uid="ControlledVocabulary.ParamValue.Equals*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_Equals_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.Equals(ControlledVocabulary.ParamValue)">
+  Equals(ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override sealed bool Equals(ParamValue obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_Equals_" data-uid="ControlledVocabulary.ParamValue.Equals*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_Equals_System_Object_" data-uid="ControlledVocabulary.ParamValue.Equals(System.Object)">
+  Equals(object)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override sealed bool Equals(object obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_Equals_" data-uid="ControlledVocabulary.ParamValue.Equals*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_Equals_System_Object_System_Collections_IEqualityComparer_" data-uid="ControlledVocabulary.ParamValue.Equals(System.Object,System.Collections.IEqualityComparer)">
+  Equals(object, IEqualityComparer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override sealed bool Equals(object obj, IEqualityComparer comp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+    <dt><code>comp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.iequalitycomparer">IEqualityComparer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_GetHashCode_" data-uid="ControlledVocabulary.ParamValue.GetHashCode*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_GetHashCode" data-uid="ControlledVocabulary.ParamValue.GetHashCode">
+  GetHashCode()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override sealed int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_GetHashCode_" data-uid="ControlledVocabulary.ParamValue.GetHashCode*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_GetHashCode_System_Collections_IEqualityComparer_" data-uid="ControlledVocabulary.ParamValue.GetHashCode(System.Collections.IEqualityComparer)">
+  GetHashCode(IEqualityComparer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override sealed int GetHashCode(IEqualityComparer comp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>comp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.iequalitycomparer">IEqualityComparer</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_NewCvValue_" data-uid="ControlledVocabulary.ParamValue.NewCvValue*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_NewCvValue_ControlledVocabulary_CvTerm_" data-uid="ControlledVocabulary.ParamValue.NewCvValue(ControlledVocabulary.CvTerm)">
+  NewCvValue(CvTerm)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ParamValue NewCvValue(CvTerm _cv)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>_cv</code> <a class="xref" href="ControlledVocabulary.CvTerm.html">CvTerm</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_NewValue_" data-uid="ControlledVocabulary.ParamValue.NewValue*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_NewValue_System_IConvertible_" data-uid="ControlledVocabulary.ParamValue.NewValue(System.IConvertible)">
+  NewValue(IConvertible)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ParamValue NewValue(IConvertible _v)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>_v</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iconvertible">IConvertible</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_NewWithCvUnitAccession_" data-uid="ControlledVocabulary.ParamValue.NewWithCvUnitAccession*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_NewWithCvUnitAccession_System_IConvertible_ControlledVocabulary_CvTerm_" data-uid="ControlledVocabulary.ParamValue.NewWithCvUnitAccession(System.IConvertible,ControlledVocabulary.CvTerm)">
+  NewWithCvUnitAccession(IConvertible, CvTerm)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ParamValue NewWithCvUnitAccession(IConvertible _cvu, CvTerm item2)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>_cvu</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iconvertible">IConvertible</a></dt>
+    <dd></dd>
+    <dt><code>item2</code> <a class="xref" href="ControlledVocabulary.CvTerm.html">CvTerm</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_ToString_" data-uid="ControlledVocabulary.ParamValue.ToString*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_ToString" data-uid="ControlledVocabulary.ParamValue.ToString">
+  ToString()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_getValue_" data-uid="ControlledVocabulary.ParamValue.getValue*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_getValue_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.getValue(ControlledVocabulary.ParamValue)">
+  getValue(ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the value of the Param as IConvertible</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static IConvertible getValue(ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iconvertible">IConvertible</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_getValueAsInt_" data-uid="ControlledVocabulary.ParamValue.getValueAsInt*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_getValueAsInt_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.getValueAsInt(ControlledVocabulary.ParamValue)">
+  getValueAsInt(ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the value of the Param as int if possible, else fails</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int getValueAsInt(ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_getValueAsString_" data-uid="ControlledVocabulary.ParamValue.getValueAsString*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_getValueAsString_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.getValueAsString(ControlledVocabulary.ParamValue)">
+  getValueAsString(ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the value of the Param as string</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string getValueAsString(ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_getValueAsTerm_" data-uid="ControlledVocabulary.ParamValue.getValueAsTerm*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_getValueAsTerm_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.getValueAsTerm(ControlledVocabulary.ParamValue)">
+  getValueAsTerm(ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the value of the Param as a term</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static CvTerm getValueAsTerm(ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="ControlledVocabulary.CvTerm.html">CvTerm</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_tryAddAccession_" data-uid="ControlledVocabulary.ParamValue.tryAddAccession*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_tryAddAccession_System_String_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.tryAddAccession(System.String,ControlledVocabulary.ParamValue)">
+  tryAddAccession(string, ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a new paramValue with the given annotationID if possible, else returns None</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSharpOption&lt;ParamValue&gt; tryAddAccession(string accession, ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>accession</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">FSharpOption</span>&lt;<a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_tryAddName_" data-uid="ControlledVocabulary.ParamValue.tryAddName*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_tryAddName_System_String_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.tryAddName(System.String,ControlledVocabulary.ParamValue)">
+  tryAddName(string, ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a new paramValue with the given name if possible, else returns None</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSharpOption&lt;ParamValue&gt; tryAddName(string name, ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">FSharpOption</span>&lt;<a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_tryAddReference_" data-uid="ControlledVocabulary.ParamValue.tryAddReference*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_tryAddReference_System_String_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.tryAddReference(System.String,ControlledVocabulary.ParamValue)">
+  tryAddReference(string, ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a new paramValue with the given reference if possible, else returns None</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSharpOption&lt;ParamValue&gt; tryAddReference(string @ref, ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>ref</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">FSharpOption</span>&lt;<a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_tryAddUnit_" data-uid="ControlledVocabulary.ParamValue.tryAddUnit*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_tryAddUnit_ControlledVocabulary_CvTerm_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.tryAddUnit(ControlledVocabulary.CvTerm,ControlledVocabulary.ParamValue)">
+  tryAddUnit(CvTerm, ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns a new paramValue with the given unit if possible, else returns None</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSharpOption&lt;ParamValue&gt; tryAddUnit(CvTerm unit, ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>unit</code> <a class="xref" href="ControlledVocabulary.CvTerm.html">CvTerm</a></dt>
+    <dd></dd>
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">FSharpOption</span>&lt;<a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="ControlledVocabulary_ParamValue_tryGetUnit_" data-uid="ControlledVocabulary.ParamValue.tryGetUnit*"></a>
+
+  <h3 id="ControlledVocabulary_ParamValue_tryGetUnit_ControlledVocabulary_ParamValue_" data-uid="ControlledVocabulary.ParamValue.tryGetUnit(ControlledVocabulary.ParamValue)">
+  tryGetUnit(ParamValue)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the unit of the Param if it exists, else returns None</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSharpOption&lt;CvTerm&gt; tryGetUnit(ParamValue param)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>param</code> <a class="xref" href="ControlledVocabulary.ParamValue.html">ParamValue</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">FSharpOption</span>&lt;<a class="xref" href="ControlledVocabulary.CvTerm.html">CvTerm</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
