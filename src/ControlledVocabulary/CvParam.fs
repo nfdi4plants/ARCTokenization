@@ -51,12 +51,7 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
     override this.Equals(o) =
         match o with
         | :? CvTerm as cvt -> Param.equalsTerm cvt this
-        | :? CvParam as cvp ->
-            cvp.Name        = this.Name &&
-            cvp.Accession   = this.Accession &&
-            cvp.RefUri      = this.RefUri &&
-            cvp.Value       = this.Value &&
-            cvp.Attributes  = this.Attributes   // careful bc of Dictionary! Comment out if necessary!
+        | :? CvParam as cvp -> cvp.GetHashCode() = this.GetHashCode()
         | :? IParam as p ->
             p.Name      = this.Name &&
             p.Accession = this.Accession &&

@@ -18,9 +18,7 @@ type CvObject<'T>(cvAccession : string, cvName : string, cvRef : string, object 
 
     override this.Equals(o) =
         match o with
-        | :? CvObject<'T> as cvo ->
-            CvBase.equals cvo this &&
-            cvo.Attributes = this.Attributes
+        | :? CvObject<'T> as cvo -> this.GetHashCode() = cvo.GetHashCode()
         | :? ICvBase as cvb -> CvBase.equals cvb this
         | _ -> false
 

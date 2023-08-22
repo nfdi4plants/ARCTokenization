@@ -44,6 +44,15 @@ type CvContainer (
         CvContainer(term, dict)
     new (term : CvTerm) = CvContainer (term, Seq.empty)  
 
+    override this.GetHashCode() =
+        hash (cvAccession, cvName, cvRef, attributes, properties)
+
+    override this.Equals(o) =
+        match o with
+        | :? CvContainer as cvc -> cvc.GetHashCode() = this.GetHashCode()
+        | :? ICvBase as cvb -> CvBase.equals cvb this
+        | _ -> false
+
     /// Returns Some CvContainer, if the given cv item can be downcast, else returns None
     static member tryCvContainer (cv : ICvBase) =
         match cv with

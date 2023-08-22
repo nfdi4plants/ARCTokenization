@@ -37,13 +37,10 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
     override this.Equals(o) =
         match o with
         | :? CvTerm as cvt -> Param.equalsTerm cvt this
-        | :? UserParam as up ->
-            up.Name         = this.Name &&
-            up.Value        = this.Value &&
-            up.Attributes   = this.Attributes
+        | :? UserParam as up -> this.GetHashCode() = up.GetHashCode()
         | :? IParam as p ->
-            p.Name          = this.Name &&
-            p.Value         = this.Value
+            p.Name  = this.Name &&
+            p.Value = this.Value
         | :? ICvBase as cvb -> CvBase.equals cvb this
         | :? IParamBase as pb -> pb.Value = this.Value
         | _ -> false
