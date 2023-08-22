@@ -14,7 +14,7 @@
       <meta name="docfx:navrel" content="../toc.html">
       <meta name="docfx:tocrel" content="toc.html">
       
-      
+      <meta name="docfx:rel" content="../">
       
       
       
@@ -37,14 +37,18 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../logo.svg" alt="">
-            
+            <img id="logo" class="svg" src="../logo.svg" alt="ARCTokenization">
+            ARCTokenization
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
           </button>
           <div class="collapse navbar-collapse" id="navpanel">
             <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
             </div>
           </div>
         </div>
@@ -79,7 +83,7 @@
 
   <h1 id="ARCTokenization_Study" data-uid="ARCTokenization.Study" class="text-break">
     Class Study
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ARCTokenization/TopLevelParsers.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ARCTokenization/TopLevelParsers.fs"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -146,7 +150,7 @@
 
   <h3 id="ARCTokenization_Study_parseAnnotationTablesFromFile_System_String_" data-uid="ARCTokenization.Study.parseAnnotationTablesFromFile(System.String)">
   parseAnnotationTablesFromFile(string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ARCTokenization/TopLevelParsers.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ARCTokenization/TopLevelParsers.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Parses all annotation tables from an ISA Study XLSX file as a list of <code>TokenizedAnnotationTable</code>s, a type that contains IO columns separated from the other columns.</p>
@@ -184,7 +188,7 @@
 
   <h3 id="ARCTokenization_Study_parseMetadataRowsFromFile_System_String_Microsoft_FSharp_Core_FSharpOption_System_Boolean__" data-uid="ARCTokenization.Study.parseMetadataRowsFromFile(System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
   parseMetadataRowsFromFile(string, FSharpOption&lt;bool&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ARCTokenization/TopLevelParsers.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ARCTokenization/TopLevelParsers.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Parses the metadata sheet from an ISA Study XLSX file as a row-based 2D list of <code>IParam</code>s.</p>
@@ -225,7 +229,7 @@
 
   <h3 id="ARCTokenization_Study_parseMetadataSheetfromFile_System_String_Microsoft_FSharp_Core_FSharpOption_System_Boolean__" data-uid="ARCTokenization.Study.parseMetadataSheetfromFile(System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
   parseMetadataSheetfromFile(string, FSharpOption&lt;bool&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ARCTokenization/TopLevelParsers.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ARCTokenization/TopLevelParsers.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Parses the metadata sheet from an ISA Study XLSX file as a flat list of <code>IParam</code>s.</p>
@@ -266,7 +270,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ARCTokenization/TopLevelParsers.fs" class="edit-link">Edit this page</a>
+          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ARCTokenization/TopLevelParsers.fs" class="edit-link">Edit this page</a>
         </div>
 
         
@@ -277,6 +281,7 @@
       </div>
     </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
 
     <footer class="border-top">
       <div class="container-xxl">

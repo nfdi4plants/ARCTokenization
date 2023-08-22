@@ -14,7 +14,7 @@
       <meta name="docfx:navrel" content="../toc.html">
       <meta name="docfx:tocrel" content="toc.html">
       
-      
+      <meta name="docfx:rel" content="../">
       
       
       
@@ -37,14 +37,18 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../logo.svg" alt="">
-            
+            <img id="logo" class="svg" src="../logo.svg" alt="ARCTokenization">
+            ARCTokenization
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
           </button>
           <div class="collapse navbar-collapse" id="navpanel">
             <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
             </div>
           </div>
         </div>
@@ -79,7 +83,7 @@
 
   <h1 id="ControlledVocabulary_CvBase" data-uid="ControlledVocabulary.CvBase" class="text-break">
     Class CvBase
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -146,7 +150,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_equalsName__2___0___1_" data-uid="ControlledVocabulary.CvBase.equalsName``2(``0,``1)">
   equalsName&lt;a, b&gt;(a, b)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns true, if the names of the given cv items match</p>
@@ -192,7 +196,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_equalsTerm__1_ControlledVocabulary_CvTerm___0_" data-uid="ControlledVocabulary.CvBase.equalsTerm``1(ControlledVocabulary.CvTerm,``0)">
   equalsTerm&lt;a&gt;(CvTerm, a)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns true, if the given term matches the term of the cv item</p>
@@ -236,7 +240,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_equals__2___0___1_" data-uid="ControlledVocabulary.CvBase.equals``2(``0,``1)">
   equals&lt;a, b&gt;(a, b)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns true, if the terms of the given cv items match</p>
@@ -282,7 +286,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_getCvAccession__1___0_" data-uid="ControlledVocabulary.CvBase.getCvAccession``1(``0)">
   getCvAccession&lt;a&gt;(a)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the id of the cv item</p>
@@ -324,7 +328,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_getCvName__1___0_" data-uid="ControlledVocabulary.CvBase.getCvName``1(``0)">
   getCvName&lt;a&gt;(a)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the name of the cv item</p>
@@ -366,7 +370,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_getCvRef__1___0_" data-uid="ControlledVocabulary.CvBase.getCvRef``1(``0)">
   getCvRef&lt;a&gt;(a)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the reference of the cv item</p>
@@ -408,7 +412,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_getTerm__1___0_" data-uid="ControlledVocabulary.CvBase.getTerm``1(``0)">
   getTerm&lt;a&gt;(a)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the full term of the cv item</p>
@@ -450,7 +454,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_is__1_ControlledVocabulary_ICvBase_" data-uid="ControlledVocabulary.CvBase.is``1(ControlledVocabulary.ICvBase)">
   is&lt;T&gt;(ICvBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns true, if the given cv item can be downcast</p>
@@ -492,7 +496,7 @@
 
   <h3 id="ControlledVocabulary_CvBase_tryAs__1_ControlledVocabulary_ICvBase_" data-uid="ControlledVocabulary.CvBase.tryAs``1(ControlledVocabulary.ICvBase)">
   tryAs&lt;T&gt;(ICvBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns Some Value of type 'T, if the given cv item can be downcast, else returns None</p>
@@ -534,7 +538,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ICvBase.fs" class="edit-link">Edit this page</a>
+          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ICvBase.fs" class="edit-link">Edit this page</a>
         </div>
 
         
@@ -545,6 +549,7 @@
       </div>
     </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
 
     <footer class="border-top">
       <div class="container-xxl">

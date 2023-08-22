@@ -14,7 +14,7 @@
       <meta name="docfx:navrel" content="../toc.html">
       <meta name="docfx:tocrel" content="toc.html">
       
-      
+      <meta name="docfx:rel" content="../">
       
       
       
@@ -37,14 +37,18 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../logo.svg" alt="">
-            
+            <img id="logo" class="svg" src="../logo.svg" alt="ARCTokenization">
+            ARCTokenization
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
           </button>
           <div class="collapse navbar-collapse" id="navpanel">
             <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
             </div>
           </div>
         </div>
@@ -79,7 +83,7 @@
 
   <h1 id="ARCTokenization_Tokenization" data-uid="ARCTokenization.Tokenization" class="text-break">
     Class Tokenization
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ARCTokenization/Tokenization.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ARCTokenization/Tokenization.fs"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -146,7 +150,7 @@
 
   <h3 id="ARCTokenization_Tokenization_convertTokens_Microsoft_FSharp_Core_FSharpFunc_Microsoft_FSharp_Collections_FSharpList_ControlledVocabulary_IParam__Microsoft_FSharp_Core_FSharpFunc_System_String_Microsoft_FSharp_Core_FSharpFunc_ControlledVocabulary_ParamValue_ControlledVocabulary_IParam____System_Collections_Generic_IEnumerable_FsSpreadsheet_FsCell__" data-uid="ARCTokenization.Tokenization.convertTokens(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Collections.FSharpList{ControlledVocabulary.IParam},Microsoft.FSharp.Core.FSharpFunc{System.String,Microsoft.FSharp.Core.FSharpFunc{ControlledVocabulary.ParamValue,ControlledVocabulary.IParam}}},System.Collections.Generic.IEnumerable{FsSpreadsheet.FsCell})">
   convertTokens(FSharpFunc&lt;FSharpList&lt;IParam&gt;, FSharpFunc&lt;string, FSharpFunc&lt;ParamValue, IParam&gt;&gt;&gt;, IEnumerable&lt;FsCell&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ARCTokenization/Tokenization.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ARCTokenization/Tokenization.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -158,7 +162,7 @@
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>keyParser</code> <span class="xref">FSharpFunc</span>&lt;<span class="xref">FSharpList</span>&lt;<a class="xref" href="ControlledVocabulary.IParam.html">IParam</a>&gt;, <span class="xref">FSharpFunc</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <span class="xref">FSharpFunc</span>&lt;<a class="xref" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/ParamValue.fs">ParamValue</a>, <a class="xref" href="ControlledVocabulary.IParam.html">IParam</a>&gt;&gt;&gt;</dt>
+    <dt><code>keyParser</code> <span class="xref">FSharpFunc</span>&lt;<span class="xref">FSharpList</span>&lt;<a class="xref" href="ControlledVocabulary.IParam.html">IParam</a>&gt;, <span class="xref">FSharpFunc</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <span class="xref">FSharpFunc</span>&lt;<a class="xref" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/ParamValue.fs">ParamValue</a>, <a class="xref" href="ControlledVocabulary.IParam.html">IParam</a>&gt;&gt;&gt;</dt>
     <dd></dd>
     <dt><code>line</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<span class="xref">FsCell</span>&gt;</dt>
     <dd></dd>
@@ -184,7 +188,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ARCTokenization/Tokenization.fs" class="edit-link">Edit this page</a>
+          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ARCTokenization/Tokenization.fs" class="edit-link">Edit this page</a>
         </div>
 
         
@@ -195,6 +199,7 @@
       </div>
     </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
 
     <footer class="border-top">
       <div class="container-xxl">

@@ -14,7 +14,7 @@
       <meta name="docfx:navrel" content="../toc.html">
       <meta name="docfx:tocrel" content="toc.html">
       
-      
+      <meta name="docfx:rel" content="../">
       
       
       
@@ -37,14 +37,18 @@
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
           <a class="navbar-brand" href="../index.html">
-            <img id="logo" class="svg" src="../logo.svg" alt="">
-            
+            <img id="logo" class="svg" src="../logo.svg" alt="ARCTokenization">
+            ARCTokenization
           </a>
           <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
             <i class="bi bi-three-dots"></i>
           </button>
           <div class="collapse navbar-collapse" id="navpanel">
             <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
             </div>
           </div>
         </div>
@@ -79,7 +83,7 @@
 
   <h1 id="ControlledVocabulary_ParamBase" data-uid="ControlledVocabulary.ParamBase" class="text-break">
     Class ParamBase
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -146,7 +150,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_getParamValue_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.getParamValue(ControlledVocabulary.IParamBase)">
   getParamValue(IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the value of the Param as a ParamValue</p>
@@ -183,7 +187,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_getValue_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.getValue(ControlledVocabulary.IParamBase)">
   getValue(IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the value of the Param as IConvertible</p>
@@ -220,7 +224,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_getValueAsInt_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.getValueAsInt(ControlledVocabulary.IParamBase)">
   getValueAsInt(IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the value of the Param as int if possible, else fails</p>
@@ -257,7 +261,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_getValueAsString_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.getValueAsString(ControlledVocabulary.IParamBase)">
   getValueAsString(IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the value of the Param as string</p>
@@ -294,7 +298,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_getValueAsTerm_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.getValueAsTerm(ControlledVocabulary.IParamBase)">
   getValueAsTerm(IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns the value of the Param as a term</p>
@@ -331,7 +335,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_mapValue_Microsoft_FSharp_Core_FSharpFunc_ControlledVocabulary_ParamValue_ControlledVocabulary_ParamValue__ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.mapValue(Microsoft.FSharp.Core.FSharpFunc{ControlledVocabulary.ParamValue,ControlledVocabulary.ParamValue},ControlledVocabulary.IParamBase)">
   mapValue(FSharpFunc&lt;ParamValue, ParamValue&gt;, IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -369,7 +373,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryAddAccession_System_String_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.tryAddAccession(System.String,ControlledVocabulary.IParamBase)">
   tryAddAccession(string, IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -407,7 +411,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryAddName_System_String_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.tryAddName(System.String,ControlledVocabulary.IParamBase)">
   tryAddName(string, IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -445,7 +449,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryAddReference_System_String_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.tryAddReference(System.String,ControlledVocabulary.IParamBase)">
   tryAddReference(string, IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -483,7 +487,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryAddUnit_ControlledVocabulary_CvTerm_ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.tryAddUnit(ControlledVocabulary.CvTerm,ControlledVocabulary.IParamBase)">
   tryAddUnit(CvTerm, IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -521,7 +525,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryGetCvUnitTermAccession__1___0_" data-uid="ControlledVocabulary.ParamBase.tryGetCvUnitTermAccession``1(``0)">
   tryGetCvUnitTermAccession&lt;b&gt;(b)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -562,7 +566,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryGetCvUnitTermName__1___0_" data-uid="ControlledVocabulary.ParamBase.tryGetCvUnitTermName``1(``0)">
   tryGetCvUnitTermName&lt;c&gt;(c)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -603,7 +607,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryGetCvUnitTermRef__1___0_" data-uid="ControlledVocabulary.ParamBase.tryGetCvUnitTermRef``1(``0)">
   tryGetCvUnitTermRef&lt;a&gt;(a)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -644,7 +648,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryGetCvUnitValue__1___0_" data-uid="ControlledVocabulary.ParamBase.tryGetCvUnitValue``1(``0)">
   tryGetCvUnitValue&lt;d&gt;(d)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -685,7 +689,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryGetCvUnit__1___0_" data-uid="ControlledVocabulary.ParamBase.tryGetCvUnit``1(``0)">
   tryGetCvUnit&lt;e&gt;(e)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -726,7 +730,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryGetValueAccession__1___0_" data-uid="ControlledVocabulary.ParamBase.tryGetValueAccession``1(``0)">
   tryGetValueAccession&lt;g&gt;(g)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -767,7 +771,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryGetValueRef__1___0_" data-uid="ControlledVocabulary.ParamBase.tryGetValueRef``1(``0)">
   tryGetValueRef&lt;f&gt;(f)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -808,7 +812,7 @@
 
   <h3 id="ControlledVocabulary_ParamBase_tryMapValue_Microsoft_FSharp_Core_FSharpFunc_ControlledVocabulary_ParamValue_Microsoft_FSharp_Core_FSharpOption_ControlledVocabulary_ParamValue___ControlledVocabulary_IParamBase_" data-uid="ControlledVocabulary.ParamBase.tryMapValue(Microsoft.FSharp.Core.FSharpFunc{ControlledVocabulary.ParamValue,Microsoft.FSharp.Core.FSharpOption{ControlledVocabulary.ParamValue}},ControlledVocabulary.IParamBase)">
   tryMapValue(FSharpFunc&lt;ParamValue, FSharpOption&lt;ParamValue&gt;&gt;, IParamBase)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -846,7 +850,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/5efa26fe18e3b7d2a165cea235cf5fc7d18082b2/src/ControlledVocabulary/IParamBase.fs" class="edit-link">Edit this page</a>
+          <a href="https://github.com/nfdi4plants/ARCTokenization/blob/243020e334a502441d527fa57c8abb1623e5d86d/src/ControlledVocabulary/IParamBase.fs" class="edit-link">Edit this page</a>
         </div>
 
         
@@ -857,6 +861,7 @@
       </div>
     </main>
 
+    <div class="container-xxl search-results" id="search-results"></div>
 
     <footer class="border-top">
       <div class="container-xxl">
