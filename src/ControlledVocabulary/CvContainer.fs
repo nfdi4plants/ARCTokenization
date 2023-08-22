@@ -44,12 +44,19 @@ type CvContainer (
         CvContainer(term, dict)
     new (term : CvTerm) = CvContainer (term, Seq.empty)  
 
+    /// Serves as the default hash function.
     override this.GetHashCode() =
         hash (cvAccession, cvName, cvRef, attributes, properties)
 
+    /// Determines whether the specified object is equals to the current object.
     override this.Equals(o) =
         match o with
-        | :? CvContainer as cvc -> cvc.GetHashCode() = this.GetHashCode()
+        | :? CvContainer as cvc -> 
+            (cvc :> ICvBase).Accession = (this :> ICvBase).Accession &&
+            (cvc :> ICvBase).Name = (this :> ICvBase).Name &&
+            (cvc :> ICvBase).RefUri = (this :> ICvBase).RefUri &&
+            cvc.Attributes = this.Attributes &&
+            cvc.Properties = this.Properties
         | :? ICvBase as cvb -> CvBase.equals cvb this
         | _ -> false
 

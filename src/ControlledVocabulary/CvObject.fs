@@ -22,6 +22,7 @@ type CvObject<'T>(cvAccession : string, cvName : string, cvRef : string, object 
         | :? ICvBase as cvb -> CvBase.equals cvb this
         | _ -> false
 
+    /// Serves as the default hash function.
     override this.GetHashCode() =
         hash (cvAccession, cvName, cvRef, attributes)
 

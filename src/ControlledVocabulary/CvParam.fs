@@ -45,13 +45,20 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
     new (cvTerm,v : IConvertible) = 
         CvParam (cvTerm,ParamValue.Value v)
 
+    /// Serves as the default hash function.
     override this.GetHashCode() =
         hash (cvAccession, cvName, cvRef, paramValue, attributes)
 
+    /// Determines whether the specified object is equals to the current object.
     override this.Equals(o) =
         match o with
         | :? CvTerm as cvt -> Param.equalsTerm cvt this
-        | :? CvParam as cvp -> cvp.GetHashCode() = this.GetHashCode()
+        | :? CvParam as cvp -> 
+            cvp.Name        = this.Name &&
+            cvp.Accession   = this.Accession &&
+            cvp.RefUri      = this.RefUri &&
+            cvp.Value       = this.Value &&
+            cvp.Attributes  = this.Attributes   // careful bc of Dictionary! Comment out if necessary!
         | :? IParam as p ->
             p.Name      = this.Name &&
             p.Accession = this.Accession &&
