@@ -45,14 +45,26 @@ type CvParam(cvAccession : string, cvName : string, cvRef : string, paramValue :
     new (cvTerm,v : IConvertible) = 
         CvParam (cvTerm,ParamValue.Value v)
 
-    member this.Equals (term : CvTerm) = 
-        Param.equalsTerm term this
+    override this.GetHashCode() =
+        hash (cvAccession, cvName, cvRef, paramValue, attributes)
 
-    member this.Equals (cv : ICvBase) = 
-        CvBase.equals cv this
-
-    member this.Equals (cvp : CvParam) =
-        this.Equals(cvp :> ICvBase)
+    override this.Equals(o) =
+        match o with
+        | :? CvTerm as cvt -> Param.equalsTerm cvt this
+        | :? CvParam as cvp ->
+            cvp.Name        = this.Name &&
+            cvp.Accession   = this.Accession &&
+            cvp.RefUri      = this.RefUri &&
+            cvp.Value       = this.Value &&
+            cvp.Attributes  = this.Attributes   // careful bc of Dictionary! Comment out if necessary!
+        | :? IParam as p ->
+            p.Name      = this.Name &&
+            p.Accession = this.Accession &&
+            p.RefUri    = this.Name &&
+            p.Value     = this.Value
+        | :? ICvBase as cvb -> CvBase.equals cvb this
+        | :? IParamBase as pb -> pb.Value = this.Value
+        | _ -> false
 
     //---------------------- IParam implementations ----------------------//
 

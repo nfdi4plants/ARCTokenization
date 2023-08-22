@@ -16,6 +16,17 @@ type CvObject<'T>(cvAccession : string, cvName : string, cvRef : string, object 
 
     new (term: CvTerm, object : 'T, attributes) = CvObject (term.Accession, term.Name, term.RefUri, object, attributes)
 
+    override this.Equals(o) =
+        match o with
+        | :? CvObject<'T> as cvo ->
+            CvBase.equals cvo this &&
+            cvo.Attributes = this.Attributes
+        | :? ICvBase as cvb -> CvBase.equals cvb this
+        | _ -> false
+
+    override this.GetHashCode() =
+        hash (cvAccession, cvName, cvRef, attributes)
+
     member this.Object = object
 
     override this.ToString() = 
