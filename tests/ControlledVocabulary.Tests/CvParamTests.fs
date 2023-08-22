@@ -2,7 +2,11 @@
 
 open ControlledVocabulary
 open ReferenceObjects
+
 open Xunit
+
+open System.Collections
+
 
 module InstanceMemberTests =
 
@@ -29,6 +33,13 @@ module InstanceMemberTests =
         let expected = [ParamValue.Value 5; ParamValue.CvValue testTerm2; ParamValue.WithCvUnitAccession (5, testTerm1)]
         let actual = testCvParams |> List.map (fun x -> x.Value)
         Assert.Equal<ParamValue List>(expected, actual)
+
+    [<Fact>]
+    let ``Equals`` () =
+        let testCvp1 = CvParam("test", "test", "test", ParamValue.Value "test", Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvParams.Head); d) 
+        let testCvp2 = CvParam("test", "test", "test", ParamValue.Value "test", Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvParams.Head); d) 
+        let actual = testCvp1 = testCvp2
+        Assert.True(actual)
 
 
 module StaticMemberTests =
