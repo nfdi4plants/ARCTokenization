@@ -20,6 +20,17 @@
     }
   ],
   "build": {
+    "globalMetadata": {
+      "_enableSearch": true,
+      "_appName": "ARCTokenization"
+    },
+    "fileMetadata": {
+      "_appTitle": {
+        "ARCTokenization/*.md": "ARCTokenization Documentation:",
+        "ControlledVocabulary/*.md": "ControlledVocabulary Documentation:"
+      }
+
+    },
     "content": [
       {
         "files": [
@@ -51,8 +62,8 @@
       "default",
       "modern"
     ],
-    "postProcessors": [],
+    "postProcessors": [ "ExtractSearchIndex" ],
     "keepFileLink": false,
     "disableGitFeatures": false
-  }
+    }
 }
