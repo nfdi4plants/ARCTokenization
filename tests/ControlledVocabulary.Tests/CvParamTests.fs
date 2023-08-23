@@ -2,7 +2,11 @@
 
 open ControlledVocabulary
 open ReferenceObjects
+
 open Xunit
+
+open System.Collections
+
 
 module InstanceMemberTests =
 
@@ -29,6 +33,48 @@ module InstanceMemberTests =
         let expected = [ParamValue.Value 5; ParamValue.CvValue testTerm2; ParamValue.WithCvUnitAccession (5, testTerm1)]
         let actual = testCvParams |> List.map (fun x -> x.Value)
         Assert.Equal<ParamValue List>(expected, actual)
+
+    module ``Equals`` =
+
+        let testCvp1 = CvParam("test", "test", "test", ParamValue.Value "test", Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvParams.Head); d) 
+        let testCvp2 = CvParam("test", "test", "test", ParamValue.Value "test", Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvParams.Head); d) 
+        let testAttr1 = CvAttributeCollection(Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvp1); d)
+        let testCvp3 = CvParam("test", "test", "test", ParamValue.Value "test")
+        let testCvp4 = CvParam("test", "test", "test", ParamValue.Value "test")
+        let testCvp5 = CvParam("test", "test", "test", ParamValue.Value "test", Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvp1); d)
+        let testCvp6 = CvParam("test", "test", "test", ParamValue.Value "test", Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvp2); d)
+        let testCvp7 = CvParam("", "", "", ParamValue.Value "", Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvParams[1]); d)
+        let testCvp8 = CvParam("", "", "", ParamValue.Value "", Generic.Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvp7); d)
+
+        [<Fact>]
+        let ``identical CvParams, empty Attributes with empty Attributes`` () =
+            let actual = testCvp3 = testCvp4
+            Assert.True actual
+
+        [<Fact>]
+        let ``identical CvParams, filled Attributes with empty Attributes`` () =
+            let actual = testCvp1 = testCvp2
+            Assert.True actual
+
+        [<Fact>]
+        let ``identical CvParams, filled Attributes with filled Attributes`` () =
+            let actual = testCvp5 = testCvp6
+            Assert.True actual
+
+        [<Fact>]
+        let ``different CvParams, empty Attributes with empty Attributes`` () =
+            let actual = testCvp3 = testCvParams.Head
+            Assert.False actual
+
+        [<Fact>]
+        let ``different CvParams, filled Attributes with empty Attributes`` () =
+            let actual = testCvp1 = testCvp7
+            Assert.False actual
+
+        [<Fact>]
+        let ``different CvParams, filled Attributes with filled Attributes`` () =
+            let actual = testCvp5 = testCvp8
+            Assert.False actual
 
 
 module StaticMemberTests =

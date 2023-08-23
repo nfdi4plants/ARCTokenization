@@ -31,6 +31,25 @@ type UserParam(name : string, paramValue : ParamValue, attributes : IDictionary<
     new (name,pv) = 
         UserParam (name,pv,Seq.empty)
 
+    /// Serves as the default hash function.
+    override this.GetHashCode() =
+        hash (name, paramValue, attributes)
+
+    /// Determines whether the specified object is equals to the current object.
+    override this.Equals(o) =
+        match o with
+        | :? CvTerm as cvt -> Param.equalsTerm cvt this
+        | :? UserParam as up -> 
+            up.Name         = this.Name &&
+            up.Value        = this.Value &&
+            up.Attributes   = this.Attributes
+        | :? IParam as p ->
+            p.Name  = this.Name &&
+            p.Value = this.Value
+        | :? ICvBase as cvb -> CvBase.equals cvb this
+        | :? IParamBase as pb -> pb.Value = this.Value
+        | _ -> false
+
     //---------------------- IParam implementations ----------------------//
 
     /// Returns the value of the Param as a ParamValue

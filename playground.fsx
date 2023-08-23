@@ -29,16 +29,51 @@ open System.Collections.Generic
 //#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\netstandard2.0\ArcGraphModel.dll"
 //#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel.IO\bin\Debug\netstandard2.0\ArcGraphModel.IO.dll"
 //#r @"C:/Users/olive/.nuget/packages/fsharpaux/1.1.0/lib/net5.0/FSharpAux.dll"
-#r "src/ArcGraphModel/bin/Release/netstandard2.0/ArcGraphModel.dll"
-#r "src/ControlledVocabulary/bin/Release/netstandard2.0/ControlledVocabulary.dll"
+//#r "src/ArcGraphModel/bin/Release/netstandard2.0/ArcGraphModel.dll"
+//#r "src/ControlledVocabulary/bin/Release/netstandard2.0/ControlledVocabulary.dll"
+#I "src/ControlledVocabulary/bin/Debug/netstandard2.0"
+#I "src/ControlledVocabulary/bin/Release/netstandard2.0"
+#r "ControlledVocabulary.dll"
+#I "src/ARCTokenization/bin/Debug/netstandard2.0"
+#I "src/ARCTokenization/bin/Release/netstandard2.0"
+#r "ARCTokenization.dll"
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open FsOboParser
 //open FsSpreadsheet.DSL
 open ControlledVocabulary
-open ControlledVocabulary.ParamBase
+open type ControlledVocabulary.ParamBase
 open ARCTokenization
+
+let testAccession1 = "TO:00000001"
+let testName1 = "Test"
+let testRef1 = "TO"
+
+let testTerm1 = CvTerm.create(accession = testAccession1, name = testName1, ref = testRef1)
+
+let testAccession2 = "TO:00000002"
+let testName2 = "5"
+let testRef2 = "TO"
+
+let testTerm2 = CvTerm.create(accession = testAccession2, name = testName2, ref = testRef2)
+
+let ``CvParam with ParamValue.Value`` = CvParam(testTerm1, ParamValue.Value 5)
+let ``CvParam with ParamValue.CvValue`` = CvParam(testTerm1, ParamValue.CvValue testTerm2)
+let ``CvParam with ParamValue.WithCvUnitAccession`` = CvParam(testTerm2, ParamValue.WithCvUnitAccession (5, testTerm1))
+
+let testCvParams = 
+    [
+        ``CvParam with ParamValue.Value``
+        ``CvParam with ParamValue.CvValue``
+        ``CvParam with ParamValue.WithCvUnitAccession``
+    ]
+let testCvp1 = CvParam("test", "test", "test", ParamValue.Value "test", Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvParams.Head); d) 
+let testCvp2 = CvParam("test", "test", "test", ParamValue.Value "test", Dictionary<string,IParam>() |> fun d -> d.Add("test", testCvParams.Head); d) 
+let actual = testCvp1 = testCvp2
+testCvp1.GetHashCode()
+testCvp2.GetHashCode()
+
 
 
 let expectedTermValuesSimple = 
