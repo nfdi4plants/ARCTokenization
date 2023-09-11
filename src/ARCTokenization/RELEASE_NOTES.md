@@ -1,3 +1,7 @@
+### 1.0.3 - (Released 2023-8-21)
+- Additions:
+    - Update FsOboParser dependency to 0.3.0
+
 ### 1.0.2 - (Released 2023-8-21)
 - Additions:
     - Include structural ontologies in the nuget package
