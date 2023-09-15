@@ -10,16 +10,16 @@ module Workbook =
 
     /// Returns the metadata worksheet from an Investigation. If `useLastSheetOnIncorrectName` is true, returns the last sheet if no worksheet with the name `Investigation` or `isa_investigation` can be found.
     let getInvestigationMetadataSheet (useLastSheetOnIncorrectName : bool) investigation =
-        FsWorkbook.tryGetWorksheetByName "isa_investigation" investigation
+        FsWorkbook.tryGetWorksheetByName "Investigation" investigation
         |> Option.defaultValue (
-            FsWorkbook.tryGetWorksheetByName "Investigation" investigation
+            FsWorkbook.tryGetWorksheetByName "isa_investigation" investigation
             |> Option.defaultValue (
                 if useLastSheetOnIncorrectName then
-                    FsWorkbook.getWorksheets investigation
-                    |> Seq.tryLast
-                    |> Option.defaultWith (fun _ -> failwith "No worksheets found in the workbook.")
+                    match FsWorkbook.getWorksheets investigation |> Seq.tryLast with
+                    | Some ws -> ws
+                    | None -> failwith "No worksheets found in the workbook."
                 else
-                    failwith "No worksheet named 'isa_investigation' found in the workbook."
+                    failwith "No worksheet named 'Investigation' or 'isa_investigation' found in the workbook."
             )
         )
 
@@ -30,9 +30,9 @@ module Workbook =
             FsWorkbook.tryGetWorksheetByName "isa_study" study
             |> Option.defaultValue (
                 if useLastSheetOnIncorrectName then
-                    FsWorkbook.getWorksheets study
-                    |> Seq.tryLast
-                    |> Option.defaultWith (fun _ -> failwith "No worksheets found in the workbook.")
+                    match FsWorkbook.getWorksheets study |> Seq.tryLast with
+                    | Some ws -> ws
+                    | None -> failwith "No worksheets found in the workbook."
                 else
                     failwith "No worksheet named 'Study' or 'isa_study' found in the workbook."
             )
@@ -45,9 +45,9 @@ module Workbook =
             FsWorkbook.tryGetWorksheetByName "isa_assay" assay
             |> Option.defaultValue (
                 if useLastSheetOnIncorrectName then
-                    FsWorkbook.getWorksheets assay
-                    |> Seq.tryLast
-                    |> Option.defaultWith (fun _ -> failwith "No worksheets found in the workbook.")
+                    match FsWorkbook.getWorksheets assay |> Seq.tryLast with
+                    | Some ws -> ws
+                    | None -> failwith "No worksheets found in the workbook."
                 else
                     failwith "No worksheet named 'Assay' or 'isa_assay' found in the workbook."
             )
