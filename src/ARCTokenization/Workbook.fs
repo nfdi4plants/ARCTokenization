@@ -1,40 +1,54 @@
 ﻿namespace ARCTokenization
 
-open ControlledVocabulary
+
 open FSharpAux
 open FsSpreadsheet
-open ARCTokenization.Terms
 
+
+/// Functions to parse and tokenize FsWorkbooks.
 module Workbook =
 
-    let getInvestigationMetadataSheet (useLastSheetOnIncorrectName: bool) investigation =
-        try
-            FsWorkbook.getWorksheetByName "isa_investigation" investigation
-        with _ ->
-            if useLastSheetOnIncorrectName then
-                FsWorkbook.getWorksheets investigation
-                |> Seq.last
-            else
-                failwith "No worksheet named 'isa_investigation' found in the workbook"
+    /// Returns the metadata worksheet from an Investigation. If `useLastSheetOnIncorrectName` is true, returns the last sheet if no worksheet with the name `Investigation` or `isa_investigation` can be found.
+    let getInvestigationMetadataSheet (useLastSheetOnIncorrectName : bool) investigation =
+        FsWorkbook.tryGetWorksheetByName "isa_investigation" investigation
+        |> Option.defaultValue (
+            FsWorkbook.tryGetWorksheetByName "Investigation" investigation
+            |> Option.defaultValue (
+                if useLastSheetOnIncorrectName then
+                    FsWorkbook.getWorksheets investigation
+                    |> Seq.tryLast
+                    |> Option.defaultWith (fun _ -> failwith "No worksheets found in the workbook.")
+                else
+                    failwith "No worksheet named 'isa_investigation' found in the workbook."
+            )
+        )
 
-    let getStudyMetadataSheet (useLastSheetOnIncorrectName: bool) study =
-        try
-            FsWorkbook.tryGetWorksheetByName "Study" study
-            |> Option.defaultValue (FsWorkbook.getWorksheetByName "isa_study" study)
-        with _ ->
-            if useLastSheetOnIncorrectName then
-                FsWorkbook.getWorksheets study
-                |> Seq.last
-            else
-                failwith "No worksheet named 'Study' or 'isa_study' found in the workbook"
+    /// Returns the metadata worksheet from a Study. If `useLastSheetOnIncorrectName` is true, returns the last sheet if no worksheet with the name `Study` or `isa_study` can be found.
+    let getStudyMetadataSheet (useLastSheetOnIncorrectName : bool) study =
+        FsWorkbook.tryGetWorksheetByName "Study" study
+        |> Option.defaultValue (
+            FsWorkbook.tryGetWorksheetByName "isa_study" study
+            |> Option.defaultValue (
+                if useLastSheetOnIncorrectName then
+                    FsWorkbook.getWorksheets study
+                    |> Seq.tryLast
+                    |> Option.defaultWith (fun _ -> failwith "No worksheets found in the workbook.")
+                else
+                    failwith "No worksheet named 'Study' or 'isa_study' found in the workbook."
+            )
+        )
 
-    let getAssayMetadataSheet (useLastSheetOnIncorrectName: bool) assay =
-        try
-            FsWorkbook.tryGetWorksheetByName "Assay" assay
-            |> Option.defaultValue (FsWorkbook.getWorksheetByName "isa_assay" assay)
-        with _ ->
-            if useLastSheetOnIncorrectName then
-                FsWorkbook.getWorksheets assay
-                |> Seq.last
-            else
-                failwith "No worksheet named 'Assay' or 'isa_assay' found in the workbook"
+    /// Returns the metadata worksheet from an Assay. If `useLastSheetOnIncorrectName` is true, returns the last sheet if no worksheet with the name `Assay` or `isa_assay` can be found.
+    let getAssayMetadataSheet (useLastSheetOnIncorrectName : bool) assay =
+        FsWorkbook.tryGetWorksheetByName "Assay" assay
+        |> Option.defaultValue (
+            FsWorkbook.tryGetWorksheetByName "isa_assay" assay
+            |> Option.defaultValue (
+                if useLastSheetOnIncorrectName then
+                    FsWorkbook.getWorksheets assay
+                    |> Seq.tryLast
+                    |> Option.defaultWith (fun _ -> failwith "No worksheets found in the workbook.")
+                else
+                    failwith "No worksheet named 'Assay' or 'isa_assay' found in the workbook."
+            )
+        )
