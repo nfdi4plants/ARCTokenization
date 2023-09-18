@@ -1,9 +1,11 @@
 ﻿module TestUtils
 
+
 open Xunit
 open ControlledVocabulary
 open ARCTokenization
 open ARCTokenization.AnnotationTable
+
 
 module CvParam =
 
@@ -55,12 +57,17 @@ module CvParam =
             (Param.getParamValue cvpActual)
         )
 
-    let structuralEquality (cvpExpectec : CvParam) (cvpActual : CvParam) =
-        termNamesEqual cvpExpectec cvpActual
-        accessionsEqual cvpExpectec cvpActual
-        refUrisEqual cvpExpectec cvpActual
-        valuesEqual cvpExpectec cvpActual
-        
+    let structuralEquality (cvpExpected : CvParam) (cvpActual : CvParam) =
+        termNamesEqual cvpExpected cvpActual
+        accessionsEqual cvpExpected cvpActual
+        refUrisEqual cvpExpected cvpActual
+        valuesEqual cvpExpected cvpActual
+
+    let termEquality onto (cvpExpected : CvParam) (cvpActual : CvParam) =
+        let cvtExp = CvTerm.create(cvpExpected.Accession, cvpExpected.Name, cvpExpected.RefUri)
+        let cvtAct = CvTerm.create(cvpActual.Accession, cvpActual.Name, cvpActual.RefUri)
+        let synos
+
 
 module UserParam =
 
@@ -71,6 +78,7 @@ module UserParam =
             (CvBase.getCvName upActual),
             (CvBase.getCvName upExpectec)
         )
+
 
 module TokenizedAnnotationTable =
     
