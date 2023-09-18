@@ -61,7 +61,7 @@ type Study =
     /// </summary>
     /// <param name="path">The path to the study xlsx file</param>
     /// <param name="UseLastSheetOnIncorrectName">Wether or not to try parse the last sheet as metadata sheet when there is no sheet with the correct name ("Assay") in the workbook</param>
-    static member parseMetadataSheetfromFile(
+    static member parseMetadataSheetFromFile(
         path: string,
         ?UseLastSheetOnIncorrectName: bool
     ) = 
