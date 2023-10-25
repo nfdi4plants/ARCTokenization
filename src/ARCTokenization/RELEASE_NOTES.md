@@ -1,3 +1,7 @@
+### 1.1.0 - (Released 2023-8-21)
+- Additions:
+    - [Add some temporary static modules representing structural ontologies](https://github.com/nfdi4plants/ARCTokenization/commit/7d37cfc8a52accbc37df63e95a39d2684e66535f)
+
 ### 1.0.3 - (Released 2023-8-21)
 - Additions:
     - Update FsOboParser dependency to 0.3.0
