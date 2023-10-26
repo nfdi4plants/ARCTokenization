@@ -9,7 +9,7 @@ module FileSystem =
     open ReferenceObjects.Tokenization.FileSystem
     open System.IO
 
-    let parsedRelativeDirectoryPaths = FS.tokenizeRelativeDirectoryPaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq
+    let parsedRelativeDirectoryPaths = FS.tokenizeRelativeDirectoryPaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
     [<Fact>]
     let ``Relative directory paths are tokenized correctly`` () =
@@ -20,7 +20,7 @@ module FileSystem =
             fun (e, a) -> Assert.True(e.Equals(a))
         )
 
-    let parsedRelativeFilePaths = FS.tokenizeRelativeFilePaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq 
+    let parsedRelativeFilePaths = FS.tokenizeRelativeFilePaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
     [<Fact>]
     let ``Relative file paths are tokenized correctly`` () =
@@ -31,7 +31,7 @@ module FileSystem =
             fun (e, a) -> Assert.True(e.Equals(a))
         )
 
-    let parsedAbsoluteDirectoryPaths = FS.tokenizeAbsoluteDirectoryPaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq
+    let parsedAbsoluteDirectoryPaths = FS.tokenizeAbsoluteDirectoryPaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
     [<Fact>]
     let ``Absolute directory paths are tokenized correctly`` () =
@@ -42,7 +42,7 @@ module FileSystem =
             fun (e, a) -> Assert.True(e.Equals(a))
         )
 
-    let parsedAbsoluteFilePaths = FS.tokenizeAbsoluteFilePaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq 
+    let parsedAbsoluteFilePaths = FS.tokenizeAbsoluteFilePaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
     [<Fact>]
     let ``Absolute file paths are tokenized correctly`` () =

@@ -1,4 +1,8 @@
-### 1.1.0 - (Released 2023-8-21)
+### 1.2.0 - (Released 2023-10-26)
+- Additions:
+    - [Add file system tokenization](https://github.com/nfdi4plants/ARCTokenization/commit/57de162d50c918f1e245f1aa34db0a6b1660ba3b)
+
+### 1.1.0 - (Released 2023-10-25)
 - Additions:
     - [Add some temporary static modules representing structural ontologies](https://github.com/nfdi4plants/ARCTokenization/commit/7d37cfc8a52accbc37df63e95a39d2684e66535f)
 

@@ -169,6 +169,7 @@ module Tokenization =
                     v = v
                 )
             )
+            |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
         let referenceAbsoluteDirectoryPaths(root) =
             [
@@ -186,6 +187,7 @@ module Tokenization =
                     v = v.Replace("\\", "/")
                 )
             )
+            |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
         let referenceRelativeFilePaths = 
             [
@@ -199,6 +201,7 @@ module Tokenization =
                     v = v
                 )
             )
+            |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
         let referenceAbsoluteFilePaths(root) =
             [
@@ -213,3 +216,4 @@ module Tokenization =
                     v = v.Replace("\\", "/")
                 )
             )
+            |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
