@@ -41,7 +41,7 @@ let buildOntologies =
             ontologySource
             |> File.read
             |> Seq.map (fun line -> line.Trim())
-            |> fun lines -> Seq.concat [seq{"!This file was auto generated. Do not edit it. All manual changes will be overwritten by the next generator run eventually."}; lines]
+            |> fun lines -> Seq.concat [seq{$"!This file was auto generated on {System.DateTime.Now.ToShortDateString()}. Do not edit it. All manual changes will be overwritten by the next generator run eventually."}; lines]
             |> File.write false (ontologySource.Replace(".yml", ".obo"))
         )
     }

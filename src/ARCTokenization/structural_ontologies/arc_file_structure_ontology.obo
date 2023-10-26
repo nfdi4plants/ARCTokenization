@@ -1,0 +1,56 @@
+!This file was auto generated on 2023-10-26. Do not edit it. All manual changes will be overwritten by the next generator run eventually.
+format-version: 1.2
+data-version: init/2023-10-26
+saved-by: Kevin Schneider
+default-namespace: afso
+ontology: AFSO
+
+[Term]
+id: AFSO:00000001
+name: File
+def: ""
+
+[Term]
+id: AFSO:00000002
+name: Directory
+def: ""
+
+[Term]
+id: AFSO:00000003
+name: File Type
+def: ""
+
+[Term]
+id: AFSO:00000004
+name: Extension
+def: ""
+
+[Term]
+id: AFSO:00000005
+name: File Name
+def: ""
+
+[Term]
+id: AFSO:00000006
+name: Directory Name
+def: ""
+
+[Term]
+id: AFSO:00000007
+name: Full Name
+def: ""
+
+[Term]
+id: AFSO:00000008
+name: Path
+def: ""
+
+[Term]
+id: AFSO:00000009
+name: File Path
+def: ""
+
+[Term]
+id: AFSO:00000010
+name: Directory Path
+def: ""

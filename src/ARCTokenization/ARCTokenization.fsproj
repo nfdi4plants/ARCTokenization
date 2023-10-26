@@ -14,12 +14,15 @@
 
   <ItemGroup>
     <None Include="RELEASE_NOTES.md" />
+    <Compile Include="structural_ontologies\AFSO.fs" />
     <Compile Include="structural_ontologies\INVMSO.fs" />
     <Compile Include="structural_ontologies\STDMSO.fs" />
     <Compile Include="structural_ontologies\ASSMSO.fs" />
+    <EmbeddedResource Include="structural_ontologies/arc_file_structure_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
     <EmbeddedResource Include="structural_ontologies/investigation_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
     <EmbeddedResource Include="structural_ontologies/study_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
     <EmbeddedResource Include="structural_ontologies/assay_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
+    <None Include="structural_ontologies/arc_file_structure_ontology.yml" />
     <None Include="structural_ontologies/investigation_metadata_structural_ontology.yml" />
     <None Include="structural_ontologies/study_metadata_structural_ontology.yml" />
     <None Include="structural_ontologies/assay_metadata_structural_ontology.yml" />
