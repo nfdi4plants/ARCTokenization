@@ -5,6 +5,52 @@ open FSharpAux
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 
+type FileSystem =
+    
+    /// <summary>
+    /// Returns all directories in the given rootPath as a list of CvParams containing the annotated absolute directory paths.
+    ///
+    /// Note that rootPath must be an absolute path ending with a trailing slash.
+    /// </summary>
+    /// <param name="rootPath">absolute path ending with a trailing slash</param>
+    static member parseAbsoluteDirectoryPaths(
+        rootPath:string
+    ) =
+        FS.tokenizeAbsoluteDirectoryPaths rootPath
+
+    /// <summary>
+    /// Returns all files in the given rootPath as a list of CvParams containing the annotated absolute file paths.
+    ///
+    /// Note that rootPath must be an absolute path ending with a trailing slash.
+    /// </summary>
+    /// <param name="rootPath">absolute path ending with a trailing slash</param>
+    static member parseAbsoluteFilePaths(
+        rootPath:string
+    ) =
+        FS.tokenizeAbsoluteFilePaths rootPath
+
+    /// <summary>
+    /// Returns all directories in the given rootPath as a list of CvParams containing the annotated relative directory paths.
+    ///
+    /// Note that rootPath must be an absolute path ending with a trailing slash.
+    /// </summary>
+    /// <param name="rootPath">absolute path ending with a trailing slash</param>
+    static member parseRelativeDirectoryPaths(
+        rootPath:string
+    ) =
+        FS.tokenizeRelativeDirectoryPaths rootPath
+
+    /// <summary>
+    /// Returns all files in the given rootPath as a list of CvParams containing the annotated relative file paths.
+    ///
+    /// Note that rootPath must be an absolute path ending with a trailing slash.
+    /// </summary>
+    /// <param name="rootPath">absolute path ending with a trailing slash</param>
+    static member parseRelativeFilePaths(
+        rootPath:string
+    ) =
+        FS.tokenizeRelativeFilePaths rootPath
+
 type Investigation =
 
     /// <summary>
@@ -21,7 +67,7 @@ type Investigation =
         
         FsWorkbook.fromXlsxFile path
         |> Workbook.getInvestigationMetadataSheet useLastSheetOnIncorrectName
-        |> Worksheet.parseRowsWith (Tokenization.convertTokens MetadataSheet.parseInvestigationKey)
+        |> Worksheet.parseRowsWith (Tokenization.convertMetadataTokens MetadataSheet.parseInvestigationKey)
 
     /// <summary>
     /// Parses the metadata sheet from an ISA Study XLSX file as a flat list of `IParam`s.
@@ -54,7 +100,7 @@ type Study =
         
         FsWorkbook.fromXlsxFile path
         |> Workbook.getStudyMetadataSheet useLastSheetOnIncorrectName
-        |> Worksheet.parseRowsWith (Tokenization.convertTokens MetadataSheet.parseStudyKey)
+        |> Worksheet.parseRowsWith (Tokenization.convertMetadataTokens MetadataSheet.parseStudyKey)
 
     /// <summary>
     /// Parses the metadata sheet from an ISA Study XLSX file as a flat list of `IParam`s.
@@ -95,7 +141,7 @@ type Assay =
         
         FsWorkbook.fromXlsxFile path
         |> Workbook.getAssayMetadataSheet useLastSheetOnIncorrectName
-        |> Worksheet.parseRowsWith (Tokenization.convertTokens MetadataSheet.parseAssayKey)
+        |> Worksheet.parseRowsWith (Tokenization.convertMetadataTokens MetadataSheet.parseAssayKey)
 
     /// <summary>
     /// Parses the metadata sheet from an ISA Assay XLSX file as a flat list of `IParam`s.

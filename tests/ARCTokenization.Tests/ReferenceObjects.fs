@@ -96,7 +96,7 @@ module Tokenization =
                 lmaoooo", ParamValue.Value 1)
             ]
 
-    module ConvertTokens =
+    module ConvertMetadataTokens =
         
         let referenceTerms = [
             CvTerm.create(accession = "1", name = "ReferenceTerm1", ref = "1")
@@ -151,3 +151,65 @@ module Tokenization =
             UserParam("fk u lmaooooo", ParamValue.Value "some value")
             UserParam("fk u lmaooooo", ParamValue.Value "another value")
         ]
+
+    module FileSystem =
+        
+        let referenceRelativeDirectoryPaths = 
+            [
+                @"1"
+                @"2"
+                @"1/1_1"
+                @"2/2_1"
+                @"2/2_2"
+                @"2/2_2/2_2_1"
+            ]
+            |> List.map (fun v ->
+                CvParam(
+                    cvTerm = CvTerm.create("AFSO:00000010","Directory Path","AFSO"),
+                    v = v
+                )
+            )
+
+        let referenceAbsoluteDirectoryPaths(root) =
+            [
+                @"1"
+                @"2"
+                @"1/1_1"
+                @"2/2_1"
+                @"2/2_2"
+                @"2/2_2/2_2_1"
+            ]
+            |> List.map (fun f -> System.IO.Path.Combine(root, f))
+            |> List.map (fun v ->
+                CvParam(
+                    cvTerm = CvTerm.create("AFSO:00000010","Directory Path","AFSO"),
+                    v = v.Replace("\\", "/")
+                )
+            )
+
+        let referenceRelativeFilePaths = 
+            [
+                @"1/1_1/.gitkeep"
+                @"2/2_1/.gitkeep"
+                @"2/2_2/2_2_1/.gitkeep"
+            ]
+            |> List.map (fun v ->
+                CvParam(
+                    cvTerm = CvTerm.create("AFSO:00000009","File Path","AFSO"),
+                    v = v
+                )
+            )
+
+        let referenceAbsoluteFilePaths(root) =
+            [
+                @"1/1_1/.gitkeep"
+                @"2/2_1/.gitkeep"
+                @"2/2_2/2_2_1/.gitkeep"
+            ]
+            |> List.map (fun f -> System.IO.Path.Combine(root, f))
+            |> List.map (fun v ->
+                CvParam(
+                    cvTerm = CvTerm.create("AFSO:00000009","File Path","AFSO"),
+                    v = v.Replace("\\", "/")
+                )
+            )

@@ -13,6 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="ARCTokenization.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="RELEASE_NOTES.md" />
     <Compile Include="structural_ontologies\AFSO.fs" />
     <Compile Include="structural_ontologies\INVMSO.fs" />
@@ -34,6 +38,7 @@
     <Compile Include="Tokenization.fs" />
     <Compile Include="Workbook.fs" />
     <Compile Include="Worksheet.fs" />
+    <Compile Include="FileSystem.fs" />
     <Compile Include="TopLevelParsers.fs" />
   </ItemGroup>
 

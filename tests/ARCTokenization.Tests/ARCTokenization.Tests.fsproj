@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Fixtures\**" CopyToOutputDirectory="Always" />
+    <None Include="Fixtures\**" CopyToOutputDirectory="Always"/>
     <Compile Include="TestUtils.fs" />
     <Compile Include="TestObjects.fs" />
     <Compile Include="ReferenceObjects.fs" />
@@ -36,7 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\ControlledVocabulary\ControlledVocabulary.fsproj" />
     <ProjectReference Include="..\..\src\ARCTokenization\ARCTokenization.fsproj" />
   </ItemGroup>
+
+  <ItemGroup />
+
+  <ItemGroup />
 
 </Project>

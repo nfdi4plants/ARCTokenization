@@ -7,7 +7,7 @@ open ARCTokenization.Terms
 
 module Tokenization = 
     
-    let convertTokens (keyParser: IParam list -> string -> (ParamValue -> IParam)) (line : FsCell seq) =
+    let convertMetadataTokens (keyParser: IParam list -> string -> (ParamValue -> IParam)) (line : FsCell seq) =
         match line |> Seq.toList with
         | [] -> failwith "Cannot convert nothin"
         | key :: [] -> 

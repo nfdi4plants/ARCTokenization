@@ -4,6 +4,55 @@ open ControlledVocabulary
 open ARCTokenization
 open Xunit
 
+module FileSystem =
+    
+    open ReferenceObjects.Tokenization.FileSystem
+    open System.IO
+
+    let parsedRelativeDirectoryPaths = FS.tokenizeRelativeDirectoryPaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq
+
+    [<Fact>]
+    let ``Relative directory paths are tokenized correctly`` () =
+        let actual = parsedRelativeDirectoryPaths
+        let expected = referenceRelativeDirectoryPaths
+        Assert.All(
+            List.zip expected actual,
+            fun (e, a) -> Assert.True(e.Equals(a))
+        )
+
+    let parsedRelativeFilePaths = FS.tokenizeRelativeFilePaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq 
+
+    [<Fact>]
+    let ``Relative file paths are tokenized correctly`` () =
+        let actual = parsedRelativeFilePaths
+        let expected = referenceRelativeFilePaths
+        Assert.All(
+            List.zip expected actual,
+            fun (e, a) -> Assert.True(e.Equals(a))
+        )
+
+    let parsedAbsoluteDirectoryPaths = FS.tokenizeAbsoluteDirectoryPaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq
+
+    [<Fact>]
+    let ``Absolute directory paths are tokenized correctly`` () =
+        let actual = parsedAbsoluteDirectoryPaths
+        let expected = referenceAbsoluteDirectoryPaths(Path.Combine(System.Environment.CurrentDirectory, "Fixtures/testPaths/"))
+        Assert.All(
+            List.zip expected actual,
+            fun (e, a) -> Assert.True(e.Equals(a))
+        )
+
+    let parsedAbsoluteFilePaths = FS.tokenizeAbsoluteFilePaths (Path.GetFullPath("Fixtures/testPaths/")) |> List.ofSeq 
+
+    [<Fact>]
+    let ``Absolute file paths are tokenized correctly`` () =
+        let actual = parsedAbsoluteFilePaths
+        let expected = referenceAbsoluteFilePaths(Path.Combine(System.Environment.CurrentDirectory, "Fixtures/testPaths/"))
+        Assert.All(
+            List.zip expected actual,
+            fun (e, a) -> Assert.True(e.Equals(a))
+        )
+
 module ParseKeyWithTerms =
     
     open ReferenceObjects.Tokenization.KeyParser
@@ -75,12 +124,12 @@ module ParseKeyWithTerms =
             fun (e, a) -> Assert.True(Param.equals e a)
         )
 
-module ConvertTokens = 
+module ConvertMetadataTokens = 
     
-    open ReferenceObjects.Tokenization.ConvertTokens
+    open ReferenceObjects.Tokenization.ConvertMetadataTokens
     open FsSpreadsheet
 
-    let tokenizer : FsCell seq -> IParam list = Tokenization.convertTokens (MetadataSheet.parseKeyWithTerms referenceTerms)
+    let tokenizer : FsCell seq -> IParam list = Tokenization.convertMetadataTokens (MetadataSheet.parseKeyWithTerms referenceTerms)
 
     let parsedCvParams = tokenizer referenceRow
 
