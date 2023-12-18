@@ -54,21 +54,21 @@ classDiagram
     }
 ```
 
-## develop
+## Develop
 
-### prerequisites
+### Prerequisites
 
 - .NET 6 SDK
 - nodejs (tested with ~v16)
 
-### setup
+### Setup
 
 - dotnet tool restore
 - npm install
 
-### build
+### Build whole project
 
-#### Linux/macos
+#### Linux/macOS
 
 - make `build.sh` executable
 - run `build.sh`
@@ -81,9 +81,24 @@ run `build.cmd`
 
 `dotnet run --project ./build/build.fsproj`
 
-### test
+### Build ontologies (YAML to OBO)
 
-#### Linux/macos
+#### Linux/macOS
+
+- make `build.sh` executable
+- run `build.sh buildOntologies`
+
+#### Windows
+
+run `build.cmd buildOntologies`
+
+#### or run the build project directly:
+
+`dotnet run --project ./build/build.fsproj buildOntologies`
+
+### Test
+
+#### Linux/macOS
 
 - run `build.sh runTests`
 
