@@ -80,6 +80,7 @@ id: STDMSO:00000009
 name: STUDY DESIGN DESCRIPTORS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000008 ! Study File Name
 
 [Term]
@@ -108,6 +109,7 @@ id: STDMSO:00000013
 name: STUDY PUBLICATIONS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000012 ! Study Design Type Term Source REF
 
 [Term]
@@ -164,6 +166,7 @@ id: STDMSO:00000021
 name: STUDY FACTORS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000020 ! Study Publication Status Term Source REF
 
 [Term]
@@ -199,6 +202,7 @@ id: STDMSO:00000026
 name: STUDY ASSAYS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000025 ! Study Factor Type Term Source REF
 
 [Term]
@@ -262,6 +266,7 @@ id: STDMSO:00000035
 name: STUDY PROTOCOLS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000034 ! Study Assay File Name
 
 [Term]
@@ -367,6 +372,7 @@ id: STDMSO:00000050
 name: STUDY CONTACTS
 def: ""
 relationship: part_of STDMSO:00000001 ! Study Metadata
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000049 ! Study Protocol Components Type Term Source REF
 
 [Term]
