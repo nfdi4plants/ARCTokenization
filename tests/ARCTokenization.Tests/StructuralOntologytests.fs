@@ -37,6 +37,55 @@ module StudyMetadata =
             (fun (e,a) -> Assert.Equal(e,a))
         )
 
+    [<Fact>]
+    let ``"STUDY METADATA" has correct ID`` () =
+        let smTerm = 
+            StudyMetadata.ontology.Terms 
+            |> List.tryFind (fun t -> t.Name = "STUDY METADATA")
+        let actual =
+            match smTerm with
+            | Some t -> t.Id = "STDMSO:00000062"
+            | None -> false
+        Assert.True actual
+
+    [<Fact>]
+    let ``Terms have correct relations to "STUDY METADATA"`` () =
+        let childrenNames = [
+            "Study Identifier"
+            "Study Title"
+            "Study Description"
+            "Study Submission Date"
+            "Study Public Release Date"
+            "Study File Name"
+            "STUDY DESIGN DESCRIPTORS"
+            "STUDY PUBLICATIONS"
+            "STUDY FACTORS"
+            "STUDY ASSAYS"
+            "STUDY PROTOCOLS"
+            "STUDY CONTACTS"
+        ]
+        let actual =
+        //let childrenRelations =
+            childrenNames
+            |> List.choose (
+                fun n -> 
+                    let respectiveTerm = StudyMetadata.ontology.Terms |> List.tryFind (fun t -> n = t.Name)
+                    Option.map (fun t -> OboOntology.getRelatedTerms t StudyMetadata.ontology) respectiveTerm
+            )
+        //let actual =
+        //    childrenRelations
+        //    |> List.map (
+        //        List.exists (fun (it,rel,ot : OboTerm option) -> rel = "part_of" && ot.IsSome && ot.Value.Name = "STUDY METADATA")
+        //    )
+        Assert.All(
+            actual, 
+            fun l -> 
+                List.map (
+                    List.exists (fun (it,rel,ot : OboTerm option) -> rel = "part_of" && ot.IsSome && ot.Value.Name = "STUDY METADATA")
+                )
+                |> ignore
+        )
+
 module AssayMetadata =
     
     [<Fact>]
