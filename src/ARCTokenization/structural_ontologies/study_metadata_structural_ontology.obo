@@ -31,16 +31,16 @@ id: STDMSO:00000003
 name: Study Identifier
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
-relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000002 ! STUDY
-relationship: follows STDMSO:00000051 ! STUDY METADATA
+relationship: follows STDMSO:00000062 ! STUDY METADATA
 
 [Term]
 id: STDMSO:00000004
 name: Study Title
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
-relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000003 ! Study Identifier
 
 [Term]
@@ -48,7 +48,7 @@ id: STDMSO:00000005
 name: Study Description
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
-relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000004 ! Study Title
 
 [Term]
@@ -56,7 +56,7 @@ id: STDMSO:00000006
 name: Study Submission Date
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
-relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000005 ! Study Description
 
 [Term]
@@ -64,7 +64,7 @@ id: STDMSO:00000007
 name: Study Public Release Date
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
-relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000006 ! Study Submission Date
 
 [Term]
@@ -72,7 +72,7 @@ id: STDMSO:00000008
 name: Study File Name
 def: ""
 relationship: part_of STDMSO:00000002 ! STUDY
-relationship: part_of STDMSO:00000051 ! STUDY METADATA
+relationship: part_of STDMSO:00000062 ! STUDY METADATA
 relationship: follows STDMSO:00000007 ! Study Public Release Date
 
 [Term]
