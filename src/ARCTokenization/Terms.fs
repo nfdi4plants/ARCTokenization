@@ -22,6 +22,11 @@ module InvestigationMetadata =
 
     let ontology = OboOntology.fromLines true obo
 
+    let nonObsoleteCvTerms = 
+        ontology.Terms
+        |> List.filter (fun t -> not t.IsObsolete)
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
+
     let obsoleteCvTerms = 
         ontology.Terms
         |> List.filter (fun t -> t.IsObsolete)
@@ -37,6 +42,11 @@ module StudyMetadata =
 
     let ontology = OboOntology.fromLines true obo
 
+    let nonObsoleteCvTerms = 
+        ontology.Terms
+        |> List.filter (fun t -> not t.IsObsolete)
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
+
     let obsoleteCvTerms = 
         ontology.Terms
         |> List.filter (fun t -> t.IsObsolete)
@@ -51,6 +61,11 @@ module AssayMetadata =
     let internal obo = (EmbeddedResource.load "structural_ontologies.assay_metadata_structural_ontology.obo").Replace("\r\n", "\n").Split('\n')
 
     let ontology = OboOntology.fromLines true obo
+
+    let nonObsoleteCvTerms = 
+        ontology.Terms
+        |> List.filter (fun t -> not t.IsObsolete)
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
 
     let cvTerms = 
         ontology.Terms

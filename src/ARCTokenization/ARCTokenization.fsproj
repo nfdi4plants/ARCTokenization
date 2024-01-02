@@ -40,6 +40,7 @@
     <Compile Include="Worksheet.fs" />
     <Compile Include="FileSystem.fs" />
     <Compile Include="TopLevelParsers.fs" />
+    <Compile Include="ARCMock.fs" />
   </ItemGroup>
 
   <PropertyGroup>

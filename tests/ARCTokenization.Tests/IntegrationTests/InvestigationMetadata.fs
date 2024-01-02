@@ -33,117 +33,24 @@ module InvestigationMetadata =
             CvParam.structuralEquality (expected) (actual :?> CvParam)
         ))
 
-    let expectedTermValuesSimple = 
-        [
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""; "iid"]
-            [""; "ititle"]
-            [""; "idesc"]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""; "Maus"; "Keider"; "müller"; ""; "oih"]
-            [""; "Oliver"; ""; "andreas";]
-            [""; "L. I."; "C."]
-            [""; "maus@nfdi4plants.org"]
-            [""]
-            [""]
-            [""]
-            [""; ""; "Affe"]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""; "sid"]
-            [""; "stitle"]
-            [""; "sdesc"]
-            [""]
-            [""]
-            [""; @"sid\isa.study.xlsx"]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""; @"aid\isa.assay.xlsx"; @"aid2\isa.assay.xlsx"]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""; "weil"]
-            [""; ""; "lukas"]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-            [""]
-        ]
-
     let allExpectedMetadataTermsFull =
-        Terms.InvestigationMetadata.cvTerms
-        |> List.skip 1 //(ignore root term)
-        |> List.filter (fun t -> not (t.Name.StartsWith("Comment"))) // ignore orcids
-        |> List.filter (fun t -> not (List.contains t Terms.InvestigationMetadata.obsoleteCvTerms)) // ignore obsolete terms
-        |> List.zip expectedTermValuesSimple
-        |> List.map (fun (values,term) ->
-            values
-            |> List.mapi (fun i v ->
-                if i = 0 then
-                    CvParam(term, ParamValue.CvValue (CvTerm.create(accession = "AGMO:00000001", name = "Metadata Section Key", ref = "AGMO")), [])
-                else
-                    CvParam(term, ParamValue.Value v, [])
-            )
+        ARCMock.InvestigationMetadataTokens(
+            Investigation_Identifier = ["iid"],
+            Investigation_Title = ["ititle"],
+            Investigation_Description = ["idesc"],
+            Investigation_Person_Last_Name = ["Maus"; "Keider"; "müller"; ""; "oih"],
+            Investigation_Person_First_Name = ["Oliver"; ""; "andreas";],
+            Investigation_Person_Mid_Initials = ["L. I."; "C."],
+            Investigation_Person_Email = ["maus@nfdi4plants.org"],
+            Investigation_Person_Affiliation = [""; "Affe"],
+            Study_Identifier = ["sid"],
+            Study_Title = ["stitle"],
+            Study_Description = ["sdesc"],
+            Study_File_Name = [@"sid\isa.study.xlsx"],
+            Study_Assay_File_Name = [@"aid\isa.assay.xlsx"; @"aid2\isa.assay.xlsx"],
+            Study_Person_Last_Name = ["weil"],
+            Study_Person_First_Name = [""; "lukas"]
         )
-        |> List.concat
 
     [<Fact>]
     let ``Simple investigation is parsed with all structural ontology terms in order`` () =
