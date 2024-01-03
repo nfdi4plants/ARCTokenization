@@ -1,3 +1,8 @@
+### 1.3.0 - (Released 2024-01-03)
+- Additions: [Add metadata token Mock API](https://github.com/nfdi4plants/ARCTokenization/commit/7ba554848542f46a60bdb82c54d84d186d6e685e)
+
+- Bugfixes:
+    - Fix multiple structural term relations ([#31](https://github.com/nfdi4plants/ARCTokenization/issues/31), [#30](https://github.com/nfdi4plants/ARCTokenization/issues/30))
 ### 1.2.0 - (Released 2023-10-26)
 - Additions:
     - [Add file system tokenization](https://github.com/nfdi4plants/ARCTokenization/commit/57de162d50c918f1e245f1aa34db0a6b1660ba3b)
