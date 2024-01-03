@@ -51,6 +51,7 @@ module InvestigationMetadata =
             Study_Person_Last_Name = ["weil"],
             Study_Person_First_Name = [""; "lukas"]
         )
+        |> List.concat // use flat list
 
     [<Fact>]
     let ``Simple investigation is parsed with all structural ontology terms in order`` () =

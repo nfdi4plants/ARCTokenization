@@ -212,7 +212,6 @@ type ARCMock =
                     CvParam(term, ParamValue.Value v, [])
             )
         )
-        |> List.concat
 
     /// <summary>
     /// returns a mock list of CvParams lists which each represent a tokenized row of study metadata.
@@ -357,7 +356,6 @@ type ARCMock =
                     CvParam(term, ParamValue.Value v, [])
             )
         )
-        |> List.concat
 
     /// <summary>
     /// returns a mock list of CvParams lists which each represent a tokenized row of assay metadata.

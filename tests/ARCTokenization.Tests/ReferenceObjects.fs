@@ -217,3 +217,32 @@ module Tokenization =
                 )
             )
             |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
+
+module MockAPI =
+    
+    module InvestigationMetadataTokens = 
+
+        // equivalent to a metadatasheet with only the first column that contains metadata section keys
+        let empty =
+            Terms.InvestigationMetadata.nonObsoleteCvTerms
+            |> List.skip 1 //(ignore root term)
+            |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
+            |> List.map (fun cvTerm -> CvParam(cvTerm, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, []))
+
+    module StudyMetadataTokens = 
+
+        // equivalent to a metadatasheet with only the first column that contains metadata section keys
+        let empty =
+            Terms.StudyMetadata.nonObsoleteCvTerms
+            |> List.skip 1 //(ignore root term)
+            |> List.filter (fun t -> not (t.Name.StartsWith("Comment")) ) // ignore all comments
+            |> List.map (fun cvTerm -> CvParam(cvTerm, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, []))
+
+    module AssayMetadataTokens = 
+        
+        // equivalent to a metadatasheet with only the first column that contains metadata section keys
+        let empty =
+            Terms.AssayMetadata.nonObsoleteCvTerms
+            |> List.skip 1 //(ignore root term)
+            |> List.filter (fun t -> not (t.Name.StartsWith("Comment")) ) // ignore all comments
+            |> List.map (fun cvTerm -> CvParam(cvTerm, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, []))

@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Fixtures\**" CopyToOutputDirectory="Always"/>
+    <None Include="Fixtures\**" CopyToOutputDirectory="Always" />
     <Compile Include="TestUtils.fs" />
     <Compile Include="TestObjects.fs" />
     <Compile Include="ReferenceObjects.fs" />
     <Compile Include="StructuralOntologytests.fs" />
     <Compile Include="TokenizationTests\ParserFunctions.fs" />
+    <Compile Include="MockAPITests\MockInvestigationMetadataTokens.fs" />
+    <Compile Include="MockAPITests\MockStudyMetadataTokens.fs" />
+    <Compile Include="MockAPITests\MockAssayMetadataTokens.fs" />
     <Compile Include="IntegrationTests\InvestigationMetadata.fs" />
     <Compile Include="IntegrationTests\StudyMetadata.fs" />
     <Compile Include="IntegrationTests\StudyAnnotationTable.fs" />
@@ -39,9 +42,5 @@
     <ProjectReference Include="..\..\src\ControlledVocabulary\ControlledVocabulary.fsproj" />
     <ProjectReference Include="..\..\src\ARCTokenization\ARCTokenization.fsproj" />
   </ItemGroup>
-
-  <ItemGroup />
-
-  <ItemGroup />
 
 </Project>
