@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en" data-root="https://nfdi4plants.github.io/ARCTokenization/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="ARCTokenization">
+    <meta property="og:title" content="CvAttributeCollection (ARCTokenization)" />
+    <meta property="og:url" content="https://nfdi4plants.github.io/ARCTokenization/{{fsdocs-source-basename}}.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://nfdi4plants.github.io/ARCTokenization/">
+    <meta name="twitter:title" content="CvAttributeCollection (ARCTokenization)">
+    
+    <title>CvAttributeCollection (ARCTokenization) | ARCTokenization</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/img/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    
+    
+</head>
+<body class="api-docs">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/RELEASE_NOTES.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+        <a href="https://nfdi4plants.github.io/ARCTokenization/">
+            <img alt="Header menu logo" src="https://nfdi4plants.github.io/ARCTokenization/img/logo.png">
+            <strong>ARCTokenization</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nfdi4plants/ArcGraphModel/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/RELEASE_NOTES.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        <div>
+  <h2>
+    CvAttributeCollection Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary.html">
+        ControlledVocabulary
+      </a>
+    </dt>
+    <dt>
+      Assembly: ControlledVocabulary.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+    </dt>
+    <dt>
+      All Interfaces: 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.idictionary">IDictionary</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.icollection">ICollection</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.ideserializationcallback">IDeserializationCallback</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable">ISerializable</a></code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+         Contains attributes by which to qualify a cv object
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '173', 173)" onmouseover="showTip(event, '173', 173)">
+                <p>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>CvAttributeCollection<span><span>(<span>attributes</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="173">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvAttributeCollection<span><span>(<span>attributes</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        attributes
+                      </b>
+                      :
+                      <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;seq</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvattributecollection.html">CvAttributeCollection</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  attributes
+                </span>
+                :
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;seq</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvattributecollection.html">CvAttributeCollection</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '174', 174)" onmouseover="showTip(event, '174', 174)">
+                <p>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>CvAttributeCollection<span><span>(<span>attributes</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="174">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvAttributeCollection<span><span>(<span>attributes</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        attributes
+                      </b>
+                      :
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvattributecollection.html">CvAttributeCollection</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  attributes
+                </span>
+                :
+                <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvattributecollection.html">CvAttributeCollection</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '175', 175)" onmouseover="showTip(event, '175', 175)">
+                <p>
+                  <a id="AddAttribute">
+                    <a href="#AddAttribute">
+                      <code><span>this.AddAttribute</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="175">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.AddAttribute</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        param
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.AddAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.AddAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L24-24" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Add an IParam as an attribute. Fails, if an attribute with the same key already exists
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    param
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '176', 176)" onmouseover="showTip(event, '176', 176)">
+                <p>
+                  <a id="Attributes">
+                    <a href="#Attributes">
+                      <code><span>this.Attributes</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="176">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Attributes</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:P:ControlledVocabulary.CvAttributeCollection.Attributes`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'P:ControlledVocabulary.CvAttributeCollection.Attributes\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L20-20" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns all attributes as a list
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '177', 177)" onmouseover="showTip(event, '177', 177)">
+                <p>
+                  <a id="ContainsAttribute">
+                    <a href="#ContainsAttribute">
+                      <code><span>this.ContainsAttribute</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="177">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ContainsAttribute</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        term
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.ContainsAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.ContainsAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L61-61" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if an attribute with the given term exists in the collection
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    term
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '178', 178)" onmouseover="showTip(event, '178', 178)">
+                <p>
+                  <a id="ContainsAttribute">
+                    <a href="#ContainsAttribute">
+                      <code><span>this.ContainsAttribute</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="178">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.ContainsAttribute</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.ContainsAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.ContainsAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L57-57" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if an attribute with the given name exists in the collection
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    name
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '179', 179)" onmouseover="showTip(event, '179', 179)">
+                <p>
+                  <a id="GetAttribute">
+                    <a href="#GetAttribute">
+                      <code><span>this.GetAttribute</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="179">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetAttribute</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        term
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.GetAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.GetAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L53-53" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Retrieves an IParam attribute by its term, if it exists, else fails
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    term
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '180', 180)" onmouseover="showTip(event, '180', 180)">
+                <p>
+                  <a id="GetAttribute">
+                    <a href="#GetAttribute">
+                      <code><span>this.GetAttribute</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="180">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.GetAttribute</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.GetAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.GetAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L49-49" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Retrieves an IParam attribute by its name, if it exists, else fails
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    name
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '181', 181)" onmouseover="showTip(event, '181', 181)">
+                <p>
+                  <a id="IsStructuralChildOf">
+                    <a href="#IsStructuralChildOf">
+                      <code><span>this.IsStructuralChildOf</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="181">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.IsStructuralChildOf</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        parent
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-icvbase.html">ICvBase</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.IsStructuralChildOf`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.IsStructuralChildOf\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L67-67" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if an attribute with the same term as the given parent exists in the collection
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    parent
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-icvbase.html">ICvBase</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '182', 182)" onmouseover="showTip(event, '182', 182)">
+                <p>
+                  <a id="TryAddAttribute">
+                    <a href="#TryAddAttribute">
+                      <code><span>this.TryAddAttribute</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="182">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryAddAttribute</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        param
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.TryAddAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.TryAddAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L29-29" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Add an IParam as an attribute. Does not fail, if an attribute with the same key already exists
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    param
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '183', 183)" onmouseover="showTip(event, '183', 183)">
+                <p>
+                  <a id="TryGetAttribute">
+                    <a href="#TryGetAttribute">
+                      <code><span>this.TryGetAttribute</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="183">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetAttribute</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        term
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.TryGetAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.TryGetAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L41-41" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Retrieves an IParam attribute by its term, if it exists, else returns None
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    term
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '184', 184)" onmouseover="showTip(event, '184', 184)">
+                <p>
+                  <a id="TryGetAttribute">
+                    <a href="#TryGetAttribute">
+                      <code><span>this.TryGetAttribute</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="184">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.TryGetAttribute</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.TryGetAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.TryGetAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L37-37" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Retrieves an IParam attribute by its name, if it exists, else returns None
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    name
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Static members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Static member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '185', 185)" onmouseover="showTip(event, '185', 185)">
+                <p>
+                  <a id="containsAttribute">
+                    <a href="#containsAttribute">
+                      <code><span>CvAttributeCollection.containsAttribute&#32;<span>name&#32;v</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="185">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvAttributeCollection.containsAttribute&#32;<span>name&#32;v</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.containsAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.containsAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L99-99" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if it implements a CvAttributeCollection and the attribute exists
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    name
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    v
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '186', 186)" onmouseover="showTip(event, '186', 186)">
+                <p>
+                  <a id="containsAttributeTerm">
+                    <a href="#containsAttributeTerm">
+                      <code><span>CvAttributeCollection.containsAttributeTerm&#32;<span>term&#32;v</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="186">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvAttributeCollection.containsAttributeTerm&#32;<span>term&#32;v</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        term
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.containsAttributeTerm`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.containsAttributeTerm\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L106-106" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if it implements a CvAttributeCollection and the attribute exists
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    term
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    v
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '187', 187)" onmouseover="showTip(event, '187', 187)">
+                <p>
+                  <a id="isStructuralChildOf">
+                    <a href="#isStructuralChildOf">
+                      <code><span>CvAttributeCollection.isStructuralChildOf&#32;<span>parent&#32;child</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="187">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvAttributeCollection.isStructuralChildOf&#32;<span>parent&#32;child</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        parent
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-icvbase.html">ICvBase</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        child
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.isStructuralChildOf`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.isStructuralChildOf\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L71-71" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if an attribute with the same term as the given parent exists in the collection
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    parent
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-icvbase.html">ICvBase</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    child
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '188', 188)" onmouseover="showTip(event, '188', 188)">
+                <p>
+                  <a id="tryAddAttribute">
+                    <a href="#tryAddAttribute">
+                      <code><span>CvAttributeCollection.tryAddAttribute&#32;<span>param&#32;v</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="188">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvAttributeCollection.tryAddAttribute&#32;<span>param&#32;v</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        param
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.tryAddAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.tryAddAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L78-78" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the attribute of the value, if it implements CvAttributeCollection and the attribute exists, else returns None
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    param
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    v
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '189', 189)" onmouseover="showTip(event, '189', 189)">
+                <p>
+                  <a id="tryGetAttribute">
+                    <a href="#tryGetAttribute">
+                      <code><span>CvAttributeCollection.tryGetAttribute&#32;<span>name&#32;v</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="189">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvAttributeCollection.tryGetAttribute&#32;<span>name&#32;v</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.tryGetAttribute`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.tryGetAttribute\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L85-85" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the attribute of the value, if it implements CvAttributeCollection and the attribute exists, else returns None
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    name
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    v
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '190', 190)" onmouseover="showTip(event, '190', 190)">
+                <p>
+                  <a id="tryGetAttributeByTerm">
+                    <a href="#tryGetAttributeByTerm">
+                      <code><span>CvAttributeCollection.tryGetAttributeByTerm&#32;<span>term&#32;v</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="190">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvAttributeCollection.tryGetAttributeByTerm&#32;<span>term&#32;v</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        term
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.CvAttributeCollection.tryGetAttributeByTerm`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.CvAttributeCollection.tryGetAttributeByTerm\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/CvAttributeCollection.fs#L92-92" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the attribute of the value, if it implements CvAttributeCollection and the attribute exists, else returns None
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    term
+                  </span>
+                  :
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    v
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;option</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+        
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <div class="empty"></div>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-tips.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-search.js"></script>
+
+</body>
+</html>

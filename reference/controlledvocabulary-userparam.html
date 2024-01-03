@@ -1,0 +1,2778 @@
+<!DOCTYPE html>
+<html lang="en" data-root="https://nfdi4plants.github.io/ARCTokenization/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="ARCTokenization">
+    <meta property="og:title" content="UserParam (ARCTokenization)" />
+    <meta property="og:url" content="https://nfdi4plants.github.io/ARCTokenization/{{fsdocs-source-basename}}.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://nfdi4plants.github.io/ARCTokenization/">
+    <meta name="twitter:title" content="UserParam (ARCTokenization)">
+    
+    <title>UserParam (ARCTokenization) | ARCTokenization</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/img/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    
+    
+</head>
+<body class="api-docs">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/RELEASE_NOTES.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+        <a href="https://nfdi4plants.github.io/ARCTokenization/">
+            <img alt="Header menu logo" src="https://nfdi4plants.github.io/ARCTokenization/img/logo.png">
+            <strong>ARCTokenization</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nfdi4plants/ArcGraphModel/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/RELEASE_NOTES.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        <div>
+  <h2>
+    UserParam Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary.html">
+        ControlledVocabulary
+      </a>
+    </dt>
+    <dt>
+      Assembly: ControlledVocabulary.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvattributecollection.html">CvAttributeCollection</a></code>
+    </dt>
+    <dt>
+      All Interfaces: 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.idictionary">IDictionary</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.icollection">ICollection</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.ideserializationcallback">IDeserializationCallback</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable">ISerializable</a></code>
+      , 
+      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></code>
+      , 
+      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparambase.html">IParamBase</a></code>
+      , 
+      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-icvbase.html">ICvBase</a></code>
+      , 
+      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+         Represents a structured value, annotated by a user defined name
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '365', 365)" onmouseover="showTip(event, '365', 365)">
+                <p>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>UserParam<span><span>(<span>name,&#32;pv</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="365">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam<span><span>(<span>name,&#32;pv</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        pv
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  name
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  pv
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '366', 366)" onmouseover="showTip(event, '366', 366)">
+                <p>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>UserParam<span><span>(<span>name,&#32;pv,&#32;attributes</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="366">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam<span><span>(<span>name,&#32;pv,&#32;attributes</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        pv
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        attributes
+                      </b>
+                      :
+                      <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;seq</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  name
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  pv
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  attributes
+                </span>
+                :
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a>&#32;seq</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '367', 367)" onmouseover="showTip(event, '367', 367)">
+                <p>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>UserParam<span><span>(<span>name,&#32;paramValue,&#32;attributes</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="367">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam<span><span>(<span>name,&#32;paramValue,&#32;attributes</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        paramValue
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        attributes
+                      </b>
+                      :
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  name
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  paramValue
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  attributes
+                </span>
+                :
+                <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '368', 368)" onmouseover="showTip(event, '368', 368)">
+                <p>
+                  <a id="Accession">
+                    <a href="#Accession">
+                      <code><span>this.Accession</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="368">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Accession</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '369', 369)" onmouseover="showTip(event, '369', 369)">
+                <p>
+                  <a id="DisplayText">
+                    <a href="#DisplayText">
+                      <code><span>this.DisplayText</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="369">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.DisplayText</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '370', 370)" onmouseover="showTip(event, '370', 370)">
+                <p>
+                  <a id="HasAttributes">
+                    <a href="#HasAttributes">
+                      <code><span>this.HasAttributes</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="370">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.HasAttributes</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '371', 371)" onmouseover="showTip(event, '371', 371)">
+                <p>
+                  <a id="Name">
+                    <a href="#Name">
+                      <code><span>this.Name</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="371">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Name</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '372', 372)" onmouseover="showTip(event, '372', 372)">
+                <p>
+                  <a id="RefUri">
+                    <a href="#RefUri">
+                      <code><span>this.RefUri</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="372">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.RefUri</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '373', 373)" onmouseover="showTip(event, '373', 373)">
+                <p>
+                  <a id="Value">
+                    <a href="#Value">
+                      <code><span>this.Value</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="373">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Value</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '374', 374)" onmouseover="showTip(event, '374', 374)">
+                <p>
+                  <a id="WithValue">
+                    <a href="#WithValue">
+                      <code><span>this.WithValue</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="374">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.WithValue</span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        v
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  v
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Static members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Static member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '375', 375)" onmouseover="showTip(event, '375', 375)">
+                <p>
+                  <a id="equals">
+                    <a href="#equals">
+                      <code><span>UserParam.equals&#32;<span>up1&#32;up2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="375">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.equals&#32;<span>up1&#32;up2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up1
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up2
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.equals`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.equals\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L122-122" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if the terms of the given param items match
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up1
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up2
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '376', 376)" onmouseover="showTip(event, '376', 376)">
+                <p>
+                  <a id="equalsName">
+                    <a href="#equalsName">
+                      <code><span>UserParam.equalsName&#32;<span>up1&#32;up2</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="376">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.equalsName&#32;<span>up1&#32;up2</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up1
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up2
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.equalsName`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.equalsName\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L125-125" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if the names of the given param items match
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up1
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up2
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '377', 377)" onmouseover="showTip(event, '377', 377)">
+                <p>
+                  <a id="equalsTerm">
+                    <a href="#equalsTerm">
+                      <code><span>UserParam.equalsTerm&#32;<span>term&#32;up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="377">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.equalsTerm&#32;<span>term&#32;up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        term
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>bool</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.equalsTerm`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.equalsTerm\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L119-119" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns true, if the given term matches the term of the cv item
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    term
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '378', 378)" onmouseover="showTip(event, '378', 378)">
+                <p>
+                  <a id="getCvAccession">
+                    <a href="#getCvAccession">
+                      <code><span>UserParam.getCvAccession&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="378">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getCvAccession&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getCvAccession`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getCvAccession\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L107-107" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the id of the cv item
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '379', 379)" onmouseover="showTip(event, '379', 379)">
+                <p>
+                  <a id="getCvName">
+                    <a href="#getCvName">
+                      <code><span>UserParam.getCvName&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="379">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getCvName&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getCvName`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getCvName\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L110-110" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the name of the cv item
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '380', 380)" onmouseover="showTip(event, '380', 380)">
+                <p>
+                  <a id="getCvRef">
+                    <a href="#getCvRef">
+                      <code><span>UserParam.getCvRef&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="380">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getCvRef&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getCvRef`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getCvRef\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L113-113" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the reference of the cv item
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '381', 381)" onmouseover="showTip(event, '381', 381)">
+                <p>
+                  <a id="getParamValue">
+                    <a href="#getParamValue">
+                      <code><span>UserParam.getParamValue&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="381">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getParamValue&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getParamValue`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getParamValue\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L56-56" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the value of the Param as a ParamValue
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '382', 382)" onmouseover="showTip(event, '382', 382)">
+                <p>
+                  <a id="getTerm">
+                    <a href="#getTerm">
+                      <code><span>UserParam.getTerm&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="382">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getTerm&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getTerm`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getTerm\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L116-116" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the full term of the cv item
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '383', 383)" onmouseover="showTip(event, '383', 383)">
+                <p>
+                  <a id="getValue">
+                    <a href="#getValue">
+                      <code><span>UserParam.getValue&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="383">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getValue&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://learn.microsoft.com/dotnet/api/system.iconvertible">IConvertible</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getValue`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getValue\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L59-59" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the value of the Param as IConvertible
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://learn.microsoft.com/dotnet/api/system.iconvertible">IConvertible</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '384', 384)" onmouseover="showTip(event, '384', 384)">
+                <p>
+                  <a id="getValueAsInt">
+                    <a href="#getValueAsInt">
+                      <code><span>UserParam.getValueAsInt&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="384">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getValueAsInt&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>int</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getValueAsInt`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getValueAsInt\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L65-65" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the value of the Param as int if possible, else fails
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>int</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '385', 385)" onmouseover="showTip(event, '385', 385)">
+                <p>
+                  <a id="getValueAsString">
+                    <a href="#getValueAsString">
+                      <code><span>UserParam.getValueAsString&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="385">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getValueAsString&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getValueAsString`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getValueAsString\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L62-62" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the value of the Param as string
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code>string</code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '386', 386)" onmouseover="showTip(event, '386', 386)">
+                <p>
+                  <a id="getValueAsTerm">
+                    <a href="#getValueAsTerm">
+                      <code><span>UserParam.getValueAsTerm&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="386">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.getValueAsTerm&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ControlledVocabulary.UserParam.getValueAsTerm`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ControlledVocabulary.UserParam.getValueAsTerm\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ArcGraphModel/tree/master/src/ControlledVocabulary/UserParam.fs#L68-68" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns the value of the Param as a term
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    up
+                  </span>
+                  :
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '387', 387)" onmouseover="showTip(event, '387', 387)">
+                <p>
+                  <a id="mapValue">
+                    <a href="#mapValue">
+                      <code><span>UserParam.mapValue&#32;<span>f&#32;up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="387">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.mapValue&#32;<span>f&#32;up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        f
+                      </b>
+                      :
+                      <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a>&#32;->&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  f
+                </span>
+                :
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a>&#32;->&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '388', 388)" onmouseover="showTip(event, '388', 388)">
+                <p>
+                  <a id="toCvParam">
+                    <a href="#toCvParam">
+                      <code><span>UserParam.toCvParam&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="388">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.toCvParam&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '389', 389)" onmouseover="showTip(event, '389', 389)">
+                <p>
+                  <a id="tryAddAccession">
+                    <a href="#tryAddAccession">
+                      <code><span>UserParam.tryAddAccession&#32;<span>acc&#32;up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="389">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryAddAccession&#32;<span>acc&#32;up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        acc
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  acc
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '390', 390)" onmouseover="showTip(event, '390', 390)">
+                <p>
+                  <a id="tryAddName">
+                    <a href="#tryAddName">
+                      <code><span>UserParam.tryAddName&#32;<span>name&#32;up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="390">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryAddName&#32;<span>name&#32;up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        name
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  name
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '391', 391)" onmouseover="showTip(event, '391', 391)">
+                <p>
+                  <a id="tryAddReference">
+                    <a href="#tryAddReference">
+                      <code><span>UserParam.tryAddReference&#32;<span>ref&#32;up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="391">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryAddReference&#32;<span>ref&#32;up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        ref
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ref
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '392', 392)" onmouseover="showTip(event, '392', 392)">
+                <p>
+                  <a id="tryAddUnit">
+                    <a href="#tryAddUnit">
+                      <code><span>UserParam.tryAddUnit&#32;<span>unit&#32;up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="392">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryAddUnit&#32;<span>unit&#32;up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        unit
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvunit.html">CvUnit</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  unit
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvunit.html">CvUnit</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '393', 393)" onmouseover="showTip(event, '393', 393)">
+                <p>
+                  <a id="tryGetCvUnit">
+                    <a href="#tryGetCvUnit">
+                      <code><span>UserParam.tryGetCvUnit&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="393">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryGetCvUnit&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvunit.html">CvUnit</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvunit.html">CvUnit</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '394', 394)" onmouseover="showTip(event, '394', 394)">
+                <p>
+                  <a id="tryGetCvUnitTermAccession">
+                    <a href="#tryGetCvUnitTermAccession">
+                      <code><span>UserParam.tryGetCvUnitTermAccession&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="394">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryGetCvUnitTermAccession&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '395', 395)" onmouseover="showTip(event, '395', 395)">
+                <p>
+                  <a id="tryGetCvUnitTermName">
+                    <a href="#tryGetCvUnitTermName">
+                      <code><span>UserParam.tryGetCvUnitTermName&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="395">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryGetCvUnitTermName&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '396', 396)" onmouseover="showTip(event, '396', 396)">
+                <p>
+                  <a id="tryGetCvUnitTermRef">
+                    <a href="#tryGetCvUnitTermRef">
+                      <code><span>UserParam.tryGetCvUnitTermRef&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="396">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryGetCvUnitTermRef&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '397', 397)" onmouseover="showTip(event, '397', 397)">
+                <p>
+                  <a id="tryGetCvUnitValue">
+                    <a href="#tryGetCvUnitValue">
+                      <code><span>UserParam.tryGetCvUnitValue&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="397">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryGetCvUnitValue&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://learn.microsoft.com/dotnet/api/system.iconvertible">IConvertible</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://learn.microsoft.com/dotnet/api/system.iconvertible">IConvertible</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '398', 398)" onmouseover="showTip(event, '398', 398)">
+                <p>
+                  <a id="tryGetValueAccession">
+                    <a href="#tryGetValueAccession">
+                      <code><span>UserParam.tryGetValueAccession&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="398">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryGetValueAccession&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '399', 399)" onmouseover="showTip(event, '399', 399)">
+                <p>
+                  <a id="tryGetValueRef">
+                    <a href="#tryGetValueRef">
+                      <code><span>UserParam.tryGetValueRef&#32;<span>up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="399">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryGetValueRef&#32;<span>up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span>string&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span>string&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '400', 400)" onmouseover="showTip(event, '400', 400)">
+                <p>
+                  <a id="tryMapValue">
+                    <a href="#tryMapValue">
+                      <code><span>UserParam.tryMapValue&#32;<span>f&#32;up</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="400">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>UserParam.tryMapValue&#32;<span>f&#32;up</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        f
+                      </b>
+                      :
+                      <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a>&#32;->&#32;<span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        up
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  f
+                </span>
+                :
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a>&#32;->&#32;<span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-paramvalue.html">ParamValue</a>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  up
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-userparam.html">UserParam</a>&#32;option</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+        
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <div class="empty"></div>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-tips.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-search.js"></script>
+
+</body>
+</html>

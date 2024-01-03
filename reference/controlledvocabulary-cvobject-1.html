@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" data-root="https://nfdi4plants.github.io/ARCTokenization/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="ARCTokenization">
+    <meta property="og:title" content="CvObject<'T> (ARCTokenization)" />
+    <meta property="og:url" content="https://nfdi4plants.github.io/ARCTokenization/{{fsdocs-source-basename}}.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://nfdi4plants.github.io/ARCTokenization/">
+    <meta name="twitter:title" content="CvObject<'T> (ARCTokenization)">
+    
+    <title>CvObject<'T> (ARCTokenization) | ARCTokenization</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/img/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    
+    
+</head>
+<body class="api-docs">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/LICENSE.md">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/RELEASE_NOTES.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+        <a href="https://nfdi4plants.github.io/ARCTokenization/">
+            <img alt="Header menu logo" src="https://nfdi4plants.github.io/ARCTokenization/img/logo.png">
+            <strong>ARCTokenization</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nfdi4plants/ArcGraphModel/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/LICENSE.md">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nfdi4plants/ArcGraphModel/blob/master/RELEASE_NOTES.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ArcGraphModel/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        <div>
+  <h2>
+    CvObject<'T> Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary.html">
+        ControlledVocabulary
+      </a>
+    </dt>
+    <dt>
+      Assembly: ControlledVocabulary.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvattributecollection.html">CvAttributeCollection</a></code>
+    </dt>
+    <dt>
+      All Interfaces: 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlydictionary-2">IReadOnlyDictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span>&gt;</span></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.idictionary">IDictionary</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.icollection">ICollection</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.ideserializationcallback">IDeserializationCallback</a></code>
+      , 
+      <code><a href="https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable">ISerializable</a></code>
+      , 
+      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-icvbase.html">ICvBase</a></code>
+      , 
+      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iattributecollection.html">IAttributeCollection</a></code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+         Represents a generic object, annotated with a controlled vocabulary term
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Constructors
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Constructor
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '251', 251)" onmouseover="showTip(event, '251', 251)">
+                <p>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>CvObject<span><span>(<span>term,&#32;object,&#32;attributes</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="251">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvObject<span><span>(<span>term,&#32;object,&#32;attributes</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        term
+                      </b>
+                      :
+                      <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        object
+                      </b>
+                      :
+                      <code>'T</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        attributes
+                      </b>
+                      :
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvobject-1.html">CvObject</a>&lt;'T&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  term
+                </span>
+                :
+                <code><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvterm.html">CvTerm</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  object
+                </span>
+                :
+                <code>'T</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  attributes
+                </span>
+                :
+                <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvobject-1.html">CvObject</a>&lt;'T&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '252', 252)" onmouseover="showTip(event, '252', 252)">
+                <p>
+                  <a id="``.ctor``">
+                    <a href="#``.ctor``">
+                      <code><span>CvObject<span><span>(<span>cvAccession,&#32;cvName,&#32;cvRef,&#32;object,&#32;attributes</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="252">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>CvObject<span><span>(<span>cvAccession,&#32;cvName,&#32;cvRef,&#32;object,&#32;attributes</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        cvAccession
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        cvName
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        cvRef
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        object
+                      </b>
+                      :
+                      <code>'T</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        attributes
+                      </b>
+                      :
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvobject-1.html">CvObject</a>&lt;'T&gt;</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  cvAccession
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  cvName
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  cvRef
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  object
+                </span>
+                :
+                <code>'T</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  attributes
+                </span>
+                :
+                <code><span><a href="https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2">Dictionary</a>&lt;<span>string,&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-iparam.html">IParam</a></span>&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvobject-1.html">CvObject</a>&lt;'T&gt;</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Instance members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Instance member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '253', 253)" onmouseover="showTip(event, '253', 253)">
+                <p>
+                  <a id="Object">
+                    <a href="#Object">
+                      <code><span>this.Object</span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="253">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>this.Object</span></code>
+                  <br/>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>'T</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>'T</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+</div>
+        
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <div class="empty"></div>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-tips.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-search.js"></script>
+
+</body>
+</html>

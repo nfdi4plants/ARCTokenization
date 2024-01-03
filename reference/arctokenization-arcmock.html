@@ -1,0 +1,3155 @@
+<!DOCTYPE html>
+<html lang="en" data-root="https://nfdi4plants.github.io/ARCTokenization/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="ARCTokenization">
+    <meta property="og:title" content="ARCMock (ARCTokenization)" />
+    <meta property="og:url" content="https://nfdi4plants.github.io/ARCTokenization/{{fsdocs-source-basename}}.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://nfdi4plants.github.io/ARCTokenization/">
+    <meta name="twitter:title" content="ARCMock (ARCTokenization)">
+    
+    <title>ARCMock (ARCTokenization) | ARCTokenization</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/img/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    
+    
+</head>
+<body class="api-docs">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/blob/main/LICENSE">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nfdi4plants/ARCTokenization/blob/main/RELEASE_NOTES.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+        <a href="https://nfdi4plants.github.io/ARCTokenization/">
+            <img alt="Header menu logo" src="https://nfdi4plants.github.io/ARCTokenization/img/logo.png">
+            <strong>ARCTokenization</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nfdi4plants/ARCTokenization/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/blob/main/LICENSE">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nfdi4plants/ARCTokenization/blob/main/RELEASE_NOTES.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        <div>
+  <h2>
+    ARCMock Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="https://nfdi4plants.github.io/ARCTokenization/reference/arctokenization.html">
+        ARCTokenization
+      </a>
+    </dt>
+    <dt>
+      Assembly: ARCTokenization.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code>obj</code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Static members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Static member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '158', 158)" onmouseover="showTip(event, '158', 158)">
+                <p>
+                  <a id="AssayMetadataTokens">
+                    <a href="#AssayMetadataTokens">
+                      <code><span>ARCMock.AssayMetadataTokens<span><span>(<span>?ASSAY,&#32;?Assay_Measurement_Type,&#32;?Assay_Measurement_Type_Term_Accession_Number,&#32;?Assay_Measurement_Type_Term_Source_REF,&#32;?Assay_Technology_Type,&#32;?Assay_Technology_Type_Term_Source_REF,&#32;?Assay_Technology_Platform,&#32;?Assay_File_Name,&#32;?ASSAY_PERFORMERS,&#32;?Assay_Performer_Last_Name,&#32;?Assay_Performer_First_Name,&#32;?Assay_Performer_Mid_Initials,&#32;?Assay_Performer_Email,&#32;?Assay_Performer_Phone,&#32;?Assay_Performer_Fax,&#32;?Assay_Performer_Address,&#32;?Assay_Performer_Affiliation,&#32;?Assay_Performer_Roles,&#32;?Assay_Performer_Roles_Term_Accession_Number,&#32;?Assay_Performer_Roles_Term_Source_REF</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="158">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ARCMock.AssayMetadataTokens<span><span>(<span>?ASSAY,&#32;?Assay_Measurement_Type,&#32;?Assay_Measurement_Type_Term_Accession_Number,&#32;?Assay_Measurement_Type_Term_Source_REF,&#32;?Assay_Technology_Type,&#32;?Assay_Technology_Type_Term_Source_REF,&#32;?Assay_Technology_Platform,&#32;?Assay_File_Name,&#32;?ASSAY_PERFORMERS,&#32;?Assay_Performer_Last_Name,&#32;?Assay_Performer_First_Name,&#32;?Assay_Performer_Mid_Initials,&#32;?Assay_Performer_Email,&#32;?Assay_Performer_Phone,&#32;?Assay_Performer_Fax,&#32;?Assay_Performer_Address,&#32;?Assay_Performer_Affiliation,&#32;?Assay_Performer_Roles,&#32;?Assay_Performer_Roles_Term_Accession_Number,&#32;?Assay_Performer_Roles_Term_Source_REF</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        ?ASSAY
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Measurement_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Measurement_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Measurement_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Technology_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Technology_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Technology_Platform
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_File_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?ASSAY_PERFORMERS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Last_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_First_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Mid_Initials
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Email
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Phone
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Fax
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Address
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Affiliation
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Roles
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Roles_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Assay_Performer_Roles_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.ARCMock.AssayMetadataTokens`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.ARCMock.AssayMetadataTokens\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/ARCMock.fs#L365-365" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     returns a mock list of CvParams lists which each represent a tokenized row of assay metadata.
+ each mandatory row is present, containing at least one CvParam annotated as MetadataSectionKey (the first column of an ISA-XLSX assay metadata sheet).
+ each row can be expanded with additional CvParams by setting the respective optional argument.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?ASSAY
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Measurement_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Measurement_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Measurement_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Technology_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Technology_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Technology_Platform
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_File_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?ASSAY_PERFORMERS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Last_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_First_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Mid_Initials
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Email
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Phone
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Fax
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Address
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Affiliation
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Roles
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Roles_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Assay_Performer_Roles_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '159', 159)" onmouseover="showTip(event, '159', 159)">
+                <p>
+                  <a id="InvestigationMetadataTokens">
+                    <a href="#InvestigationMetadataTokens">
+                      <code><span>ARCMock.InvestigationMetadataTokens<span><span>(<span>?ONTOLOGY_SOURCE_REFERENCE,&#32;?Term_Source_Name,&#32;?Term_Source_File,&#32;?Term_Source_Version,&#32;?Term_Source_Description,&#32;?INVESTIGATION,&#32;?Investigation_Identifier,&#32;?Investigation_Title,&#32;?Investigation_Description,&#32;?Investigation_Submission_Date,&#32;?Investigation_Public_Release_Date,&#32;?INVESTIGATION_PUBLICATIONS,&#32;?Investigation_Publication_PubMed_ID,&#32;?Investigation_Publication_DOI,&#32;?Investigation_Publication_Author_List,&#32;?Investigation_Publication_Title,&#32;?Investigation_Publication_Status,&#32;?Investigation_Publication_Status_Term_Accession_Number,&#32;?Investigation_Publication_Status_Term_Source_REF,&#32;?INVESTIGATION_CONTACTS,&#32;?Investigation_Person_Last_Name,&#32;?Investigation_Person_First_Name,&#32;?Investigation_Person_Mid_Initials,&#32;?Investigation_Person_Email,&#32;?Investigation_Person_Phone,&#32;?Investigation_Person_Fax,&#32;?Investigation_Person_Address,&#32;?Investigation_Person_Affiliation,&#32;?Investigation_Person_Roles,&#32;?Investigation_Person_Roles_Term_Accession_Number,&#32;?Investigation_Person_Roles_Term_Source_REF,&#32;?Comment_ORCID,&#32;?STUDY,&#32;?Study_Identifier,&#32;?Study_Title,&#32;?Study_Description,&#32;?Study_Submission_Date,&#32;?Study_Public_Release_Date,&#32;?Study_File_Name,&#32;?STUDY_DESIGN_DESCRIPTORS,&#32;?Study_Design_Type,&#32;?Study_Design_Type_Term_Accession_Number,&#32;?Study_Design_Type_Term_Source_REF,&#32;?STUDY_PUBLICATIONS,&#32;?Study_Publication_PubMed_ID,&#32;?Study_Publication_DOI,&#32;?Study_Publication_Author_List,&#32;?Study_Publication_Title,&#32;?Study_Publication_Status,&#32;?Study_Publication_Status_Term_Accession_Number,&#32;?Study_Publication_Status_Term_Source_REF,&#32;?STUDY_FACTORS,&#32;?Study_Factor_Name,&#32;?Study_Factor_Type,&#32;?Study_Factor_Type_Term_Accession_Number,&#32;?Study_Factor_Type_Term_Source_REF,&#32;?STUDY_ASSAYS,&#32;?Study_Assay_Measurement_Type,&#32;?Study_Assay_Measurement_Type_Term_Accession_Number,&#32;?Study_Assay_Measurement_Type_Term_Source_REF,&#32;?Study_Assay_Technology_Type,&#32;?Study_Assay_Technology_Type_Term_Accession_Number,&#32;?Study_Assay_Technology_Type_Term_Source_REF,&#32;?Study_Assay_Technology_Platform,&#32;?Study_Assay_File_Name,&#32;?STUDY_PROTOCOLS,&#32;?Study_Protocol_Name,&#32;?Study_Protocol_Type,&#32;?Study_Protocol_Type_Term_Accession_Number,&#32;?Study_Protocol_Type_Term_Source_REF,&#32;?Study_Protocol_Description,&#32;?Study_Protocol_URI,&#32;?Study_Protocol_Version,&#32;?Study_Protocol_Parameters_Name,&#32;?Study_Protocol_Parameters_Term_Accession_Number,&#32;?Study_Protocol_Parameters_Term_Source_REF,&#32;?Study_Protocol_Components_Name,&#32;?Study_Protocol_Components_Type,&#32;?Study_Protocol_Components_Type_Term_Accession_Number,&#32;?Study_Protocol_Components_Type_Term_Source_REF,&#32;?STUDY_CONTACTS,&#32;?Study_Person_Last_Name,&#32;?Study_Person_First_Name,&#32;?Study_Person_Mid_Initials,&#32;?Study_Person_Email,&#32;?Study_Person_Phone,&#32;?Study_Person_Fax,&#32;?Study_Person_Address,&#32;?Study_Person_Affiliation,&#32;?Study_Person_Roles,&#32;?Study_Person_Roles_Term_Accession_Number,&#32;?Study_Person_Roles_Term_Source_REF</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="159">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ARCMock.InvestigationMetadataTokens<span><span>(<span>?ONTOLOGY_SOURCE_REFERENCE,&#32;?Term_Source_Name,&#32;?Term_Source_File,&#32;?Term_Source_Version,&#32;?Term_Source_Description,&#32;?INVESTIGATION,&#32;?Investigation_Identifier,&#32;?Investigation_Title,&#32;?Investigation_Description,&#32;?Investigation_Submission_Date,&#32;?Investigation_Public_Release_Date,&#32;?INVESTIGATION_PUBLICATIONS,&#32;?Investigation_Publication_PubMed_ID,&#32;?Investigation_Publication_DOI,&#32;?Investigation_Publication_Author_List,&#32;?Investigation_Publication_Title,&#32;?Investigation_Publication_Status,&#32;?Investigation_Publication_Status_Term_Accession_Number,&#32;?Investigation_Publication_Status_Term_Source_REF,&#32;?INVESTIGATION_CONTACTS,&#32;?Investigation_Person_Last_Name,&#32;?Investigation_Person_First_Name,&#32;?Investigation_Person_Mid_Initials,&#32;?Investigation_Person_Email,&#32;?Investigation_Person_Phone,&#32;?Investigation_Person_Fax,&#32;?Investigation_Person_Address,&#32;?Investigation_Person_Affiliation,&#32;?Investigation_Person_Roles,&#32;?Investigation_Person_Roles_Term_Accession_Number,&#32;?Investigation_Person_Roles_Term_Source_REF,&#32;?Comment_ORCID,&#32;?STUDY,&#32;?Study_Identifier,&#32;?Study_Title,&#32;?Study_Description,&#32;?Study_Submission_Date,&#32;?Study_Public_Release_Date,&#32;?Study_File_Name,&#32;?STUDY_DESIGN_DESCRIPTORS,&#32;?Study_Design_Type,&#32;?Study_Design_Type_Term_Accession_Number,&#32;?Study_Design_Type_Term_Source_REF,&#32;?STUDY_PUBLICATIONS,&#32;?Study_Publication_PubMed_ID,&#32;?Study_Publication_DOI,&#32;?Study_Publication_Author_List,&#32;?Study_Publication_Title,&#32;?Study_Publication_Status,&#32;?Study_Publication_Status_Term_Accession_Number,&#32;?Study_Publication_Status_Term_Source_REF,&#32;?STUDY_FACTORS,&#32;?Study_Factor_Name,&#32;?Study_Factor_Type,&#32;?Study_Factor_Type_Term_Accession_Number,&#32;?Study_Factor_Type_Term_Source_REF,&#32;?STUDY_ASSAYS,&#32;?Study_Assay_Measurement_Type,&#32;?Study_Assay_Measurement_Type_Term_Accession_Number,&#32;?Study_Assay_Measurement_Type_Term_Source_REF,&#32;?Study_Assay_Technology_Type,&#32;?Study_Assay_Technology_Type_Term_Accession_Number,&#32;?Study_Assay_Technology_Type_Term_Source_REF,&#32;?Study_Assay_Technology_Platform,&#32;?Study_Assay_File_Name,&#32;?STUDY_PROTOCOLS,&#32;?Study_Protocol_Name,&#32;?Study_Protocol_Type,&#32;?Study_Protocol_Type_Term_Accession_Number,&#32;?Study_Protocol_Type_Term_Source_REF,&#32;?Study_Protocol_Description,&#32;?Study_Protocol_URI,&#32;?Study_Protocol_Version,&#32;?Study_Protocol_Parameters_Name,&#32;?Study_Protocol_Parameters_Term_Accession_Number,&#32;?Study_Protocol_Parameters_Term_Source_REF,&#32;?Study_Protocol_Components_Name,&#32;?Study_Protocol_Components_Type,&#32;?Study_Protocol_Components_Type_Term_Accession_Number,&#32;?Study_Protocol_Components_Type_Term_Source_REF,&#32;?STUDY_CONTACTS,&#32;?Study_Person_Last_Name,&#32;?Study_Person_First_Name,&#32;?Study_Person_Mid_Initials,&#32;?Study_Person_Email,&#32;?Study_Person_Phone,&#32;?Study_Person_Fax,&#32;?Study_Person_Address,&#32;?Study_Person_Affiliation,&#32;?Study_Person_Roles,&#32;?Study_Person_Roles_Term_Accession_Number,&#32;?Study_Person_Roles_Term_Source_REF</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        ?ONTOLOGY_SOURCE_REFERENCE
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Term_Source_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Term_Source_File
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Term_Source_Version
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Term_Source_Description
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?INVESTIGATION
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Identifier
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Title
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Description
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Submission_Date
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Public_Release_Date
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?INVESTIGATION_PUBLICATIONS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Publication_PubMed_ID
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Publication_DOI
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Publication_Author_List
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Publication_Title
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Publication_Status
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Publication_Status_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Publication_Status_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?INVESTIGATION_CONTACTS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Last_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_First_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Mid_Initials
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Email
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Phone
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Fax
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Address
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Affiliation
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Roles
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Roles_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Investigation_Person_Roles_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Comment_ORCID
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Identifier
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Title
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Description
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Submission_Date
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Public_Release_Date
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_File_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_DESIGN_DESCRIPTORS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Design_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Design_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Design_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_PUBLICATIONS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_PubMed_ID
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_DOI
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Author_List
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Title
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Status
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Status_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Status_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_FACTORS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Factor_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Factor_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Factor_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Factor_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_ASSAYS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Measurement_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Measurement_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Measurement_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Technology_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Technology_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Technology_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Technology_Platform
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_File_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_PROTOCOLS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Description
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_URI
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Version
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Parameters_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Parameters_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Parameters_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Components_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Components_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Components_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Components_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_CONTACTS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Last_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_First_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Mid_Initials
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Email
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Phone
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Fax
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Address
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Affiliation
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Roles
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Roles_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Roles_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.ARCMock.InvestigationMetadataTokens`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.ARCMock.InvestigationMetadataTokens\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/ARCMock.fs#L12-12" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     returns a mock list of CvParams lists which each represent a tokenized row of investigation metadata.
+ each mandatory row is present, containing at least one CvParam annotated as MetadataSectionKey (the first column of an ISA-XLSX investigation metadata sheet).
+ each row can be expanded with additional CvParams by setting the respective optional argument.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?ONTOLOGY_SOURCE_REFERENCE
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Term_Source_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Term_Source_File
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Term_Source_Version
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Term_Source_Description
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?INVESTIGATION
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Identifier
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Title
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Description
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Submission_Date
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Public_Release_Date
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?INVESTIGATION_PUBLICATIONS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Publication_PubMed_ID
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Publication_DOI
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Publication_Author_List
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Publication_Title
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Publication_Status
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Publication_Status_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Publication_Status_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?INVESTIGATION_CONTACTS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Last_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_First_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Mid_Initials
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Email
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Phone
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Fax
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Address
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Affiliation
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Roles
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Roles_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Investigation_Person_Roles_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Comment_ORCID
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Identifier
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Title
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Description
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Submission_Date
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Public_Release_Date
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_File_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_DESIGN_DESCRIPTORS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Design_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Design_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Design_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_PUBLICATIONS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_PubMed_ID
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_DOI
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Author_List
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Title
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Status
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Status_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Status_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_FACTORS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Factor_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Factor_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Factor_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Factor_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_ASSAYS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Measurement_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Measurement_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Measurement_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Technology_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Technology_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Technology_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Technology_Platform
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_File_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_PROTOCOLS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Description
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_URI
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Version
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Parameters_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Parameters_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Parameters_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Components_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Components_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Components_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Components_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_CONTACTS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Last_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_First_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Mid_Initials
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Email
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Phone
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Fax
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Address
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Affiliation
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Roles
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Roles_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Roles_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '160', 160)" onmouseover="showTip(event, '160', 160)">
+                <p>
+                  <a id="StudyMetadataTokens">
+                    <a href="#StudyMetadataTokens">
+                      <code><span>ARCMock.StudyMetadataTokens<span><span>(<span>?STUDY,&#32;?Study_Identifier,&#32;?Study_Title,&#32;?Study_Description,&#32;?Study_Submission_Date,&#32;?Study_Public_Release_Date,&#32;?Study_File_Name,&#32;?STUDY_DESIGN_DESCRIPTORS,&#32;?Study_Design_Type,&#32;?Study_Design_Type_Term_Accession_Number,&#32;?Study_Design_Type_Term_Source_REF,&#32;?STUDY_PUBLICATIONS,&#32;?Study_Publication_PubMed_ID,&#32;?Study_Publication_DOI,&#32;?Study_Publication_Author_List,&#32;?Study_Publication_Title,&#32;?Study_Publication_Status,&#32;?Study_Publication_Status_Term_Accession_Number,&#32;?Study_Publication_Status_Term_Source_REF,&#32;?STUDY_FACTORS,&#32;?Study_Factor_Name,&#32;?Study_Factor_Type,&#32;?Study_Factor_Type_Term_Accession_Number,&#32;?Study_Factor_Type_Term_Source_REF,&#32;?STUDY_ASSAYS,&#32;?Study_Assay_Measurement_Type,&#32;?Study_Assay_Measurement_Type_Term_Accession_Number,&#32;?Study_Assay_Measurement_Type_Term_Source_REF,&#32;?Study_Assay_Technology_Type,&#32;?Study_Assay_Technology_Type_Term_Accession_Number,&#32;?Study_Assay_Technology_Type_Term_Source_REF,&#32;?Study_Assay_Technology_Platform,&#32;?Study_Assay_File_Name,&#32;?STUDY_PROTOCOLS,&#32;?Study_Protocol_Name,&#32;?Study_Protocol_Type,&#32;?Study_Protocol_Type_Term_Accession_Number,&#32;?Study_Protocol_Type_Term_Source_REF,&#32;?Study_Protocol_Description,&#32;?Study_Protocol_URI,&#32;?Study_Protocol_Version,&#32;?Study_Protocol_Parameters_Name,&#32;?Study_Protocol_Parameters_Term_Accession_Number,&#32;?Study_Protocol_Parameters_Term_Source_REF,&#32;?Study_Protocol_Components_Name,&#32;?Study_Protocol_Components_Type,&#32;?Study_Protocol_Components_Type_Term_Accession_Number,&#32;?Study_Protocol_Components_Type_Term_Source_REF,&#32;?STUDY_CONTACTS,&#32;?Study_Person_Last_Name,&#32;?Study_Person_First_Name,&#32;?Study_Person_Mid_Initials,&#32;?Study_Person_Email,&#32;?Study_Person_Phone,&#32;?Study_Person_Fax,&#32;?Study_Person_Address,&#32;?Study_Person_Affiliation,&#32;?Study_Person_Roles,&#32;?Study_Person_Roles_Term_Accession_Number,&#32;?Study_Person_Roles_Term_Source_REF</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="160">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ARCMock.StudyMetadataTokens<span><span>(<span>?STUDY,&#32;?Study_Identifier,&#32;?Study_Title,&#32;?Study_Description,&#32;?Study_Submission_Date,&#32;?Study_Public_Release_Date,&#32;?Study_File_Name,&#32;?STUDY_DESIGN_DESCRIPTORS,&#32;?Study_Design_Type,&#32;?Study_Design_Type_Term_Accession_Number,&#32;?Study_Design_Type_Term_Source_REF,&#32;?STUDY_PUBLICATIONS,&#32;?Study_Publication_PubMed_ID,&#32;?Study_Publication_DOI,&#32;?Study_Publication_Author_List,&#32;?Study_Publication_Title,&#32;?Study_Publication_Status,&#32;?Study_Publication_Status_Term_Accession_Number,&#32;?Study_Publication_Status_Term_Source_REF,&#32;?STUDY_FACTORS,&#32;?Study_Factor_Name,&#32;?Study_Factor_Type,&#32;?Study_Factor_Type_Term_Accession_Number,&#32;?Study_Factor_Type_Term_Source_REF,&#32;?STUDY_ASSAYS,&#32;?Study_Assay_Measurement_Type,&#32;?Study_Assay_Measurement_Type_Term_Accession_Number,&#32;?Study_Assay_Measurement_Type_Term_Source_REF,&#32;?Study_Assay_Technology_Type,&#32;?Study_Assay_Technology_Type_Term_Accession_Number,&#32;?Study_Assay_Technology_Type_Term_Source_REF,&#32;?Study_Assay_Technology_Platform,&#32;?Study_Assay_File_Name,&#32;?STUDY_PROTOCOLS,&#32;?Study_Protocol_Name,&#32;?Study_Protocol_Type,&#32;?Study_Protocol_Type_Term_Accession_Number,&#32;?Study_Protocol_Type_Term_Source_REF,&#32;?Study_Protocol_Description,&#32;?Study_Protocol_URI,&#32;?Study_Protocol_Version,&#32;?Study_Protocol_Parameters_Name,&#32;?Study_Protocol_Parameters_Term_Accession_Number,&#32;?Study_Protocol_Parameters_Term_Source_REF,&#32;?Study_Protocol_Components_Name,&#32;?Study_Protocol_Components_Type,&#32;?Study_Protocol_Components_Type_Term_Accession_Number,&#32;?Study_Protocol_Components_Type_Term_Source_REF,&#32;?STUDY_CONTACTS,&#32;?Study_Person_Last_Name,&#32;?Study_Person_First_Name,&#32;?Study_Person_Mid_Initials,&#32;?Study_Person_Email,&#32;?Study_Person_Phone,&#32;?Study_Person_Fax,&#32;?Study_Person_Address,&#32;?Study_Person_Affiliation,&#32;?Study_Person_Roles,&#32;?Study_Person_Roles_Term_Accession_Number,&#32;?Study_Person_Roles_Term_Source_REF</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        ?STUDY
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Identifier
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Title
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Description
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Submission_Date
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Public_Release_Date
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_File_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_DESIGN_DESCRIPTORS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Design_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Design_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Design_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_PUBLICATIONS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_PubMed_ID
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_DOI
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Author_List
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Title
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Status
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Status_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Publication_Status_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_FACTORS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Factor_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Factor_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Factor_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Factor_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_ASSAYS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Measurement_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Measurement_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Measurement_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Technology_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Technology_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Technology_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_Technology_Platform
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Assay_File_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_PROTOCOLS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Description
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_URI
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Version
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Parameters_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Parameters_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Parameters_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Components_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Components_Type
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Components_Type_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Protocol_Components_Type_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?STUDY_CONTACTS
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Last_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_First_Name
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Mid_Initials
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Email
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Phone
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Fax
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Address
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Affiliation
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Roles
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Roles_Term_Accession_Number
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?Study_Person_Roles_Term_Source_REF
+                      </b>
+                      :
+                      <code><span>string&#32;seq</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.ARCMock.StudyMetadataTokens`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.ARCMock.StudyMetadataTokens\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/ARCMock.fs#L221-221" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     returns a mock list of CvParams lists which each represent a tokenized row of study metadata.
+ each mandatory row is present, containing at least one CvParam annotated as MetadataSectionKey (the first column of an ISA-XLSX study metadata sheet).
+ each row can be expanded with additional CvParams by setting the respective optional argument.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Identifier
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Title
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Description
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Submission_Date
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Public_Release_Date
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_File_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_DESIGN_DESCRIPTORS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Design_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Design_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Design_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_PUBLICATIONS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_PubMed_ID
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_DOI
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Author_List
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Title
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Status
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Status_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Publication_Status_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_FACTORS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Factor_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Factor_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Factor_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Factor_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_ASSAYS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Measurement_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Measurement_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Measurement_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Technology_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Technology_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Technology_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_Technology_Platform
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Assay_File_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_PROTOCOLS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Description
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_URI
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Version
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Parameters_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Parameters_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Parameters_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Components_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Components_Type
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Components_Type_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Protocol_Components_Type_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?STUDY_CONTACTS
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Last_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_First_Name
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Mid_Initials
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Email
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Phone
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Fax
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Address
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Affiliation
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Roles
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Roles_Term_Accession_Number
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    ?Study_Person_Roles_Term_Source_REF
+                  </span>
+                  :
+                  <code><span>string&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+        
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <div class="empty"></div>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-tips.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-search.js"></script>
+
+</body>
+</html>

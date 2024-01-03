@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en" data-root="https://nfdi4plants.github.io/ARCTokenization/">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey" name="author">
+    <!-- Opengraph properties (https://ogp.me/) -->
+    <meta property="og:site_name" content="ARCTokenization">
+    <meta property="og:title" content="AnnotationTable (ARCTokenization)" />
+    <meta property="og:url" content="https://nfdi4plants.github.io/ARCTokenization/{{fsdocs-source-basename}}.html">
+    <meta property="og:type" content="website" />
+    <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://nfdi4plants.github.io/ARCTokenization/">
+    <meta name="twitter:title" content="AnnotationTable (ARCTokenization)">
+    
+    <title>AnnotationTable (ARCTokenization) | ARCTokenization</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/img/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-default.css" rel="stylesheet" type="text/css"/>
+    <link href="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.css" rel="stylesheet" type="text/css"/>
+    
+    
+</head>
+<body class="api-docs">
+<header>
+    <div class="start">
+        <div id="menu-toggle">
+            <iconify-icon class="icon closed" height="22" icon="eva:menu-fill" width="22"></iconify-icon>
+            <iconify-icon class="icon open" height="22" icon="mi:close" width="22"></iconify-icon>
+            <input type="checkbox" name="mobile-menu" />
+            <ul class="menu">
+                <li class="nav-header">Links</li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/blob/main/LICENSE">License</a>
+                </li>
+                <li class="nav-item"><a class="nav-link"
+                                        href="https://github.com/nfdi4plants/ARCTokenization/blob/main/RELEASE_NOTES.md">Release
+                    Notes</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/">Source
+                    Repository</a></li>
+                <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+        <a href="https://nfdi4plants.github.io/ARCTokenization/">
+            <img alt="Header menu logo" src="https://nfdi4plants.github.io/ARCTokenization/img/logo.png">
+            <strong>ARCTokenization</strong>
+        </a>
+    </div>
+    <div class="end">
+        <a href="https://github.com/nfdi4plants/ARCTokenization/" target="_blank">
+            <iconify-icon icon="uil:github" width="26" height="26"></iconify-icon>
+        </a>
+        <iconify-icon id="search-btn" icon="carbon:search" class="search" width="24" height="24"></iconify-icon>
+        <fsdocs-theme-toggle></fsdocs-theme-toggle>
+    </div>
+</header>
+<aside id="fsdocs-main-menu">
+    <ul class="menu">
+        <li class="nav-header">Links</li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/blob/main/LICENSE">License</a>
+        </li>
+        <li class="nav-item"><a class="nav-link"
+                                href="https://github.com/nfdi4plants/ARCTokenization/blob/main/RELEASE_NOTES.md">Release
+            Notes</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://github.com/nfdi4plants/ARCTokenization/">Source
+            Repository</a></li>
+        <li class="nav-header ">
+  ControlledVocabulary
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
+    Introduction
+  </a>
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
+    CvParam
+
+  </a>
+</li>             
+<li class="nav-header ">
+  ARCTokenization
+</li>             
+<li class="nav-item ">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ARCTokenization/Introduction.html">
+    Introduction
+  </a>
+</li>
+        <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+    </ul>
+</aside>
+<main>
+    <div id="content">
+        <div>
+  <h2>
+    AnnotationTable Module
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="https://nfdi4plants.github.io/ARCTokenization/reference/arctokenization.html">
+        ARCTokenization
+      </a>
+    </dt>
+    <dt>
+      Assembly: ARCTokenization.dll
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+         Functions to work with FsTables into graph-based models.
+      </p>
+    </div>
+  </div>
+  <div>
+    <h3>
+      Types
+    </h3>
+    <table class="table outer-list fsdocs-entity-list">
+      <thead>
+        <tr>
+          <td>
+            Type
+          </td>
+          <td>
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-entity-name">
+            <p>
+              <a name="TokenizedAnnotationTable">
+                <a href="https://nfdi4plants.github.io/ARCTokenization/reference/arctokenization-annotationtable-tokenizedannotationtable.html">
+                  TokenizedAnnotationTable
+                </a>
+              </a>
+            </p>
+          </td>
+          <td class="fsdocs-entity-xmldoc">
+            <div>
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:ARCTokenization.AnnotationTable.TokenizedAnnotationTable`')">
+                <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:ARCTokenization.AnnotationTable.TokenizedAnnotationTable\'/>')">
+                <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+              </div>
+              <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L41-41" class="fsdocs-source-link" title="Source on GitHub">
+                <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+              </a>
+              <p class="fsdocs-summary">
+                
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>
+      Functions and values
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Function or value
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '9', 9)" onmouseover="showTip(event, '9', 9)">
+                <p>
+                  <a id="getAnnotationTables">
+                    <a href="#getAnnotationTables">
+                      <code><span>getAnnotationTables&#32;<span>workbook</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="9">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>getAnnotationTables&#32;<span>workbook</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        workbook
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fsworkbook">FsWorkbook</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.AnnotationTable.getAnnotationTables`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.AnnotationTable.getAnnotationTables\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L86-86" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes an FsWorkbook and returns all Annotation Tables it contains.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    workbook
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fsworkbook">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '10', 10)" onmouseover="showTip(event, '10', 10)">
+                <p>
+                  <a id="getDataCellsOf">
+                    <a href="#getDataCellsOf">
+                      <code><span>getDataCellsOf&#32;<span>fcc&#32;table&#32;headerCell</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="10">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>getDataCellsOf&#32;<span>fcc&#32;table&#32;headerCell</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        fcc
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        table
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        headerCell
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.AnnotationTable.getDataCellsOf`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.AnnotationTable.getDataCellsOf\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L100-100" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns all data cells from a given header cell by using a given FsCellsCollection and a given FsTable.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    fcc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    headerCell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '11', 11)" onmouseover="showTip(event, '11', 11)">
+                <p>
+                  <a id="getHeaderCellsOf">
+                    <a href="#getHeaderCellsOf">
+                      <code><span>getHeaderCellsOf&#32;<span>fcc&#32;table</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="11">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>getHeaderCellsOf&#32;<span>fcc&#32;table</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        fcc
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        table
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;seq</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.AnnotationTable.getHeaderCellsOf`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.AnnotationTable.getHeaderCellsOf\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L93-93" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Returns all header cells from a given FsCellsCollection and a given FsTable.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    fcc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;seq</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '12', 12)" onmouseover="showTip(event, '12', 12)">
+                <p>
+                  <a id="groupTermRelatedBuildingBlocks">
+                    <a href="#groupTermRelatedBuildingBlocks">
+                      <code><span>groupTermRelatedBuildingBlocks&#32;<span>table&#32;fcc&#32;cl</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="12">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>groupTermRelatedBuildingBlocks&#32;<span>table&#32;fcc&#32;cl</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        table
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        fcc
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        cl
+                      </b>
+                      :
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.AnnotationTable.groupTermRelatedBuildingBlocks`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.AnnotationTable.groupTermRelatedBuildingBlocks\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L122-122" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes a list of header cells from Term-related Building Blocks and groups them into a list of Building Block units.
+ 
+ (1 inner list = 1 Building Block unit)
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    fcc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cl
+                  </span>
+                  :
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '13', 13)" onmouseover="showTip(event, '13', 13)">
+                <p>
+                  <a id="parseIOColumns">
+                    <a href="#parseIOColumns">
+                      <code><span>parseIOColumns&#32;<span>fcc&#32;table&#32;headerCell</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="13">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>parseIOColumns&#32;<span>fcc&#32;table&#32;headerCell</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        fcc
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        table
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        headerCell
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.AnnotationTable.parseIOColumns`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.AnnotationTable.parseIOColumns\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L237-237" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes a header cells and an FsCellsCollections and returns a list of CvParams according to the information from the FsCells.
+ 
+ This function should only be used for parsing input-, output-, and featured columns.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    fcc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    headerCell
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '14', 14)" onmouseover="showTip(event, '14', 14)">
+                <p>
+                  <a id="parseTermRelatedBuildingBlocks">
+                    <a href="#parseTermRelatedBuildingBlocks">
+                      <code><span>parseTermRelatedBuildingBlocks&#32;<span>crStart&#32;table&#32;fcc&#32;cl</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="14">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>parseTermRelatedBuildingBlocks&#32;<span>crStart&#32;table&#32;fcc&#32;cl</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        crStart
+                      </b>
+                      :
+                      <code>bool</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        table
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        fcc
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        cl
+                      </b>
+                      :
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.AnnotationTable.parseTermRelatedBuildingBlocks`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.AnnotationTable.parseTermRelatedBuildingBlocks\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L134-134" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes a list of header cells and an FsCellsCollections and returns a list of CvParams according to the information from the FsCells.
+ If `crStart` is true, it is assumed that the first header cell is a Term containing header cell of a Building Block.
+ 
+ This function should only be used for parsing Term-related Building Blocks.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    crStart
+                  </span>
+                  :
+                  <code>bool</code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    fcc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cl
+                  </span>
+                  :
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><a href="https://nfdi4plants.github.io/ARCTokenization/reference/controlledvocabulary-cvparam.html">CvParam</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '15', 15)" onmouseover="showTip(event, '15', 15)">
+                <p>
+                  <a id="parseWorkbook">
+                    <a href="#parseWorkbook">
+                      <code><span>parseWorkbook&#32;<span>wb</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="15">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>parseWorkbook&#32;<span>wb</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        wb
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fsworkbook">FsWorkbook</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span>(<span>string&#32;*&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/arctokenization-annotationtable-tokenizedannotationtable.html">TokenizedAnnotationTable</a></span>)</span>&#32;list</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.AnnotationTable.parseWorkbook`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.AnnotationTable.parseWorkbook\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L251-251" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes an FsWorkbook and returns a list of worksheet names and their respective IO columns as CvParam lists and Term-related Building Blocks as CvParam lists.
+ 
+ (inner CvParam list: CvParams of a column, outer CvParam list: all columns in a worksheet's AnnotationTable)
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    wb
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fsworkbook">FsWorkbook</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><span>(<span>string&#32;*&#32;<a href="https://nfdi4plants.github.io/ARCTokenization/reference/arctokenization-annotationtable-tokenizedannotationtable.html">TokenizedAnnotationTable</a></span>)</span>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '16', 16)" onmouseover="showTip(event, '16', 16)">
+                <p>
+                  <a id="splitColumns">
+                    <a href="#splitColumns">
+                      <code><span>splitColumns&#32;<span>table&#32;fcc&#32;cl</span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="16">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>splitColumns&#32;<span>table&#32;fcc&#32;cl</span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        table
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        fcc
+                      </b>
+                      :
+                      <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        cl
+                      </b>
+                      :
+                      <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span>&#32;*&#32;<span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <details>
+              <summary>
+                <div class="fsdocs-summary">
+                  <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:ARCTokenization.AnnotationTable.splitColumns`')">
+                    <iconify-icon icon="bi:filetype-md" height="24" width="24"></iconify-icon>
+                  </div>
+                  <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:ARCTokenization.AnnotationTable.splitColumns\'/>')">
+                    <iconify-icon icon="bi:filetype-xml" height="24" width="24"></iconify-icon>
+                  </div>
+                  <a href="https://github.com/nfdi4plants/ARCTokenization/tree/master/src/ARCTokenization/AnnotationTable.fs#L113-113" class="fsdocs-source-link" title="Source on GitHub">
+                    <iconify-icon icon="ri:github-fill" height="24" width="24"></iconify-icon>
+                  </a>
+                  <p class="fsdocs-summary">
+                     Takes a list of header cells and splits them into a tuple of IO column header cells and Term-related Building Block header cells by using a given FsCellsCollection and a given FsTable.
+                  </p>
+                </div>
+              </summary>
+              <dl class="fsdocs-params">
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    table
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fstable">FsTable</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    fcc
+                  </span>
+                  :
+                  <code><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscellscollection">FsCellsCollection</a></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+                <dt class="fsdocs-param">
+                  <span class="fsdocs-param-name">
+                    cl
+                  </span>
+                  :
+                  <code><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></code>
+                </dt>
+                <dd class="fsdocs-param-docs"></dd>
+              </dl>
+              <dl class="fsdocs-returns">
+                <dt>
+                  <span class="fsdocs-return-name">
+                    Returns: 
+                  </span>
+                  <code><span><span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span>&#32;*&#32;<span><a href="https://learn.microsoft.com/dotnet/api/fsspreadsheet.fscell">FsCell</a>&#32;list</span></span></code>
+                </dt>
+                <dd class="fsdocs-return-docs"></dd>
+              </dl>
+            </details>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+        
+    </div>
+</main>
+<aside id="fsdocs-page-menu">
+    <p id="on-this-page">On this page</p>
+    <div class="empty"></div>
+</aside>
+<dialog>
+    <input type="search" placeholder="Search docs" />
+    <div class="results">
+        <ul></ul>
+        <p class="empty">Type something to start searching.</p>
+    </div>
+</dialog>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-tips.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme-toggle.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-theme.js"></script>
+<script type="module" src="https://nfdi4plants.github.io/ARCTokenization/content/fsdocs-search.js"></script>
+
+</body>
+</html>

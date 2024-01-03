@@ -7,18 +7,15 @@
     <meta content="Oliver Maus, Kevin Schneider, Heinrich Lukas Weil, Timo Muehlhaus, Kevin Frey" name="author">
     <!-- Opengraph properties (https://ogp.me/) -->
     <meta property="og:site_name" content="ARCTokenization">
-    <meta property="og:title" content="CvParam
-" />
+    <meta property="og:title" content="Introduction" />
     <meta property="og:url" content="https://nfdi4plants.github.io/ARCTokenization/script.html">
     <meta property="og:type" content="website" />
     <!-- Twitter cards (https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image) -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="https://nfdi4plants.github.io/ARCTokenization/">
-    <meta name="twitter:title" content="CvParam
-">
+    <meta name="twitter:title" content="Introduction">
     
-    <title>CvParam
- | ARCTokenization</title>
+    <title>Introduction | ARCTokenization</title>
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
@@ -48,12 +45,12 @@
                 <li class="nav-header active">
   ControlledVocabulary
 </li>             
-<li class="nav-item ">
+<li class="nav-item active">
   <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
     Introduction
   </a>
 </li>             
-<li class="nav-item active">
+<li class="nav-item ">
   <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
     CvParam
 
@@ -103,12 +100,12 @@
         <li class="nav-header active">
   ControlledVocabulary
 </li>             
-<li class="nav-item ">
+<li class="nav-item active">
   <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/Introduction.html">
     Introduction
   </a>
 </li>             
-<li class="nav-item active">
+<li class="nav-item ">
   <a class="nav-link" href="https://nfdi4plants.github.io/ARCTokenization/ControlledVocabulary/CvParam.html">
     CvParam
 
@@ -135,7 +132,8 @@
 <main>
     <div id="content">
         
-<h1><a name="CvParam" class="anchor" href="#CvParam">CvParam</a></h1>
+<h1><a name="ControlledVocabulary" class="anchor" href="#ControlledVocabulary">ControlledVocabulary</a></h1>
+<p>ControlledVocabulary is a .NET library for modelling and working with controlled vocabularies.</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;nuget: ControlledVocabulary&quot;</span>
 </code></pre>
 <p><div><div></div><div><strong>Installing Packages</strong><ul><li><span>ControlledVocabulary</span></li></ul></div><div></div></div>
@@ -146,40 +144,56 @@
 </p>
 <p><div><div></div><div><strong>Installing Packages</strong><ul><li><span>ControlledVocabulary...</span></li></ul></div><div></div></div>
 </p>
-<p><div><div></div><div><strong>Installing Packages</strong><ul><li><span>ControlledVocabulary....</span></li></ul></div><div></div></div>
-</p>
 <p><div><div></div><div></div><div><strong>Installed Packages</strong><ul><li><span>ControlledVocabulary, 1.0.1</span></li></ul></div></div>
 </p>
-<p><code>CvParam</code> is a value that is annotated with a controlled vocabulary term.</p>
-<p>Suppose we have the name of a person (<code>"Kevin Schneider"</code>).</p>
-<p>We can annotate this value with a term to indicate that it is a name:</p>
+<p>In its barest form, a term from a controlled vocabulary consists of the term name itself, a URI for the term, and a reference to the controlled vocabulary that contains the term:</p>
 <pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">ControlledVocabulary</span>
 
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">human</span> <span class="o">=</span>
-    <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="rt">CvTerm</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">create</span><span class="pn">(</span>
-        <span class="fn">accession</span> <span class="o">=</span> <span class="s">&quot;TO:00042069&quot;</span><span class="pn">,</span> <span class="c">// the term&#39;s unique accession number</span>
-        <span class="fn">name</span> <span class="o">=</span> <span class="s">&quot;Full Name&quot;</span><span class="pn">,</span> <span class="c">// the term name</span>
-        <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="fn">ref</span> <span class="o">=</span> <span class="s">&quot;https://link/to/reference/vocabulary/named/TO&quot;</span> <span class="c">// the reference vocabulary</span>
-    <span class="pn">)</span>
-
-<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">cvp</span> <span class="o">=</span> 
-    <span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="fn">CvParam</span><span class="pn">(</span>
-        <span class="fn">cvTerm</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 8)" onmouseover="showTip(event, 'fs2', 8)" class="id">human</span><span class="pn">,</span>
-        <span class="fn">pv</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="rt">ParamValue</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">Value</span> <span class="s">&quot;Kevin Schneider&quot;</span>
-    <span class="pn">)</span>
-
-<span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="id">cvp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="id">ToString</span><span class="pn">(</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="rt">CvTerm</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">create</span><span class="pn">(</span>
+    <span class="fn">accession</span> <span class="o">=</span> <span class="s">&quot;TO:00042069&quot;</span><span class="pn">,</span> <span class="c">// the term&#39;s unique accession number</span>
+    <span class="fn">name</span> <span class="o">=</span> <span class="s">&quot;yup&quot;</span><span class="pn">,</span> <span class="c">// the term name</span>
+    <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="fn">ref</span> <span class="o">=</span> <span class="s">&quot;https://link/to/reference/vocabulary/named/TO&quot;</span> <span class="c">// the reference vocabulary</span>
+<span class="pn">)</span>
 </code></pre>
-<table class="pre"><tbody><tr><td><pre><code>"CvParam: Full Name
-	ID: TO:00042069
-	RefUri: https://link/to/reference/vocabulary/named/TO
-	Value: Value "Kevin Schneider"
-	Attributes: []"
-</code></pre></td></tr></tbody></table>
+<p><details open="open" class="dni-treeview"><summary><span class="dni-code-hint"><code>{ Accession = &quot;TO:00042069&quot;\n  Name = &quot;yup&quot;\n  RefUri = &quot;https://link/to/reference/vocabulary/named/TO&quot; }</code></span></summary><div><table><thead><tr></tr></thead><tbody><tr><td>Accession</td><td><div class="dni-plaintext"><pre>&quot;TO:00042069&quot;
+</pre></div></td></tr><tr><td>Name</td><td><div class="dni-plaintext"><pre>&quot;yup&quot;
+</pre></div></td></tr><tr><td>RefUri</td><td><div class="dni-plaintext"><pre>&quot;https://link/to/reference/vocabulary/named/TO&quot;
+</pre></div></td></tr></tbody></table></div></details><style>
+.dni-code-hint {
+    font-style: italic;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.dni-treeview {
+    white-space: nowrap;
+}
+.dni-treeview td {
+    vertical-align: top;
+    text-align: start;
+}
+details.dni-treeview {
+    padding-left: 1em;
+}
+table td {
+    text-align: start;
+}
+table tr { 
+    vertical-align: top; 
+    margin: 0em 0px;
+}
+table tr td pre 
+{ 
+    vertical-align: top !important; 
+    margin: 0em 0px !important;
+} 
+table th {
+    text-align: start;
+}
+</style>
+</p>
 
         <div class="fsdocs-tip" id="fs1">namespace ControlledVocabulary</div>
-<div class="fsdocs-tip" id="fs2">val human: CvTerm</div>
-<div class="fsdocs-tip" id="fs3">type CvTerm =
+<div class="fsdocs-tip" id="fs2">type CvTerm =
   {
     Accession: string
     Name: string
@@ -189,43 +203,8 @@
  Represents a term from a controlled vocabulary (Cv)
  in the form of: id|accession ; name|value ; refUri
 &lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs4">static member CvTerm.create: name: string -&gt; CvTerm<br />static member CvTerm.create: accession: string * name: string * ref: string -&gt; CvTerm</div>
-<div class="fsdocs-tip" id="fs5">Multiple items<br />val ref: value: &#39;T -&gt; &#39;T ref<br /><br />--------------------<br />type &#39;T ref = Ref&lt;&#39;T&gt;</div>
-<div class="fsdocs-tip" id="fs6">val cvp: CvParam</div>
-<div class="fsdocs-tip" id="fs7">Multiple items<br />type CvParam =
-  inherit CvAttributeCollection
-  interface IParam
-  new: cvAccession: string * cvName: string * cvRef: string * paramValue: ParamValue * attributes: IDictionary&lt;string,IParam&gt; -&gt; CvParam + 6 overloads
-  member Equals: term: CvTerm -&gt; bool + 2 overloads
-  override ToString: unit -&gt; string
-  member WithValue: v: ParamValue -&gt; CvParam
-  static member equals: cvp1: CvParam -&gt; cvp2: CvParam -&gt; bool
-  static member equalsName: cvp1: CvParam -&gt; cvp2: CvParam -&gt; bool
-  static member equalsTerm: term: CvTerm -&gt; cvp: CvParam -&gt; bool
-  static member fromCategory: category: CvTerm -&gt; term: CvTerm -&gt; CvParam
-  ...<br /><em>&lt;summary&gt;
- Represents a structured value, annotated with a controlled vocabulary term
-
- Attributes can be used to further describe the CvParam
-&lt;/summary&gt;</em><br /><br />--------------------<br />new: cvTerm: CvTerm * pv: ParamValue -&gt; CvParam<br />new: cvTerm: CvTerm * v: System.IConvertible -&gt; CvParam<br />new: term: CvTerm * pv: ParamValue * attributes: IParam seq -&gt; CvParam<br />new: id: string * name: string * ref: string * pv: ParamValue -&gt; CvParam<br />new: id: string * name: string * ref: string * v: System.IConvertible -&gt; CvParam<br />new: cvAccession: string * cvName: string * cvRef: string * paramValue: ParamValue * attributes: System.Collections.Generic.IDictionary&lt;string,IParam&gt; -&gt; CvParam<br />new: id: string * name: string * ref: string * pv: ParamValue * attributes: IParam seq -&gt; CvParam</div>
-<div class="fsdocs-tip" id="fs8">type ParamValue =
-  | Value of v: IConvertible
-  | CvValue of cv: CvTerm
-  | WithCvUnitAccession of cvu: IConvertible * CvUnit
-  static member getValue: param: ParamValue -&gt; IConvertible
-  static member getValueAsInt: param: ParamValue -&gt; int
-  static member getValueAsString: param: ParamValue -&gt; string
-  static member getValueAsTerm: param: ParamValue -&gt; CvTerm
-  static member tryAddAccession: accession: string -&gt; param: ParamValue -&gt; ParamValue option
-  static member tryAddName: name: string -&gt; param: ParamValue -&gt; ParamValue option
-  static member tryAddReference: ref: string -&gt; param: ParamValue -&gt; ParamValue option
-  static member tryAddUnit: unit: CvUnit -&gt; param: ParamValue -&gt; ParamValue option
-  static member tryGetUnit: param: ParamValue -&gt; CvUnit option<br /><em>&lt;summary&gt;
- Represent the different cases of a parameter, which is either a simple value,
- a CvTerm or a simple value with CvUnit 
-&lt;/summary&gt;</em></div>
-<div class="fsdocs-tip" id="fs9">union case ParamValue.Value: v: System.IConvertible -&gt; ParamValue</div>
-<div class="fsdocs-tip" id="fs10">override CvParam.ToString: unit -&gt; string</div>
+<div class="fsdocs-tip" id="fs3">static member CvTerm.create: name: string -&gt; CvTerm<br />static member CvTerm.create: accession: string * name: string * ref: string -&gt; CvTerm</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />val ref: value: &#39;T -&gt; &#39;T ref<br /><br />--------------------<br />type &#39;T ref = Ref&lt;&#39;T&gt;</div>
 
     </div>
 </main>
@@ -233,8 +212,8 @@
     <p id="on-this-page">On this page</p>
     <ul>
   <li class="level-1">
-    <a href="#CvParam">
-      CvParam
+    <a href="#ControlledVocabulary">
+      ControlledVocabulary
     </a>
   </li>
 </ul>
