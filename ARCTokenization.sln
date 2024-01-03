@@ -40,34 +40,20 @@ EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ARCTokenization.Tests", "tests\ARCTokenization.Tests\ARCTokenization.Tests.fsproj", "{30177EF1-3980-4FFE-9B49-90B75DCEBDA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx_project", "docfx_project", "{86CD7F81-ADB4-4991-A960-063FE02D907D}"
 	ProjectSection(SolutionItems) = preProject
-		docs\docfx_project\.gitignore = docs\docfx_project\.gitignore
-		docs\convert-notebook.ps1 = docs\convert-notebook.ps1
-		docs\convert-notebooks.ps1 = docs\convert-notebooks.ps1
-		docs\docfx_project\docfx.json = docs\docfx_project\docfx.json
-		docs\docfx_project\index.md = docs\docfx_project\index.md
-		docs\docfx_project\toc.yml = docs\docfx_project\toc.yml
+		docs\index.ipynb = docs\index.ipynb
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ARCTokenization", "ARCTokenization", "{E669BA6D-4327-40AE-8CE1-E6FEA8F89A15}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ARCTokenization", "ARCTokenization", "{699C5B9A-EA4B-4D25-B05D-16CA14320CFB}"
 	ProjectSection(SolutionItems) = preProject
-		docs\docfx_project\ARCTokenization\intro.md = docs\docfx_project\ARCTokenization\intro.md
+		docs\ARCTokenization\Introduction.ipynb = docs\ARCTokenization\Introduction.ipynb
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ControlledVocabulary", "ControlledVocabulary", "{F6471491-8FE4-48A7-BA9E-1113DE63B5F5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ControlledVocabulary", "ControlledVocabulary", "{524F5156-C079-4AEF-822E-F01DAE6874AA}"
 	ProjectSection(SolutionItems) = preProject
-		docs\docfx_project\ControlledVocabulary\CvParam.ipynb = docs\docfx_project\ControlledVocabulary\CvParam.ipynb
-		docs\docfx_project\ControlledVocabulary\intro.ipynb = docs\docfx_project\ControlledVocabulary\intro.ipynb
+		docs\ControlledVocabulary\CvParam.ipynb = docs\ControlledVocabulary\CvParam.ipynb
+		docs\ControlledVocabulary\Introduction.ipynb = docs\ControlledVocabulary\Introduction.ipynb
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{9031C346-A994-4943-AB58-1095882E725C}"
-	ProjectSection(SolutionItems) = preProject
-		docs\docfx_project\api\index.md = docs\docfx_project\api\index.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{31DCBC4B-41D9-4CE1-9E5D-3F5A3F5E01CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,11 +91,8 @@ Global
 		{ED24D0E3-BA79-4F6D-9A30-D05FF4EBAFDB} = {3DB2A5F4-23F6-4A06-9AE5-CEAC0707735B}
 		{24D99DC2-DF18-45A3-B444-B60351F131DB} = {67DA0DCC-75F4-4F30-91C3-309A48B13D49}
 		{30177EF1-3980-4FFE-9B49-90B75DCEBDA3} = {2EB71559-9BE4-4E02-9763-9092876D1E4A}
-		{86CD7F81-ADB4-4991-A960-063FE02D907D} = {551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}
-		{E669BA6D-4327-40AE-8CE1-E6FEA8F89A15} = {86CD7F81-ADB4-4991-A960-063FE02D907D}
-		{F6471491-8FE4-48A7-BA9E-1113DE63B5F5} = {86CD7F81-ADB4-4991-A960-063FE02D907D}
-		{9031C346-A994-4943-AB58-1095882E725C} = {86CD7F81-ADB4-4991-A960-063FE02D907D}
-		{31DCBC4B-41D9-4CE1-9E5D-3F5A3F5E01CA} = {86CD7F81-ADB4-4991-A960-063FE02D907D}
+		{699C5B9A-EA4B-4D25-B05D-16CA14320CFB} = {551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}
+		{524F5156-C079-4AEF-822E-F01DAE6874AA} = {551D4715-5ECD-4CAB-8A4A-41E246F4A7B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {933E3470-7D09-4F22-A056-2407458B9600}
