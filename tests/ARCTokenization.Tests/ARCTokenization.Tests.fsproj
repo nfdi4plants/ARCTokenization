@@ -11,7 +11,7 @@
     <Compile Include="TestUtils.fs" />
     <Compile Include="TestObjects.fs" />
     <Compile Include="ReferenceObjects.fs" />
-    <Compile Include="StructuralOntologytests.fs" />
+    <Compile Include="StructuralOntologyTests.fs" />
     <Compile Include="TokenizationTests\ParserFunctions.fs" />
     <Compile Include="MockAPITests\MockInvestigationMetadataTokens.fs" />
     <Compile Include="MockAPITests\MockStudyMetadataTokens.fs" />

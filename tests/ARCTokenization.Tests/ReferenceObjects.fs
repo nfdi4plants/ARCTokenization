@@ -4,6 +4,16 @@ open ControlledVocabulary
 open ARCTokenization
 open FsSpreadsheet
 
+module Terms =
+
+    let referenceInvestigationMetadataOntologyName = "INVMSO"
+    let referenceStudyMetadataOntologyName = "INVMSO"
+    let referenceAssayMetadataOntologyName = "INVMSO"
+
+    let referenceInvestigationMetadataOntologyRootTerm = CvTerm.create(accession = "INVMSO:00000001", name = "Investigation Metadata", ref = "INVMSO")
+    let referenceStudyMetadataOntologyRootTerm = CvTerm.create(accession = "STDMSO:00000001", name = "Study Metadata", ref = "STDMSO")
+    let referenceAssayMetadataOntologyRootTerm = CvTerm.create(accession = "ASSMSO:00000001", name = "Assay Metadata", ref = "ASSMSO")
+
 module Tokenization =
     
     module KeyParser = 
@@ -224,8 +234,7 @@ module MockAPI =
 
         // equivalent to a metadatasheet with only the first column that contains metadata section keys
         let empty =
-            Terms.InvestigationMetadata.nonObsoleteCvTerms
-            |> List.skip 1 //(ignore root term)
+            Terms.InvestigationMetadata.nonObsoleteNonRootCvTerms
             |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
             |> List.map (fun cvTerm -> CvParam(cvTerm, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, []))
 
@@ -233,8 +242,7 @@ module MockAPI =
 
         // equivalent to a metadatasheet with only the first column that contains metadata section keys
         let empty =
-            Terms.StudyMetadata.nonObsoleteCvTerms
-            |> List.skip 1 //(ignore root term)
+            Terms.StudyMetadata.nonObsoleteNonRootCvTerms
             |> List.filter (fun t -> not (t.Name.StartsWith("Comment")) ) // ignore all comments
             |> List.map (fun cvTerm -> CvParam(cvTerm, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, []))
 
@@ -242,7 +250,6 @@ module MockAPI =
         
         // equivalent to a metadatasheet with only the first column that contains metadata section keys
         let empty =
-            Terms.AssayMetadata.nonObsoleteCvTerms
-            |> List.skip 1 //(ignore root term)
+            Terms.AssayMetadata.nonObsoleteNonRootCvTerms
             |> List.filter (fun t -> not (t.Name.StartsWith("Comment")) ) // ignore all comments
             |> List.map (fun cvTerm -> CvParam(cvTerm, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, []))

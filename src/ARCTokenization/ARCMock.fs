@@ -199,8 +199,7 @@ type ARCMock =
                 ["" ; yield! Study_Person_Roles_Term_Source_REF |> Option.defaultValue Seq.empty]
             ]
 
-        Terms.InvestigationMetadata.nonObsoleteCvTerms
-        |> List.skip 1 //(ignore root term)
+        Terms.InvestigationMetadata.nonObsoleteNonRootCvTerms
         |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
         |> List.zip valueRows
         |> List.map (fun (values,term) ->
@@ -343,8 +342,7 @@ type ARCMock =
             [""; yield! Study_Person_Roles_Term_Source_REF |> Option.defaultValue Seq.empty ]
         ]
 
-        Terms.StudyMetadata.nonObsoleteCvTerms
-        |> List.skip 1 //(ignore root term)
+        Terms.StudyMetadata.nonObsoleteNonRootCvTerms
         |> List.filter (fun t -> not (t.Name.StartsWith("Comment"))) // ignore all comments
         |> List.zip valueRows
         |> List.map (fun (values,term) ->
@@ -407,8 +405,7 @@ type ARCMock =
             [""; yield! Assay_Performer_Roles_Term_Source_REF |> Option.defaultValue Seq.empty ]
         ]
 
-        Terms.AssayMetadata.nonObsoleteCvTerms
-        |> List.skip 1 //(ignore root term)
+        Terms.AssayMetadata.nonObsoleteNonRootCvTerms
         |> List.filter (fun t -> not (t.Name.StartsWith("Comment"))) // ignore all comments
         |> List.zip valueRows
         |> List.map (fun (values,term) ->

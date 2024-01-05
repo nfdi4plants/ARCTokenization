@@ -22,18 +22,40 @@ module InvestigationMetadata =
 
     let ontology = OboOntology.fromLines true obo
 
-    let nonObsoleteCvTerms = 
+    let nonRootOboTerms = 
+        ontology.Terms
+        |> List.skip 1
+
+    let nonObsoleteOboTerms = 
         ontology.Terms
         |> List.filter (fun t -> not t.IsObsolete)
-        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
 
-    let obsoleteCvTerms = 
-        ontology.Terms
+    let nonObsoleteNonRootOboTerms = 
+        nonRootOboTerms
+        |> List.filter (fun t -> not t.IsObsolete)
+
+    let obsoleteOboTerms = 
+        nonRootOboTerms
         |> List.filter (fun t -> t.IsObsolete)
-        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
 
     let cvTerms = 
         ontology.Terms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
+
+    let nonRootCvTerms = 
+        nonRootOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
+
+    let nonObsoleteCvTerms =
+        nonObsoleteOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
+
+    let nonObsoleteNonRootCvTerms =
+        nonObsoleteNonRootOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
+
+    let obsoleteCvTerms =
+        obsoleteOboTerms
         |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
 
 module StudyMetadata =
@@ -42,38 +64,81 @@ module StudyMetadata =
 
     let ontology = OboOntology.fromLines true obo
 
-    let nonObsoleteCvTerms = 
+    let nonRootOboTerms = 
+        ontology.Terms
+        |> List.skip 1
+
+    let nonObsoleteOboTerms = 
         ontology.Terms
         |> List.filter (fun t -> not t.IsObsolete)
-        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
 
-    let obsoleteCvTerms = 
-        ontology.Terms
+    let nonObsoleteNonRootOboTerms = 
+        nonRootOboTerms
+        |> List.filter (fun t -> not t.IsObsolete)
+
+    let obsoleteOboTerms = 
+        nonRootOboTerms
         |> List.filter (fun t -> t.IsObsolete)
-        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))
 
     let cvTerms = 
         ontology.Terms
-        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))    
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))
 
+    let nonRootCvTerms = 
+        nonRootOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))
+
+    let nonObsoleteCvTerms =
+        nonObsoleteOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))
+
+    let nonObsoleteNonRootCvTerms =
+        nonObsoleteNonRootOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))
+
+    let obsoleteCvTerms =
+        obsoleteOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))
 module AssayMetadata = 
     
     let internal obo = (EmbeddedResource.load "structural_ontologies.assay_metadata_structural_ontology.obo").Replace("\r\n", "\n").Split('\n')
 
     let ontology = OboOntology.fromLines true obo
 
-    let nonObsoleteCvTerms = 
+    let nonRootOboTerms = 
+        ontology.Terms
+        |> List.skip 1
+
+    let nonObsoleteOboTerms = 
         ontology.Terms
         |> List.filter (fun t -> not t.IsObsolete)
-        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "INVMSO"))
+
+    let nonObsoleteNonRootOboTerms = 
+        nonRootOboTerms
+        |> List.filter (fun t -> not t.IsObsolete)
+
+    let obsoleteOboTerms = 
+        nonRootOboTerms
+        |> List.filter (fun t -> t.IsObsolete)
 
     let cvTerms = 
         ontology.Terms
         |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
 
-    let obsoleteCvTerms = 
-        ontology.Terms
-        |> List.filter (fun t -> t.IsObsolete)
+    let nonRootCvTerms = 
+        nonRootOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
+
+    let nonObsoleteCvTerms =
+        nonObsoleteOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
+
+    let nonObsoleteNonRootCvTerms =
+        nonObsoleteNonRootOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
+
+    let obsoleteCvTerms =
+        obsoleteOboTerms
         |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
 
 

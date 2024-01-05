@@ -11,6 +11,5 @@ module AssayMetadata =
     open TestUtils
 
     let allExpectedMetadataTermsEmpty = 
-        Terms.AssayMetadata.cvTerms
-        |> List.skip 1 //(ignore root term)
+        Terms.AssayMetadata.nonObsoleteNonRootCvTerms
         |> List.map (fun p -> CvParam(p, ParamValue.CvValue (CvTerm.create(accession = "AGMO:00000001", name = "Metadata Section Key", ref = "AGMO")), []))

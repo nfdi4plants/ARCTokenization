@@ -14,10 +14,8 @@ module InvestigationMetadata =
     let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetFromFile "Fixtures/correct/investigation_simple.xlsx"
 
     let allExpectedMetadataTermsEmpty = 
-        Terms.InvestigationMetadata.cvTerms
-        |> List.skip 1 //(ignore root term)
+        Terms.InvestigationMetadata.nonObsoleteNonRootCvTerms
         |> List.filter (fun t -> not (t.Name.StartsWith("Comment"))) // ignore orcids
-        |> List.filter (fun t -> not (List.contains t Terms.InvestigationMetadata.obsoleteCvTerms)) // ignore obsolete terms
         |> List.map (fun p -> CvParam(p, ParamValue.CvValue (CvTerm.create(accession = "AGMO:00000001", name = "Metadata Section Key", ref = "AGMO")), []))
 
     [<Fact>]

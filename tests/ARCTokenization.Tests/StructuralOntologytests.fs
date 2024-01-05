@@ -5,6 +5,8 @@ open ARCTokenization
 open ARCTokenization.Terms
 open Xunit
 
+open TestUtils
+
 module InvestigationMetadata =
     
     [<Fact>]
@@ -21,6 +23,18 @@ module InvestigationMetadata =
             (fun (e,a) -> Assert.Equal(e,a))
         )
 
+    [<Fact>] 
+    let ``no root term in non root terms`` () =
+        Assert.All(
+            InvestigationMetadata.nonRootCvTerms,
+            (fun t -> 
+                Assert.True(
+                    t.Name <> ReferenceObjects.Terms.referenceInvestigationMetadataOntologyRootTerm.Name
+                    && t.Accession <> ReferenceObjects.Terms.referenceInvestigationMetadataOntologyRootTerm.Accession
+                )
+            )
+        )
+
 module StudyMetadata =
     
     [<Fact>]
@@ -35,6 +49,18 @@ module StudyMetadata =
         Assert.All(
             List.zip expected actual,
             (fun (e,a) -> Assert.Equal(e,a))
+        )
+
+    [<Fact>] 
+    let ``no root term in non root terms`` () =
+        Assert.All(
+            StudyMetadata.nonRootCvTerms,
+            (fun t -> 
+                Assert.True(
+                    t.Name <> ReferenceObjects.Terms.referenceStudyMetadataOntologyRootTerm.Name
+                    && t.Accession <> ReferenceObjects.Terms.referenceStudyMetadataOntologyRootTerm.Accession
+                )
+            )
         )
 
     [<Fact>]
@@ -100,4 +126,16 @@ module AssayMetadata =
         Assert.All(
             List.zip expected actual,
             (fun (e,a) -> Assert.Equal(e,a))
+        )
+
+    [<Fact>] 
+    let ``no root term in non root terms`` () =
+        Assert.All(
+            AssayMetadata.nonRootCvTerms,
+            (fun t -> 
+                Assert.True(
+                    t.Name <> ReferenceObjects.Terms.referenceAssayMetadataOntologyRootTerm.Name
+                    && t.Accession <> ReferenceObjects.Terms.referenceAssayMetadataOntologyRootTerm.Accession
+                )
+            )
         )

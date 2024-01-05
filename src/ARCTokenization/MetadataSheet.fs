@@ -34,8 +34,8 @@ module MetadataSheet =
         | UnMatchable name -> 
             fun (pv) -> UserParam(name, pv, attributes) 
 
-    let rec parseAssayKey = parseKeyWithTerms AssayMetadata.cvTerms
+    let rec parseAssayKey = parseKeyWithTerms AssayMetadata.nonRootCvTerms
 
-    let rec parseStudyKey = parseKeyWithTerms StudyMetadata.cvTerms
+    let rec parseStudyKey = parseKeyWithTerms StudyMetadata.nonRootCvTerms
 
-    let rec parseInvestigationKey = parseKeyWithTerms InvestigationMetadata.cvTerms
+    let rec parseInvestigationKey = parseKeyWithTerms InvestigationMetadata.nonRootCvTerms
