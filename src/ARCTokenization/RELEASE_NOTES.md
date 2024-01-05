@@ -1,3 +1,7 @@
+### 1.3.0 - (Released 2024-01-05)
+- Additions: [Offer more different sets of CvTerms and OboTerms for structural ontologies](https://github.com/nfdi4plants/ARCTokenization/commit/f44ab3835725b1e86657f778045474438f51f24c)
+    - includes: all, non-root, non-obsolete, non-root + non-obsolete, obsolete
+
 ### 1.3.0 - (Released 2024-01-03)
 - Additions: [Add metadata token Mock API](https://github.com/nfdi4plants/ARCTokenization/commit/7ba554848542f46a60bdb82c54d84d186d6e685e)
 
