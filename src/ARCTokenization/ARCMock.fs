@@ -366,6 +366,7 @@ type ARCMock =
         ?Assay_Measurement_Type_Term_Accession_Number: seq<string>,
         ?Assay_Measurement_Type_Term_Source_REF: seq<string>,
         ?Assay_Technology_Type: seq<string>,
+        ?Assay_Technology_Type_Term_Accession_Number: seq<string>,
         ?Assay_Technology_Type_Term_Source_REF: seq<string>,
         ?Assay_Technology_Platform: seq<string>,
         ?Assay_File_Name: seq<string>,
@@ -388,6 +389,7 @@ type ARCMock =
             [""; yield! Assay_Measurement_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
             [""; yield! Assay_Measurement_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
             [""; yield! Assay_Technology_Type |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Technology_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
             [""; yield! Assay_Technology_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
             [""; yield! Assay_Technology_Platform |> Option.defaultValue Seq.empty ]
             [""; yield! Assay_File_Name |> Option.defaultValue Seq.empty ]
