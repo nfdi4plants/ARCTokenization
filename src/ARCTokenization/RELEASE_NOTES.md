@@ -1,3 +1,10 @@
+### 2.0.0 - (Released 2024-01-08)
+
+Changes in existing ontology terms will now ways result in a new major version of the package.
+
+- BugFixes:
+    - [Fix Assay Technology Type TAN being marked obsolete](https://github.com/nfdi4plants/ARCTokenization/issues/47)
+
 ### 1.4.0 - (Released 2024-01-05)
 - Additions: [Offer more different sets of CvTerms and OboTerms for structural ontologies](https://github.com/nfdi4plants/ARCTokenization/commit/f44ab3835725b1e86657f778045474438f51f24c)
     - includes: all, non-root, non-obsolete, non-root + non-obsolete, obsolete
