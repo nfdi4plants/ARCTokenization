@@ -24,13 +24,37 @@ module InvestigationMetadata =
         )
 
     [<Fact>] 
+    let ``all ontology names correct`` () =
+        Assert.All(
+            InvestigationMetadata.cvTerms,
+            (fun t -> Assert.True(t.RefUri = ReferenceObjects.Terms.InvestigationMetadata.referenceOntologyName))
+        )
+
+    [<Fact>] 
     let ``no root term in non root terms`` () =
         Assert.All(
             InvestigationMetadata.nonRootCvTerms,
             (fun t -> 
                 Assert.True(
-                    t.Name <> ReferenceObjects.Terms.referenceInvestigationMetadataOntologyRootTerm.Name
-                    && t.Accession <> ReferenceObjects.Terms.referenceInvestigationMetadataOntologyRootTerm.Accession
+                    t.Name <> ReferenceObjects.Terms.InvestigationMetadata.referenceOntologyRootTerm.Name
+                    && t.Accession <> ReferenceObjects.Terms.InvestigationMetadata.referenceOntologyRootTerm.Accession
+                )
+            )
+        )
+
+    [<Fact>]
+    let ``all non root non obsolete CvTerms are correct`` () =
+        Assert.All(
+            (
+                List.zip
+                    InvestigationMetadata.nonObsoleteNonRootCvTerms
+                    ReferenceObjects.Terms.InvestigationMetadata.epectedNonObsoleteNonRootTerms
+            ),
+            (fun (actual, expected) -> 
+                Assert.True(
+                    (actual.Name = expected.Name)
+                    && (actual.Accession = expected.Accession)
+                    && (actual.RefUri = expected.RefUri)
                 )
             )
         )
@@ -52,13 +76,37 @@ module StudyMetadata =
         )
 
     [<Fact>] 
+    let ``all ontology names correct`` () =
+        Assert.All(
+            StudyMetadata.cvTerms,
+            (fun t -> Assert.True(t.RefUri = ReferenceObjects.Terms.StudyMetadata.referenceOntologyName))
+        )
+
+    [<Fact>] 
     let ``no root term in non root terms`` () =
         Assert.All(
             StudyMetadata.nonRootCvTerms,
             (fun t -> 
                 Assert.True(
-                    t.Name <> ReferenceObjects.Terms.referenceStudyMetadataOntologyRootTerm.Name
-                    && t.Accession <> ReferenceObjects.Terms.referenceStudyMetadataOntologyRootTerm.Accession
+                    t.Name <> ReferenceObjects.Terms.StudyMetadata.referenceOntologyRootTerm.Name
+                    && t.Accession <> ReferenceObjects.Terms.StudyMetadata.referenceOntologyRootTerm.Accession
+                )
+            )
+        )
+
+    [<Fact>]
+    let ``all non root non obsolete CvTerms are correct`` () =
+        Assert.All(
+            (
+                List.zip
+                    StudyMetadata.nonObsoleteNonRootCvTerms
+                    ReferenceObjects.Terms.StudyMetadata.epectedNonObsoleteNonRootTerms
+            ),
+            (fun (actual, expected) -> 
+                Assert.True(
+                    (actual.Name = expected.Name)
+                    && (actual.Accession = expected.Accession)
+                    && (actual.RefUri = expected.RefUri)
                 )
             )
         )
@@ -129,13 +177,37 @@ module AssayMetadata =
         )
 
     [<Fact>] 
+    let ``all ontology names correct`` () =
+        Assert.All(
+            AssayMetadata.cvTerms,
+            (fun t -> Assert.True(t.RefUri = ReferenceObjects.Terms.AssayMetadata.referenceOntologyName))
+        )
+
+    [<Fact>] 
     let ``no root term in non root terms`` () =
         Assert.All(
             AssayMetadata.nonRootCvTerms,
             (fun t -> 
                 Assert.True(
-                    t.Name <> ReferenceObjects.Terms.referenceAssayMetadataOntologyRootTerm.Name
-                    && t.Accession <> ReferenceObjects.Terms.referenceAssayMetadataOntologyRootTerm.Accession
+                    t.Name <> ReferenceObjects.Terms.AssayMetadata.referenceOntologyRootTerm.Name
+                    && t.Accession <> ReferenceObjects.Terms.AssayMetadata.referenceOntologyRootTerm.Accession
+                )
+            )
+        )
+
+    [<Fact>]
+    let ``all non root non obsolete CvTerms are correct`` () =
+        Assert.All(
+            (
+                List.zip
+                    AssayMetadata.nonObsoleteNonRootCvTerms
+                    ReferenceObjects.Terms.AssayMetadata.epectedNonObsoleteNonRootTerms
+            ),
+            (fun (actual, expected) -> 
+                Assert.True(
+                    (actual.Name = expected.Name)
+                    && (actual.Accession = expected.Accession)
+                    && (actual.RefUri = expected.RefUri)
                 )
             )
         )

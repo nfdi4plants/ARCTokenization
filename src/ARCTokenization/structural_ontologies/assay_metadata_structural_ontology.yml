@@ -124,7 +124,6 @@ def: ""
     name: Assay Technology Type Term Accession Number
     def: ""
     synonym: "Technology Type Term Accession Number" EXACT []
-    is_obsolete: true
     relationship: part_of ASSMSO:00000002 ! ASSAY
     relationship: part_of ASSMSO:00000003 ! ASSAY METADATA
     relationship: follows ASSMSO:00000010 ! Technology Type
