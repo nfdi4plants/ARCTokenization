@@ -56,3 +56,23 @@ module MockAPI =
                     CompositeCell.FreeText "Sample_2"
                 ]
             )
+
+        let simpleStudy = 
+            ARCMock.ProcessGraph(
+                [
+                    CompositeHeader.Input IOType.Source, [
+                        CompositeCell.FreeText "Source_1"
+                        CompositeCell.FreeText "Source_1"
+                    ]
+
+                    CompositeHeader.Characteristic (OntologyAnnotation.create(TermAccessionNumber = "OBI:0100026", Name = AnnotationValue.Text "organism", TermSourceREF = "OBI")), [
+                        CompositeCell.Term (OntologyAnnotation.create(TermAccessionNumber = "http://purl.obolibrary.org/obo/NCBITaxon_3702", Name = AnnotationValue.Text "Arabidopsis thaliana", TermSourceREF = "NCBITaxon"))
+                        CompositeCell.Term (OntologyAnnotation.create(TermAccessionNumber = "http://purl.obolibrary.org/obo/NCBITaxon_3702", Name = AnnotationValue.Text "Arabidopsis thaliana", TermSourceREF = "NCBITaxon"))
+                    ]
+
+                    CompositeHeader.Output IOType.Sample, [
+                        CompositeCell.FreeText "Sample_1"
+                        CompositeCell.FreeText "Sample_2"
+                    ]
+                ]
+            )

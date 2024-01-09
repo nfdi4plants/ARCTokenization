@@ -37,3 +37,18 @@ module MockProcessGraphTokens =
                 List.zip expected actual,
                 (fun (expected,actual) -> Param.typedStructuralEquality (expected) (actual))
             )
+
+    module ProcessGraph =
+
+        [<Fact>]
+        let ``Simple study process graph mock tokens are correct`` () = 
+            let expected = ReferenceObjects.MockAPI.ProcessGraph.referenceStudyProcessGraphTable
+            let actual = TestObjects.MockAPI.ProcessGraphTokens.simpleStudy
+            Assert.All(
+                List.zip expected actual,
+                (fun (expected,actual) -> 
+                    Assert.All(
+                        List.zip expected actual,
+                        (fun (expected,actual) -> Param.typedStructuralEquality (expected) (actual)))
+                )
+            )

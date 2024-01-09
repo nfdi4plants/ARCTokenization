@@ -497,3 +497,12 @@ module MockAPI =
             CvParam(CvTerm.create("APGSO:00000014", "Output", "APGSO"), ParamValue.Value "Sample_1")
             CvParam(CvTerm.create("APGSO:00000014", "Output", "APGSO"), ParamValue.Value "Sample_2")
         ]
+
+    module ProcessGraph =
+        
+        let referenceStudyProcessGraphTable = 
+            [
+                ProcessGraphTokens.referenceInputColumn
+                ProcessGraphTokens.referenceCharacteristicsColumn
+                ProcessGraphTokens.referenceOutputColumn
+            ]
