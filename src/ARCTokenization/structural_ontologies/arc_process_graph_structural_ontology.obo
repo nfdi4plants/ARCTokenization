@@ -1,0 +1,129 @@
+!This file was auto generated on 2024-01-09. Do not edit it. All manual changes will be overwritten by the next generator run eventually.
+format-version: 1.2
+data-version: init/2024-01-09
+saved-by: Kevin Schneider
+default-namespace: apgso
+ontology: APGSO
+
+[Term]
+id: APGSO:00000001
+name: Process Graph Header
+def: ""
+
+[Term]
+id: APGSO:00000002
+name: Characteristic
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000003
+name: Factor
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000004
+name: Parameter
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000005
+name: Component
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000006
+name: ProtocolType
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000007
+name: ProtocolDescription
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000008
+name: ProtocolUri
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000009
+name: ProtocolVersion
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000010
+name: ProtocolREF
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000011
+name: Performer
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000012
+name: Date
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000013
+name: Input
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000014
+name: Output
+def: ""
+relationship: is_a APGSO:00000001 ! Process Graph Header
+
+[Term]
+id: APGSO:00000015
+name: IOType
+def: ""
+
+[Term]
+id: APGSO:00000016
+name: Source
+relationship: is_a APGSO:00000014 ! IOType
+
+[Term]
+id: APGSO:00000017
+name: Sample
+relationship: is_a APGSO:00000014 ! IOType
+
+[Term]
+id: APGSO:00000018
+name: RawDataFile
+relationship: is_a APGSO:00000014 ! IOType
+
+[Term]
+id: APGSO:00000019
+name: DerivedDataFile
+relationship: is_a APGSO:00000014 ! IOType
+
+[Term]
+id: APGSO:00000020
+name: ImageFile
+relationship: is_a APGSO:00000014 ! IOType
+
+[Term]
+id: APGSO:00000021
+name: Material
+relationship: is_a APGSO:00000014 ! IOType
+
+[Term]
+id: APGSO:00000022
+name: FreeText
+def: ""

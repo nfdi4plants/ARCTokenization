@@ -208,6 +208,32 @@ module Terms =
 
         ]
 
+    module ProcessGraph =
+        
+        let referenceOntologyName = "APGSO"
+
+        let expectedNonObsoleteNonRootTerms = [
+            CvTerm.create(accession = "APGSO:00000002", name = "Characteristic", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000003", name = "Factor", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000004", name = "Parameter", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000005", name = "Component", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000006", name = "ProtocolType", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000007", name = "ProtocolDescription", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000008", name = "ProtocolUri", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000009", name = "ProtocolVersion", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000010", name = "ProtocolREF", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000011", name = "Performer", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000012", name = "Date", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000013", name = "Input", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000014", name = "Output", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000016", name = "Source", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000017", name = "Sample", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000018", name = "RawDataFile", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000019", name = "DerivedDataFile", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000020", name = "ImageFile", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000021", name = "Material", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000022", name = "FreeText", ref = "APGSO")
+        ]
 
 
 
