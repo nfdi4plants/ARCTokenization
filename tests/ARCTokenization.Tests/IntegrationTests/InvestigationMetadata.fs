@@ -56,3 +56,13 @@ module InvestigationMetadata =
         Assert.All((List.zip allExpectedMetadataTermsFull parsedInvestigationMetadataSimple), (fun (expected,actual) ->
             CvParam.structuralEquality (expected) (actual :?> CvParam)
         ))
+
+    open ARCTokenization.StructuralOntology
+
+    [<Fact>]
+    let ``Simple investigation is parsed from filepath CvParam with all structural ontology terms in order`` () =
+        let fakePath = CvParam(cvTerm = AFSO.``File Path``, v = "Fixtures/correct/investigation_simple.xlsx")
+        let actual = ParamBasedParsers.parseIsaMetadataSheetFromCvp "investigation_simple.xlsx" Investigation.parseMetadataSheetFromFile [fakePath] |> Seq.head
+        Assert.All((List.zip allExpectedMetadataTermsFull actual), (fun (expected,actual) ->
+            CvParam.structuralEquality (expected) (actual :?> CvParam)
+        ))
