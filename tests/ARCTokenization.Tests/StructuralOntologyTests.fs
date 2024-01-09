@@ -1,6 +1,6 @@
 ﻿namespace StructuralOntologyTests
 
-open FsOboParser
+open OBO.NET
 open ARCTokenization
 open ARCTokenization.Terms
 open Xunit

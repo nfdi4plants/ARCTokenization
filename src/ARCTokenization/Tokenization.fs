@@ -4,6 +4,7 @@ open ControlledVocabulary
 open FsSpreadsheet
 open MetadataSheet
 open ARCTokenization.Terms
+open ARCtrl.ISA
 
 module Tokenization = 
     
@@ -11,7 +12,7 @@ module Tokenization =
         match line |> Seq.toList with
         | [] -> failwith "Cannot convert nothin"
         | key :: [] -> 
-            let f = keyParser [] key.Value
+            let f = keyParser [] (key.ValueAsString())
 
             let keyTerm = 
                 let tmp = f (ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey)
@@ -22,7 +23,7 @@ module Tokenization =
             [keyTerm]
 
         | key :: cells ->
-            let f = keyParser [] key.Value
+            let f = keyParser [] (key.ValueAsString())
 
             let keyTerm = 
                 let tmp = f (ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey)
@@ -33,10 +34,31 @@ module Tokenization =
             let cellTerms =
                 cells
                 |> List.map (fun c -> 
-                    let param = f (ParamValue.Value c.Value)
+                    let param = f (ParamValue.Value (c.ValueAsString()))
                     CvAttributeCollection.tryAddAttribute (Address.createRowParam(c.RowNumber)) param       |> ignore
                     CvAttributeCollection.tryAddAttribute (Address.createColumnParam(c.ColumnNumber)) param |> ignore
                     param
             
                 )
             keyTerm :: cellTerms
+
+    let convertAnnotationValue (av: AnnotationValue) =
+        match av with
+        | Text t -> t :> System.IConvertible
+        | Float f -> f :> System.IConvertible
+        | Int i -> i :> System.IConvertible
+
+    module OntologyAnnotation =
+
+        let tryAsCvTerm (oa: OntologyAnnotation) =
+            match (oa.TermAccessionNumber, oa.Name, oa.TermSourceREF) with
+            | (Some accession, Some name, Some ref) -> 
+                Some (
+                    CvTerm.create(
+                        accession = accession,
+                        name = name.ToString(),
+                        ref = ref 
+                    )
+                )
+
+            | _ -> None

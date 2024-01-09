@@ -1,6 +1,6 @@
 ﻿namespace ARCTokenization.Terms
 
-open FsOboParser
+open OBO.NET
 open System.IO
 open ControlledVocabulary
 

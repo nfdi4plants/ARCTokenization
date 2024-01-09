@@ -123,7 +123,6 @@ type Study =
     /// <param name="path">he path to the study xlsx file</param>
     static member parseAnnotationTablesFromFile (path: string) =
         FsWorkbook.fromXlsxFile path
-        |> AnnotationTable.parseWorkbook
 
 type Assay =
 
@@ -164,4 +163,3 @@ type Assay =
     /// <param name="path">he path to the assay xlsx file</param>
     static member parseAnnotationTablesFromFile (path: string) =
         FsWorkbook.fromXlsxFile path
-        |> AnnotationTable.parseWorkbook

@@ -60,9 +60,10 @@
   <ItemGroup>
     <ProjectReference Include="..\ControlledVocabulary\ControlledVocabulary.fsproj" PackageVersion="[1.0.0, 2.0.0)" />
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
-    <PackageReference Include="FsOboParser" Version="[0.3.0]" />
-    <PackageReference Include="FsSpreadsheet" Version="[4.1.0]" />
-    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[4.1.0]" />
+    <PackageReference Include="OBO.NET" Version="[0.4.2]" />
+    <PackageReference Include="FsSpreadsheet" Version="[5.0.2]" />
+    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[5.0.2]" />
+    <PackageReference Include="ARCtrl" Version="[1.0.1]" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
