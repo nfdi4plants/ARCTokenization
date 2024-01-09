@@ -44,14 +44,6 @@ module Tokenization =
 
     module ARCtrl =
 
-        module AnnotationValue =
-
-            let getValue (av: AnnotationValue) =
-                match av with
-                | Text t -> t :> System.IConvertible
-                | Float f -> f :> System.IConvertible
-                | Int i -> i :> System.IConvertible
-
         module OntologyAnnotation =
 
             let asCvTerm (oa: OntologyAnnotation) =
@@ -60,6 +52,7 @@ module Tokenization =
                     name = oa.NameText,
                     ref = oa.TermSourceREFString
                 )
+
         module IOType =
 
             let asCvTerm (io: IOType) = 

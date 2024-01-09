@@ -12,15 +12,18 @@
     <Compile Include="TestObjects.fs" />
     <Compile Include="ReferenceObjects.fs" />
     <Compile Include="StructuralOntologyTests.fs" />
-    <Compile Include="TokenizationTests\ParserFunctions.fs" />
+    <Compile Include="TokenizationTests\ProcessGraphTokenization.fs" />
+    <Compile Include="TokenizationTests\MetadataTokenization.fs" />
+    <Compile Include="TokenizationTests\FileSystemTokenization.fs" />
     <Compile Include="MockAPITests\MockInvestigationMetadataTokens.fs" />
     <Compile Include="MockAPITests\MockStudyMetadataTokens.fs" />
     <Compile Include="MockAPITests\MockAssayMetadataTokens.fs" />
+    <Compile Include="MockAPITests\MockProcessGraphTokens.fs" />
     <Compile Include="IntegrationTests\InvestigationMetadata.fs" />
     <Compile Include="IntegrationTests\StudyMetadata.fs" />
-    <Compile Include="IntegrationTests\StudyAnnotationTable.fs" />
+    <Compile Include="IntegrationTests\StudyProcessgraph.fs" />
     <Compile Include="IntegrationTests\AssayMetadata.fs" />
-    <Compile Include="IntegrationTests\AssayAnnotationTable.fs" />
+    <Compile Include="IntegrationTests\AssayProcessGraph.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

@@ -175,7 +175,6 @@ module Terms =
             CvTerm.create("STDMSO:00000060", "Study Person Roles Term Accession Number", "STDMSO")
             CvTerm.create("STDMSO:00000061", "Study Person Roles Term Source REF", "STDMSO")
         ]
-    
 
     module AssayMetadata = 
 
@@ -234,8 +233,6 @@ module Terms =
             CvTerm.create(accession = "APGSO:00000021", name = "Material", ref = "APGSO")
             CvTerm.create(accession = "APGSO:00000022", name = "FreeText", ref = "APGSO")
         ]
-
-
 
 module Tokenization =
     
@@ -451,6 +448,10 @@ module Tokenization =
             )
             |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
+    module ARCtrl =
+        ()
+
+
 module MockAPI =
     
     module InvestigationMetadataTokens = 
@@ -476,3 +477,23 @@ module MockAPI =
             Terms.AssayMetadata.nonObsoleteNonRootCvTerms
             |> List.filter (fun t -> not (t.Name.StartsWith("Comment")) ) // ignore all comments
             |> List.map (fun cvTerm -> CvParam(cvTerm, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, []))
+
+    module ProcessGraphTokens = 
+
+        let referenceInputColumn = [
+            CvParam(CvTerm.create("APGSO:00000013", "Input", "APGSO"), ParamValue.CvValue(CvTerm.create("APGSO:00000016", "Source", "APGSO")))
+            CvParam(CvTerm.create("APGSO:00000013", "Input", "APGSO"), ParamValue.Value "Source_1")
+            CvParam(CvTerm.create("APGSO:00000013", "Input", "APGSO"), ParamValue.Value "Source_1")
+        ]
+
+        let referenceCharacteristicsColumn = [
+            CvParam(CvTerm.create("APGSO:00000002", "Characteristic", "APGSO"), ParamValue.CvValue(CvTerm.create("OBI:0100026","organism","OBI")))
+            CvParam(CvTerm.create("APGSO:00000002", "Characteristic", "APGSO"), ParamValue.CvValue(CvTerm.create("http://purl.obolibrary.org/obo/NCBITaxon_3702","Arabidopsis thaliana","NCBITaxon")))
+            CvParam(CvTerm.create("APGSO:00000002", "Characteristic", "APGSO"), ParamValue.CvValue(CvTerm.create("http://purl.obolibrary.org/obo/NCBITaxon_3702","Arabidopsis thaliana","NCBITaxon")))
+        ]
+            
+        let referenceOutputColumn = [
+            CvParam(CvTerm.create("APGSO:00000014", "Output", "APGSO"), ParamValue.CvValue(CvTerm.create("APGSO:00000017", "Sample", "APGSO")))
+            CvParam(CvTerm.create("APGSO:00000014", "Output", "APGSO"), ParamValue.Value "Sample_1")
+            CvParam(CvTerm.create("APGSO:00000014", "Output", "APGSO"), ParamValue.Value "Sample_2")
+        ]

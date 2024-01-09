@@ -1,6 +1,8 @@
 ﻿namespace ARCTokenization
 
 open ControlledVocabulary
+open ARCtrl
+open ARCtrl.ISA
 
 type ARCMock =
 
@@ -419,3 +421,25 @@ type ARCMock =
                     CvParam(term, ParamValue.Value v, [])
             )
         )
+
+    static member ProcessGraphColumn(
+        header: ARCtrl.ISA.CompositeHeader,
+        cells: seq<ARCtrl.ISA.CompositeCell>
+    ) =
+        CompositeColumn.create(header, cells |> Array.ofSeq)
+        |> Tokenization.ARCtrl.CompositeColumn.tokenize
+
+    static member ProcessGraph(
+        columns: seq<ARCtrl.ISA.CompositeHeader *  seq<ARCtrl.ISA.CompositeCell>>
+    ) =
+        let table = ArcTable.create("", new ResizeArray<_>(), new System.Collections.Generic.Dictionary<_,_>())
+        
+        columns
+        |> Seq.map (fun (headerTerm, cells) -> 
+            CompositeColumn.create(headerTerm, cells |> Array.ofSeq)
+        )
+        |> Array.ofSeq
+        |> table.AddColumns
+        
+        table
+        |> Tokenization.ARCtrl.ARCTable.tokenizeColumns

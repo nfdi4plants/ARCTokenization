@@ -1,0 +1,4 @@
+﻿namespace IntegrationTests
+
+module StudyProcessGraph = ()
+
