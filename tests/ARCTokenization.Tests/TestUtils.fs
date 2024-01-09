@@ -3,13 +3,12 @@
 open Xunit
 open ControlledVocabulary
 open ARCTokenization
-open ARCTokenization.AnnotationTable
 
 module CvParam =
 
-    let termNamesEqual (cvpExpectec : CvParam) (cvpActual : CvParam) =
+    let termNamesEqual (cvpExpected : CvParam) (cvpActual : CvParam) =
         Assert.Equal(
-            (CvBase.getCvName cvpExpectec),
+            (CvBase.getCvName cvpExpected),
             (CvBase.getCvName cvpActual)
         )
 
@@ -19,9 +18,9 @@ module CvParam =
             (CvBase.getCvName cvpActual)
         )
 
-    let accessionsEqual (cvpExpectec : CvParam) (cvpActual : CvParam) =
+    let accessionsEqual (cvpExpected : CvParam) (cvpActual : CvParam) =
         Assert.Equal(
-            (CvBase.getCvAccession cvpExpectec),
+            (CvBase.getCvAccession cvpExpected),
             (CvBase.getCvAccession cvpActual)
         )
 
@@ -31,9 +30,9 @@ module CvParam =
             (CvBase.getCvAccession cvpActual)
         )
 
-    let refUrisEqual (cvpExpectec : CvParam) (cvpActual : CvParam) =
+    let refUrisEqual (cvpExpected : CvParam) (cvpActual : CvParam) =
         Assert.Equal(
-            (CvBase.getCvRef cvpExpectec),
+            (CvBase.getCvRef cvpExpected),
             (CvBase.getCvRef cvpActual)
         )
 
@@ -43,9 +42,9 @@ module CvParam =
             (CvBase.getCvRef cvpActual)
         )
 
-    let valuesEqual (cvpExpectec : CvParam) (cvpActual : CvParam) =
+    let valuesEqual (cvpExpected : CvParam) (cvpActual : CvParam) =
         Assert.Equal(
-            (Param.getParamValue cvpExpectec),
+            (Param.getParamValue cvpExpected),
             (Param.getParamValue cvpActual)
         )
 
@@ -55,48 +54,140 @@ module CvParam =
             (Param.getParamValue cvpActual)
         )
 
-    let structuralEquality (cvpExpectec : CvParam) (cvpActual : CvParam) =
-        termNamesEqual cvpExpectec cvpActual
-        accessionsEqual cvpExpectec cvpActual
-        refUrisEqual cvpExpectec cvpActual
-        valuesEqual cvpExpectec cvpActual
+    let structuralEquality (cvpExpected : CvParam) (cvpActual : CvParam) =
+        termNamesEqual cvpExpected cvpActual
+        accessionsEqual cvpExpected cvpActual
+        refUrisEqual cvpExpected cvpActual
+        valuesEqual cvpExpected cvpActual
         
 
 module UserParam =
 
     open ARCTokenization
 
-    let termNamesEqual (upActual : UserParam) (upExpectec : UserParam) =
+    let termNamesEqual (upExpected : UserParam) (upActual : UserParam) =
         Assert.Equal(
-            (CvBase.getCvName upActual),
-            (CvBase.getCvName upExpectec)
+            (CvBase.getCvName upExpected),
+            (CvBase.getCvName upActual)
         )
+
+    let hasTermValue (expectedValue : string) (upActual : UserParam) =
+        Assert.Equal(
+            expectedValue,
+            (CvBase.getCvName upActual)
+        )
+
+    let accessionsEqual (upExpected : UserParam) (upActual : UserParam) =
+        Assert.Equal(
+            (CvBase.getCvAccession upExpected),
+            (CvBase.getCvAccession upActual)
+        )
+
+    let hasAccession (expectedID : string) (upActual : UserParam) =
+        Assert.Equal(
+            expectedID,
+            (CvBase.getCvAccession upActual)
+        )
+
+    let refUrisEqual (upExpected : UserParam) (upActual : UserParam) =
+        Assert.Equal(
+            (CvBase.getCvRef upExpected),
+            (CvBase.getCvRef upActual)
+        )
+
+    let hasRefUri (expectedRefUri : string) (upActual : UserParam) =
+        Assert.Equal(
+            expectedRefUri,
+            (CvBase.getCvRef upActual)
+        )
+
+    let valuesEqual (upExpected : UserParam) (upActual : UserParam) =
+        Assert.Equal(
+            (Param.getParamValue upExpected),
+            (Param.getParamValue upActual)
+        )
+
+    let hasValue (expectedValue : ParamValue) (upActual : UserParam) =
+        Assert.Equal(
+            expectedValue,
+            (Param.getParamValue upActual)
+        )
+
+    let structuralEquality (upActual : UserParam) (upExpected : UserParam) =
+        termNamesEqual upExpected upActual
+        accessionsEqual upExpected upActual
+        refUrisEqual upExpected upActual
+        valuesEqual upExpected upActual
+
+module Param =
+    
+    open ARCTokenization
+
+    let termNamesEqual (ipExpected : IParam) (ipActual : IParam) =
+        Assert.Equal(
+            (CvBase.getCvName ipExpected),
+            (CvBase.getCvName ipActual)
+        )
+
+    let hasTermValue (expectedValue : string) (ipActual : IParam) =
+        Assert.Equal(
+            expectedValue,
+            (CvBase.getCvName ipActual)
+        )
+
+    let accessionsEqual (ipExpected : IParam) (ipActual : IParam) =
+        Assert.Equal(
+            (CvBase.getCvAccession ipExpected),
+            (CvBase.getCvAccession ipActual)
+        )
+
+    let hasAccession (expectedID : string) (ipActual : IParam) =
+        Assert.Equal(
+            expectedID,
+            (CvBase.getCvAccession ipActual)
+        )
+
+    let refUrisEqual (ipExpected : IParam) (ipActual : IParam) =
+        Assert.Equal(
+            (CvBase.getCvRef ipExpected),
+            (CvBase.getCvRef ipActual)
+        )
+
+    let hasRefUri (expectedRefUri : string) (ipActual : IParam) =
+        Assert.Equal(
+            expectedRefUri,
+            (CvBase.getCvRef ipActual)
+        )
+
+    let valuesEqual (ipExpected : IParam) (ipActual : IParam) =
+        Assert.Equal(
+            (Param.getParamValue ipExpected),
+            (Param.getParamValue ipActual)
+        )
+
+    let hasValue (expectedValue : ParamValue) (ipActual : IParam) =
+        Assert.Equal(
+            expectedValue,
+            (Param.getParamValue ipActual)
+        )
+
+    let structuralEquality (ipActual : IParam) (ipExpected : IParam) =
+        termNamesEqual ipExpected ipActual
+        accessionsEqual ipExpected ipActual
+        refUrisEqual ipExpected ipActual
+        valuesEqual ipExpected ipActual
+
+    let typedStructuralEquality (ipExpected : IParam) (ipActual : IParam) =
+        if Param.is<CvParam> ipExpected && Param.is<CvParam> ipActual then
+            structuralEquality ipExpected ipActual
+        elif 
+            Param.is<UserParam> ipExpected && Param.is<UserParam> ipActual then
+            structuralEquality ipExpected ipActual
+        else
+            Assert.True(false, "Expected and actual parameters are not of the same param subtype")
 
 module TokenizedAnnotationTable =
     
-    let IOColumnsEqual (expectedIOColumns : CvParam list list) (table : TokenizedAnnotationTable) =
-        (expectedIOColumns, table.IOColumns)
-        ||> List.iter2 (fun expectedGroup actualGroup ->
-            (expectedGroup, actualGroup)
-            ||> List.iter2 (fun expectedParam actualParam ->
-                CvParam.structuralEquality expectedParam actualParam
-            )
-        )
-
-    let hasIOColumnAmount (expectedIOColumnAmount : int) (table : TokenizedAnnotationTable) =
-        Assert.Equal(expectedIOColumnAmount, table.IOColumns.Length)
-
-
-    let termRelatedBuildingBlocksEqual (expectedTermRelatedBuildingBlocks : CvParam list list) (table : TokenizedAnnotationTable) =
-        (expectedTermRelatedBuildingBlocks, table.TermRelatedBuildingBlocks)
-        ||> List.iter2 (fun expectedGroup actualGroup ->
-            (expectedGroup, actualGroup)
-            ||> List.iter2 (fun expectedParam actualParam ->
-                CvParam.structuralEquality expectedParam actualParam
-            )
-        )
-
-    let hasTermRelatedBuildingBlockAmount (expectedTermRelatedBuildingBlockAmount : int) (table : TokenizedAnnotationTable) =
-        Assert.Equal(expectedTermRelatedBuildingBlockAmount, table.TermRelatedBuildingBlocks.Length)
+    ()
 
 

@@ -76,6 +76,7 @@ let structuralOntologySources = [
     "src/ARCTokenization/structural_ontologies/investigation_metadata_structural_ontology.yml"
     "src/ARCTokenization/structural_ontologies/study_metadata_structural_ontology.yml"
     "src/ARCTokenization/structural_ontologies/assay_metadata_structural_ontology.yml"
+    "src/ARCTokenization/structural_ontologies/arc_process_graph_structural_ontology.yml"
     "src/ARCTokenization/structural_ontologies/arc_file_structure_ontology.yml"
 ]
 

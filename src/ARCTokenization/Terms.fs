@@ -1,6 +1,6 @@
 ﻿namespace ARCTokenization.Terms
 
-open FsOboParser
+open OBO.NET
 open System.IO
 open ControlledVocabulary
 
@@ -99,6 +99,7 @@ module StudyMetadata =
     let obsoleteCvTerms =
         obsoleteOboTerms
         |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "STDMSO"))
+
 module AssayMetadata = 
     
     let internal obo = (EmbeddedResource.load "structural_ontologies.assay_metadata_structural_ontology.obo").Replace("\r\n", "\n").Split('\n')
@@ -138,8 +139,56 @@ module AssayMetadata =
         |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
 
     let obsoleteCvTerms =
-        obsoleteOboTerms
+        obsoleteOboTerms 
         |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "ASSMSO"))
+
+// equivalents of composite header / cell types in ARCtrl
+module ProcessGraph =
+    
+    let internal obo = (EmbeddedResource.load "structural_ontologies.arc_process_graph_structural_ontology.obo").Replace("\r\n", "\n").Split('\n')
+
+    let ontology = OboOntology.fromLines true obo
+
+    let nonRootOboTerms = 
+        ontology.Terms
+        |> List.filter (fun t ->
+            t.Name <> "Process Graph Header"
+            && t.Id <> "APGSO:00000001"
+            && t.Name <> "IOType"
+            && t.Id <> "APGSO:00000015"
+        )
+
+    let nonObsoleteOboTerms = 
+        ontology.Terms
+        |> List.filter (fun t -> not t.IsObsolete)
+
+    let nonObsoleteNonRootOboTerms = 
+        nonRootOboTerms
+        |> List.filter (fun t -> not t.IsObsolete)
+
+    let obsoleteOboTerms = 
+        nonRootOboTerms
+        |> List.filter (fun t -> t.IsObsolete)
+
+    let cvTerms =
+        ontology.Terms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "APGSO"))
+
+    let nonRootCvTerms = 
+        nonRootOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "APGSO"))
+
+    let nonObsoleteCvTerms =
+        nonObsoleteOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "APGSO"))
+
+    let nonObsoleteNonRootCvTerms =
+        nonObsoleteNonRootOboTerms
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "APGSO"))
+
+    let obsoleteCvTerms =
+        obsoleteOboTerms 
+        |> List.map (fun t -> CvTerm.create(accession = t.Id, name = t.Name, ref = "APGSO"))
 
 
 module StructuralTerms =

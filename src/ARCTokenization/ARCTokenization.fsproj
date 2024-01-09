@@ -19,14 +19,17 @@
   <ItemGroup>
     <None Include="RELEASE_NOTES.md" />
     <Compile Include="structural_ontologies\AFSO.fs" />
+    <Compile Include="structural_ontologies\APGSO.fs" />
     <Compile Include="structural_ontologies\INVMSO.fs" />
     <Compile Include="structural_ontologies\STDMSO.fs" />
     <Compile Include="structural_ontologies\ASSMSO.fs" />
     <EmbeddedResource Include="structural_ontologies/arc_file_structure_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
+    <EmbeddedResource Include="structural_ontologies/arc_process_graph_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
     <EmbeddedResource Include="structural_ontologies/investigation_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
     <EmbeddedResource Include="structural_ontologies/study_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
     <EmbeddedResource Include="structural_ontologies/assay_metadata_structural_ontology.obo" CopyToOutputDirectory="Always" Pack="true" PackagePath="structural_ontologies" />
     <None Include="structural_ontologies/arc_file_structure_ontology.yml" />
+    <None Include="structural_ontologies/arc_process_graph_structural_ontology.yml" />
     <None Include="structural_ontologies/investigation_metadata_structural_ontology.yml" />
     <None Include="structural_ontologies/study_metadata_structural_ontology.yml" />
     <None Include="structural_ontologies/assay_metadata_structural_ontology.yml" />
@@ -60,9 +63,10 @@
   <ItemGroup>
     <ProjectReference Include="..\ControlledVocabulary\ControlledVocabulary.fsproj" PackageVersion="[1.0.0, 2.0.0)" />
     <PackageReference Include="FSharpAux.Core" Version="[2.0.0]" />
-    <PackageReference Include="FsOboParser" Version="[0.3.0]" />
-    <PackageReference Include="FsSpreadsheet" Version="[4.1.0]" />
-    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[4.1.0]" />
+    <PackageReference Include="OBO.NET" Version="[0.4.2]" />
+    <PackageReference Include="FsSpreadsheet" Version="[5.0.2]" />
+    <PackageReference Include="FsSpreadsheet.ExcelIO" Version="[5.0.2]" />
+    <PackageReference Include="ARCtrl" Version="[1.0.1]" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 

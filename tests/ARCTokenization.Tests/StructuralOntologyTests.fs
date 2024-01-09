@@ -1,6 +1,6 @@
 ﻿namespace StructuralOntologyTests
 
-open FsOboParser
+open OBO.NET
 open ARCTokenization
 open ARCTokenization.Terms
 open Xunit
@@ -202,6 +202,46 @@ module AssayMetadata =
                 List.zip
                     AssayMetadata.nonObsoleteNonRootCvTerms
                     ReferenceObjects.Terms.AssayMetadata.epectedNonObsoleteNonRootTerms
+            ),
+            (fun (actual, expected) -> 
+                Assert.True(
+                    (actual.Name = expected.Name)
+                    && (actual.Accession = expected.Accession)
+                    && (actual.RefUri = expected.RefUri)
+                )
+            )
+        )
+
+module ProcessGraph =
+    
+    [<Fact>]
+    let ``no duplicate term ids`` () =
+        let expected = [1 .. ProcessGraph.ontology.Terms.Length]
+        let actual = 
+            ProcessGraph.ontology.Terms
+            |> List.map (fun t ->
+                t.Id.Replace("APGSO:","") |> int
+            )
+            |> List.sort
+        Assert.All(
+            List.zip expected actual,
+            (fun (e,a) -> Assert.Equal(e,a))
+        )
+
+    [<Fact>] 
+    let ``all ontology names correct`` () =
+        Assert.All(
+            ProcessGraph.cvTerms,
+            (fun t -> Assert.True(t.RefUri = ReferenceObjects.Terms.ProcessGraph.referenceOntologyName))
+        )
+
+    [<Fact>]
+    let ``all non root non obsolete CvTerms are correct`` () =
+        Assert.All(
+            (
+                List.zip
+                    ProcessGraph.nonObsoleteNonRootCvTerms
+                    ReferenceObjects.Terms.ProcessGraph.expectedNonObsoleteNonRootTerms
             ),
             (fun (actual, expected) -> 
                 Assert.True(

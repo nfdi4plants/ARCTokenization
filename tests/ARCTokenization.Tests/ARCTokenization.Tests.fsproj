@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
@@ -12,27 +12,29 @@
     <Compile Include="TestObjects.fs" />
     <Compile Include="ReferenceObjects.fs" />
     <Compile Include="StructuralOntologyTests.fs" />
-    <Compile Include="TokenizationTests\ParserFunctions.fs" />
+    <Compile Include="TokenizationTests\ProcessGraphTokenization.fs" />
+    <Compile Include="TokenizationTests\MetadataTokenization.fs" />
+    <Compile Include="TokenizationTests\FileSystemTokenization.fs" />
     <Compile Include="MockAPITests\MockInvestigationMetadataTokens.fs" />
     <Compile Include="MockAPITests\MockStudyMetadataTokens.fs" />
     <Compile Include="MockAPITests\MockAssayMetadataTokens.fs" />
+    <Compile Include="MockAPITests\MockProcessGraphTokens.fs" />
     <Compile Include="IntegrationTests\InvestigationMetadata.fs" />
     <Compile Include="IntegrationTests\StudyMetadata.fs" />
-    <Compile Include="IntegrationTests\StudyAnnotationTable.fs" />
+    <Compile Include="IntegrationTests\StudyProcessgraph.fs" />
     <Compile Include="IntegrationTests\AssayMetadata.fs" />
-    <Compile Include="IntegrationTests\AssayAnnotationTable.fs" />
+    <Compile Include="IntegrationTests\AssayProcessGraph.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.6.5" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.6">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="3.1.2">
+    <PackageReference Include="coverlet.collector" Version="6.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

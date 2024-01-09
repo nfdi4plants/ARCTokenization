@@ -175,7 +175,6 @@ module Terms =
             CvTerm.create("STDMSO:00000060", "Study Person Roles Term Accession Number", "STDMSO")
             CvTerm.create("STDMSO:00000061", "Study Person Roles Term Source REF", "STDMSO")
         ]
-    
 
     module AssayMetadata = 
 
@@ -208,8 +207,32 @@ module Terms =
 
         ]
 
+    module ProcessGraph =
+        
+        let referenceOntologyName = "APGSO"
 
-
+        let expectedNonObsoleteNonRootTerms = [
+            CvTerm.create(accession = "APGSO:00000002", name = "Characteristic", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000003", name = "Factor", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000004", name = "Parameter", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000005", name = "Component", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000006", name = "ProtocolType", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000007", name = "ProtocolDescription", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000008", name = "ProtocolUri", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000009", name = "ProtocolVersion", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000010", name = "ProtocolREF", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000011", name = "Performer", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000012", name = "Date", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000013", name = "Input", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000014", name = "Output", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000016", name = "Source", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000017", name = "Sample", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000018", name = "RawDataFile", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000019", name = "DerivedDataFile", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000020", name = "ImageFile", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000021", name = "Material", ref = "APGSO")
+            CvTerm.create(accession = "APGSO:00000022", name = "FreeText", ref = "APGSO")
+        ]
 
 module Tokenization =
     
@@ -425,6 +448,10 @@ module Tokenization =
             )
             |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
 
+    module ARCtrl =
+        ()
+
+
 module MockAPI =
     
     module InvestigationMetadataTokens = 
@@ -450,3 +477,32 @@ module MockAPI =
             Terms.AssayMetadata.nonObsoleteNonRootCvTerms
             |> List.filter (fun t -> not (t.Name.StartsWith("Comment")) ) // ignore all comments
             |> List.map (fun cvTerm -> CvParam(cvTerm, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, []))
+
+    module ProcessGraphTokens = 
+
+        let referenceInputColumn = [
+            CvParam(CvTerm.create("APGSO:00000013", "Input", "APGSO"), ParamValue.CvValue(CvTerm.create("APGSO:00000016", "Source", "APGSO")))
+            CvParam(CvTerm.create("APGSO:00000013", "Input", "APGSO"), ParamValue.Value "Source_1")
+            CvParam(CvTerm.create("APGSO:00000013", "Input", "APGSO"), ParamValue.Value "Source_1")
+        ]
+
+        let referenceCharacteristicsColumn = [
+            CvParam(CvTerm.create("APGSO:00000002", "Characteristic", "APGSO"), ParamValue.CvValue(CvTerm.create("OBI:0100026","organism","OBI")))
+            CvParam(CvTerm.create("APGSO:00000002", "Characteristic", "APGSO"), ParamValue.CvValue(CvTerm.create("http://purl.obolibrary.org/obo/NCBITaxon_3702","Arabidopsis thaliana","NCBITaxon")))
+            CvParam(CvTerm.create("APGSO:00000002", "Characteristic", "APGSO"), ParamValue.CvValue(CvTerm.create("http://purl.obolibrary.org/obo/NCBITaxon_3702","Arabidopsis thaliana","NCBITaxon")))
+        ]
+            
+        let referenceOutputColumn = [
+            CvParam(CvTerm.create("APGSO:00000014", "Output", "APGSO"), ParamValue.CvValue(CvTerm.create("APGSO:00000017", "Sample", "APGSO")))
+            CvParam(CvTerm.create("APGSO:00000014", "Output", "APGSO"), ParamValue.Value "Sample_1")
+            CvParam(CvTerm.create("APGSO:00000014", "Output", "APGSO"), ParamValue.Value "Sample_2")
+        ]
+
+    module ProcessGraph =
+        
+        let referenceStudyProcessGraphTable = 
+            [
+                ProcessGraphTokens.referenceInputColumn
+                ProcessGraphTokens.referenceCharacteristicsColumn
+                ProcessGraphTokens.referenceOutputColumn
+            ]

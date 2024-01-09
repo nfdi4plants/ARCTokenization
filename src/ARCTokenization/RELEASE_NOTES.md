@@ -1,3 +1,12 @@
+### 3.0.0 - (Released TBD)
+
+- Additions:
+    - [Add basic process graph tokenization](https://github.com/nfdi4plants/ARCTokenization/pull/48/commits/e6cd1775575aaac5aca3d2a48ff26fd31b136038):
+        - Based on ARCtrl ARCTable
+        - add ARC Process Graph Structural ontology (APGSO)
+
+
+
 ### 2.0.0 - (Released 2024-01-08)
 
 Changes in existing ontology terms will now ways result in a new major version of the package.

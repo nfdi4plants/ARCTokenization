@@ -118,12 +118,25 @@ type Study =
         |> List.concat
 
     /// <summary>
-    /// Parses all annotation tables from an ISA Study XLSX file as a list of `TokenizedAnnotationTable`s, a type that contains IO columns separated from the other columns.
+    /// Parses all annotation tables from an ISA Study XLSX file as a 
+    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
+    /// where the string is the name of the worksheet that contained the table, 
+    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
     /// </summary>
     /// <param name="path">he path to the study xlsx file</param>
-    static member parseAnnotationTablesFromFile (path: string) =
-        FsWorkbook.fromXlsxFile path
-        |> AnnotationTable.parseWorkbook
+    static member parseProcessGraphColumnsFromFile (path: string) =
+        (FsWorkbook.fromXlsxFile path)
+            .GetWorksheets()
+            |> Seq.choose (fun ws ->
+                ws
+                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> Option.map (fun t -> 
+                    ws.Name, 
+                    t 
+                    |> Tokenization.ARCtrl.ARCTable.tokenizeColumns
+                )
+            )
+            |> Map.ofSeq
 
 type Assay =
 
@@ -159,9 +172,22 @@ type Assay =
         |> List.concat
 
     /// <summary>
-    /// Parses all annotation tables from an ISA Assay XLSX file as a list of `TokenizedAnnotationTable`s, a type that contains IO columns separated from the other columns.
+    /// Parses all annotation tables from an ISA Assay XLSX file as a 
+    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
+    /// where the string is the name of the worksheet that contained the table, 
+    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
     /// </summary>
-    /// <param name="path">he path to the assay xlsx file</param>
-    static member parseAnnotationTablesFromFile (path: string) =
-        FsWorkbook.fromXlsxFile path
-        |> AnnotationTable.parseWorkbook
+    /// <param name="path">he path to the study xlsx file</param>
+    static member parseProcessGraphColumnsFromFile (path: string) =
+        (FsWorkbook.fromXlsxFile path)
+            .GetWorksheets()
+            |> Seq.choose (fun ws ->
+                ws
+                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> Option.map (fun t -> 
+                    ws.Name, 
+                    t 
+                    |> Tokenization.ARCtrl.ARCTable.tokenizeColumns
+                )
+            )
+            |> Map.ofSeq
