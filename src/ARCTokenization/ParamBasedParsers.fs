@@ -14,7 +14,8 @@ type ParamBasedParsers =
             fun cvp ->
                 let cvpStr = Param.getValueAsString cvp
                 //printfn $"cvpStr: {cvpStr}"
-                if String.contains isaFileName cvpStr then
+                //if String.contains isaFileName cvpStr then
+                if Path.GetFileName cvpStr = isaFileName then
                     Some (isaMdsParsingF cvpStr)
                 else None
         )
@@ -34,7 +35,8 @@ type ParamBasedParsers =
             fun cvp ->
                 let cvpStr = Param.getValueAsString cvp
                 //printfn $"cvpStr: {cvpStr}"
-                if String.contains isaFileName (Path.GetFileName cvpStr) then
+                //if String.contains isaFileName cvpStr then
+                if isaFileName = Path.GetFileName cvpStr then
                     try Some (isaMdsParsingF cvpStr)
                     with _ -> None
                 else None
