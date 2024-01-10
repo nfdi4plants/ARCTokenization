@@ -33,6 +33,7 @@
     <None Include="structural_ontologies/investigation_metadata_structural_ontology.yml" />
     <None Include="structural_ontologies/study_metadata_structural_ontology.yml" />
     <None Include="structural_ontologies/assay_metadata_structural_ontology.yml" />
+    <Compile Include="Globals.fs" />
     <Compile Include="Address.fs" />
     <Compile Include="Terms.fs" />
     <Compile Include="Regex.fs" />
@@ -43,7 +44,6 @@
     <Compile Include="Worksheet.fs" />
     <Compile Include="FileSystem.fs" />
     <Compile Include="TopLevelParsers.fs" />
-    <Compile Include="ParamBasedParsers.fs" />
     <Compile Include="ARCMock.fs" />
   </ItemGroup>
 

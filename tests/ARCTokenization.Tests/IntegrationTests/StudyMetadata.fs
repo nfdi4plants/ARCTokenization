@@ -28,7 +28,12 @@ module StudyMetadata =
     [<Fact>]
     let ``Simple study is parsed from filepath CvParam with all structural ontology terms in order`` () =
         let fakePath = CvParam(cvTerm = AFSO.``File Path``, v = "Fixtures/correct/study_simple.xlsx")
-        let actual = ParamBasedParsers.parseIsaMetadataSheetFromCvp "study_simple.xlsx" Study.parseMetadataSheetfromFile [fakePath] |> Seq.head
+        let actual = 
+            [fakePath]
+            |> Study.parseMetadataSheetsFromTokens(
+                FileName = "study_simple.xlsx"
+            ) 
+            |> Seq.head
         Assert.All((List.zip allExpectedMetadataTermsFull actual), (fun (expected,actual) ->
             CvParam.structuralEquality (expected) (actual :?> CvParam)
         ))

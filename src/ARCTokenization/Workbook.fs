@@ -9,7 +9,7 @@ module Workbook =
 
     let getInvestigationMetadataSheet (useLastSheetOnIncorrectName: bool) investigation =
         try
-            FsWorkbook.getWorksheetByName "isa_investigation" investigation
+            FsWorkbook.getWorksheetByName Globals.INVESTIGATION_METADATA_SHEET_NAME investigation
         with _ ->
             if useLastSheetOnIncorrectName then
                 FsWorkbook.getWorksheets investigation
@@ -19,22 +19,22 @@ module Workbook =
 
     let getStudyMetadataSheet (useLastSheetOnIncorrectName: bool) study =
         try
-            FsWorkbook.tryGetWorksheetByName "Study" study
-            |> Option.defaultValue (FsWorkbook.getWorksheetByName "isa_study" study)
+            FsWorkbook.tryGetWorksheetByName Globals.STUDY_OBSOLETE_METADATA_SHEET_NAME study
+            |> Option.defaultValue (FsWorkbook.getWorksheetByName Globals.STUDY_METADATA_SHEET_NAME study)
         with _ ->
             if useLastSheetOnIncorrectName then
                 FsWorkbook.getWorksheets study
                 |> Seq.last
             else
-                failwith "No worksheet named 'Study' or 'isa_study' found in the workbook"
+                failwith $"No worksheet named {Globals.STUDY_OBSOLETE_METADATA_SHEET_NAME} or {Globals.STUDY_METADATA_SHEET_NAME} found in the workbook"
 
     let getAssayMetadataSheet (useLastSheetOnIncorrectName: bool) assay =
         try
-            FsWorkbook.tryGetWorksheetByName "Assay" assay
-            |> Option.defaultValue (FsWorkbook.getWorksheetByName "isa_assay" assay)
+            FsWorkbook.tryGetWorksheetByName Globals.ASSAY_OBSOLETE_METADATA_SHEET_NAME assay
+            |> Option.defaultValue (FsWorkbook.getWorksheetByName Globals.ASSAY_METADATA_SHEET_NAME assay)
         with _ ->
             if useLastSheetOnIncorrectName then
                 FsWorkbook.getWorksheets assay
                 |> Seq.last
             else
-                failwith "No worksheet named 'Assay' or 'isa_assay' found in the workbook"
+                failwith $"No worksheet named {Globals.ASSAY_OBSOLETE_METADATA_SHEET_NAME} or {Globals.ASSAY_METADATA_SHEET_NAME} found in the workbook"
