@@ -10,8 +10,8 @@ module InvestigationMetadata =
 
     open TestUtils
 
-    let parsedInvestigationMetadataEmpty = Investigation.parseMetadataSheetFromFile "Fixtures/incorrect/investigation_empty.xlsx"
-    let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetFromFile "Fixtures/correct/investigation_simple.xlsx"
+    let parsedInvestigationMetadataEmpty = Investigation.parseMetadataSheetFromFile() "Fixtures/incorrect/investigation_empty.xlsx"
+    let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetFromFile() "Fixtures/correct/investigation_simple.xlsx"
 
     let allExpectedMetadataTermsEmpty = 
         Terms.InvestigationMetadata.nonObsoleteNonRootCvTerms
@@ -54,5 +54,21 @@ module InvestigationMetadata =
     [<Fact>]
     let ``Simple investigation is parsed with all structural ontology terms in order`` () =
         Assert.All((List.zip allExpectedMetadataTermsFull parsedInvestigationMetadataSimple), (fun (expected,actual) ->
+            CvParam.structuralEquality (expected) (actual :?> CvParam)
+        ))
+
+    open ARCTokenization.StructuralOntology
+
+    [<Fact>]
+    let ``Simple investigation is parsed from filepath CvParam with all structural ontology terms in order`` () =
+        let fakePath = CvParam(cvTerm = AFSO.``File Path``, v = "Fixtures/correct/investigation_simple.xlsx")
+        let actual = 
+            [fakePath]
+            |> Investigation.parseMetadataSheetsFromTokens(
+                FileName = "investigation_simple.xlsx"
+            ) 
+            |> Seq.head
+
+        Assert.All((List.zip allExpectedMetadataTermsFull actual), (fun (expected,actual) ->
             CvParam.structuralEquality (expected) (actual :?> CvParam)
         ))

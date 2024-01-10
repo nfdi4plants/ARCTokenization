@@ -7,12 +7,9 @@
 //File.Copy(dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll", true)
 //File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll", true)
 
-#r "nuget: DocumentFormat.OpenXml"
 #r "nuget: FSharpAux"
 #r "nuget: FsOboParser"
-#r "nuget: FsSpreadsheet, 3.1.1"
-#r "nuget: FsSpreadsheet.ExcelIO, 3.1.1"
-#r "nuget: FSharp.FGL"
+#r "nuget: FsSpreadsheet.ExcelIO, 4.1.0"
 #r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
 open DocumentFormat.OpenXml
@@ -45,6 +42,32 @@ open FsOboParser
 open ControlledVocabulary
 open type ControlledVocabulary.ParamBase
 open ARCTokenization
+open ARCTokenization.StructuralOntology
+
+System.IO.Directory.GetCurrentDirectory()
+let fakePath = CvParam(cvTerm = AFSO.``File Path``, v = System.IO.Directory.GetCurrentDirectory() + "/tests/ARCTokenization.Tests/Fixtures/correct/investigation_simple.xlsx")
+
+let fakePath = CvParam(cvTerm = AFSO.``File Path``, v = "tests/ARCTokenization.Tests/Fixtures/correct/assay_simple.xlsx")
+let actual = ParamBasedParsers.parseIsaMetadataSheetFromCvp "assay_simple.xlsx" Assay.parseMetadataSheetFromFile [fakePath] |> Seq.head
+actual.Length
+let exp =
+    ARCMock.AssayMetadataTokens(
+        Assay_File_Name = [@"measurement1\isa.assay.xlsx"],
+        Assay_Performer_First_Name = ["Oliver"; "Marius"],
+        Assay_Performer_Last_Name = ["Maus"; "Katz"],
+        Assay_Performer_Mid_Initials = [""; "G."],
+        Assay_Performer_Email = ["maus@nfdi4plants.org"],
+        Assay_Performer_Affiliation = ["RPTU University of Kaiserslautern"],
+        Assay_Performer_Roles = ["research assistant"],
+        Assay_Performer_Roles_Term_Accession_Number = ["http://purl.org/spar/scoro/research-assistant"],
+        Assay_Performer_Roles_Term_Source_REF = ["scoro"]
+     )
+    |> List.concat
+exp.Length
+actual |> List.fold (fun acc ip -> $"{acc}\n{ip.Name}") "" |> printfn "%s"
+exp |> List.iter (fun ip -> printfn $"{ip.Name}")
+for i = 0 to 33 do
+    printfn $"{List.tryItem i actual |> Option.map (fun x -> x.Name) |> Option.defaultValue System.String.Empty}\t{List.tryItem i exp |> Option.map (fun x -> x.Name) |> Option.defaultValue System.String.Empty}"
 
 let testAccession1 = "TO:00000001"
 let testName1 = "Test"
