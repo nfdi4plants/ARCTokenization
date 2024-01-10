@@ -4,8 +4,11 @@
     - [Add basic process graph tokenization](https://github.com/nfdi4plants/ARCTokenization/pull/48/commits/e6cd1775575aaac5aca3d2a48ff26fd31b136038):
         - Based on ARCtrl ARCTable
         - add ARC Process Graph Structural ontology (APGSO)
+    - [Add filesystem token-based metadata parsing](https://github.com/nfdi4plants/ARCTokenization/pull/49)
+    - Most API endpoints now have a slightly different signature, meaning this is a major release
 
-
+- Bugfixes:
+    - Fix Option.defaultValue usage throwing errors although sheet names were present ([#35](https://github.com/nfdi4plants/ARCTokenization/issues/35) and [#36](https://github.com/nfdi4plants/ARCTokenization/issues/36)) via  [this commit](https://github.com/nfdi4plants/ARCTokenization/commit/560d46bfb11df5587f06a6da990bf49dad88334b) inspired by this [PR](https://github.com/nfdi4plants/ARCTokenization/pull/37)
 
 ### 2.0.0 - (Released 2024-01-08)
 
