@@ -1,4 +1,4 @@
-### 3.0.0 - (Released TBD)
+### 3.0.0 - (Released 2024-01-0)
 
 - Additions:
     - [Add basic process graph tokenization](https://github.com/nfdi4plants/ARCTokenization/pull/48/commits/e6cd1775575aaac5aca3d2a48ff26fd31b136038):
