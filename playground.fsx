@@ -1,33 +1,7 @@
-//open System.IO
-//open System.Collections.Generic
-
-//let dllBasePath = @"c:/repos/csbiology/fsspreadsheet/src"
-//File.Copy(dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll", dllBasePath + "/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet_Copy.dll", true)
-//File.Copy(dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll", dllBasePath + "/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO_Copy.dll", true)
-//File.Copy(dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll", dllBasePath + "/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO_Copy.dll", true)
-//File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll", true)
-
 #r "nuget: FSharpAux"
-#r "nuget: FsOboParser"
+#r "nuget: OBO.NET"
 #r "nuget: FsSpreadsheet.ExcelIO, 4.1.0"
-#r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
-open DocumentFormat.OpenXml
-open FSharpAux
-open FSharp.FGL
-open FSharp.FGL.ArrayAdjacencyGraph
-open System.Collections.Generic
-
-
-//#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet/bin/Debug/netstandard2.0/FsSpreadsheet.dll"
-//#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.CsvIO/bin/Debug/netstandard2.0/FsSpreadsheet.CsvIO.dll"
-//#r "c:/repos/csbiology/fsspreadsheet/src/FsSpreadsheet.ExcelIO/bin/Debug/netstandard2.0/FsSpreadsheet.ExcelIO.dll"
-//#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll"
-//#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\netstandard2.0\ArcGraphModel.dll"
-//#r @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel.IO\bin\Debug\netstandard2.0\ArcGraphModel.IO.dll"
-//#r @"C:/Users/olive/.nuget/packages/fsharpaux/1.1.0/lib/net5.0/FSharpAux.dll"
-//#r "src/ArcGraphModel/bin/Release/netstandard2.0/ArcGraphModel.dll"
-//#r "src/ControlledVocabulary/bin/Release/netstandard2.0/ControlledVocabulary.dll"
 #I "src/ControlledVocabulary/bin/Debug/netstandard2.0"
 #I "src/ControlledVocabulary/bin/Release/netstandard2.0"
 #r "ControlledVocabulary.dll"
@@ -37,12 +11,41 @@ open System.Collections.Generic
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
-open FsOboParser
-//open FsSpreadsheet.DSL
+open OBO.NET
 open ControlledVocabulary
 open type ControlledVocabulary.ParamBase
 open ARCTokenization
 open ARCTokenization.StructuralOntology
+open System.IO
+
+
+let arcProt = @"C:\Repos\git.nfdi4plants.org\ArcPrototype"
+
+let afts = FileSystem.parseAbsoluteFilePaths arcProt
+afts |> Seq.iter (Param.getValueAsString >> printfn "%s")
+
+let tryParseMetadataSheetFromToken (isaFileName: string) (isaMdsParsingF: string -> IParam list) (absFileToken: IParam) =
+    let cvpStr = Param.getValueAsString absFileToken
+    printfn $"cvpStr: {cvpStr}"
+    //if String.contains isaFileName cvpStr then
+    if Path.GetFileName cvpStr = isaFileName then
+        try 
+            Some (isaMdsParsingF cvpStr)
+        with _ -> 
+            None
+    else None
+
+afts 
+|> Seq.map (
+    fun cvp -> 
+        printfn $"{Param.getValueAsString cvp}"
+        tryParseMetadataSheetFromToken "isa.investigation.xlsx" (Investigation.parseMetadataSheetFromFile()) cvp
+)
+|> Seq.length
+
+let its = Investigation.parseMetadataSheetsFromTokens() afts
+
+
 
 System.IO.Directory.GetCurrentDirectory()
 let fakePath = CvParam(cvTerm = AFSO.``File Path``, v = System.IO.Directory.GetCurrentDirectory() + "/tests/ARCTokenization.Tests/Fixtures/correct/investigation_simple.xlsx")
