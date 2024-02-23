@@ -172,9 +172,6 @@ module Tokenization =
                 |>fun x -> 
                     x.Trim(segmentor)  
 
-            let directories = 
-                System.IO.Directory.EnumerateDirectories(rootPath, "*", System.IO.SearchOption.AllDirectories)
-            
             let trimmSegments (p:string) = 
                 p,
                 p.Split([|arcName|],System.StringSplitOptions.RemoveEmptyEntries)
@@ -208,6 +205,40 @@ module Tokenization =
                 | _ -> 
                     p,StructuralOntology.AFSO.``Directory Path``
 
-            directories
+            System.IO.Directory.EnumerateDirectories(rootPath, "*", System.IO.SearchOption.AllDirectories)
             |> Seq.map(fun x -> x|>trimmSegments|>fun (p,segments) -> getC p segments)
+
+        let matchFilePathToCVTerms (rootPath:string) =
+            let root =  System.Uri(rootPath)
+
+            let segmentor = 
+                root.Segments.[0].ToCharArray().[0]
+
+            let arcName = 
+                root.Segments
+                |>Array.last
+                |>fun x -> 
+                    x.Trim(segmentor)  
+
+            // let trimmSegments (p:string) = 
+            //     p.Split([|arcName|],System.StringSplitOptions.RemoveEmptyEntries)
+            //     |>fun x -> String.concat root.Segments.[0] x
             
+            let getC (p: string) = 
+                if p.Contains "isa.investigation.xlsx" then
+                    p,StructuralOntology.AFSO.``Investigation ISA``
+                elif p.Contains "isa.assay.xlsx" then
+                    p,StructuralOntology.AFSO.``Assay ISA``
+                elif p.Contains "isa.dataset.xlsx" then
+                    p,StructuralOntology.AFSO.``Dataset ISA``
+                elif p.Contains "isa.study.xlsx" then
+                    p,StructuralOntology.AFSO.``Study ISA``
+                elif p.Contains ".yml" then
+                    p,StructuralOntology.AFSO.``YML File``
+                elif p.Contains ".cwl" then
+                    p,StructuralOntology.AFSO.``CWL File``
+                else
+                    p,StructuralOntology.AFSO.``File Path``
+
+            System.IO.Directory.EnumerateFiles(rootPath, "*", System.IO.SearchOption.AllDirectories)
+            |> Seq.map(fun x -> x|> getC )
