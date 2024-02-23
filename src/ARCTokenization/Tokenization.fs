@@ -158,3 +158,56 @@ module Tokenization =
                 at.Columns
                 |> Array.map CompositeColumn.tokenize
                 |> List.ofArray
+
+    module SpecificTokens =
+        let matchPathToCVTerms (rootPath:string) =
+            let root =  System.Uri(rootPath)
+
+            let segmentor = 
+                root.Segments.[0].ToCharArray().[0]
+
+            let arcName = 
+                root.Segments
+                |>Array.last
+                |>fun x -> 
+                    x.Trim(segmentor)  
+
+            let directories = 
+                System.IO.Directory.EnumerateDirectories(rootPath, "*", System.IO.SearchOption.AllDirectories)
+            
+            let trimmSegments (p:string) = 
+                p,
+                p.Split([|arcName|],System.StringSplitOptions.RemoveEmptyEntries)
+                |>Array.tail
+                |> fun x -> x.[0].Trim(segmentor).Split segmentor
+            
+            let getC (p: string) (segments: string array) = 
+                match Array.length segments with
+                | 1 -> 
+                    if Array.contains "studies" segments then
+                        p,StructuralOntology.AFSO.``Studies Directory``
+                    elif Array.contains "assays" segments then
+                        p,StructuralOntology.AFSO.``Assays Directory``
+                    elif Array.contains "runs" segments then
+                        p,StructuralOntology.AFSO.``Runs Directory``
+                    elif Array.contains "workfows" segments then
+                        p,StructuralOntology.AFSO.``Workflows Directory``
+                    else
+                        p,StructuralOntology.AFSO.``Directory Path``
+                | 2 -> 
+                    if Array.contains "studies" segments then
+                        p,StructuralOntology.AFSO.Study
+                    elif Array.contains "assays" segments then
+                        p,StructuralOntology.AFSO.Assay
+                    elif Array.contains "runs" segments then
+                        p,StructuralOntology.AFSO.Run
+                    elif Array.contains "workfows" segments then
+                        p,StructuralOntology.AFSO.Workflow
+                    else
+                        p,StructuralOntology.AFSO.``Directory Path``
+                | _ -> 
+                    p,StructuralOntology.AFSO.``Directory Path``
+
+            directories
+            |> Seq.map(fun x -> x|>trimmSegments|>fun (p,segments) -> getC p segments)
+            

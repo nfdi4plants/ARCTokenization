@@ -9,28 +9,47 @@ open ARCTokenization.StructuralOntology
 open System.IO
 open System
 open ControlledVocabulary
+open Tokenization
 
 module internal FS =
 
     let tokenizeRelativeDirectoryPaths (rootPath:string) =
         let root = System.Uri(rootPath)
-        seq {
-            for dir in Directory.EnumerateDirectories(rootPath, "*", SearchOption.AllDirectories) do
-                let currentUri =  System.Uri(dir)
-                yield CvParam(
-                    cvTerm = AFSO.``Directory Path``,
-                    v = root.MakeRelativeUri(currentUri).ToString()
-                )
-        }
+        let tokens = Tokenization.SpecificTokens.matchPathToCVTerms rootPath
+        tokens
+        |>Seq.map(fun (path,param) ->
+            let currentUri =  System.Uri(path)
+            CvParam(
+                cvTerm = param,
+                v = root.MakeRelativeUri(currentUri).ToString()
+            )   
+        )
+        // seq {
+        //     for dir in Directory.EnumerateDirectories(rootPath, "*", SearchOption.AllDirectories) do
+        //         let currentUri =  System.Uri(dir)
+        //         yield CvParam(
+        //             cvTerm = AFSO.``Directory Path``,
+        //             v = root.MakeRelativeUri(currentUri).ToString()
+        //         )
+        // }
 
     let tokenizeAbsoluteDirectoryPaths  (rootPath:string) =
-        seq {
-                for dir in Directory.EnumerateDirectories(rootPath, "*", SearchOption.AllDirectories) do
-                    yield CvParam(
-                        cvTerm = AFSO.``Directory Path``,
-                        v = dir.Replace("\\","/")
-                    )
-            }    
+        let tokens = Tokenization.SpecificTokens.matchPathToCVTerms rootPath
+        tokens
+        |>Seq.map(fun (path,param) ->
+            CvParam(
+                cvTerm = param,
+                v = path.Replace("\\","/")
+            )   
+        )
+        
+        // seq {
+        //         for dir in Directory.EnumerateDirectories(rootPath, "*", SearchOption.AllDirectories) do
+        //             yield CvParam(
+        //                 cvTerm = AFSO.``Directory Path``,
+        //                 v = dir.Replace("\\","/")
+        //             )
+        //     }    
 
 
     let tokenizeRelativeFilePaths (rootPath:string) =
