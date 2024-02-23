@@ -187,7 +187,7 @@ module Tokenization =
                         p,StructuralOntology.AFSO.``Assays Directory``
                     elif Array.contains "runs" segments then
                         p,StructuralOntology.AFSO.``Runs Directory``
-                    elif Array.contains "workfows" segments then
+                    elif Array.contains "workflows" segments then
                         p,StructuralOntology.AFSO.``Workflows Directory``
                     else
                         p,StructuralOntology.AFSO.``Directory Path``
@@ -198,7 +198,7 @@ module Tokenization =
                         p,StructuralOntology.AFSO.Assay
                     elif Array.contains "runs" segments then
                         p,StructuralOntology.AFSO.Run
-                    elif Array.contains "workfows" segments then
+                    elif Array.contains "workflows" segments then
                         p,StructuralOntology.AFSO.Workflow
                     else
                         p,StructuralOntology.AFSO.``Directory Path``
