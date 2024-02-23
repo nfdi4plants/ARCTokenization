@@ -1,4 +1,4 @@
-!This file was auto generated on 2024-01-10. Do not edit it. All manual changes will be overwritten by the next generator run eventually.
+!This file was auto generated on 23.02.2024. Do not edit it. All manual changes will be overwritten by the next generator run eventually.
 format-version: 1.2
 data-version: init/2023-10-26
 saved-by: Kevin Schneider
@@ -53,4 +53,74 @@ def: ""
 [Term]
 id: AFSO:00000010
 name: Directory Path
+def: ""
+
+[Term]
+id: AFSO:00000011
+name: Studies Directory
+def: ""
+
+[Term]
+id: AFSO:00000012
+name: Assays Directory
+def: ""
+
+[Term]
+id: AFSO:00000013
+name: Runs Directory
+def: ""
+
+[Term]
+id: AFSO:00000014
+name: Workflows Directory
+def: ""
+
+[Term]
+id: AFSO:00000015
+name: Study
+def: ""
+
+[Term]
+id: AFSO:00000016
+name: Assay
+def: ""
+
+[Term]
+id: AFSO:00000017
+name: Run
+def: ""
+
+[Term]
+id: AFSO:00000018
+name: Workflow
+def: ""
+
+[Term]
+id: AFSO:00000019
+name: Investigation ISA
+def: ""
+
+[Term]
+id: AFSO:00000020
+name: Study ISA
+def: ""
+
+[Term]
+id: AFSO:00000021
+name: Assay ISA
+def: ""
+
+[Term]
+id: AFSO:00000022
+name: Dataset ISA
+def: ""
+
+[Term]
+id: AFSO:00000023
+name: CWL File
+def: ""
+
+[Term]
+id: AFSO:00000024
+name: YML File
 def: ""
