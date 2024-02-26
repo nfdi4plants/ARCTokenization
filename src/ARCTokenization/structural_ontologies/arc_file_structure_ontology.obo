@@ -1,4 +1,4 @@
-!This file was auto generated on 23.02.2024. Do not edit it. All manual changes will be overwritten by the next generator run eventually.
+!This file was auto generated on 26.02.2024. Do not edit it. All manual changes will be overwritten by the next generator run eventually.
 format-version: 1.2
 data-version: init/2023-10-26
 saved-by: Kevin Schneider
@@ -77,42 +77,42 @@ def: ""
 
 [Term]
 id: AFSO:00000015
-name: Study
+name: Study Directory
 def: ""
 
 [Term]
 id: AFSO:00000016
-name: Assay
+name: Assay Directory
 def: ""
 
 [Term]
 id: AFSO:00000017
-name: Run
+name: Run Directory
 def: ""
 
 [Term]
 id: AFSO:00000018
-name: Workflow
+name: Workflow Directory
 def: ""
 
 [Term]
 id: AFSO:00000019
-name: Investigation ISA
+name: Investigation File
 def: ""
 
 [Term]
 id: AFSO:00000020
-name: Study ISA
+name: Study File
 def: ""
 
 [Term]
 id: AFSO:00000021
-name: Assay ISA
+name: Assay File
 def: ""
 
 [Term]
 id: AFSO:00000022
-name: Dataset ISA
+name: Dataset File
 def: ""
 
 [Term]

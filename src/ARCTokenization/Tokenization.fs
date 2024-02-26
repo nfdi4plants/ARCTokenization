@@ -193,13 +193,13 @@ module Tokenization =
                         p,StructuralOntology.AFSO.``Directory Path``
                 | 2 -> 
                     if Array.contains "studies" segments then
-                        p,StructuralOntology.AFSO.Study
+                        p,StructuralOntology.AFSO.``Study Directory``
                     elif Array.contains "assays" segments then
-                        p,StructuralOntology.AFSO.Assay
+                        p,StructuralOntology.AFSO.``Assay Directory``
                     elif Array.contains "runs" segments then
-                        p,StructuralOntology.AFSO.Run
+                        p,StructuralOntology.AFSO.``Run Directory``
                     elif Array.contains "workflows" segments then
-                        p,StructuralOntology.AFSO.Workflow
+                        p,StructuralOntology.AFSO.``Workflow Directory``
                     else
                         p,StructuralOntology.AFSO.``Directory Path``
                 | _ -> 
@@ -226,13 +226,13 @@ module Tokenization =
             
             let getC (p: string) = 
                 if p.Contains "isa.investigation.xlsx" then
-                    p,StructuralOntology.AFSO.``Investigation ISA``
+                    p,StructuralOntology.AFSO.``Investigation File``
                 elif p.Contains "isa.assay.xlsx" then
-                    p,StructuralOntology.AFSO.``Assay ISA``
+                    p,StructuralOntology.AFSO.``Assay File``
                 elif p.Contains "isa.dataset.xlsx" then
-                    p,StructuralOntology.AFSO.``Dataset ISA``
+                    p,StructuralOntology.AFSO.``Dataset File``
                 elif p.Contains "isa.study.xlsx" then
-                    p,StructuralOntology.AFSO.``Study ISA``
+                    p,StructuralOntology.AFSO.``Study File``
                 elif p.Contains ".yml" then
                     p,StructuralOntology.AFSO.``YML File``
                 elif p.Contains ".cwl" then

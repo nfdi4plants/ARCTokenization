@@ -32,17 +32,17 @@ module AFSO =
     let ``Workflows Directory`` = CvTerm.create("AFSO:00000014","Workflows Directory","AFSO")
 
     // Sub level folders
-    let ``Study``   = CvTerm.create("AFSO:00000015","Study","AFSO")
-    let ``Assay``    = CvTerm.create("AFSO:00000016","Assay","AFSO")
-    let ``Run``      = CvTerm.create("AFSO:00000017","Run","AFSO")
-    let ``Workflow`` = CvTerm.create("AFSO:00000018","Workflow","AFSO")
+    let ``Study Directory``   = CvTerm.create("AFSO:00000015","Study Directory","AFSO")
+    let ``Assay Directory``    = CvTerm.create("AFSO:00000016","Assay Directory","AFSO")
+    let ``Run Directory``      = CvTerm.create("AFSO:00000017","Run Directory","AFSO")
+    let ``Workflow Directory`` = CvTerm.create("AFSO:00000018","Workflow Directory","AFSO")
 
 
     // Isa FileTypes 
-    let ``Investigation ISA``   = CvTerm.create("AFSO:00000019","Investigation ISA","AFSO")
-    let ``Study ISA``           = CvTerm.create("AFSO:00000020","Study ISA","AFSO")
-    let ``Assay ISA``           = CvTerm.create("AFSO:00000021","Assay ISA","AFSO")
-    let ``Dataset ISA``         = CvTerm.create("AFSO:00000022","Dataset ISA","AFSO")
+    let ``Investigation File``   = CvTerm.create("AFSO:00000019","Investigation File","AFSO")
+    let ``Study File``           = CvTerm.create("AFSO:00000020","Study File","AFSO")
+    let ``Assay File``           = CvTerm.create("AFSO:00000021","Assay File","AFSO")
+    let ``Dataset File``         = CvTerm.create("AFSO:00000022","Dataset File","AFSO")
 
     // Additional FileTypes
     let ``CWL File``         = CvTerm.create("AFSO:00000023","CWL File","AFSO")

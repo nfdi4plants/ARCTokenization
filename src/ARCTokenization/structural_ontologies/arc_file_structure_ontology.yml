@@ -76,42 +76,42 @@ def: ""
 
 [Term]
 id: AFSO:00000015
-name: Study
+name: Study Directory
 def: ""
 
 [Term]
 id: AFSO:00000016
-name: Assay
+name: Assay Directory
 def: ""
 
 [Term]
 id: AFSO:00000017
-name: Run
+name: Run Directory
 def: ""
 
 [Term]
 id: AFSO:00000018
-name: Workflow
+name: Workflow Directory
 def: ""
 
 [Term]
 id: AFSO:00000019
-name: Investigation ISA
+name: Investigation File
 def: ""
 
 [Term]
 id: AFSO:00000020
-name: Study ISA
+name: Study File
 def: ""
 
 [Term]
 id: AFSO:00000021
-name: Assay ISA
+name: Assay File
 def: ""
 
 [Term]
 id: AFSO:00000022
-name: Dataset ISA
+name: Dataset File
 def: ""
 
 [Term]
