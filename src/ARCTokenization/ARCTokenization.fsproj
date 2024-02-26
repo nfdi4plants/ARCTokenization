@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <None Include="RELEASE_NOTES.md" />
+    <Compile Include="structural_ontologies\CodeGeneration.fs" />
     <Compile Include="structural_ontologies\AFSO.fs" />
     <Compile Include="structural_ontologies\APGSO.fs" />
     <Compile Include="structural_ontologies\INVMSO.fs" />
