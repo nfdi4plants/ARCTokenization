@@ -160,7 +160,7 @@ module Tokenization =
                 |> Array.map CompositeColumn.tokenize
                 |> List.ofArray
 
-    module SpecificTokens =
+    module ArcFileSystem =
         
         /// Represents the type of file system entity (Directory or File)
         type PType =
@@ -168,7 +168,7 @@ module Tokenization =
             | Directory
     
         /// Matches a CvParam based on the relative path and file system type
-        let matchFileSystemTokenByRelativePath (pType:PType) (relativePath: string) = 
+        let convertRelativePath (pType:PType) (relativePath: string) = 
                 match pType with
                 | PType.Directory ->
                     match (relativePath.Split '/') with
@@ -179,7 +179,7 @@ module Tokenization =
                     | [|Path.RunsFolderName|]           ->  StructuralOntology.AFSO.``Runs Directory``      |> fun t -> CvParam(t,relativePath)
                     | [|Path.RunsFolderName; _|]        ->  StructuralOntology.AFSO.``Run Directory``       |> fun t -> CvParam(t,relativePath)
                     | [|Path.WorkflowsFolderName|]      ->  StructuralOntology.AFSO.``Workflows Directory`` |> fun t -> CvParam(t,relativePath)
-                    | [|Path.WorkflowsFolderName; _|]   ->  StructuralOntology.AFSO.``Study Directory``     |> fun t -> CvParam(t,relativePath)
+                    | [|Path.WorkflowsFolderName; _|]   ->  StructuralOntology.AFSO.``Workflow Directory``  |> fun t -> CvParam(t,relativePath)
                     | _                                 ->  StructuralOntology.AFSO.``Directory Path``      |> fun t -> CvParam(t,relativePath)
                 | PType.File ->
                     match relativePath with
@@ -192,7 +192,7 @@ module Tokenization =
                     | _                                                     -> StructuralOntology.AFSO.``File Path``            |> fun t -> CvParam(t,relativePath)
         
         /// Gets CvParams based on the root path, file system type, and full path
-        let getSpecificTokens (rootPath:string) (pType:PType) (path:string) =
-            let relativePath = path.Replace(rootPath,"")
-            matchFileSystemTokenByRelativePath pType relativePath
+        let getArcFileSystemTokens (rootPath:string) (pType:PType) (path:string) =
+            let relativePath = path.Replace(rootPath,"").TrimStart('/')
+            convertRelativePath pType relativePath
             

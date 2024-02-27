@@ -55,7 +55,7 @@ module internal FS =
         }
 
 
-    let private normalisePath (path:string) =
+    let internal normalisePath (path:string) =
         path.Replace("\\","/")
 
     let tokenizeARCFileSystem (rootPath:string) =
@@ -64,19 +64,19 @@ module internal FS =
         let directories =
             Directory.EnumerateDirectories(rootPath, "*", SearchOption.AllDirectories)
             |> Seq.map(fun p -> 
-                Tokenization.SpecificTokens.PType.Directory,
+                Tokenization.ArcFileSystem.PType.Directory,
                 p|>normalisePath
             )
 
         let files = 
             Directory.EnumerateFiles(rootPath, "*", SearchOption.AllDirectories)
             |> Seq.map(fun p -> 
-                Tokenization.SpecificTokens.PType.File,
+                Tokenization.ArcFileSystem.PType.File,
                 p|>normalisePath
             )
-        let collection: (Tokenization.SpecificTokens.PType * string) seq = Seq.concat (seq{directories;files})
+        let collection: (Tokenization.ArcFileSystem.PType * string) seq = Seq.concat (seq{directories;files})
 
         collection
-        |>Seq.map(fun (pType,p) -> Tokenization.SpecificTokens.getSpecificTokens rootPathNormalised pType p)
+        |>Seq.map(fun (pType,p) ->  ArcFileSystem.getArcFileSystemTokens rootPathNormalised pType p)
         
         
