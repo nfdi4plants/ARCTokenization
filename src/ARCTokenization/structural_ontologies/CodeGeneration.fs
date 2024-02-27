@@ -31,11 +31,12 @@ module CodeGeneration =
     let toCodeString (term : OboTerm) = 
         $"    let {toUnderscoredName term} = CvTerm.create(\"{term.Id}\", \"{term.Name}\", \"{toTermSourceRef term}\"){System.Environment.NewLine}{System.Environment.NewLine}"
 
-    /// Takes a module name and a
+    /// Takes a module name and an OboOntology and returns the F# code of the whole term list for structural ontology libraries.
     let toSourceCode moduleName (onto : OboOntology) =
         let concattedSingleValues = String.init onto.Terms.Length (fun i -> $"{toCodeString onto.Terms[i]}")
         let updatedBaseString = String.replace "<name>" moduleName
         $"{updatedBaseString}{concattedSingleValues}"
 
+    /// Takes a module name and an OboOntology and writes the ontology's terms as F# code for structural ontology libraries as a source file at the given path.
     let toFile moduleName (onto : OboOntology) path =
         System.IO.File.WriteAllText(path, toSourceCode moduleName onto)
