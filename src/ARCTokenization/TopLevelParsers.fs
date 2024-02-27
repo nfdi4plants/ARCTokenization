@@ -104,6 +104,17 @@ type FileSystem =
     ) =
         FS.tokenizeRelativeFilePaths rootPath
 
+    /// <summary>
+    /// Returns all files in the given rootPath as a list of CvParams containing the annotated relative file paths.
+    ///
+    /// Note that rootPath must be an absolute path ending with a trailing slash.
+    /// </summary>
+    /// <param name="rootPath">absolute path ending with a trailing slash</param>
+    static member parseARCFileSystem(
+        rootPath:string
+    ) =
+        FS.tokenizeARCFileSystem rootPath
+
 type Investigation =
 
     /// <summary>
