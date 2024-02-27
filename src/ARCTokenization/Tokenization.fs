@@ -4,6 +4,7 @@ open ControlledVocabulary
 open FsSpreadsheet
 open MetadataSheet
 open ARCTokenization.Terms
+open ARCtrl
 open ARCtrl.ISA
 
 module Tokenization = 
@@ -160,85 +161,38 @@ module Tokenization =
                 |> List.ofArray
 
     module SpecificTokens =
-        let matchPathToCVTerms (rootPath:string) =
-            let root =  System.Uri(rootPath)
-
-            let segmentor = 
-                root.Segments.[0].ToCharArray().[0]
-
-            let arcName = 
-                root.Segments
-                |>Array.last
-                |>fun x -> 
-                    x.Trim(segmentor)  
-
-            let trimmSegments (p:string) = 
-                p,
-                p.Split([|arcName|],System.StringSplitOptions.RemoveEmptyEntries)
-                |>Array.tail
-                |> fun x -> x.[0].Trim(segmentor).Split segmentor
+        
+        /// Represents the type of file system entity (Directory or File)
+        type PType =
+            | File
+            | Directory
+    
+        /// Matches a CvParam based on the relative path and file system type
+        let matchFileSystemTokenByRelativePath (pType:PType) (relativePath: string) = 
+                match pType with
+                | PType.Directory ->
+                    match (relativePath.Split '/') with
+                    | [|Path.StudiesFolderName|]        ->  StructuralOntology.AFSO.``Studies Directory``   |> fun t -> CvParam(t,relativePath)
+                    | [|Path.StudiesFolderName; _|]     ->  StructuralOntology.AFSO.``Study Directory``     |> fun t -> CvParam(t,relativePath)
+                    | [|Path.AssaysFolderName|]         ->  StructuralOntology.AFSO.``Assays Directory``    |> fun t -> CvParam(t,relativePath)
+                    | [|Path.AssaysFolderName; _|]      ->  StructuralOntology.AFSO.``Assay Directory``     |> fun t -> CvParam(t,relativePath)
+                    | [|Path.RunsFolderName|]           ->  StructuralOntology.AFSO.``Runs Directory``      |> fun t -> CvParam(t,relativePath)
+                    | [|Path.RunsFolderName; _|]        ->  StructuralOntology.AFSO.``Run Directory``       |> fun t -> CvParam(t,relativePath)
+                    | [|Path.WorkflowsFolderName|]      ->  StructuralOntology.AFSO.``Workflows Directory`` |> fun t -> CvParam(t,relativePath)
+                    | [|Path.WorkflowsFolderName; _|]   ->  StructuralOntology.AFSO.``Study Directory``     |> fun t -> CvParam(t,relativePath)
+                    | _                                 ->  StructuralOntology.AFSO.``Directory Path``      |> fun t -> CvParam(t,relativePath)
+                | PType.File ->
+                    match relativePath with
+                    | _ when relativePath.EndsWith "isa.investigation.xlsx" -> StructuralOntology.AFSO.``Investigation File``   |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.assay.xlsx"         -> StructuralOntology.AFSO.``Assay File``           |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.dataset.xlsx"       -> StructuralOntology.AFSO.``Dataset File``         |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.study.xlsx"         -> StructuralOntology.AFSO.``Study File``           |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith ".yml"                   -> StructuralOntology.AFSO.``YML File``             |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith ".cwl"                   -> StructuralOntology.AFSO.``CWL File``             |> fun t -> CvParam(t,relativePath)
+                    | _                                                     -> StructuralOntology.AFSO.``File Path``            |> fun t -> CvParam(t,relativePath)
+        
+        /// Gets CvParams based on the root path, file system type, and full path
+        let getSpecificTokens (rootPath:string) (pType:PType) (path:string) =
+            let relativePath = path.Replace(rootPath,"")
+            matchFileSystemTokenByRelativePath pType relativePath
             
-            let getC (p: string) (segments: string array) = 
-                match Array.length segments with
-                | 1 -> 
-                    if Array.contains "studies" segments then
-                        p,StructuralOntology.AFSO.``Studies Directory``
-                    elif Array.contains "assays" segments then
-                        p,StructuralOntology.AFSO.``Assays Directory``
-                    elif Array.contains "runs" segments then
-                        p,StructuralOntology.AFSO.``Runs Directory``
-                    elif Array.contains "workflows" segments then
-                        p,StructuralOntology.AFSO.``Workflows Directory``
-                    else
-                        p,StructuralOntology.AFSO.``Directory Path``
-                | 2 -> 
-                    if Array.contains "studies" segments then
-                        p,StructuralOntology.AFSO.``Study Directory``
-                    elif Array.contains "assays" segments then
-                        p,StructuralOntology.AFSO.``Assay Directory``
-                    elif Array.contains "runs" segments then
-                        p,StructuralOntology.AFSO.``Run Directory``
-                    elif Array.contains "workflows" segments then
-                        p,StructuralOntology.AFSO.``Workflow Directory``
-                    else
-                        p,StructuralOntology.AFSO.``Directory Path``
-                | _ -> 
-                    p,StructuralOntology.AFSO.``Directory Path``
-
-            System.IO.Directory.EnumerateDirectories(rootPath, "*", System.IO.SearchOption.AllDirectories)
-            |> Seq.map(fun x -> x|>trimmSegments|>fun (p,segments) -> getC p segments)
-
-        let matchFilePathToCVTerms (rootPath:string) =
-            let root =  System.Uri(rootPath)
-
-            let segmentor = 
-                root.Segments.[0].ToCharArray().[0]
-
-            let arcName = 
-                root.Segments
-                |>Array.last
-                |>fun x -> 
-                    x.Trim(segmentor)  
-
-            // let trimmSegments (p:string) = 
-            //     p.Split([|arcName|],System.StringSplitOptions.RemoveEmptyEntries)
-            //     |>fun x -> String.concat root.Segments.[0] x
-            
-            let getC (p: string) = 
-                if p.Contains "isa.investigation.xlsx" then
-                    p,StructuralOntology.AFSO.``Investigation File``
-                elif p.Contains "isa.assay.xlsx" then
-                    p,StructuralOntology.AFSO.``Assay File``
-                elif p.Contains "isa.dataset.xlsx" then
-                    p,StructuralOntology.AFSO.``Dataset File``
-                elif p.Contains "isa.study.xlsx" then
-                    p,StructuralOntology.AFSO.``Study File``
-                elif p.Contains ".yml" then
-                    p,StructuralOntology.AFSO.``YML File``
-                elif p.Contains ".cwl" then
-                    p,StructuralOntology.AFSO.``CWL File``
-                else
-                    p,StructuralOntology.AFSO.``File Path``
-
-            System.IO.Directory.EnumerateFiles(rootPath, "*", System.IO.SearchOption.AllDirectories)
-            |> Seq.map(fun x -> x|> getC )
