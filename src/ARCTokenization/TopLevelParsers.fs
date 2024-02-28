@@ -9,54 +9,68 @@ module internal ISA =
 
     open System.IO
 
-    let tryParseMetadataSheetFromToken (isaFileName: string) (isaMdsParsingF: string -> IParam list) (absFileToken: IParam) =
+    let tryParseMetadataSheetFromToken (rootPath:string) (isaCvTerm: CvTerm) (isaMdsParsingF: string -> IParam list) (absFileToken: IParam) =
 
         let cvpStr = Param.getValueAsString absFileToken
-        //printfn $"cvpStr: {cvpStr}"
-        //if String.contains isaFileName cvpStr then
-        if Path.GetFileName cvpStr = isaFileName then
+        let path = Path.Combine(rootPath, cvpStr)
+        let containsToken = absFileToken|> (fun x -> x.Name = isaCvTerm.Name) 
+
+        if containsToken then
             try 
-                Some (isaMdsParsingF cvpStr)
+                Some (isaMdsParsingF path)
             with _ -> 
                 None
         else None
 
-    let parseMetadataSheetsFromTokens (isaFileName: string) (isaMdsParsingF: string -> IParam list) (absFileTokens: #IParam seq) =
+    let parseMetadataSheetsFromTokens (rootPath:string) (isaCvTerm: CvTerm) (isaMdsParsingF: string -> IParam list) (absFileTokens: #IParam seq) =
         absFileTokens
-        |> Seq.choose (fun token ->  tryParseMetadataSheetFromToken isaFileName isaMdsParsingF token)
+        |> Seq.choose (fun token ->  tryParseMetadataSheetFromToken rootPath isaCvTerm isaMdsParsingF token)
+    
+    /// <summary>
+    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
+    /// where the string is the name of the worksheet that contained the table, 
+    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
+    /// </summary>
+    /// <param name="rootPath">ARC root path</param>
+    /// <param name="absFileToken">he path to the study xlsx file</param>
+    let parseProcessGraphColumnsFromToken (rootPath:string) (absFileToken: IParam) =
+        let cvpStr = Param.getValueAsString absFileToken
+        let path = System.IO.Path.Combine(rootPath, cvpStr)
+        (FsWorkbook.fromXlsxFile path)
+            .GetWorksheets()
+            |> Seq.choose (fun ws ->
+                ws
+                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> Option.map (fun t -> 
+                    ws.Name, 
+                    t 
+                    |> Tokenization.ARCtrl.ARCTable.tokenizeColumns
+                )
+            )
+            |> Map.ofSeq
 
-    //type löl =
-        
+    /// <summary>
+    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
+    /// where the string is the name of the worksheet that contained the table, 
+    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
+    /// </summary>
+    /// <param name="rootPath">ARC root path</param>
+    /// <param name="isaCvTerm">The term to which the token should be found</param>
+    /// <param name="absFileToken">he path to the study xlsx file</param>
+    let parseProcessGraphColumnsFromTokens (rootPath:string) (isaCvTerm: CvTerm) (absFileTokens: #IParam seq) =
+        absFileTokens
+        |> Seq.choose (fun token ->  
+            match token.Name = isaCvTerm.Name with 
+            | true -> Some (parseProcessGraphColumnsFromToken rootPath token)
+            | false -> None
+        )
+        |> fun x -> 
+            match Seq.length x with
+            | 0 -> failwith "No token found"
+            | _ -> x 
 
-    //    static member parseStudyMetadataSheetFromCvp absFileTokens =
-    //        parseMetadataSheetsFromCvps "isa.study.xlsx" ARCTokenization.Study.parseMetadataSheetfromFile absFileTokens
-
-    //    static member parseAssayMetadataSheetFromCvp absFileTokens =
-    //        parseMetadataSheetsFromCvps "isa.assay.xlsx" ARCTokenization.Assay.parseMetadataSheetFromFile absFileTokens
-
-    //    static member tryParseIsaMetadataSheetFromCvp (isaFileName : string) isaMdsParsingF absFileTokens =
-    //        absFileTokens
-    //        |> Seq.choose (
-    //            fun cvp ->
-    //                let cvpStr = Param.getValueAsString cvp
-    //                //printfn $"cvpStr: {cvpStr}"
-    //                //if String.contains isaFileName cvpStr then
-    //                if isaFileName = Path.GetFileName cvpStr then
-    //                    try Some (isaMdsParsingF cvpStr)
-    //                    with _ -> None
-    //                else None
-    //        )
-
-    //    static member tryParseInvestigationMetadataSheetFromCvp (absFileTokens : #IParam seq) =
-    //        try ParamBasedParsers.tryParseIsaMetadataSheetFromCvp "isa.investigation.xlsx" ARCTokenization.Investigation.parseMetadataSheetFromFile absFileTokens 
-    //            |> Seq.concat
-    //        with _ -> Seq.empty
-
-    //    static member tryParseStudyMetadataSheetFromCvp (absFileTokens : #IParam seq) =
-    //        ParamBasedParsers.tryParseIsaMetadataSheetFromCvp "isa.study.xlsx" ARCTokenization.Study.parseMetadataSheetfromFile absFileTokens
-
-    //    static member tryParseAssayMetadataSheetFromCvp (absFileTokens : #IParam seq) =
-    //        ParamBasedParsers.tryParseIsaMetadataSheetFromCvp "isa.assay.xlsx" ARCTokenization.Assay.parseMetadataSheetFromFile absFileTokens
 
 type FileSystem =
     
@@ -152,14 +166,14 @@ type Investigation =
     /// <param name="UseLastSheetOnIncorrectName">Wether or not to try parse the last sheet as metadata sheet when there is no sheet with the correct name ("isa_investigation") in the workbook</param>
     /// <param name="FileName">The name of the investigation file, note that this should not be set if the file follows spec (as "isa.investigation.xlsx" is the default)</param>
     static member tryParseMetadataSheetFromToken(
-        ?UseLastSheetOnIncorrectName: bool,
-        ?FileName: string
+        ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileName = defaultArg FileName Globals.INVESTIGATION_FILE_NAME
+        let fileToken = StructuralOntology.AFSO.``Investigation File``
 
-        fun (token: #IParam) ->
+        fun (rootPath:string) (token: #IParam) ->
             ISA.tryParseMetadataSheetFromToken
-                fileName
+                rootPath
+                fileToken
                 (Investigation.parseMetadataSheetFromFile(?UseLastSheetOnIncorrectName = UseLastSheetOnIncorrectName))
                 token
 
@@ -173,14 +187,14 @@ type Investigation =
     /// <param name="UseLastSheetOnIncorrectName">Wether or not to try parse the last sheet as metadata sheet when there is no sheet with the correct name ("isa_investigation") in the workbook</param>
     /// <param name="FileName">The name of the investigation file, note that this should not be set if the file follows spec (as "isa.investigation.xlsx" is the default)</param>
     static member parseMetadataSheetsFromTokens(
-        ?UseLastSheetOnIncorrectName: bool,
-        ?FileName: string
+        ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileName = defaultArg FileName Globals.INVESTIGATION_FILE_NAME
+        let fileToken = StructuralOntology.AFSO.``Investigation File``
 
-        fun (tokens: #seq<#IParam>) ->
+        fun (rootPath:string) (tokens: #seq<#IParam>) ->
             ISA.parseMetadataSheetsFromTokens
-                fileName
+                rootPath
+                fileToken
                 (Investigation.parseMetadataSheetFromFile(?UseLastSheetOnIncorrectName = UseLastSheetOnIncorrectName))
                 tokens
             |> List.ofSeq
@@ -222,14 +236,15 @@ type Study =
     /// <param name="UseLastSheetOnIncorrectName">Wether or not to try parse the last sheet as metadata sheet when there is no sheet with the correct name ("isa_study") in the workbook</param>
     /// <param name="FileName">The name of the study file, note that this should not be set if the file follows spec (as "isa.study.xlsx" is the default)</param>
     static member tryParseMetadataSheetFromToken(
-        ?UseLastSheetOnIncorrectName: bool,
-        ?FileName: string
+        ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileName = defaultArg FileName Globals.STUDY_FILE_NAME
 
-        fun (token: #IParam) ->
+        let fileToken = StructuralOntology.AFSO.``Study File``
+
+        fun (rootPath:string) (token: #IParam) ->
             ISA.tryParseMetadataSheetFromToken
-                fileName
+                rootPath
+                fileToken
                 (Study.parseMetadataSheetFromFile(?UseLastSheetOnIncorrectName = UseLastSheetOnIncorrectName))
                 token
 
@@ -243,18 +258,17 @@ type Study =
     /// <param name="UseLastSheetOnIncorrectName">Wether or not to try parse the last sheet as metadata sheet when there is no sheet with the correct name ("isa_study") in the workbook</param>
     /// <param name="FileName">The name of the study file, note that this should not be set if the file follows spec (as "isa.study.xlsx" is the default)</param>
     static member parseMetadataSheetsFromTokens(
-        ?UseLastSheetOnIncorrectName: bool,
-        ?FileName: string
+        ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileName = defaultArg FileName Globals.STUDY_FILE_NAME
+        let fileToken = StructuralOntology.AFSO.``Study File``
 
-        fun (tokens: #seq<#IParam>) ->
+        fun (rootPath:string) (tokens: #seq<#IParam>) ->
             ISA.parseMetadataSheetsFromTokens
-                fileName
+                rootPath
+                fileToken
                 (Study.parseMetadataSheetFromFile(?UseLastSheetOnIncorrectName = UseLastSheetOnIncorrectName))
                 tokens
             |> List.ofSeq
-
 
     /// <summary>
     /// Parses all annotation tables from an ISA Study XLSX file as a 
@@ -276,6 +290,29 @@ type Study =
                 )
             )
             |> Map.ofSeq
+
+    /// <summary>
+    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
+    /// where the string is the name of the worksheet that contained the table, 
+    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
+    /// </summary>
+    /// <param name="rootPath">ARC root path</param>
+    /// <param name="absFileToken">he path to the study xlsx file</param>
+    static member parseProcessGraphColumnsFromToken (rootPath:string) (absFileToken: IParam) =
+        ISA.parseProcessGraphColumnsFromToken rootPath absFileToken
+
+
+    /// <summary>
+    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
+    /// where the string is the name of the worksheet that contained the table, 
+    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
+    /// </summary>
+    /// <param name="rootPath">ARC root path</param>
+    /// <param name="absFileToken">he path to the  xlsx file</param>
+    static member parseProcessGraphColumnsFromTokens (rootPath:string) (isaCsvTerm) (absFileTokens: #IParam seq) =
+        ISA.parseProcessGraphColumnsFromTokens rootPath isaCsvTerm absFileTokens
 
 type Assay =
 
@@ -317,11 +354,12 @@ type Assay =
         ?UseLastSheetOnIncorrectName: bool,
         ?FileName: string
     ) =
-        let fileName = defaultArg FileName Globals.ASSAY_FILE_NAME
+        let fileToken = StructuralOntology.AFSO.``Assay File``
 
-        fun (token: #IParam) ->
+        fun (rootPath:string) (token: #IParam) ->
             ISA.tryParseMetadataSheetFromToken
-                fileName
+                rootPath
+                fileToken
                 (Assay.parseMetadataSheetFromFile(?UseLastSheetOnIncorrectName = UseLastSheetOnIncorrectName))
                 token
 
@@ -338,11 +376,12 @@ type Assay =
         ?UseLastSheetOnIncorrectName: bool,
         ?FileName: string
     ) =
-        let fileName = defaultArg FileName Globals.ASSAY_FILE_NAME
+        let fileToken = StructuralOntology.AFSO.``Assay File``
 
-        fun (tokens: #seq<#IParam>) ->
+        fun (rootPath:string) (tokens: #seq<#IParam>) ->
             ISA.parseMetadataSheetsFromTokens
-                fileName
+                rootPath
+                fileToken
                 (Assay.parseMetadataSheetFromFile(?UseLastSheetOnIncorrectName = UseLastSheetOnIncorrectName))
                 tokens
             |> List.ofSeq
@@ -367,3 +406,25 @@ type Assay =
                 )
             )
             |> Map.ofSeq
+
+    /// <summary>
+    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
+    /// where the string is the name of the worksheet that contained the table, 
+    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
+    /// </summary>
+    /// <param name="rootPath">ARC root path</param>
+    /// <param name="absFileToken">he path to the study xlsx file</param>
+    static member parseProcessGraphColumnsFromToken (rootPath:string) (absFileToken: IParam) =
+        ISA.parseProcessGraphColumnsFromToken rootPath absFileToken
+
+    /// <summary>
+    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
+    /// where the string is the name of the worksheet that contained the table, 
+    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
+    /// </summary>
+    /// <param name="rootPath">ARC root path</param>
+    /// <param name="absFileToken">he path to the  xlsx file</param>
+    static member parseProcessGraphColumnsFromTokens (rootPath:string) (isaCsvTerm) (absFileTokens: #IParam seq) =
+        ISA.parseProcessGraphColumnsFromTokens rootPath isaCsvTerm absFileTokens
