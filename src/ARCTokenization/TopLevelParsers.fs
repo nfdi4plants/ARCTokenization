@@ -9,11 +9,11 @@ module internal ISA =
 
     open System.IO
 
-    let tryParseMetadataSheetFromToken (rootPath:string) (isaCvTerm: CvTerm) (isaMdsParsingF: string -> IParam list) (absFileToken: IParam) =
+    let tryParseMetadataSheetFromToken (rootPath:string) (isaCvTerm: CvTerm) (isaMdsParsingF: string -> IParam list) (refFileToken: IParam) =
 
-        let cvpStr = Param.getValueAsString absFileToken
+        let cvpStr = Param.getValueAsString refFileToken
         let path = Path.Combine(rootPath, cvpStr)
-        let containsToken = absFileToken|> (fun x -> x.Name = isaCvTerm.Name) 
+        let containsToken = refFileToken|> (fun x -> x.Name = isaCvTerm.Name) 
 
         if containsToken then
             try 
@@ -22,20 +22,12 @@ module internal ISA =
                 None
         else None
 
-    let parseMetadataSheetsFromTokens (rootPath:string) (isaCvTerm: CvTerm) (isaMdsParsingF: string -> IParam list) (absFileTokens: #IParam seq) =
-        absFileTokens
+    let parseMetadataSheetsFromTokens (rootPath:string) (isaCvTerm: CvTerm) (isaMdsParsingF: string -> IParam list) (refFileTokens: #IParam seq) =
+        refFileTokens
         |> Seq.choose (fun token ->  tryParseMetadataSheetFromToken rootPath isaCvTerm isaMdsParsingF token)
     
-    /// <summary>
-    /// Parses all annotation tables from an ISA XLSX file as a 
-    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
-    /// where the string is the name of the worksheet that contained the table, 
-    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
-    /// </summary>
-    /// <param name="rootPath">ARC root path</param>
-    /// <param name="absFileToken">he path to the study xlsx file</param>
-    let parseProcessGraphColumnsFromToken (rootPath:string) (absFileToken: IParam) =
-        let cvpStr = Param.getValueAsString absFileToken
+    let parseProcessGraphColumnsFromToken (rootPath:string) (refFileToken: IParam) =
+        let cvpStr = Param.getValueAsString refFileToken
         let path = System.IO.Path.Combine(rootPath, cvpStr)
         (FsWorkbook.fromXlsxFile path)
             .GetWorksheets()
@@ -50,17 +42,8 @@ module internal ISA =
             )
             |> Map.ofSeq
 
-    /// <summary>
-    /// Parses all annotation tables from an ISA XLSX file as a 
-    /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
-    /// where the string is the name of the worksheet that contained the table, 
-    /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
-    /// </summary>
-    /// <param name="rootPath">ARC root path</param>
-    /// <param name="isaCvTerm">The term to which the token should be found</param>
-    /// <param name="absFileToken">he path to the study xlsx file</param>
-    let parseProcessGraphColumnsFromTokens (rootPath:string) (isaCvTerm: CvTerm) (absFileTokens: #IParam seq) =
-        absFileTokens
+    let parseProcessGraphColumnsFromTokens (rootPath:string) (isaCvTerm: CvTerm) (refFileTokens: #IParam seq) =
+        refFileTokens
         |> Seq.choose (fun token ->  
             match token.Name = isaCvTerm.Name with 
             | true -> Some (parseProcessGraphColumnsFromToken rootPath token)
@@ -292,27 +275,27 @@ type Study =
             |> Map.ofSeq
 
     /// <summary>
-    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Returns an annotation tables from an IParam if the given token contains a filepath with the standard study file name ("isa.study.xlsx").
     /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
     /// where the string is the name of the worksheet that contained the table, 
     /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
     /// </summary>
     /// <param name="rootPath">ARC root path</param>
-    /// <param name="absFileToken">he path to the study xlsx file</param>
-    static member parseProcessGraphColumnsFromToken (rootPath:string) (absFileToken: IParam) =
-        ISA.parseProcessGraphColumnsFromToken rootPath absFileToken
+    /// <param name="refFileToken">IParam of the ARC Tokens</param>
+    static member parseProcessGraphColumnsFromToken (rootPath:string) (refFileToken: IParam) =
+        ISA.parseProcessGraphColumnsFromToken rootPath refFileToken
 
 
     /// <summary>
-    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Returns a seq of annotation tables from an IParam seq if the given tokens contains a filepath with the standard study file name ("isa.study.xlsx").
     /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
     /// where the string is the name of the worksheet that contained the table, 
     /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
     /// </summary>
     /// <param name="rootPath">ARC root path</param>
-    /// <param name="absFileToken">he path to the  xlsx file</param>
-    static member parseProcessGraphColumnsFromTokens (rootPath:string) (isaCsvTerm) (absFileTokens: #IParam seq) =
-        ISA.parseProcessGraphColumnsFromTokens rootPath isaCsvTerm absFileTokens
+    /// <param name="refFileToken">IParam seq of the ARC Tokens</param>
+    static member parseProcessGraphColumnsFromTokens (rootPath:string) (refFileTokens: #IParam seq) =
+        ISA.parseProcessGraphColumnsFromTokens rootPath (StructuralOntology.AFSO.``Study File``) refFileTokens
 
 type Assay =
 
@@ -349,10 +332,8 @@ type Assay =
     /// Returns a function that returns Some flat IParam list representing the assay metadata if the given token contains a filepath with the standard assay file name ("isa.assay.xlsx") or None otherwise.
     /// </summary>
     /// <param name="UseLastSheetOnIncorrectName">Wether or not to try parse the last sheet as metadata sheet when there is no sheet with the correct name ("isa_assay") in the workbook</param>
-    /// <param name="FileName">The name of the assay file, note that this should not be set if the file follows spec (as "isa.assay.xlsx" is the default)</param>
     static member tryParseMetadataSheetFromToken(
-        ?UseLastSheetOnIncorrectName: bool,
-        ?FileName: string
+        ?UseLastSheetOnIncorrectName: bool
     ) =
         let fileToken = StructuralOntology.AFSO.``Assay File``
 
@@ -371,10 +352,8 @@ type Assay =
     /// if no tokens contain such a file path, the result will be an empty list.
     /// </summary>
     /// <param name="UseLastSheetOnIncorrectName">Wether or not to try parse the last sheet as metadata sheet when there is no sheet with the correct name ("isa_assay") in the workbook</param>
-    /// <param name="FileName">The name of the assay file, note that this should not be set if the file follows spec (as "isa.assay.xlsx" is the default)</param>
     static member parseMetadataSheetsFromTokens(
-        ?UseLastSheetOnIncorrectName: bool,
-        ?FileName: string
+        ?UseLastSheetOnIncorrectName: bool
     ) =
         let fileToken = StructuralOntology.AFSO.``Assay File``
 
@@ -408,23 +387,23 @@ type Assay =
             |> Map.ofSeq
 
     /// <summary>
-    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Returns an annotation tables from an IParam if the given token contains a filepath with the standard assay file name ("isa.assay.xlsx").
     /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
     /// where the string is the name of the worksheet that contained the table, 
     /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
     /// </summary>
     /// <param name="rootPath">ARC root path</param>
-    /// <param name="absFileToken">he path to the study xlsx file</param>
-    static member parseProcessGraphColumnsFromToken (rootPath:string) (absFileToken: IParam) =
-        ISA.parseProcessGraphColumnsFromToken rootPath absFileToken
+    /// <param name="refFileToken">IParam of the ARC Tokens</param>
+    static member parseProcessGraphColumnsFromToken (rootPath:string) (refFileToken: IParam) =
+        ISA.parseProcessGraphColumnsFromToken rootPath refFileToken
 
     /// <summary>
-    /// Parses all annotation tables from an ISA XLSX file as a 
+    /// Returns a seq of annotation tables from an IParam seq if the given tokens contains a filepath with the standard assay file name ("isa.assay.xlsx").
     /// Map of string * `IParam` 2D List representing the individual parts parts of the Process graph, 
     /// where the string is the name of the worksheet that contained the table, 
     /// and the 2D lists represent a single table in which the inner 1D lists represent a single column.
     /// </summary>
     /// <param name="rootPath">ARC root path</param>
-    /// <param name="absFileToken">he path to the  xlsx file</param>
-    static member parseProcessGraphColumnsFromTokens (rootPath:string) (isaCsvTerm) (absFileTokens: #IParam seq) =
-        ISA.parseProcessGraphColumnsFromTokens rootPath isaCsvTerm absFileTokens
+    /// <param name="refFileToken">IParam seq of the ARC Tokens</param>
+    static member parseProcessGraphColumnsFromTokens (rootPath:string) (refFileTokens: #IParam seq) =
+        ISA.parseProcessGraphColumnsFromTokens rootPath (StructuralOntology.AFSO.``Assay File``) refFileTokens
