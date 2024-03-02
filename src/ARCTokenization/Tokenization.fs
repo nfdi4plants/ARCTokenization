@@ -4,6 +4,7 @@ open ControlledVocabulary
 open FsSpreadsheet
 open MetadataSheet
 open ARCTokenization.Terms
+open ARCtrl
 open ARCtrl.ISA
 
 module Tokenization = 
@@ -158,3 +159,40 @@ module Tokenization =
                 at.Columns
                 |> Array.map CompositeColumn.tokenize
                 |> List.ofArray
+
+    module ArcFileSystem =
+        
+        /// Represents the type of file system entity (Directory or File)
+        type PType =
+            | File
+            | Directory
+    
+        /// Matches a CvParam based on the relative path and file system type
+        let convertRelativePath (pType:PType) (relativePath: string) = 
+                match pType with
+                | PType.Directory ->
+                    match (relativePath.Split '/') with
+                    | [|Path.StudiesFolderName|]        ->  StructuralOntology.AFSO.``Studies Directory``   |> fun t -> CvParam(t,relativePath)
+                    | [|Path.StudiesFolderName; _|]     ->  StructuralOntology.AFSO.``Study Directory``     |> fun t -> CvParam(t,relativePath)
+                    | [|Path.AssaysFolderName|]         ->  StructuralOntology.AFSO.``Assays Directory``    |> fun t -> CvParam(t,relativePath)
+                    | [|Path.AssaysFolderName; _|]      ->  StructuralOntology.AFSO.``Assay Directory``     |> fun t -> CvParam(t,relativePath)
+                    | [|Path.RunsFolderName|]           ->  StructuralOntology.AFSO.``Runs Directory``      |> fun t -> CvParam(t,relativePath)
+                    | [|Path.RunsFolderName; _|]        ->  StructuralOntology.AFSO.``Run Directory``       |> fun t -> CvParam(t,relativePath)
+                    | [|Path.WorkflowsFolderName|]      ->  StructuralOntology.AFSO.``Workflows Directory`` |> fun t -> CvParam(t,relativePath)
+                    | [|Path.WorkflowsFolderName; _|]   ->  StructuralOntology.AFSO.``Workflow Directory``  |> fun t -> CvParam(t,relativePath)
+                    | _                                 ->  StructuralOntology.AFSO.``Directory Path``      |> fun t -> CvParam(t,relativePath)
+                | PType.File ->
+                    match relativePath with
+                    | _ when relativePath.EndsWith "isa.investigation.xlsx" -> StructuralOntology.AFSO.``Investigation File``   |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.assay.xlsx"         -> StructuralOntology.AFSO.``Assay File``           |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.dataset.xlsx"       -> StructuralOntology.AFSO.``Dataset File``         |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.study.xlsx"         -> StructuralOntology.AFSO.``Study File``           |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith ".yml"                   -> StructuralOntology.AFSO.``YML File``             |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith ".cwl"                   -> StructuralOntology.AFSO.``CWL File``             |> fun t -> CvParam(t,relativePath)
+                    | _                                                     -> StructuralOntology.AFSO.``File Path``            |> fun t -> CvParam(t,relativePath)
+        
+        /// Gets CvParams based on the root path, file system type, and full path
+        let getArcFileSystemTokens (rootPath:string) (pType:PType) (path:string) =
+            let relativePath = path.Replace(rootPath,"").TrimStart('/')
+            convertRelativePath pType relativePath
+            
