@@ -50,4 +50,5 @@ module toSourceCode =
             |> String.splitS NewLine 
             |> Array.take 11 
             |> String.concat "\n"
+            |> String.replace "\r" ""
         Assert.Equal(expected, actual)
