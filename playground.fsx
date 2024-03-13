@@ -8,7 +8,8 @@
 //File.Copy(@"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel.dll", @"C:\Repos\nfdi4plants\ArcGraphModel\src\ArcGraphModel\bin\Debug\net6.0\ArcGraphModel_Copy.dll", true)
 
 #r "nuget: FSharpAux"
-#r "nuget: FsOboParser"
+//#r "nuget: FsOboParser"
+#r "nuget: OBO.NET"
 #r "nuget: FsSpreadsheet.ExcelIO, 4.1.0"
 #r "nuget: FSharp.FGL.ArrayAdjacencyGraph"
 
@@ -37,12 +38,19 @@ open System.Collections.Generic
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
-open FsOboParser
+//open FsOboParser
+open OBO.NET
 //open FsSpreadsheet.DSL
 open ControlledVocabulary
 open type ControlledVocabulary.ParamBase
 open ARCTokenization
 open ARCTokenization.StructuralOntology
+
+
+let ot = List.head Terms.InvestigationMetadata.ontology.Terms
+
+ARCTokenization.StructuralOntology.CodeGeneration.toCodeString ot
+CodeGeneration.toSourceCode "Investigation" Terms.InvestigationMetadata.ontology
 
 System.IO.Directory.GetCurrentDirectory()
 let fakePath = CvParam(cvTerm = AFSO.``File Path``, v = System.IO.Directory.GetCurrentDirectory() + "/tests/ARCTokenization.Tests/Fixtures/correct/investigation_simple.xlsx")

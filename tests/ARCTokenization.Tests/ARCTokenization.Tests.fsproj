@@ -12,6 +12,7 @@
     <Compile Include="TestObjects.fs" />
     <Compile Include="ReferenceObjects.fs" />
     <Compile Include="StructuralOntologyTests.fs" />
+    <Compile Include="CodeGenerationTests.fs" />
     <Compile Include="TokenizationTests\ProcessGraphTokenization.fs" />
     <Compile Include="TokenizationTests\MetadataTokenization.fs" />
     <Compile Include="TokenizationTests\FileSystemTokenization.fs" />
