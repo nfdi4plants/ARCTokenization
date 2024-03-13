@@ -1,4 +1,9 @@
-### 3.0.0 - (Released 2024-01-0)
+### 4.0.0 - (Released 2024-03-02)
+
+- Additions:
+  - [Add enhanced Tokenization for Specific Folders and Files](https://github.com/nfdi4plants/ARCTokenization/pull/53)
+
+### 3.0.0 - (Released 2024-01-10)
 
 - Additions:
     - [Add basic process graph tokenization](https://github.com/nfdi4plants/ARCTokenization/pull/48/commits/e6cd1775575aaac5aca3d2a48ff26fd31b136038):
