@@ -61,7 +61,7 @@ module InvestigationMetadata =
 
     [<Fact>]
     let ``Simple investigation is parsed from filepath CvParam with all structural ontology terms in order`` () =
-        let fakePath = CvParam(cvTerm = AFSO.``Investigation File``, v = "isa.investigation.xlsx")
+        let fakePath = CvParam(cvTerm = AFSO.Investigation_File, v = "isa.investigation.xlsx")
         let rootDir = (System.IO.Path.GetFullPath("Fixtures/arcStructure/"))
         let actual = 
             Investigation.parseMetadataSheetsFromTokens(

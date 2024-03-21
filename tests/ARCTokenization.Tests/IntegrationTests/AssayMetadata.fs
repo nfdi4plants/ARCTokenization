@@ -32,7 +32,7 @@ module AssayMetadata =
 
     [<Fact>]
     let ``Simple study is parsed from filepath CvParam with all structural ontology terms in order`` () =
-        let fakePath = CvParam(cvTerm = AFSO.``Assay File``, v = "assays/measurement1/isa.assay.xlsx")
+        let fakePath = CvParam(cvTerm = AFSO.Assay_File, v = "assays/measurement1/isa.assay.xlsx")
         let rootDir = (System.IO.Path.GetFullPath("Fixtures/arcStructure/"))
         let actual = 
             [fakePath]
