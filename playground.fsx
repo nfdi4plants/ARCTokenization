@@ -1,4 +1,5 @@
 #r "nuget: FSharpAux"
+//#r "nuget: FsOboParser"
 #r "nuget: OBO.NET"
 #r "nuget: FsSpreadsheet.ExcelIO, 4.1.0"
 
@@ -11,7 +12,9 @@
 
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
+//open FsOboParser
 open OBO.NET
+//open FsSpreadsheet.DSL
 open ControlledVocabulary
 open type ControlledVocabulary.ParamBase
 open ARCTokenization
@@ -46,6 +49,12 @@ afts
 let its = Investigation.parseMetadataSheetsFromTokens() afts
 
 
+
+
+let ot = List.head Terms.InvestigationMetadata.ontology.Terms
+
+ARCTokenization.StructuralOntology.CodeGeneration.toCodeString ot
+CodeGeneration.toSourceCode "Investigation" Terms.InvestigationMetadata.ontology
 
 System.IO.Directory.GetCurrentDirectory()
 let fakePath = CvParam(cvTerm = AFSO.``File Path``, v = System.IO.Directory.GetCurrentDirectory() + "/tests/ARCTokenization.Tests/Fixtures/correct/investigation_simple.xlsx")
@@ -124,7 +133,7 @@ let expectedTermValuesSimple =
         [""]
         [""]
         [""]
-        [""; "Maus"; "Keider"; "müller"; "oih"]
+        [""; "Maus"; "Keider"; "mÃ¼ller"; "oih"]
         [""; "Oliver"; "andreas"]
         [""; "L. I."; "C."]
         [""; "maus@nfdi4plants.org"]

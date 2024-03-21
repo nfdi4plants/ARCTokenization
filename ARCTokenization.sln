@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sln", "sln", "{CE1B84FD-33D
 		build.cmd = build.cmd
 		build.sh = build.sh
 		global.json = global.json
+		codeGenTestScript.fsx = codeGenTestScript.fsx
 		LICENSE = LICENSE
 		package.json = package.json
 		playground.fsx = playground.fsx

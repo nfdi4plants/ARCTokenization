@@ -80,6 +80,14 @@ let structuralOntologySources = [
     "src/ARCTokenization/structural_ontologies/arc_file_structure_ontology.yml"
 ]
 
+let sourceFileSources = [
+    "src/ARCTokenization/structural_ontologies/investigation_metadata_structural_ontology.obo"
+    "src/ARCTokenization/structural_ontologies/study_metadata_structural_ontology.obo"
+    "src/ARCTokenization/structural_ontologies/assay_metadata_structural_ontology.obo"
+    "src/ARCTokenization/structural_ontologies/arc_process_graph_structural_ontology.obo"
+    "src/ARCTokenization/structural_ontologies/arc_file_structure_ontology.obo"
+]
+
 let solutionFile  = $"{project}.sln"
 
 let configuration = "Release"

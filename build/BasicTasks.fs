@@ -6,6 +6,8 @@ open Fake.DotNet
 open Fake.IO.Globbing.Operators
 open System.IO
 open Fake.IO
+open ARCTokenization.StructuralOntology
+open FSharpAux
 
 open ProjectInfo
 
@@ -46,10 +48,21 @@ let buildOntologies =
         )
     }
 
+let buildSourceFiles =
+    BuildTask.create "BuildSourceFiles" [clean; buildOntologies] {
+        sourceFileSources
+        |> List.iter (fun sourceFileSource ->
+            let oboFilePath = (FileInfo sourceFileSource).DirectoryName
+            let oboFile = OBO.NET.OboOntology.fromFile false sourceFileSource
+            let modName = List.head oboFile.Terms |> CodeGeneration.toTermSourceRef
+            let sourceFilePath = Path.Combine(oboFilePath, $"{modName}.fs")
+            CodeGeneration.toFile modName oboFile sourceFilePath
+        )
+    }
 
 /// builds the solution file (dotnet build solution.sln)
 let buildSolution =
-    BuildTask.create "BuildSolution" [ clean ; buildOntologies ] { 
+    BuildTask.create "BuildSolution" [ clean ; buildOntologies; buildSourceFiles ] { 
         solutionFile 
         |> DotNet.build (fun p ->
             let msBuildParams =
@@ -76,7 +89,7 @@ let buildSolution =
 /// - AssemblyInformationalVersion
 ///
 /// - warnon:3390 for xml doc formatting warnings on compilation
-let build = BuildTask.create "Build" [clean; buildOntologies] {
+let build = BuildTask.create "Build" [clean; buildOntologies; buildSourceFiles] {
     projects
     |> List.iter (fun pInfo ->
         let proj = pInfo.ProjFile

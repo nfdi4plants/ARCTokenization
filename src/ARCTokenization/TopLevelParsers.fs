@@ -150,7 +150,7 @@ type Investigation =
     static member tryParseMetadataSheetFromToken(
         ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileToken = StructuralOntology.AFSO.``Investigation File``
+        let fileToken = StructuralOntology.AFSO.Investigation_File
 
         fun (rootPath:string) (token: #IParam) ->
             ISA.tryParseMetadataSheetFromToken
@@ -170,7 +170,7 @@ type Investigation =
     static member parseMetadataSheetsFromTokens(
         ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileToken = StructuralOntology.AFSO.``Investigation File``
+        let fileToken = StructuralOntology.AFSO.Investigation_File
 
         fun (rootPath:string) (tokens: #seq<#IParam>) ->
             ISA.parseMetadataSheetsFromTokens
@@ -219,7 +219,7 @@ type Study =
         ?UseLastSheetOnIncorrectName: bool
     ) =
 
-        let fileToken = StructuralOntology.AFSO.``Study File``
+        let fileToken = StructuralOntology.AFSO.Study_File
 
         fun (rootPath:string) (token: #IParam) ->
             ISA.tryParseMetadataSheetFromToken
@@ -239,7 +239,7 @@ type Study =
     static member parseMetadataSheetsFromTokens(
         ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileToken = StructuralOntology.AFSO.``Study File``
+        let fileToken = StructuralOntology.AFSO.Study_File
 
         fun (rootPath:string) (tokens: #seq<#IParam>) ->
             ISA.parseMetadataSheetsFromTokens
@@ -291,7 +291,7 @@ type Study =
     /// <param name="relFileTokens">A seq of IParams that may contain relevant tokens</param>
     /// <returns>A Seq of maps of string * `IParam` 2D list representing the individual parts of the process graph</returns>
     static member parseProcessGraphColumnsFromTokens (rootPath:string) (relFileTokens: #IParam seq) =
-        ISA.parseProcessGraphColumnsFromTokens rootPath (StructuralOntology.AFSO.``Study File``) relFileTokens
+        ISA.parseProcessGraphColumnsFromTokens rootPath (StructuralOntology.AFSO.Study_File) relFileTokens
 
 type Assay =
 
@@ -331,7 +331,7 @@ type Assay =
     static member tryParseMetadataSheetFromToken(
         ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileToken = StructuralOntology.AFSO.``Assay File``
+        let fileToken = StructuralOntology.AFSO.Assay_File
 
         fun (rootPath:string) (token: #IParam) ->
             ISA.tryParseMetadataSheetFromToken
@@ -351,7 +351,7 @@ type Assay =
     static member parseMetadataSheetsFromTokens(
         ?UseLastSheetOnIncorrectName: bool
     ) =
-        let fileToken = StructuralOntology.AFSO.``Assay File``
+        let fileToken = StructuralOntology.AFSO.Assay_File
 
         fun (rootPath:string) (tokens: #seq<#IParam>) ->
             ISA.parseMetadataSheetsFromTokens
@@ -402,4 +402,4 @@ type Assay =
 /// <param name="relFileTokens">A seq of IParams that may contain relevant tokens</param>
 /// <returns>A Seq of maps of string * `IParam` 2D list representing the individual parts of the process graph</returns>
     static member parseProcessGraphColumnsFromTokens (rootPath:string) (relFileTokens: #IParam seq) =
-        ISA.parseProcessGraphColumnsFromTokens rootPath (StructuralOntology.AFSO.``Assay File``) relFileTokens
+        ISA.parseProcessGraphColumnsFromTokens rootPath (StructuralOntology.AFSO.Assay_File) relFileTokens
