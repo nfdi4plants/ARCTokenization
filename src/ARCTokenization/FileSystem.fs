@@ -19,7 +19,7 @@ module internal FS =
             for dir in Directory.EnumerateDirectories(rootPath, "*", SearchOption.AllDirectories) do
                 let currentUri =  System.Uri(dir)
                 yield CvParam(
-                    cvTerm = AFSO.``Directory Path``,
+                    cvTerm = AFSO.Directory_Path,
                     v = root.MakeRelativeUri(currentUri).ToString()
                 )
         }
@@ -28,7 +28,7 @@ module internal FS =
         seq {
                 for dir in Directory.EnumerateDirectories(rootPath, "*", SearchOption.AllDirectories) do
                     yield CvParam(
-                        cvTerm = AFSO.``Directory Path``,
+                        cvTerm = AFSO.Directory_Path,
                         v = dir.Replace("\\","/")
                     )
             }    
@@ -40,7 +40,7 @@ module internal FS =
             for file in Directory.EnumerateFiles(rootPath, "*", SearchOption.AllDirectories) do
                 let currentFileUri =  System.Uri(file)
                 yield CvParam(
-                    cvTerm = AFSO.``File Path``, 
+                    cvTerm = AFSO.File_Path, 
                     v = root.MakeRelativeUri(currentFileUri).ToString()
                 )
         }
@@ -49,7 +49,7 @@ module internal FS =
         seq {
             for file in Directory.EnumerateFiles(rootPath, "*", SearchOption.AllDirectories) do
             yield CvParam(
-                cvTerm = AFSO.``File Path``, 
+                cvTerm = AFSO.File_Path, 
                 v = file.Replace("\\","/")
             )
         }

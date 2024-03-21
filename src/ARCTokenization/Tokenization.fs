@@ -58,73 +58,73 @@ module Tokenization =
 
             let asCvTerm (io: IOType) = 
                 match io with
-                | IOType.Source            -> StructuralOntology.APGSO.IOType.Source
-                | IOType.Sample            -> StructuralOntology.APGSO.IOType.Sample
-                | IOType.RawDataFile       -> StructuralOntology.APGSO.IOType.RawDataFile
-                | IOType.DerivedDataFile   -> StructuralOntology.APGSO.IOType.DerivedDataFile
-                | IOType.ImageFile         -> StructuralOntology.APGSO.IOType.ImageFile
-                | IOType.Material          -> StructuralOntology.APGSO.IOType.Material
+                | IOType.Source            -> StructuralOntology.APGSO.Source
+                | IOType.Sample            -> StructuralOntology.APGSO.Sample
+                | IOType.RawDataFile       -> StructuralOntology.APGSO.RawDataFile
+                | IOType.DerivedDataFile   -> StructuralOntology.APGSO.DerivedDataFile
+                | IOType.ImageFile         -> StructuralOntology.APGSO.ImageFile
+                | IOType.Material          -> StructuralOntology.APGSO.Material
                 | IOType.FreeText s        -> CvTerm.create (accession = "", name = s, ref = "")
 
         module CompositeHeader =
 
             let toCvTerm(ch: CompositeHeader) =
                 match ch with
-                | CompositeHeader.Characteristic _      -> StructuralOntology.APGSO.``Process Graph Header``.Characteristic
-                | CompositeHeader.Factor _              -> StructuralOntology.APGSO.``Process Graph Header``.Factor
-                | CompositeHeader.Parameter _           -> StructuralOntology.APGSO.``Process Graph Header``.Parameter
-                | CompositeHeader.Component _           -> StructuralOntology.APGSO.``Process Graph Header``.Component
-                | CompositeHeader.ProtocolType          -> StructuralOntology.APGSO.``Process Graph Header``.ProtocolType
-                | CompositeHeader.ProtocolDescription   -> StructuralOntology.APGSO.``Process Graph Header``.ProtocolDescription
-                | CompositeHeader.ProtocolUri           -> StructuralOntology.APGSO.``Process Graph Header``.ProtocolUri
-                | CompositeHeader.ProtocolVersion       -> StructuralOntology.APGSO.``Process Graph Header``.ProtocolVersion
-                | CompositeHeader.ProtocolREF           -> StructuralOntology.APGSO.``Process Graph Header``.ProtocolREF
-                | CompositeHeader.Performer             -> StructuralOntology.APGSO.``Process Graph Header``.Performer
-                | CompositeHeader.Date                  -> StructuralOntology.APGSO.``Process Graph Header``.Date
-                | CompositeHeader.Input _               -> StructuralOntology.APGSO.``Process Graph Header``.Input
-                | CompositeHeader.Output _              -> StructuralOntology.APGSO.``Process Graph Header``.Output
+                | CompositeHeader.Characteristic _      -> StructuralOntology.APGSO.Characteristic
+                | CompositeHeader.Factor _              -> StructuralOntology.APGSO.Factor
+                | CompositeHeader.Parameter _           -> StructuralOntology.APGSO.Parameter
+                | CompositeHeader.Component _           -> StructuralOntology.APGSO.Component
+                | CompositeHeader.ProtocolType          -> StructuralOntology.APGSO.ProtocolType
+                | CompositeHeader.ProtocolDescription   -> StructuralOntology.APGSO.ProtocolDescription
+                | CompositeHeader.ProtocolUri           -> StructuralOntology.APGSO.ProtocolUri
+                | CompositeHeader.ProtocolVersion       -> StructuralOntology.APGSO.ProtocolVersion
+                | CompositeHeader.ProtocolREF           -> StructuralOntology.APGSO.ProtocolREF
+                | CompositeHeader.Performer             -> StructuralOntology.APGSO.Performer
+                | CompositeHeader.Date                  -> StructuralOntology.APGSO.Date
+                | CompositeHeader.Input _               -> StructuralOntology.APGSO.Input
+                | CompositeHeader.Output _              -> StructuralOntology.APGSO.Output
                 | CompositeHeader.FreeText _            -> StructuralOntology.APGSO.FreeText
 
             let toHeaderParam (ch: CompositeHeader) : IParam = 
                 match ch with
                 | CompositeHeader.Characteristic term -> 
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.Characteristic, ParamValue.CvValue (OntologyAnnotation.asCvTerm term))
+                    CvParam(StructuralOntology.APGSO.Characteristic, ParamValue.CvValue (OntologyAnnotation.asCvTerm term))
 
                 | CompositeHeader.Factor term -> 
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.Factor, ParamValue.CvValue (OntologyAnnotation.asCvTerm term))
+                    CvParam(StructuralOntology.APGSO.Factor, ParamValue.CvValue (OntologyAnnotation.asCvTerm term))
 
                 | CompositeHeader.Parameter term ->
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.Parameter, ParamValue.CvValue (OntologyAnnotation.asCvTerm term))
+                    CvParam(StructuralOntology.APGSO.Parameter, ParamValue.CvValue (OntologyAnnotation.asCvTerm term))
 
                 | CompositeHeader.Component term -> 
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.Component, ParamValue.CvValue (OntologyAnnotation.asCvTerm term))
+                    CvParam(StructuralOntology.APGSO.Component, ParamValue.CvValue (OntologyAnnotation.asCvTerm term))
 
                 | CompositeHeader.ProtocolType -> 
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.ProtocolType, ParamValue.Value "")
+                    CvParam(StructuralOntology.APGSO.ProtocolType, ParamValue.Value "")
 
                 | CompositeHeader.ProtocolDescription ->
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.ProtocolDescription, ParamValue.Value "")
+                    CvParam(StructuralOntology.APGSO.ProtocolDescription, ParamValue.Value "")
 
                 | CompositeHeader.ProtocolUri ->
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.ProtocolUri, ParamValue.Value "")
+                    CvParam(StructuralOntology.APGSO.ProtocolUri, ParamValue.Value "")
 
                 | CompositeHeader.ProtocolVersion ->
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.ProtocolVersion, ParamValue.Value "")
+                    CvParam(StructuralOntology.APGSO.ProtocolVersion, ParamValue.Value "")
 
                 | CompositeHeader.ProtocolREF ->
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.ProtocolREF, ParamValue.Value "")
+                    CvParam(StructuralOntology.APGSO.ProtocolREF, ParamValue.Value "")
 
                 | CompositeHeader.Performer ->
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.Performer, ParamValue.Value "")
+                    CvParam(StructuralOntology.APGSO.Performer, ParamValue.Value "")
 
                 | CompositeHeader.Date ->
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.Date, ParamValue.Value "")
+                    CvParam(StructuralOntology.APGSO.Date, ParamValue.Value "")
 
                 | CompositeHeader.Input io ->
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.Input, ParamValue.CvValue (IOType.asCvTerm io))
+                    CvParam(StructuralOntology.APGSO.Input, ParamValue.CvValue (IOType.asCvTerm io))
 
                 | CompositeHeader.Output io -> 
-                    CvParam(StructuralOntology.APGSO.``Process Graph Header``.Output, ParamValue.CvValue (IOType.asCvTerm io))
+                    CvParam(StructuralOntology.APGSO.Output, ParamValue.CvValue (IOType.asCvTerm io))
 
                 | CompositeHeader.FreeText f -> 
                     UserParam(f, ParamValue.CvValue StructuralOntology.APGSO.FreeText)
@@ -172,24 +172,24 @@ module Tokenization =
                 match pType with
                 | PType.Directory ->
                     match (relativePath.Split '/') with
-                    | [|Path.StudiesFolderName|]        ->  StructuralOntology.AFSO.``Studies Directory``   |> fun t -> CvParam(t,relativePath)
-                    | [|Path.StudiesFolderName; _|]     ->  StructuralOntology.AFSO.``Study Directory``     |> fun t -> CvParam(t,relativePath)
-                    | [|Path.AssaysFolderName|]         ->  StructuralOntology.AFSO.``Assays Directory``    |> fun t -> CvParam(t,relativePath)
-                    | [|Path.AssaysFolderName; _|]      ->  StructuralOntology.AFSO.``Assay Directory``     |> fun t -> CvParam(t,relativePath)
-                    | [|Path.RunsFolderName|]           ->  StructuralOntology.AFSO.``Runs Directory``      |> fun t -> CvParam(t,relativePath)
-                    | [|Path.RunsFolderName; _|]        ->  StructuralOntology.AFSO.``Run Directory``       |> fun t -> CvParam(t,relativePath)
-                    | [|Path.WorkflowsFolderName|]      ->  StructuralOntology.AFSO.``Workflows Directory`` |> fun t -> CvParam(t,relativePath)
-                    | [|Path.WorkflowsFolderName; _|]   ->  StructuralOntology.AFSO.``Workflow Directory``  |> fun t -> CvParam(t,relativePath)
-                    | _                                 ->  StructuralOntology.AFSO.``Directory Path``      |> fun t -> CvParam(t,relativePath)
+                    | [|Path.StudiesFolderName|]        ->  StructuralOntology.AFSO.Studies_Directory   |> fun t -> CvParam(t,relativePath)
+                    | [|Path.StudiesFolderName; _|]     ->  StructuralOntology.AFSO.Study_Directory     |> fun t -> CvParam(t,relativePath)
+                    | [|Path.AssaysFolderName|]         ->  StructuralOntology.AFSO.Assays_Directory    |> fun t -> CvParam(t,relativePath)
+                    | [|Path.AssaysFolderName; _|]      ->  StructuralOntology.AFSO.Assay_Directory     |> fun t -> CvParam(t,relativePath)
+                    | [|Path.RunsFolderName|]           ->  StructuralOntology.AFSO.Runs_Directory      |> fun t -> CvParam(t,relativePath)
+                    | [|Path.RunsFolderName; _|]        ->  StructuralOntology.AFSO.Run_Directory       |> fun t -> CvParam(t,relativePath)
+                    | [|Path.WorkflowsFolderName|]      ->  StructuralOntology.AFSO.Workflows_Directory |> fun t -> CvParam(t,relativePath)
+                    | [|Path.WorkflowsFolderName; _|]   ->  StructuralOntology.AFSO.Workflow_Directory  |> fun t -> CvParam(t,relativePath)
+                    | _                                 ->  StructuralOntology.AFSO.Directory_Path      |> fun t -> CvParam(t,relativePath)
                 | PType.File ->
                     match relativePath with
-                    | _ when relativePath.EndsWith "isa.investigation.xlsx" -> StructuralOntology.AFSO.``Investigation File``   |> fun t -> CvParam(t,relativePath)
-                    | _ when relativePath.EndsWith "isa.assay.xlsx"         -> StructuralOntology.AFSO.``Assay File``           |> fun t -> CvParam(t,relativePath)
-                    | _ when relativePath.EndsWith "isa.dataset.xlsx"       -> StructuralOntology.AFSO.``Dataset File``         |> fun t -> CvParam(t,relativePath)
-                    | _ when relativePath.EndsWith "isa.study.xlsx"         -> StructuralOntology.AFSO.``Study File``           |> fun t -> CvParam(t,relativePath)
-                    | _ when relativePath.EndsWith ".yml"                   -> StructuralOntology.AFSO.``YML File``             |> fun t -> CvParam(t,relativePath)
-                    | _ when relativePath.EndsWith ".cwl"                   -> StructuralOntology.AFSO.``CWL File``             |> fun t -> CvParam(t,relativePath)
-                    | _                                                     -> StructuralOntology.AFSO.``File Path``            |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.investigation.xlsx" -> StructuralOntology.AFSO.Investigation_File   |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.assay.xlsx"         -> StructuralOntology.AFSO.Assay_File           |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.dataset.xlsx"       -> StructuralOntology.AFSO.Dataset_File         |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith "isa.study.xlsx"         -> StructuralOntology.AFSO.Study_File           |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith ".yml"                   -> StructuralOntology.AFSO.YML_File             |> fun t -> CvParam(t,relativePath)
+                    | _ when relativePath.EndsWith ".cwl"                   -> StructuralOntology.AFSO.CWL_File             |> fun t -> CvParam(t,relativePath)
+                    | _                                                     -> StructuralOntology.AFSO.File_Path            |> fun t -> CvParam(t,relativePath)
         
         /// Gets CvParams based on the root path, file system type, and full path
         let getArcFileSystemTokens (rootPath:string) (pType:PType) (path:string) =
