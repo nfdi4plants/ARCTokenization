@@ -6,6 +6,8 @@ open Fake.DotNet
 open Fake.IO.Globbing.Operators
 open System.IO
 open Fake.IO
+open ARCTokenization.StructuralOntology
+open FSharpAux
 
 open ProjectInfo
 
@@ -46,6 +48,17 @@ let buildOntologies =
         )
     }
 
+let buildSourceFiles =
+    BuildTask.create "BuildSourceFiles" [clean; buildOntologies] {
+        sourceFileSources
+        |> List.iter (fun sourceFileSource ->
+            let oboFileName = 
+                FileInfo sourceFileSource
+            let oboFile = OBO.NET.OboOntology.fromFile false sourceFileSource
+            let modName = List.head oboFile.Terms |> CodeGeneration.toTermSourceRef
+            CodeGeneration.toFile modName oboFile
+        )
+    }
 
 /// builds the solution file (dotnet build solution.sln)
 let buildSolution =

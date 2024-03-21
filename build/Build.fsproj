@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\ARCTokenization\ARCTokenization.fsproj" PackageVersion="[1.0.0, 2.0.0)" />
     <PackageReference Include="BlackFox.Fake.BuildTask" Version="0.1.3" />
     <PackageReference Include="Fake.Api.Github" Version="5.23.1" />
     <PackageReference Include="Fake.Core.Process" Version="5.23.1" />
