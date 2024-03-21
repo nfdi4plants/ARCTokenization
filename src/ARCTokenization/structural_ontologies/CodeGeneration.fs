@@ -23,6 +23,15 @@ module CodeGeneration =
         term.Name
         |> String.replace " " "_"
 
+    /// Returns true if a string contains special characters or starts with a number.
+    let checkForSpecialCharacters str =
+        let spChs = System.Text.RegularExpressions.Regex("(^\d|[^a-zA-Z0-9_])")
+        (spChs.Match str).Success
+
+    /// Takes a string and returns it with back ticks ("``") at the beginning and the end.
+    let addBackTicks str =
+        $"``{str}``"
+
     /// Takes an OboTerm and returns its TermSourceRef as string.
     let toTermSourceRef (term : OboTerm) =
         term.Id
@@ -30,7 +39,12 @@ module CodeGeneration =
 
     /// Takes an OboTerm and transforms it into an F# code string for structural ontology libraries.
     let toCodeString (term : OboTerm) = 
-        $"        let {toUnderscoredName term} = CvTerm.create(\"{term.Id}\", \"{term.Name}\", \"{toTermSourceRef term}\"){NewLine}{NewLine}"
+        let underscoredName = toUnderscoredName term
+        let curatedName =
+            if checkForSpecialCharacters underscoredName then
+                addBackTicks underscoredName
+            else underscoredName
+        $"        let {curatedName} = CvTerm.create(\"{term.Id}\", \"{term.Name}\", \"{toTermSourceRef term}\"){NewLine}{NewLine}"
 
     /// Takes a module name and an OboOntology and returns the F# code of the whole term list for structural ontology libraries.
     let toSourceCode moduleName (onto : OboOntology) =
