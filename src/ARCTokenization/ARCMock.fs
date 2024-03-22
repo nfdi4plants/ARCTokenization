@@ -373,17 +373,17 @@ type ARCMock =
         ?Assay_Technology_Platform: seq<string>,
         ?Assay_File_Name: seq<string>,
         ?ASSAY_PERFORMERS: seq<string>,
-        ?Assay_Performer_Last_Name: seq<string>,
-        ?Assay_Performer_First_Name: seq<string>,
-        ?Assay_Performer_Mid_Initials: seq<string>,
-        ?Assay_Performer_Email: seq<string>,
-        ?Assay_Performer_Phone: seq<string>,
-        ?Assay_Performer_Fax: seq<string>,
-        ?Assay_Performer_Address: seq<string>,
-        ?Assay_Performer_Affiliation: seq<string>,
-        ?Assay_Performer_Roles: seq<string>,
-        ?Assay_Performer_Roles_Term_Accession_Number: seq<string>,
-        ?Assay_Performer_Roles_Term_Source_REF: seq<string>
+        ?Assay_Person_Last_Name: seq<string>,
+        ?Assay_Person_First_Name: seq<string>,
+        ?Assay_Person_Mid_Initials: seq<string>,
+        ?Assay_Person_Email: seq<string>,
+        ?Assay_Person_Phone: seq<string>,
+        ?Assay_Person_Fax: seq<string>,
+        ?Assay_Person_Address: seq<string>,
+        ?Assay_Person_Affiliation: seq<string>,
+        ?Assay_Person_Roles: seq<string>,
+        ?Assay_Person_Roles_Term_Accession_Number: seq<string>,
+        ?Assay_Person_Roles_Term_Source_REF: seq<string>
     ) =
         let valueRows = [
             [""; yield! ASSAY |> Option.defaultValue Seq.empty ]
@@ -396,17 +396,17 @@ type ARCMock =
             [""; yield! Assay_Technology_Platform |> Option.defaultValue Seq.empty ]
             [""; yield! Assay_File_Name |> Option.defaultValue Seq.empty ]
             [""; yield! ASSAY_PERFORMERS |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Last_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_First_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Mid_Initials |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Email |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Phone |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Fax |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Address |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Affiliation |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Roles |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Roles_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Performer_Roles_Term_Source_REF |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Last_Name |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_First_Name |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Mid_Initials |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Email |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Phone |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Fax |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Address |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Affiliation |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Roles |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Roles_Term_Accession_Number |> Option.defaultValue Seq.empty ]
+            [""; yield! Assay_Person_Roles_Term_Source_REF |> Option.defaultValue Seq.empty ]
         ]
 
         Terms.AssayMetadata.nonObsoleteNonRootCvTerms
