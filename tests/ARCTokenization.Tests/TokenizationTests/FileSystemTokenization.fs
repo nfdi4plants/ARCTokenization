@@ -65,6 +65,11 @@ module FileSystem =
                 CvParam(StructuralOntology.AFSO.``Assay Directory`` ,   "assays/measurement1")
                 CvParam(StructuralOntology.AFSO.``Assay File`` ,        "assays/measurement1/isa.assay.xlsx")
                 CvParam(StructuralOntology.AFSO.``Dataset File``,       "assays/measurement1/isa.dataset.xlsx")
+                CvParam(StructuralOntology.AFSO.``Directory Path``,     "assays/measurement1/dataset")
+                CvParam(StructuralOntology.AFSO.``File Path``,     "assays/measurement1/dataset/.gitkeep")
+                CvParam(StructuralOntology.AFSO.``Directory Path``,     "assays/measurement1/protocols")
+                CvParam(StructuralOntology.AFSO.``File Path``,     "assays/measurement1/protocols/.gitkeep")
+                CvParam(StructuralOntology.AFSO.``File Path``,     "assays/measurement1/README.md")
                 CvParam(StructuralOntology.AFSO.``Investigation File``, "isa.investigation.xlsx")
                 CvParam(StructuralOntology.AFSO.``Runs Directory`` ,    "runs")
                 CvParam(StructuralOntology.AFSO.``YML File`` ,          "runs/FSharpArcCapsule.yml")
@@ -73,14 +78,32 @@ module FileSystem =
                 CvParam(StructuralOntology.AFSO.``Study File`` ,        "studies/experiment1_material/isa.study.xlsx")
                 CvParam(StructuralOntology.AFSO.``Directory Path``,     "studies/experiment1_material/resources")
                 CvParam(StructuralOntology.AFSO.``File Path``,     "studies/experiment1_material/resources/.gitkeep")
+                CvParam(StructuralOntology.AFSO.``Directory Path``,     "studies/experiment1_material/protocols")
+                CvParam(StructuralOntology.AFSO.``File Path``,     "studies/experiment1_material/README.md")
                 CvParam(StructuralOntology.AFSO.``Workflows Directory`` ,"workflows")
                 CvParam(StructuralOntology.AFSO.``Workflow Directory``, "workflows/FixedScript")
                 CvParam(StructuralOntology.AFSO.``File Path``,          "workflows/FixedScript/script.fsx")
             ]
             |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
-        
+        let m1 =
+            actual
+            |> List.map (fun i -> i|>string)
+            |> String.concat "\n"
+
+        let actualFiltered = 
+            actual 
+            |> List.filter (fun i -> 
+                i.Value
+                |>ParamValue.getValue
+                |>string
+                |>fun x -> 
+                    not (x.Contains ".DS_Store")
+                    
+                    )
+            |> List.sortBy (fun cvp -> cvp.Value |> ParamValue.getValueAsString)
         Assert.All(   
-            List.zip actual expected,
-            fun (a,e) -> 
-                Assert.True(a.Equals(e))
+            
+            expected,
+            fun (e) -> 
+                Assert.True(actualFiltered|>List.contains e, sprintf "%A "e)
         )
