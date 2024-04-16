@@ -11,7 +11,7 @@ module InvestigationMetadata =
     open TestUtils
 
     let parsedInvestigationMetadataEmpty = Investigation.parseMetadataSheetFromFile() "Fixtures/incorrect/investigation_empty.xlsx"
-    let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetFromFile() "Fixtures/correct/isa.investigation.xlsx"
+    let parsedInvestigationMetadataSimple = Investigation.parseMetadataSheetFromFile() "Fixtures/correct/isa.investigation_simple.xlsx"
 
     let allExpectedMetadataTermsEmpty = 
         Terms.InvestigationMetadata.nonObsoleteNonRootCvTerms
@@ -31,31 +31,59 @@ module InvestigationMetadata =
             CvParam.structuralEquality (expected) (actual :?> CvParam)
         ))
 
-    let allExpectedMetadataTermsFull =
+    let allExpectedMetadataTerms =
         ARCMock.InvestigationMetadataTokens(
+            true,
+            ONTOLOGY_SOURCE_REFERENCE = Seq.empty,
+            Term_Source_Name= Seq.empty,
+            Term_Source_File= Seq.empty,
+            Term_Source_Version= Seq.empty,
+            Term_Source_Description= Seq.empty,
+            INVESTIGATION= Seq.empty,
+            Investigation_Submission_Date= Seq.empty,
+            Investigation_Public_Release_Date= Seq.empty,
+            INVESTIGATION_PUBLICATIONS= Seq.empty,
+            Investigation_Publication_PubMed_ID= Seq.empty,
+            Investigation_Publication_DOI= Seq.empty,
+            Investigation_Publication_Author_List= Seq.empty,
+            Investigation_Publication_Title= Seq.empty,
+            Investigation_Publication_Status= Seq.empty,
+            Investigation_Publication_Status_Term_Accession_Number= Seq.empty,
+            Investigation_Publication_Status_Term_Source_REF= Seq.empty,
             Investigation_Identifier = ["iid"],
             Investigation_Title = ["ititle"],
             Investigation_Description = ["idesc"],
+            INVESTIGATION_CONTACTS= Seq.empty,
             Investigation_Person_Last_Name = ["Maus"; "Keider"; "müller"; ""; "oih"],
             Investigation_Person_First_Name = ["Oliver"; ""; "andreas";],
             Investigation_Person_Mid_Initials = ["L. I."; "C."],
             Investigation_Person_Email = ["maus@nfdi4plants.org"],
-            Investigation_Person_Affiliation = [""; "Affe"]//,
-            // Study_Identifier = ["sid"],
-            // Study_Title = ["stitle"],
-            // Study_Description = ["sdesc"],
-            // Study_File_Name = [@"sid\isa.study.xlsx"],
-            // Study_Assay_File_Name = [@"aid\isa.assay.xlsx"; @"aid2\isa.assay.xlsx"],
-            // Study_Person_Last_Name = ["weil"],
-            // Study_Person_First_Name = [""; "lukas"]
+            Investigation_Person_Phone= Seq.empty,
+            Investigation_Person_Fax= Seq.empty,
+            Investigation_Person_Address= Seq.empty,
+            Investigation_Person_Affiliation = [""; "Affe"],
+            Investigation_Person_Roles= Seq.empty,
+            Investigation_Person_Roles_Term_Accession_Number= Seq.empty,
+            Investigation_Person_Roles_Term_Source_REF= Seq.empty
         )
         |> List.concat // use flat list
 
-    // [<Fact>]
-    // let ``Simple investigation is parsed with all structural ontology terms in order`` () =
-    //     Assert.All((List.zip allExpectedMetadataTermsFull parsedInvestigationMetadataSimple), (fun (expected,actual) ->
-    //         CvParam.structuralEquality (expected) (actual :?> CvParam)
-    //     ))
+    [<Fact>]
+    let ``Simple investigation is parsed with all structural ontology terms in order`` () =
+        let x = 
+            allExpectedMetadataTerms
+            |>List.map(fun x -> x.Name)
+            |>String.concat "\n"
+        let y =     
+            parsedInvestigationMetadataSimple
+            |>List.map(fun x -> x.Name)
+            |>String.concat "\n"
+
+        let z = String.concat "--------------\n\n" [x; y]
+        // Assert.True(1=3,z)
+        Assert.All((List.zip allExpectedMetadataTerms parsedInvestigationMetadataSimple), (fun (expected,actual) ->
+            CvParam.structuralEquality (expected) (actual :?> CvParam) 
+        ))
 
     open ARCTokenization.StructuralOntology
 
@@ -69,44 +97,6 @@ module InvestigationMetadata =
             )  rootDir absoluteDirectoryPaths
             |> Seq.head
 
-        // Assert.True(
-        //     let x =  allExpectedMetadataTermsFull
-        //     let y =  actual
-        //     let lx = Seq.length x 
-        //     let ly = Seq.length y
-            
-        //     // Seq.iter (fun x -> printfn "%A" x) x
-        //     // Seq.iter (fun x -> printfn "%A" x) y
-            
-        //     1=5,
-        //     (sprintf "%A %A" lx ly)
-        // )
-        let x =  allExpectedMetadataTermsFull
-        let y =  actual
-        let y2 =  actual|>List.map (fun i -> i.Name)
-        let lx = Seq.length x 
-        let ly = Seq.length y
-        let aaa = 
-            x|>List.choose (fun i -> 
-                if List.contains i.Name y2 then 
-                    None
-                else 
-                    Some (i|>string)
-                )
-        let z = 
-            [
-                lx|>string
-                ly|>string
-                //x|>List.map (fun i -> i|>string);
-                "--------------------------------------------------------------------------------------------------------------------------------"
-                //y|>List.map (fun i -> i|>string)
-                aaa|>List.length|>string
-                aaa|>String.concat "\n"
-            ]
-            |>String.concat "\n"
-        Assert.True(false,z)
-
-
-        // Assert.All((List.zip allExpectedMetadataTermsFull actual), (fun (expected,actual) ->
-        //     CvParam.structuralEquality (expected) (actual :?> CvParam)
-        // ))
+        Assert.All((List.zip allExpectedMetadataTerms actual), (fun (expected,actual) ->
+            CvParam.structuralEquality (expected) (actual :?> CvParam)
+        ))

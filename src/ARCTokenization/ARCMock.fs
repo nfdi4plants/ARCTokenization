@@ -12,6 +12,7 @@ type ARCMock =
     /// each row can be expanded with additional CvParams by setting the respective optional argument.
     /// </summary>
     static member InvestigationMetadataTokens(
+        deleteEmpty:bool,
         ?ONTOLOGY_SOURCE_REFERENCE: seq<string>,
         ?Term_Source_Name: seq<string>,
         ?Term_Source_File: seq<string>,
@@ -107,112 +108,132 @@ type ARCMock =
     ) =
         let valueRows = 
             [
-                ["" ; yield! ONTOLOGY_SOURCE_REFERENCE |> Option.defaultValue Seq.empty]
-                ["" ; yield! Term_Source_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Term_Source_File |> Option.defaultValue Seq.empty]
-                ["" ; yield! Term_Source_Version |> Option.defaultValue Seq.empty]
-                ["" ; yield! Term_Source_Description |> Option.defaultValue Seq.empty]
-                ["" ; yield! INVESTIGATION |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Identifier |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Title |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Description |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Submission_Date |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Public_Release_Date |> Option.defaultValue Seq.empty]
-                ["" ; yield! INVESTIGATION_PUBLICATIONS |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Publication_PubMed_ID |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Publication_DOI |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Publication_Author_List |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Publication_Title |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Publication_Status |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Publication_Status_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Publication_Status_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! INVESTIGATION_CONTACTS |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Last_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_First_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Mid_Initials |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Email |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Phone |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Fax |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Address |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Affiliation |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Roles |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Roles_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Investigation_Person_Roles_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! Comment_ORCID |> Option.defaultValue Seq.empty]
-                ["" ; yield! STUDY |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Identifier |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Title |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Description |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Submission_Date |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Public_Release_Date |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_File_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! STUDY_DESIGN_DESCRIPTORS |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Design_Type |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Design_Type_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Design_Type_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! STUDY_PUBLICATIONS |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Publication_PubMed_ID |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Publication_DOI |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Publication_Author_List |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Publication_Title |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Publication_Status |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Publication_Status_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Publication_Status_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! STUDY_FACTORS |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Factor_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Factor_Type |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Factor_Type_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Factor_Type_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! STUDY_ASSAYS |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Assay_Measurement_Type |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Assay_Measurement_Type_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Assay_Measurement_Type_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Assay_Technology_Type |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Assay_Technology_Type_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Assay_Technology_Type_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Assay_Technology_Platform |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Assay_File_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! STUDY_PROTOCOLS |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Type |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Type_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Type_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Description |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_URI |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Version |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Parameters_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Parameters_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Parameters_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Components_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Components_Type |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Components_Type_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Protocol_Components_Type_Term_Source_REF |> Option.defaultValue Seq.empty]
-                ["" ; yield! STUDY_CONTACTS |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Last_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_First_Name |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Mid_Initials |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Email |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Phone |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Fax |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Address |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Affiliation |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Roles |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Roles_Term_Accession_Number |> Option.defaultValue Seq.empty]
-                ["" ; yield! Study_Person_Roles_Term_Source_REF |> Option.defaultValue Seq.empty]
+                ONTOLOGY_SOURCE_REFERENCE
+                Term_Source_Name
+                Term_Source_File
+                Term_Source_Version
+                Term_Source_Description
+                INVESTIGATION
+                Investigation_Identifier
+                Investigation_Title
+                Investigation_Description
+                Investigation_Submission_Date
+                Investigation_Public_Release_Date
+                INVESTIGATION_PUBLICATIONS
+                Investigation_Publication_PubMed_ID
+                Investigation_Publication_DOI
+                Investigation_Publication_Author_List
+                Investigation_Publication_Title
+                Investigation_Publication_Status
+                Investigation_Publication_Status_Term_Accession_Number
+                Investigation_Publication_Status_Term_Source_REF
+                INVESTIGATION_CONTACTS
+                Investigation_Person_Last_Name
+                Investigation_Person_First_Name
+                Investigation_Person_Mid_Initials
+                Investigation_Person_Email
+                Investigation_Person_Phone
+                Investigation_Person_Fax
+                Investigation_Person_Address
+                Investigation_Person_Affiliation
+                Investigation_Person_Roles
+                Investigation_Person_Roles_Term_Accession_Number
+                Investigation_Person_Roles_Term_Source_REF
+                Comment_ORCID
+                STUDY
+                Study_Identifier
+                Study_Title
+                Study_Description
+                Study_Submission_Date
+                Study_Public_Release_Date
+                Study_File_Name
+                STUDY_DESIGN_DESCRIPTORS
+                Study_Design_Type
+                Study_Design_Type_Term_Accession_Number
+                Study_Design_Type_Term_Source_REF
+                STUDY_PUBLICATIONS
+                Study_Publication_PubMed_ID
+                Study_Publication_DOI
+                Study_Publication_Author_List
+                Study_Publication_Title
+                Study_Publication_Status
+                Study_Publication_Status_Term_Accession_Number
+                Study_Publication_Status_Term_Source_REF
+                STUDY_FACTORS
+                Study_Factor_Name
+                Study_Factor_Type
+                Study_Factor_Type_Term_Accession_Number
+                Study_Factor_Type_Term_Source_REF
+                STUDY_ASSAYS
+                Study_Assay_Measurement_Type
+                Study_Assay_Measurement_Type_Term_Accession_Number
+                Study_Assay_Measurement_Type_Term_Source_REF
+                Study_Assay_Technology_Type
+                Study_Assay_Technology_Type_Term_Accession_Number
+                Study_Assay_Technology_Type_Term_Source_REF
+                Study_Assay_Technology_Platform
+                Study_Assay_File_Name
+                STUDY_PROTOCOLS
+                Study_Protocol_Name
+                Study_Protocol_Type
+                Study_Protocol_Type_Term_Accession_Number
+                Study_Protocol_Type_Term_Source_REF
+                Study_Protocol_Description
+                Study_Protocol_URI
+                Study_Protocol_Version
+                Study_Protocol_Parameters_Name
+                Study_Protocol_Parameters_Term_Accession_Number
+                Study_Protocol_Parameters_Term_Source_REF
+                Study_Protocol_Components_Name
+                Study_Protocol_Components_Type
+                Study_Protocol_Components_Type_Term_Accession_Number
+                Study_Protocol_Components_Type_Term_Source_REF
+                STUDY_CONTACTS
+                Study_Person_Last_Name
+                Study_Person_First_Name
+                Study_Person_Mid_Initials
+                Study_Person_Email
+                Study_Person_Phone
+                Study_Person_Fax
+                Study_Person_Address
+                Study_Person_Affiliation
+                Study_Person_Roles
+                Study_Person_Roles_Term_Accession_Number
+                Study_Person_Roles_Term_Source_REF
             ]
 
-        Terms.InvestigationMetadata.nonObsoleteNonRootCvTerms
-        |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
-        |> List.zip valueRows
-        |> List.map (fun (values,term) ->
-            values
-            |> List.mapi (fun i v ->
-                if i = 0 then
-                    CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
-                else
-                    CvParam(term, ParamValue.Value v, [])
+        if deleteEmpty then
+            Terms.InvestigationMetadata.nonObsoleteNonRootCvTerms
+            |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
+            |> List.zip valueRows
+            |> List.choose (fun (values,term) -> 
+                match values with
+                | None -> None
+                | Some v -> 
+                    Some ([""; yield! v],term))
+            |> List.map (fun (values,term) ->
+                values
+                |> List.mapi (fun i v ->
+                    if i = 0 then
+                        CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
+                    else
+                        CvParam(term, ParamValue.Value v, [])
+                )
             )
-        )
+        else
+            Terms.InvestigationMetadata.nonObsoleteNonRootCvTerms
+            |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
+            |> List.zip valueRows
+            |> List.map (fun (values,term) ->
+                [""; yield! values  |> Option.defaultValue Seq.empty ]
+                |> List.mapi (fun i v ->
+                    if i = 0 then
+                        CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
+                    else
+                        CvParam(term, ParamValue.Value v, [])
+                )
+            )
+
 
     /// <summary>
     /// returns a mock list of CvParams lists which each represent a tokenized row of study metadata.
@@ -220,6 +241,7 @@ type ARCMock =
     /// each row can be expanded with additional CvParams by setting the respective optional argument.
     /// </summary>
     static member StudyMetadataTokens(
+        deleteEmpty:bool,
         ?STUDY: seq<string>,
         ?Study_Identifier: seq<string>,
         ?Study_Title: seq<string>,
@@ -282,80 +304,99 @@ type ARCMock =
         ?Study_Person_Roles_Term_Source_REF: seq<string>
     ) =
         let valueRows = [
-            [""; yield! STUDY |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Identifier |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Title |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Description |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Submission_Date |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Public_Release_Date |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_File_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! STUDY_DESIGN_DESCRIPTORS |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Design_Type |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Design_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Design_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! STUDY_PUBLICATIONS |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Publication_PubMed_ID |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Publication_DOI |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Publication_Author_List |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Publication_Title |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Publication_Status |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Publication_Status_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Publication_Status_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! STUDY_FACTORS |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Factor_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Factor_Type |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Factor_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Factor_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! STUDY_ASSAYS |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Assay_Measurement_Type |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Assay_Measurement_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Assay_Measurement_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Assay_Technology_Type |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Assay_Technology_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Assay_Technology_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Assay_Technology_Platform |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Assay_File_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! STUDY_PROTOCOLS |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Type |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Description |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_URI |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Version |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Parameters_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Parameters_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Parameters_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Components_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Components_Type |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Components_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Protocol_Components_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! STUDY_CONTACTS |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Last_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_First_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Mid_Initials |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Email |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Phone |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Fax |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Address |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Affiliation |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Roles |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Roles_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Study_Person_Roles_Term_Source_REF |> Option.defaultValue Seq.empty ]
+            STUDY 
+            Study_Identifier
+            Study_Title
+            Study_Description
+            Study_Submission_Date
+            Study_Public_Release_Date 
+            Study_File_Name 
+            STUDY_DESIGN_DESCRIPTORS 
+            Study_Design_Type 
+            Study_Design_Type_Term_Accession_Number 
+            Study_Design_Type_Term_Source_REF 
+            STUDY_PUBLICATIONS 
+            Study_Publication_PubMed_ID 
+            Study_Publication_DOI 
+            Study_Publication_Author_List 
+            Study_Publication_Title 
+            Study_Publication_Status 
+            Study_Publication_Status_Term_Accession_Number 
+            Study_Publication_Status_Term_Source_REF 
+            STUDY_FACTORS 
+            Study_Factor_Name 
+            Study_Factor_Type 
+            Study_Factor_Type_Term_Accession_Number 
+            Study_Factor_Type_Term_Source_REF 
+            STUDY_ASSAYS 
+            Study_Assay_Measurement_Type 
+            Study_Assay_Measurement_Type_Term_Accession_Number 
+            Study_Assay_Measurement_Type_Term_Source_REF 
+            Study_Assay_Technology_Type 
+            Study_Assay_Technology_Type_Term_Accession_Number 
+            Study_Assay_Technology_Type_Term_Source_REF 
+            Study_Assay_Technology_Platform 
+            Study_Assay_File_Name 
+            STUDY_PROTOCOLS 
+            Study_Protocol_Name 
+            Study_Protocol_Type 
+            Study_Protocol_Type_Term_Accession_Number 
+            Study_Protocol_Type_Term_Source_REF 
+            Study_Protocol_Description 
+            Study_Protocol_URI 
+            Study_Protocol_Version 
+            Study_Protocol_Parameters_Name 
+            Study_Protocol_Parameters_Term_Accession_Number 
+            Study_Protocol_Parameters_Term_Source_REF 
+            Study_Protocol_Components_Name 
+            Study_Protocol_Components_Type 
+            Study_Protocol_Components_Type_Term_Accession_Number 
+            Study_Protocol_Components_Type_Term_Source_REF 
+            STUDY_CONTACTS 
+            Study_Person_Last_Name 
+            Study_Person_First_Name 
+            Study_Person_Mid_Initials 
+            Study_Person_Email 
+            Study_Person_Phone 
+            Study_Person_Fax 
+            Study_Person_Address 
+            Study_Person_Affiliation 
+            Study_Person_Roles 
+            Study_Person_Roles_Term_Accession_Number 
+            Study_Person_Roles_Term_Source_REF 
         ]
 
-        Terms.StudyMetadata.nonObsoleteNonRootCvTerms
-        |> List.filter (fun t -> not (t.Name.StartsWith("Comment"))) // ignore all comments
-        |> List.zip valueRows
-        |> List.map (fun (values,term) ->
-            values
-            |> List.mapi (fun i v ->
-                if i = 0 then
-                    CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
-                else
-                    CvParam(term, ParamValue.Value v, [])
+        if deleteEmpty then
+            Terms.StudyMetadata.nonObsoleteNonRootCvTerms
+            |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
+            |> List.zip valueRows
+            |> List.choose (fun (values,term) -> 
+                match values with
+                | None -> None
+                | Some v -> 
+                    Some ([""; yield! v],term))
+            |> List.map (fun (values,term) ->
+                values
+                |> List.mapi (fun i v ->
+                    if i = 0 then
+                        CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
+                    else
+                        CvParam(term, ParamValue.Value v, [])
+                )
             )
-        )
+        else
+            Terms.StudyMetadata.nonObsoleteNonRootCvTerms
+            |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
+            |> List.zip valueRows
+            |> List.map (fun (values,term) ->
+                [""; yield! values  |> Option.defaultValue Seq.empty ]
+                |> List.mapi (fun i v ->
+                    if i = 0 then
+                        CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
+                    else
+                        CvParam(term, ParamValue.Value v, [])
+                )
+            )
 
     /// <summary>
     /// returns a mock list of CvParams lists which each represent a tokenized row of assay metadata.
@@ -363,6 +404,7 @@ type ARCMock =
     /// each row can be expanded with additional CvParams by setting the respective optional argument.
     /// </summary>
     static member AssayMetadataTokens(
+        deleteEmpty:bool,
         ?ASSAY: seq<string>,
         ?Assay_Measurement_Type: seq<string>,
         ?Assay_Measurement_Type_Term_Accession_Number: seq<string>,
@@ -386,41 +428,60 @@ type ARCMock =
         ?Assay_Person_Roles_Term_Source_REF: seq<string>
     ) =
         let valueRows = [
-            [""; yield! ASSAY |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Measurement_Type |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Measurement_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Measurement_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Technology_Type |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Technology_Type_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Technology_Type_Term_Source_REF |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Technology_Platform |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_File_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! ASSAY_PERFORMERS |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Last_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_First_Name |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Mid_Initials |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Email |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Phone |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Fax |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Address |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Affiliation |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Roles |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Roles_Term_Accession_Number |> Option.defaultValue Seq.empty ]
-            [""; yield! Assay_Person_Roles_Term_Source_REF |> Option.defaultValue Seq.empty ]
+            ASSAY 
+            Assay_Measurement_Type 
+            Assay_Measurement_Type_Term_Accession_Number 
+            Assay_Measurement_Type_Term_Source_REF 
+            Assay_Technology_Type 
+            Assay_Technology_Type_Term_Accession_Number 
+            Assay_Technology_Type_Term_Source_REF 
+            Assay_Technology_Platform 
+            Assay_File_Name 
+            ASSAY_PERFORMERS 
+            Assay_Person_Last_Name 
+            Assay_Person_First_Name 
+            Assay_Person_Mid_Initials 
+            Assay_Person_Email 
+            Assay_Person_Phone 
+            Assay_Person_Fax 
+            Assay_Person_Address 
+            Assay_Person_Affiliation 
+            Assay_Person_Roles 
+            Assay_Person_Roles_Term_Accession_Number 
+            Assay_Person_Roles_Term_Source_REF 
         ]
 
-        Terms.AssayMetadata.nonObsoleteNonRootCvTerms
-        |> List.filter (fun t -> not (t.Name.StartsWith("Comment"))) // ignore all comments
-        |> List.zip valueRows
-        |> List.map (fun (values,term) ->
-            values
-            |> List.mapi (fun i v ->
-                if i = 0 then
-                    CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
-                else
-                    CvParam(term, ParamValue.Value v, [])
+        if deleteEmpty then
+            Terms.AssayMetadata.nonObsoleteNonRootCvTerms
+            |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
+            |> List.zip valueRows
+            |> List.choose (fun (values,term) -> 
+                match values with
+                | None -> None
+                | Some v -> 
+                    Some ([""; yield! v],term))
+            |> List.map (fun (values,term) ->
+                values
+                |> List.mapi (fun i v ->
+                    if i = 0 then
+                        CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
+                    else
+                        CvParam(term, ParamValue.Value v, [])
+                )
             )
-        )
+        else
+            Terms.AssayMetadata.nonObsoleteNonRootCvTerms
+            |> List.filter (fun t -> (not (t.Name.StartsWith("Comment"))) || (t.Name.Equals("Comment[ORCID]"))) // ignore all comments except non-obsolete orcid
+            |> List.zip valueRows
+            |> List.map (fun (values,term) ->
+                [""; yield! values  |> Option.defaultValue Seq.empty ]
+                |> List.mapi (fun i v ->
+                    if i = 0 then
+                        CvParam(term, ParamValue.CvValue Terms.StructuralTerms.metadataSectionKey, [])
+                    else
+                        CvParam(term, ParamValue.Value v, [])
+                )
+            )
 
     static member ProcessGraphColumn(
         header: ARCtrl.ISA.CompositeHeader,

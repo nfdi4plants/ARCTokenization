@@ -11,21 +11,21 @@ module MockAPI =
 
         // equivalent to a metadatasheet with only the first column that contains metadata section keys
         let empty = 
-            ARCMock.InvestigationMetadataTokens()
+            ARCMock.InvestigationMetadataTokens(false)
             |> List.concat // use flat list
 
     module StudyMetadataTokens = 
 
         // equivalent to a metadatasheet with only the first column that contains metadata section keys
         let empty = 
-            ARCMock.StudyMetadataTokens()
+            ARCMock.StudyMetadataTokens(false)
             |> List.concat // use flat list
 
     module AssayMetadataTokens = 
         
         // equivalent to a metadatasheet with only the first column that contains metadata section keys
         let empty = 
-            ARCMock.AssayMetadataTokens()
+            ARCMock.AssayMetadataTokens(false)
             |> List.concat // use flat list
 
     module ProcessGraphTokens =
