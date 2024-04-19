@@ -18,15 +18,28 @@ module AssayMetadata =
 
     let allExpectedMetadataTermsFull =
         ARCMock.AssayMetadataTokens(
+            true,
+            ASSAY= Seq.empty,
+            Assay_Measurement_Type = Seq.empty,
+            Assay_Measurement_Type_Term_Accession_Number= Seq.empty,
+            Assay_Measurement_Type_Term_Source_REF= Seq.empty,
+            Assay_Technology_Type= Seq.empty,
+            Assay_Technology_Type_Term_Accession_Number= Seq.empty,
+            Assay_Technology_Type_Term_Source_REF= Seq.empty,
+            Assay_Technology_Platform= Seq.empty,
             Assay_File_Name = [@"measurement1\isa.assay.xlsx"],
-            Assay_Performer_First_Name = ["Oliver"; "Marius"],
-            Assay_Performer_Last_Name = ["Maus"; "Katz"],
-            Assay_Performer_Mid_Initials = [""; "G."],
-            Assay_Performer_Email = ["maus@nfdi4plants.org"],
-            Assay_Performer_Affiliation = ["RPTU University of Kaiserslautern"],
-            Assay_Performer_Roles = ["research assistant"],
-            Assay_Performer_Roles_Term_Accession_Number = ["http://purl.org/spar/scoro/research-assistant"],
-            Assay_Performer_Roles_Term_Source_REF = ["scoro"]
+            ASSAY_PERFORMERS= Seq.empty,
+            Assay_Person_First_Name = ["Oliver"; "Marius"],
+            Assay_Person_Last_Name = ["Maus"; "Katz"],
+            Assay_Person_Mid_Initials = [""; "G."],
+            Assay_Person_Email = ["maus@nfdi4plants.org"],
+            Assay_Person_Phone= Seq.empty,
+            Assay_Person_Fax= Seq.empty,
+            Assay_Person_Address= Seq.empty,
+            Assay_Person_Affiliation = ["RPTU University of Kaiserslautern"],
+            Assay_Person_Roles = ["research assistant"],
+            Assay_Person_Roles_Term_Accession_Number = ["http://purl.org/spar/scoro/research-assistant"],
+            Assay_Person_Roles_Term_Source_REF = ["scoro"]
         )
         |> List.concat // use flat list
 
