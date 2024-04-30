@@ -1,3 +1,8 @@
+### 5.0.0 - (Released 2024-04-19)
+
+- Additions:
+  - [Fix various term names and expand ARCMock in preparation for supporting ARC-specification draft 2.0.0 and isa-light](https://github.com/nfdi4plants/ARCTokenization/pull/57)
+
 ### 4.0.0 - (Released 2024-03-02)
 
 - Additions:
