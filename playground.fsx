@@ -9,6 +9,7 @@
 #I "src/ARCTokenization/bin/Release/netstandard2.0"
 #r "ARCTokenization.dll"
 
+
 open FsSpreadsheet
 open FsSpreadsheet.ExcelIO
 open OBO.NET
@@ -18,6 +19,14 @@ open ARCTokenization
 open ARCTokenization.StructuralOntology
 open System.IO
 
+
+let arcProt = @"C:\Repos\git.nfdi4plants.org\ArcPrototype"
+
+let afts = FileSystem.parseAbsoluteFilePaths arcProt
+afts |> Seq.iter (Param.getValueAsString >> printfn "%s")
+
+
+// --------------------------
 
 let arcProt = @"C:\Repos\git.nfdi4plants.org\ArcPrototype"
 
