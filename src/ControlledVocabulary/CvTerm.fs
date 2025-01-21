@@ -19,7 +19,7 @@ type CvTerm = {
     /// </summary>
     /// <param name="accession">The input accession.</param>
     static member checkForUri accession =
-        let rx = System.Text.RegularExpressions.Regex("^https?:\/\/[a-zA-Z0-9\/]+\/[a-zA-Z]+_[0-9]+\/?$")
+        let rx = System.Text.RegularExpressions.Regex("^https?:\/\/[a-zA-Z0-9\/.]+\/[a-zA-Z]+_[0-9]+\/?$")
         rx.Match(accession).Success
 
     /// <summary>
