@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Include="ReferenceObjects.fs" />
+    <Compile Include="CvTermTests.fs" />
     <Compile Include="CvParamTests.fs" />
     <Compile Include="CvBaseTests.fs" />
     <Compile Include="ParamTests.fs" />
