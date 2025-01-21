@@ -1,5 +1,9 @@
 ﻿namespace ControlledVocabulary
 
+
+open FSharpAux
+
+
 /// Represents a term from a controlled vocabulary (Cv)
 /// in the form of: id|accession ; name|value ; refUri
 // ?Maybe [<Struct>]
@@ -9,6 +13,15 @@ type CvTerm = {
     Name: string
     RefUri: string
 } with
+
+    /// <summary>
+    /// Checks if the given accession is an URI.
+    /// </summary>
+    /// <param name="accession">The input accession.</param>
+    static member checkForUri accession =
+        let rx = System.Text.RegularExpressions.Regex("^https?:\/\/[a-zA-Z0-9\/]+\/[a-zA-Z]+_[0-9]+\/?$")
+        rx.Match(accession).Success
+
     static member create(
         accession: string,
         name: string,
