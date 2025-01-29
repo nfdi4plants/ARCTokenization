@@ -21,9 +21,9 @@
       },
       "FSharp.Core": {
         "type": "Direct",
-        "requested": "[8.0.100, )",
-        "resolved": "8.0.100",
-        "contentHash": "ZOVZ/o+jI3ormTZOa28Wh0tSRoyle1f7lKFcUN61sPiXI7eDZu8eSveFybgTeyIEyW0ujjp31cp7GOglDgsNEg=="
+        "requested": "[9.0.100, )",
+        "resolved": "9.0.100",
+        "contentHash": "ye8yagHGsH08H2Twno5GRWkSbrMtxK/SWiHuPcF+3nODpW65/VJ8RO0aWxp8n9+KQbmahg90wAEL3TEXjF0r6A=="
       },
       "FSharpAux.Core": {
         "type": "Direct",
@@ -619,7 +619,7 @@
       "controlledvocabulary": {
         "type": "Project",
         "dependencies": {
-          "FSharp.Core": "[8.0.100, )",
+          "FSharp.Core": "[9.0.100, )",
           "FSharpAux.Core": "[2.0.0, 2.0.0]"
         }
       }
