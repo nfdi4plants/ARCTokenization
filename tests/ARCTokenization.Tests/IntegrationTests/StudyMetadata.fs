@@ -4,7 +4,7 @@ module StudyMetadata =
 
     open ControlledVocabulary
     open FsSpreadsheet
-    open FsSpreadsheet.ExcelIO
+    open FsSpreadsheet.Net
     open ARCTokenization
     open Xunit
 

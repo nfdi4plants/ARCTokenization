@@ -3,7 +3,7 @@
 open ControlledVocabulary
 open FSharpAux
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 
 module internal ISA =
 
