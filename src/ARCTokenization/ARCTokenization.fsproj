@@ -67,7 +67,7 @@
     <PackageReference Include="OBO.NET" Version="[0.4.2]" />
     <PackageReference Include="FsSpreadsheet" Version="[6.3.1]" />
     <PackageReference Include="FsSpreadsheet.NET" Version="[6.3.1]" />
-    <PackageReference Include="ARCtrl" Version="[1.0.1]" />
+    <PackageReference Include="ARCtrl" Version="[2.3.1]" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 

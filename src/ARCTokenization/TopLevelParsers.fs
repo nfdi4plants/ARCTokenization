@@ -33,7 +33,7 @@ module internal ISA =
             .GetWorksheets()
             |> Seq.choose (fun ws ->
                 ws
-                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> ARCtrl.Spreadsheet.ArcTable.tryFromFsWorksheet
                 |> Option.map (fun t -> 
                     ws.Name, 
                     t 

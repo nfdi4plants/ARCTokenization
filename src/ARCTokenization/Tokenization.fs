@@ -5,7 +5,6 @@ open FsSpreadsheet
 open MetadataSheet
 open ARCTokenization.Terms
 open ARCtrl
-open ARCtrl.ISA
 
 module Tokenization = 
     
@@ -49,22 +48,24 @@ module Tokenization =
 
             let asCvTerm (oa: OntologyAnnotation) =
                 CvTerm.create(
-                    accession = oa.TermAccessionString,
+                    accession = (oa.TermAccessionNumber |> Option.defaultValue ""),
                     name = oa.NameText,
-                    ref = oa.TermSourceREFString
+                    ref = (oa.TermSourceREF |> Option.defaultValue "")
                 )
 
         module IOType =
 
             let asCvTerm (io: IOType) = 
                 match io with
-                | IOType.Source            -> StructuralOntology.APGSO.IOType.Source
-                | IOType.Sample            -> StructuralOntology.APGSO.IOType.Sample
-                | IOType.RawDataFile       -> StructuralOntology.APGSO.IOType.RawDataFile
-                | IOType.DerivedDataFile   -> StructuralOntology.APGSO.IOType.DerivedDataFile
-                | IOType.ImageFile         -> StructuralOntology.APGSO.IOType.ImageFile
-                | IOType.Material          -> StructuralOntology.APGSO.IOType.Material
-                | IOType.FreeText s        -> CvTerm.create (accession = "", name = s, ref = "")
+                | IOType.Source             -> StructuralOntology.APGSO.IOType.Source
+                | IOType.Sample             -> StructuralOntology.APGSO.IOType.Sample
+                // outdated
+                //| IOType.RawDataFile       -> StructuralOntology.APGSO.IOType.RawDataFile
+                //| IOType.DerivedDataFile   -> StructuralOntology.APGSO.IOType.DerivedDataFile
+                //| IOType.ImageFile         -> StructuralOntology.APGSO.IOType.ImageFile
+                | IOType.Material           -> StructuralOntology.APGSO.IOType.Material
+                | IOType.FreeText s         -> CvTerm.create (accession = "", name = s, ref = "")
+                | IOType.Data               -> StructuralOntology.APGSO.IOType.Data
 
         module CompositeHeader =
 
@@ -168,7 +169,7 @@ module Tokenization =
             | Directory
     
         /// Matches a CvParam based on the relative path and file system type
-        let convertRelativePath (pType:PType) (relativePath: string) = 
+        let convertRelativePath (pType : PType) (relativePath : string) = 
                 match pType with
                 | PType.Directory ->
                     match (relativePath.Split '/') with
