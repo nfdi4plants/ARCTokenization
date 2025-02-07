@@ -5,6 +5,8 @@ open FsSpreadsheet
 open MetadataSheet
 open ARCTokenization.Terms
 open ARCtrl
+open ARCtrl.Path
+open ARCtrl.ArcPathHelper
 
 module Tokenization = 
     
@@ -59,10 +61,11 @@ module Tokenization =
                 match io with
                 | IOType.Source             -> StructuralOntology.APGSO.IOType.Source
                 | IOType.Sample             -> StructuralOntology.APGSO.IOType.Sample
-                // outdated
+                // outdated --->
                 //| IOType.RawDataFile       -> StructuralOntology.APGSO.IOType.RawDataFile
                 //| IOType.DerivedDataFile   -> StructuralOntology.APGSO.IOType.DerivedDataFile
                 //| IOType.ImageFile         -> StructuralOntology.APGSO.IOType.ImageFile
+                // <--- outdated
                 | IOType.Material           -> StructuralOntology.APGSO.IOType.Material
                 | IOType.FreeText s         -> CvTerm.create (accession = "", name = s, ref = "")
                 | IOType.Data               -> StructuralOntology.APGSO.IOType.Data
@@ -173,15 +176,15 @@ module Tokenization =
                 match pType with
                 | PType.Directory ->
                     match (relativePath.Split '/') with
-                    | [|Path.StudiesFolderName|]        ->  StructuralOntology.AFSO.``Studies Directory``   |> fun t -> CvParam(t,relativePath)
-                    | [|Path.StudiesFolderName; _|]     ->  StructuralOntology.AFSO.``Study Directory``     |> fun t -> CvParam(t,relativePath)
-                    | [|Path.AssaysFolderName|]         ->  StructuralOntology.AFSO.``Assays Directory``    |> fun t -> CvParam(t,relativePath)
-                    | [|Path.AssaysFolderName; _|]      ->  StructuralOntology.AFSO.``Assay Directory``     |> fun t -> CvParam(t,relativePath)
-                    | [|Path.RunsFolderName|]           ->  StructuralOntology.AFSO.``Runs Directory``      |> fun t -> CvParam(t,relativePath)
-                    | [|Path.RunsFolderName; _|]        ->  StructuralOntology.AFSO.``Run Directory``       |> fun t -> CvParam(t,relativePath)
-                    | [|Path.WorkflowsFolderName|]      ->  StructuralOntology.AFSO.``Workflows Directory`` |> fun t -> CvParam(t,relativePath)
-                    | [|Path.WorkflowsFolderName; _|]   ->  StructuralOntology.AFSO.``Workflow Directory``  |> fun t -> CvParam(t,relativePath)
-                    | _                                 ->  StructuralOntology.AFSO.``Directory Path``      |> fun t -> CvParam(t,relativePath)
+                    | [|StudiesFolderName|]         ->  StructuralOntology.AFSO.``Studies Directory``   |> fun t -> CvParam(t,relativePath)
+                    | [|StudiesFolderName; _|]      ->  StructuralOntology.AFSO.``Study Directory``     |> fun t -> CvParam(t,relativePath)
+                    | [|AssaysFolderName|]          ->  StructuralOntology.AFSO.``Assays Directory``    |> fun t -> CvParam(t,relativePath)
+                    | [|AssaysFolderName; _|]       ->  StructuralOntology.AFSO.``Assay Directory``     |> fun t -> CvParam(t,relativePath)
+                    | [|RunsFolderName|]            ->  StructuralOntology.AFSO.``Runs Directory``      |> fun t -> CvParam(t,relativePath)
+                    | [|RunsFolderName; _|]         ->  StructuralOntology.AFSO.``Run Directory``       |> fun t -> CvParam(t,relativePath)
+                    | [|WorkflowsFolderName|]       ->  StructuralOntology.AFSO.``Workflows Directory`` |> fun t -> CvParam(t,relativePath)
+                    | [|WorkflowsFolderName; _|]    ->  StructuralOntology.AFSO.``Workflow Directory``  |> fun t -> CvParam(t,relativePath)
+                    | _                             ->  StructuralOntology.AFSO.``Directory Path``      |> fun t -> CvParam(t,relativePath)
                 | PType.File ->
                     match relativePath with
                     | _ when relativePath.EndsWith "isa.investigation.xlsx" -> StructuralOntology.AFSO.``Investigation File``   |> fun t -> CvParam(t,relativePath)

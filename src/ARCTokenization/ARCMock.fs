@@ -2,7 +2,7 @@
 
 open ControlledVocabulary
 open ARCtrl
-open ARCtrl.ISA
+//open ARCtrl.ISA
 
 type ARCMock =
 
@@ -484,14 +484,14 @@ type ARCMock =
             )
 
     static member ProcessGraphColumn(
-        header: ARCtrl.ISA.CompositeHeader,
-        cells: seq<ARCtrl.ISA.CompositeCell>
+        header: ARCtrl.CompositeHeader,
+        cells: seq<ARCtrl.CompositeCell>
     ) =
         CompositeColumn.create(header, cells |> Array.ofSeq)
         |> Tokenization.ARCtrl.CompositeColumn.tokenize
 
     static member ProcessGraph(
-        columns: seq<ARCtrl.ISA.CompositeHeader *  seq<ARCtrl.ISA.CompositeCell>>
+        columns: seq<ARCtrl.CompositeHeader *  seq<ARCtrl.CompositeCell>>
     ) =
         let table = ArcTable.create("", new ResizeArray<_>(), new System.Collections.Generic.Dictionary<_,_>())
         

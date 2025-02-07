@@ -1,18 +1,20 @@
 ﻿module TestObjects
 
+
 open ARCTokenization
 open FsSpreadsheet
 open ARCtrl
-open ARCtrl.ISA
+
 
 module MockAPI =
-    
+
     module InvestigationMetadataTokens = 
 
         // equivalent to a metadatasheet with only the first column that contains metadata section keys
         let empty = 
             ARCMock.InvestigationMetadataTokens(false)
             |> List.concat // use flat list
+
 
     module StudyMetadataTokens = 
 
@@ -21,15 +23,17 @@ module MockAPI =
             ARCMock.StudyMetadataTokens(false)
             |> List.concat // use flat list
 
+
     module AssayMetadataTokens = 
-        
+
         // equivalent to a metadatasheet with only the first column that contains metadata section keys
         let empty = 
             ARCMock.AssayMetadataTokens(false)
             |> List.concat // use flat list
 
+
     module ProcessGraphTokens =
-        
+
         let inputColumn = 
             ARCMock.ProcessGraphColumn(
                 header = CompositeHeader.Input IOType.Source,
@@ -41,13 +45,13 @@ module MockAPI =
 
         let characteristicsColumn =
             ARCMock.ProcessGraphColumn(
-                header = CompositeHeader.Characteristic (OntologyAnnotation.create(TermAccessionNumber = "OBI:0100026", Name = AnnotationValue.Text "organism", TermSourceREF = "OBI")),
+                header = CompositeHeader.Characteristic (OntologyAnnotation.create(tan = "OBI:0100026", name = "organism", tsr = "OBI")),
                 cells = [
-                    CompositeCell.Term (OntologyAnnotation.create(TermAccessionNumber = "http://purl.obolibrary.org/obo/NCBITaxon_3702", Name = AnnotationValue.Text "Arabidopsis thaliana", TermSourceREF = "NCBITaxon"))
-                    CompositeCell.Term (OntologyAnnotation.create(TermAccessionNumber = "http://purl.obolibrary.org/obo/NCBITaxon_3702", Name = AnnotationValue.Text "Arabidopsis thaliana", TermSourceREF = "NCBITaxon"))
+                    CompositeCell.Term (OntologyAnnotation.create(tan = "http://purl.obolibrary.org/obo/NCBITaxon_3702", name = "Arabidopsis thaliana", tsr = "NCBITaxon"))
+                    CompositeCell.Term (OntologyAnnotation.create(tan = "http://purl.obolibrary.org/obo/NCBITaxon_3702", name = "Arabidopsis thaliana", tsr = "NCBITaxon"))
                 ]
             )
-                    
+
         let outputColumn = 
             ARCMock.ProcessGraphColumn(
                 header = CompositeHeader.Output IOType.Sample,
@@ -65,9 +69,9 @@ module MockAPI =
                         CompositeCell.FreeText "Source_1"
                     ]
 
-                    CompositeHeader.Characteristic (OntologyAnnotation.create(TermAccessionNumber = "OBI:0100026", Name = AnnotationValue.Text "organism", TermSourceREF = "OBI")), [
-                        CompositeCell.Term (OntologyAnnotation.create(TermAccessionNumber = "http://purl.obolibrary.org/obo/NCBITaxon_3702", Name = AnnotationValue.Text "Arabidopsis thaliana", TermSourceREF = "NCBITaxon"))
-                        CompositeCell.Term (OntologyAnnotation.create(TermAccessionNumber = "http://purl.obolibrary.org/obo/NCBITaxon_3702", Name = AnnotationValue.Text "Arabidopsis thaliana", TermSourceREF = "NCBITaxon"))
+                    CompositeHeader.Characteristic (OntologyAnnotation.create(tan = "OBI:0100026", name = "organism", tsr = "OBI")), [
+                        CompositeCell.Term (OntologyAnnotation.create(tan = "http://purl.obolibrary.org/obo/NCBITaxon_3702", name = "Arabidopsis thaliana", tsr = "NCBITaxon"))
+                        CompositeCell.Term (OntologyAnnotation.create(tan = "http://purl.obolibrary.org/obo/NCBITaxon_3702", name = "Arabidopsis thaliana", tsr = "NCBITaxon"))
                     ]
 
                     CompositeHeader.Output IOType.Sample, [

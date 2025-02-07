@@ -261,7 +261,7 @@ type Study =
             .GetWorksheets()
             |> Seq.choose (fun ws ->
                 ws
-                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> ARCtrl.Spreadsheet.ArcTable.tryFromFsWorksheet
                 |> Option.map (fun t -> 
                     ws.Name, 
                     t 
@@ -373,7 +373,7 @@ type Assay =
             .GetWorksheets()
             |> Seq.choose (fun ws ->
                 ws
-                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> ARCtrl.Spreadsheet.ArcTable.tryFromFsWorksheet
                 |> Option.map (fun t -> 
                     ws.Name, 
                     t 
