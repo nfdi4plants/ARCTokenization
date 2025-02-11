@@ -31,6 +31,11 @@ type CvTerm = {
         uri[posLastSlash + 1 ..]
         |> String.replace "_" ":"
 
+    /// Returns the corresponding Term Source Ref from the given Term Number Accession.
+    static member refOfAccession accession =
+        let m = System.Text.RegularExpressions.Regex.Match(accession, @"^(?<TermSourceRef>[A-Za-z]+):(\d+)$")
+        m.Groups["TermSourceRef"].Value
+
     /// <summary>
     /// Creates a CvTerm from a given accession, name and reference.
     /// </summary>
