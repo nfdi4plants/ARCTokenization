@@ -34,6 +34,15 @@ module UriToTan =
         Assert.Equal(expected, actual)
 
 
+module RefOfAccession =
+
+    [<Fact>]
+    let ``correct TSR returned`` () =
+        let expected = "TO"
+        let actual = CvTerm.refOfAccession testAccession1
+        Assert.Equal(expected, actual)
+
+
 module Create =
 
     [<Fact>]
