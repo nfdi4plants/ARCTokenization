@@ -1,3 +1,8 @@
+### 1.1.0 – (Released 2025-02-07)
+
+- Changes:
+  - [Functionality of `CvTerm` type to turn an URI to a TAN directly on creation](https://github.com/nfdi4plants/ARCTokenization/pull/62)
+
 ### 1.0.0+e7faa34 (Released 2023-8-17)
 * Additions:
     * [[#e7faa34](https://github.com/nfdi4plants/ArcGraphModel/commit/e7faa348c1d8128205a40e2186914380c466fed6)] Add ConvertTokens tests

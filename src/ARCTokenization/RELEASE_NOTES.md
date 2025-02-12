@@ -1,12 +1,7 @@
-### 6.1.0 – (Released 2025-02-07)
-
-- Changes:
-  - [Functionality of `CvTerm` type to turn an URI to a TAN directly on creation](https://github.com/nfdi4plants/ARCTokenization/pull/62)
-
 ### 6.0.0 – (Released 2024-04-30)
 
 - Changes:
-  - Dependencie changes
+  - Dependency changes
 
 ### 5.0.0 - (Released 2024-04-19)
 
