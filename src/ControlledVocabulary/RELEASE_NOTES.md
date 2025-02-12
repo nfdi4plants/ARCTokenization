@@ -1,3 +1,8 @@
+### 1.2.0 – (Released 2025-02-12)
+
+- Additions:
+  - [Function in module `CvTerm` to get a TSR (term source ref) directly from a TAN (term accession number)](https://github.com/nfdi4plants/ARCTokenization/pull/74)
+
 ### 1.1.0 – (Released 2025-02-07)
 
 - Changes:
