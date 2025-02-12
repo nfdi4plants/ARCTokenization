@@ -31,7 +31,10 @@ type CvTerm = {
         uri[posLastSlash + 1 ..]
         |> String.replace "_" ":"
 
+    /// <summary>
     /// Returns the corresponding Term Source Ref from the given Term Number Accession.
+    /// </summary>
+    /// <param name="accession">The input accession.</param>
     static member refOfAccession accession =
         let m = System.Text.RegularExpressions.Regex.Match(accession, @"^(?<TermSourceRef>[A-Za-z]+):(\d+)$")
         m.Groups["TermSourceRef"].Value
