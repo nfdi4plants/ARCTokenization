@@ -3,7 +3,7 @@
 open ControlledVocabulary
 open FSharpAux
 open FsSpreadsheet
-open FsSpreadsheet.ExcelIO
+open FsSpreadsheet.Net
 
 module internal ISA =
 
@@ -33,7 +33,7 @@ module internal ISA =
             .GetWorksheets()
             |> Seq.choose (fun ws ->
                 ws
-                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> ARCtrl.Spreadsheet.ArcTable.tryFromFsWorksheet
                 |> Option.map (fun t -> 
                     ws.Name, 
                     t 
@@ -261,7 +261,7 @@ type Study =
             .GetWorksheets()
             |> Seq.choose (fun ws ->
                 ws
-                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> ARCtrl.Spreadsheet.ArcTable.tryFromFsWorksheet
                 |> Option.map (fun t -> 
                     ws.Name, 
                     t 
@@ -373,7 +373,7 @@ type Assay =
             .GetWorksheets()
             |> Seq.choose (fun ws ->
                 ws
-                |> ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet
+                |> ARCtrl.Spreadsheet.ArcTable.tryFromFsWorksheet
                 |> Option.map (fun t -> 
                     ws.Name, 
                     t 

@@ -1,4 +1,9 @@
-### 6.0.0 � (Released 2024-04-30)
+### 6.1.0 – (Released 2025-02-12)
+
+- Changes:
+  - [Dependency updates for FsSpreadsheet & ARCtrl](https://github.com/nfdi4plants/ARCTokenization/pull/70)
+
+### 6.0.0 – (Released 2024-04-30)
 
 - Changes:
   - Dependency changes

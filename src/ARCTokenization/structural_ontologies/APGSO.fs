@@ -3,7 +3,10 @@
 
 namespace ARCTokenization.StructuralOntology
 
+
 open ControlledVocabulary
+open System
+
 
 module APGSO =
 
@@ -27,16 +30,18 @@ module APGSO =
         let Input               = CvTerm.create(accession = "APGSO:00000013", name = "Input", ref = "APGSO")
         let Output              = CvTerm.create(accession = "APGSO:00000014", name = "Output", ref = "APGSO")
 
+
     module IOType = 
 
         let key = CvTerm.create(accession = "APGSO:00000016", name = "IOType", ref = "APGSO")
         
         let Source          = CvTerm.create(accession = "APGSO:00000016", name = "Source", ref = "APGSO")
         let Sample          = CvTerm.create(accession = "APGSO:00000017", name = "Sample", ref = "APGSO")
-        let RawDataFile     = CvTerm.create(accession = "APGSO:00000018", name = "RawDataFile", ref = "APGSO")
-        let DerivedDataFile = CvTerm.create(accession = "APGSO:00000019", name = "DerivedDataFile", ref = "APGSO")
-        let ImageFile       = CvTerm.create(accession = "APGSO:00000020", name = "ImageFile", ref = "APGSO")
         let Material        = CvTerm.create(accession = "APGSO:00000021", name = "Material", ref = "APGSO")
-
-
-
+        let Data            = CvTerm.create(accession = "APGSI:00000023", name = "Data", ref = "APGSO")
+        [<Obsolete>]
+        let RawDataFile     = CvTerm.create(accession = "APGSO:00000018", name = "RawDataFile", ref = "APGSO")
+        [<Obsolete>]
+        let DerivedDataFile = CvTerm.create(accession = "APGSO:00000019", name = "DerivedDataFile", ref = "APGSO")
+        [<Obsolete>]
+        let ImageFile       = CvTerm.create(accession = "APGSO:00000020", name = "ImageFile", ref = "APGSO")

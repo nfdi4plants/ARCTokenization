@@ -1,41 +1,29 @@
 ﻿namespace ARCTokenization
 
-open ControlledVocabulary
-open FSharpAux
-open FsSpreadsheet
 
-open System
 open ARCtrl
-open ARCtrl.ISA
+
 
 module AnnnotationTable = 
 
     let a ws =
-        let t = ARCtrl.ISA.Spreadsheet.ArcTable.tryFromFsWorksheet ws
+        let t = ARCtrl.Spreadsheet.ArcTable.tryFromFsWorksheet ws
 
         t.Value.Columns
         |> Array.map (fun c ->
             match c.Header with
-
-            | ISA.CompositeHeader.Input i | ISA.CompositeHeader.Output i -> 
-                
-                1
-
-            | ISA.CompositeHeader.Characteristic headerOntology
-            | ISA.CompositeHeader.Factor headerOntology
-            | ISA.CompositeHeader.Parameter headerOntology ->
-                2
-
-            | ISA.CompositeHeader.FreeText s ->
-                3
-
-            | ISA.CompositeHeader.Component a -> 4
-
-            | ISA.CompositeHeader.ProtocolDescription -> 5
-            | ISA.CompositeHeader.ProtocolREF -> 6
-            | ISA.CompositeHeader.ProtocolUri -> 7
-            | ISA.CompositeHeader.ProtocolVersion -> 8
-            | ISA.CompositeHeader.ProtocolType -> 9
-            | ISA.CompositeHeader.Performer -> 10
-            | ISA.CompositeHeader.Date -> 11
+            | CompositeHeader.Input i 
+            | CompositeHeader.Output i                      -> 1
+            | CompositeHeader.Characteristic headerOntology
+            | CompositeHeader.Factor headerOntology
+            | CompositeHeader.Parameter headerOntology      -> 2
+            | CompositeHeader.FreeText s                    -> 3
+            | CompositeHeader.Component a                   -> 4
+            | CompositeHeader.ProtocolDescription           -> 5
+            | CompositeHeader.ProtocolREF                   -> 6
+            | CompositeHeader.ProtocolUri                   -> 7
+            | CompositeHeader.ProtocolVersion               -> 8
+            | CompositeHeader.ProtocolType                  -> 9
+            | CompositeHeader.Performer                     -> 10
+            | CompositeHeader.Date                          -> 11
         )
